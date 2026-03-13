@@ -1,3 +1,3 @@
 export default function page() {
-  return <div className="">Halo Dunia</div>;
+  return <div className="">iini agung</div>;
 }
