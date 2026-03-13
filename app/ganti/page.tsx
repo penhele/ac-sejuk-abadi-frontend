@@ -1,67 +1,84 @@
+"use client";
+
 export default function Page() {
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Data disimpan!");
+  };
+
   return (
-    <div className="min-h-screen bg-slate-50 p-6">
+    <div className="min-h-screen flex items-center justify-center bg-slate-100 p-6">
 
-      {/* ACCOUNT SETTINGS */}
-      <section className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 max-w-4xl">
+<div className="w-full max-w-xs bg-white p-10 rounded-xl shadow">
+            {/* Header */}
+        <div className="text-center mb-6">
+          <h2 className="text-2xl font-bold text-slate-800">
+            Informasi Pribadi
+          </h2>
+          <p className="text-sm text-slate-500">
+            Perbarui data akun Anda
+          </p>
+        </div>
 
-        <h2 className="text-xl font-bold mb-6 text-slate-800">
-          Informasi Pribadi
-        </h2>
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="space-y-4">
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-
-          <div className="space-y-1.5">
-            <label className="text-xs font-bold text-slate-400 uppercase ml-1">
+          <div>
+            <label className="text-sm font-medium text-slate-600">
               Nama Lengkap
             </label>
             <input
-              className="w-full border border-slate-200 bg-slate-50 rounded-xl p-3 focus:bg-white focus:ring-2 focus:ring-blue-100 focus:border-blue-400 outline-none transition-all"
-              placeholder="Nama Lengkap"
+              type="text"
+              placeholder="Budi Santoso"
+              className="w-full mt-1 border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
           </div>
 
-          <div className="space-y-1.5">
-            <label className="text-xs font-bold text-slate-400 uppercase ml-1">
+          <div>
+            <label className="text-sm font-medium text-slate-600">
               Email
             </label>
             <input
-              className="w-full border border-slate-200 bg-slate-50 rounded-xl p-3 focus:bg-white focus:ring-2 focus:ring-blue-100 focus:border-blue-400 outline-none transition-all"
-              placeholder="Email"
+              type="email"
+              placeholder="budi@email.com"
+              className="w-full mt-1 border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
           </div>
 
-          <div className="space-y-1.5">
-            <label className="text-xs font-bold text-slate-400 uppercase ml-1">
+          <div>
+            <label className="text-sm font-medium text-slate-600">
               Nomor Telepon
             </label>
             <input
-              className="w-full border border-slate-200 bg-slate-50 rounded-xl p-3 focus:bg-white focus:ring-2 focus:ring-blue-100 focus:border-blue-400 outline-none transition-all"
-              placeholder="Nomor Telepon"
+              type="tel"
+              placeholder="0812xxxxxxx"
+              className="w-full mt-1 border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
           </div>
 
-          <div className="space-y-1.5">
-            <label className="text-xs font-bold text-slate-400 uppercase ml-1">
-              Ganti Password
+          <div>
+            <label className="text-sm font-medium text-slate-600">
+              Password Baru
             </label>
             <input
               type="password"
-              className="w-full border border-slate-200 bg-slate-50 rounded-xl p-3 focus:bg-white focus:ring-2 focus:ring-blue-100 focus:border-blue-400 outline-none transition-all"
-              placeholder="Password Baru"
+              placeholder="••••••••"
+              className="w-full mt-1 border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
           </div>
 
-        </div>
-
-        <div className="mt-8 flex justify-end">
-          <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-10 py-3 rounded-xl shadow-lg shadow-blue-100 transition-all active:scale-95">
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700"
+          >
             Simpan Perubahan
           </button>
-        </div>
 
-      </section>
+        </form>
+
+      </div>
 
     </div>
-  )
+  );
 }
