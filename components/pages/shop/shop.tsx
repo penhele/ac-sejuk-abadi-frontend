@@ -31,7 +31,7 @@ export default function Shop() {
 
   return (
     <div className="flex flex-row gap-8 items-start">
-      <aside className="w-3xs flex flex-col gap-8 sticky top-0 h-screen overflow-y-auto ">
+      <aside className="w-3xs flex flex-col gap-8 sticky top-0 h-screen overflow-y-auto">
         <CheckboxFilter title="Brand" listFilter={brandList} />
 
         <CheckboxFilter title="PK" listFilter={pkList} />

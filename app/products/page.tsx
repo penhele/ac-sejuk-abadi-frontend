@@ -1,9 +1,9 @@
-import Shop from "@/components/pages/shop/page";
+import Shop from "@/components/pages/shop/shop";
 
 export default function page() {
   return (
     <div className="max-w-7xl mx-auto">
-      <div className="p-8">
+      <div className="">
         <Shop />
       </div>
     </div>
