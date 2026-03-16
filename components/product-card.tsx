@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function ProductCard({ id }: { id: string }) {
   return (
-    <Link href={`/products/${id}`}>
+    <Link href={`/shop/${id}`}>
       <div className="shadow-lg rounded-md bg-gray-50 hover:scale-101 transition">
         <div className="relative">
           <AspectRatio ratio={1 / 1} className="bg-muted rounded-t-md" />

@@ -2,6 +2,7 @@ import "./globals.css";
 import React from "react";
 
 import { Geist } from "next/font/google";
+import Navbar from "@/components/navbar/navbar";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -12,7 +13,10 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html className={geist.className}>
-      <body>{children}</body>
+      <body>
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }
