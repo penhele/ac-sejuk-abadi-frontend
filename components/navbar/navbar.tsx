@@ -6,8 +6,8 @@ import Link from "next/link";
 export default function Navbar() {
   return (
     <div className="sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-center h-16 bg-white">
+      <div className="max-w-7xl mx-auto bg-white">
+        <div className="flex justify-between items-center h-16">
           <div className="flex flex-row gap-16">
             <Link href={"/"} className="relative h-12 w-28">
               <Image
