@@ -2,6 +2,7 @@ import { Search, SearchIcon, ShoppingCart, User } from "lucide-react";
 import { Button } from "../ui/button";
 import { ButtonGroup } from "../ui/button-group";
 import { Input } from "../ui/input";
+import Link from "next/link";
 
 export default function NavAction() {
   return (
@@ -21,7 +22,10 @@ export default function NavAction() {
 
       <div className="flex flex-row gap-2 items-center">
         <Button variant={"ghost"}>Register</Button>
-        <Button>Login</Button>
+
+        <Link href={'/auth/login'}>
+          <Button>Login</Button>
+        </Link>
       </div>
     </div>
   );
