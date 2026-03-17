@@ -23,7 +23,7 @@ export default function NavAction() {
       <div className="flex flex-row gap-2 items-center">
         <Button variant={"ghost"}>Register</Button>
 
-        <Link href={'/auth/login'}>
+        <Link href={"/auth/login"}>
           <Button>Login</Button>
         </Link>
       </div>

@@ -7,12 +7,10 @@ export default function PublicLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html>
-      <body>
-        <Navbar />
-        {children}
-        <Footer />
-      </body>
-    </html>
+    <div className="">
+      <Navbar />
+      {children}
+      <Footer />
+    </div>
   );
 }
