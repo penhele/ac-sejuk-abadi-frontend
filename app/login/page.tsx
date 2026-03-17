@@ -1,111 +1,104 @@
-import Link from "next/link";
 export default function Page() {
   return (
-    <div className="login-container">
+    <div className="flex min-h-screen">
 
-      {/* KIRI - BRANDING */}
-      <div className="login-left">
-        <h1>AC Sejuk Abadi</h1>
-        <p>Solusi Pendingin Ruangan Terbaik</p>
+      {/* LEFT */}
+      <div className="w-1/2 bg-[#74a1d2] text-white flex flex-col justify-center items-center text-center">
+        <h1 className="text-5xl mb-2">AC Sejuk Abadi</h1>
+        <p className="text-lg">Solusi Pendingin Ruangan Terbaik</p>
 
-        <img 
-          src="/logo.png"
-          alt="logo"
-          className="logo-image"
-        />
+        <img src="/logo.png" className="w-[150px] mt-5" />
       </div>
 
+      {/* RIGHT */}
+      <div className="w-1/2 flex justify-center items-center bg-gray-100 dark:bg-[#121212]">
 
-      {/* KANAN - LOGIN */}
-      <div className="login-right">
+        <div className="bg-white dark:bg-[#1e1e1e] p-10 w-95 rounded-lg border border-gray-300 dark:border-gray-700 shadow-md">
 
-        <div className="login-card">
+          {/* TITLE */}
+          <h2 className="text-2xl text-center text-blue-600">
+            Login
+          </h2>
 
-          <h2 className="login-title">Login</h2>
-
-          <p className="login-subtitle">
-            Selamat datang di website
+          <p className="text-center text-gray-500 dark:text-gray-400 mb-5">
+            Selamat Datang
           </p>
 
-          <form className="login-form">
+          {/* FORM */}
+          <form className="flex flex-col gap-4">
 
             {/* EMAIL */}
-            <div className="form-group">
-              <label>Email</label>
+            <div className="flex flex-col">
+              <label className="mb-1">Email</label>
               <input
-                type="email"
+                className="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                 placeholder="Masukkan email"
               />
             </div>
 
             {/* PASSWORD */}
-            <div className="form-group">
-              <label>Password</label>
+            <div className="flex flex-col">
+              <label className="mb-1">Password</label>
               <input
                 type="password"
+                className="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                 placeholder="Masukkan password"
               />
             </div>
 
             {/* OPTIONS */}
-            <div className="form-options">
-
-              <label className="checkbox">
-                <input type="checkbox"/>
-                <span>I'm not a robot</span>
+            <div className="flex justify-between items-center text-sm">
+              <label className="flex items-center gap-2">
+                <input type="checkbox" />
+                I'm not a robot
               </label>
 
-              <a href="#" className="forgot">
+              <a href="/forgot-password" className="text-blue-600 hover:underline">
                 Lupa password?
               </a>
-
             </div>
 
-            {/* LOGIN BUTTON */}
-            <button type="submit" className="login-button">
+            {/* BUTTON */}
+            <button className="p-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
               Login
             </button>
 
           </form>
 
-
-          {/* PEMISAH */}
-          <div className="divider">
-            <span>atau login dengan</span>
+          {/* DIVIDER */}
+          <div className="text-center my-5 relative">
+            <span className="px-2 text-gray-400 bg-white dark:bg-[#1e1e1e]">
+              atau
+            </span>
           </div>
-
 
           {/* SOCIAL LOGIN */}
-          <div className="social-login">
-
-            <button>
-              <img src="/google.png" alt="google"/>
+          <div className="flex justify-center gap-4">
+            <button className="w-11.25 h-11.25 border rounded-md bg-white hover:bg-gray-100 flex justify-center items-center">
+              <img src="/google.png" className="w-6" />
             </button>
 
-            <button>
-              <img src="/facebook.png" alt="facebook"/>
+            <button className="w-11.25 h-11.25 border rounded-md bg-white hover:bg-gray-100 flex justify-center items-center">
+              <img src="/facebook.png" className="w-6" />
             </button>
 
-            <button>
-              <img src="/instagram.png" alt="instagram"/>
+            <button className="w-11.25 h-11.25 border rounded-md bg-white hover:bg-gray-100 flex justify-center items-center">
+              <img src="/instagram.png" className="w-6" />
             </button>
-
           </div>
 
-
-          {/* REGISTER */}
-<p className="text-sm text-center mt-4">
-  Belum punya akun?
-  <Link href="/register" className="text-blue-600 ml-1 hover:underline">
-    Daftar sekarang
-  </Link>
-</p>
-       
+          <div className="flex justify-center items-center gap-2 text-sm">
+            <p className="text-gray-500 dark:text-gray-400">
+              Belum punya akun?
+              </p>
+              <a href="/register" className="text-blue-600 hover:underline">
+              Daftar di sini
+              </a>
+              </div>
+          
 
         </div>
-
       </div>
-
     </div>
-  )
+  );
 }
