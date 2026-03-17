@@ -19,7 +19,7 @@ export default function Page() {
       <div className="flex gap-8 max-w-6xl mx-auto">
 
         {/* SIDEBAR */}
-        <aside className="w-[250px] bg-white dark:bg-[#1e1e1e] border rounded-xl p-5">
+        <aside className="w-62.5 bg-white dark:bg-[#1e1e1e] border rounded-xl p-5">
 
           <h2 className="text-lg font-semibold mb-5">Menu Akun</h2>
 
@@ -99,7 +99,7 @@ export default function Page() {
 
                   <div className="flex gap-4 items-center">
 
-                    <div className="w-[60px] h-[60px] bg-blue-100 rounded-lg flex items-center justify-center text-2xl">
+                    <div className="w-15 h-15 bg-blue-100 rounded-lg flex items-center justify-center text-2xl">
                       {order.icon}
                     </div>
 

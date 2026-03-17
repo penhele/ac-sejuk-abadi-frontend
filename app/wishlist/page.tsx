@@ -27,7 +27,7 @@ export default function Page() {
 
               <div className="flex gap-4 items-center">
 
-                <div className="w-[60px] h-[60px] bg-blue-100 rounded-lg flex items-center justify-center text-2xl">
+                <div className="w-15 h-15 bg-blue-100 rounded-lg flex items-center justify-center text-2xl">
                   {item.icon}
                 </div>
 
