@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Page() {
 
   const status = [
@@ -17,29 +19,35 @@ export default function Page() {
       <div className="account-container">
 
         {/* SIDEBAR */}
-        <aside className="account-sidebar">
+       <aside className="account-sidebar">
 
-          <h2 className="sidebar-title">Menu Akun</h2>
+  <h2 className="sidebar-title">Menu Akun</h2>
 
-          <nav className="sidebar-menu">
+  <nav className="sidebar-menu">
 
-            <button className="menu-item">
-              ⚙️ Biodata
-            </button>
+    <Link href="/biodata">
+      <button className="menu-item">
+        ⚙️ Biodata
+      </button>
+    </Link>
 
-            <button className="menu-item">
-              ❤️ Wishlist
-            </button>
+    <Link href="/wishlist">
+      <button className="menu-item">
+        ❤️ Wishlist
+      </button>
+    </Link>
 
-            <hr />
+    <hr />
 
-            <button className="menu-item logout">
-              🚪 Keluar
-            </button>
+    <Link href="/login">
+      <button className="menu-item logout">
+        🚪 Keluar
+      </button>
+    </Link>
 
-          </nav>
+  </nav>
 
-        </aside>
+</aside>
 
 
         {/* MAIN CONTENT */}

@@ -1,3 +1,4 @@
+import Link from "next/link";
 export default function Page() {
   return (
     <div className="login-container">
@@ -93,10 +94,13 @@ export default function Page() {
 
 
           {/* REGISTER */}
-          <p className="register-text">
-            Belum punya akun?
-            <a href="#"> Daftar sekarang</a>
-          </p>
+<p className="text-sm text-center mt-4">
+  Belum punya akun?
+  <Link href="/register" className="text-blue-600 ml-1 hover:underline">
+    Daftar sekarang
+  </Link>
+</p>
+       
 
         </div>
 
