@@ -15,36 +15,18 @@ export default function Page() {
       </div>
 
 
-      {/* KANAN - REGISTER */}
+      {/* KANAN - LOGIN */}
       <div className="login-right">
 
         <div className="login-card">
 
-          <h2 className="login-title">Register</h2>
+          <h2 className="login-title">Login</h2>
 
           <p className="login-subtitle">
             Selamat datang di website
           </p>
 
           <form className="login-form">
-
-            {/* NAMA DEPAN */}
-            <div className="form-group">
-              <label>Nama Depan</label>
-              <input
-                type="text"
-                placeholder="Masukkan nama depan"
-              />
-            </div>
-
-            {/* NAMA BELAKANG */}
-            <div className="form-group">
-              <label>Nama Belakang</label>
-              <input
-                type="text"
-                placeholder="Masukkan nama belakang"
-              />
-            </div>
 
             {/* EMAIL */}
             <div className="form-group">
@@ -64,16 +46,7 @@ export default function Page() {
               />
             </div>
 
-            {/* ALAMAT */}
-            <div className="form-group">
-              <label>Alamat</label>
-              <input
-                type="text"
-                placeholder="Masukkan alamat"
-              />
-            </div>
-
-            {/* CAPTCHA */}
+            {/* OPTIONS */}
             <div className="form-options">
 
               <label className="checkbox">
@@ -81,17 +54,49 @@ export default function Page() {
                 <span>I'm not a robot</span>
               </label>
 
+              <a href="#" className="forgot">
+                Lupa password?
+              </a>
+
             </div>
 
-            {/* BUTTON */}
-            <button
-              type="submit"
-              className="login-button"
-            >
-              Register
+            {/* LOGIN BUTTON */}
+            <button type="submit" className="login-button">
+              Login
             </button>
 
           </form>
+
+
+          {/* PEMISAH */}
+          <div className="divider">
+            <span>atau login dengan</span>
+          </div>
+
+
+          {/* SOCIAL LOGIN */}
+          <div className="social-login">
+
+            <button>
+              <img src="/google.png" alt="google"/>
+            </button>
+
+            <button>
+              <img src="/facebook.png" alt="facebook"/>
+            </button>
+
+            <button>
+              <img src="/instagram.png" alt="instagram"/>
+            </button>
+
+          </div>
+
+
+          {/* REGISTER */}
+          <p className="register-text">
+            Belum punya akun?
+            <a href="#"> Daftar sekarang</a>
+          </p>
 
         </div>
 
