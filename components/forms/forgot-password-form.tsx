@@ -17,7 +17,7 @@ export default function ForgotPasswordForm() {
           <Input id="code" type="code" placeholder="" required />
         </Field>
 
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid xs:grid-cols-2 gap-2">
           <Field>
             <FieldLabel htmlFor="password">Password</FieldLabel>
             <Input id="password" type="password" placeholder="" required />

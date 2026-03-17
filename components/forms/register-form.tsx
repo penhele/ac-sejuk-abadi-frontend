@@ -9,12 +9,13 @@ import {
 } from "../ui/field";
 import { Input } from "../ui/input";
 import Link from "next/link";
+import { Textarea } from "../ui/textarea";
 
 export default function RegisterForm() {
   return (
     <form action="">
       <div className="space-y-4">
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid xs:grid-cols-2 gap-4">
           <Field>
             <FieldLabel htmlFor="first_name">Nama Depan</FieldLabel>
             <Input id="first_name" placeholder="John" required />
@@ -32,10 +33,21 @@ export default function RegisterForm() {
 
         <Field>
           <FieldLabel htmlFor="address">Alamat</FieldLabel>
-          <Input id="address" placeholder="Jl. Srengseng Sawah No.2" required />
+          <Input
+            id="address"
+            placeholder="Jl. Srengseng Sawah No.2"
+            className="hidden xs:block"
+            required
+          />
+          <Textarea
+            id="address"
+            placeholder="Jl. Srengseng Sawah No.2"
+            className="block xs:hidden"
+            required
+          />
         </Field>
 
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid xs:grid-cols-2 gap-2">
           <div className="grid grid-cols-2 gap-2">
             <Field>
               <FieldLabel htmlFor="rt">RT</FieldLabel>
@@ -57,7 +69,7 @@ export default function RegisterForm() {
           <Input id="email" type="email" placeholder="john@doe.com" required />
         </Field>
 
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid xs:grid-cols-2 gap-2">
           <Field>
             <FieldLabel htmlFor="password">Password</FieldLabel>
             <Input id="password" type="password" required />

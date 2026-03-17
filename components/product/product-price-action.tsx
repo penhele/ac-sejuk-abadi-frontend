@@ -6,6 +6,7 @@ import { Separator } from "../ui/separator";
 import { FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { useState } from "react";
 import { formatCurrency } from "@/lib/currency";
+import { Input } from "../ui/input";
 
 export default function ProductPriceAction() {
   const price = 2500000;
@@ -46,7 +47,7 @@ export default function ProductPriceAction() {
             <MinusIcon />
           </Button>
 
-          <span className="text-lg">{quantity}</span>
+          <span className="text-lg w-8 flex justify-center">{quantity}</span>
 
           <Button variant={"outline"} onClick={increaseQty}>
             <PlusIcon />
