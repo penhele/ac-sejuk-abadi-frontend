@@ -7,9 +7,5 @@ const geist = Geist({
 export default function AuthLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  return (
-    <html className={geist.className}>
-      <body>{children}</body>
-    </html>
-  );
+  return <div className="">{children}</div>;
 }

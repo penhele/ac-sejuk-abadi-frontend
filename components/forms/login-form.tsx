@@ -19,7 +19,13 @@ export default function LoginForm() {
         </Field>
 
         <Field>
-          <FieldLabel htmlFor="password">Password</FieldLabel>
+          <div className="flex flex-row justify-between">
+            <FieldLabel htmlFor="password">Password</FieldLabel>
+
+            <Link href={""}>
+              <FieldLabel>Forgot Password?</FieldLabel>
+            </Link>
+          </div>
           <Input id="password" type="password" required />
         </Field>
 
