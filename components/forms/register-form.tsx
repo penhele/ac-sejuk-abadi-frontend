@@ -97,7 +97,7 @@ export default function RegisterForm() {
 
           <FieldDescription className="text-center">
             Have an account?{" "}
-            <Link href="/auth/login" className="underline underline-offset-4">
+            <Link href="/login" className="underline underline-offset-4">
               Sign in
             </Link>
           </FieldDescription>

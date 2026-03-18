@@ -22,7 +22,7 @@ export default function LoginForm() {
           <div className="flex flex-row justify-between">
             <FieldLabel htmlFor="password">Password</FieldLabel>
 
-            <Link href={"/auth/forgot-password"}>
+            <Link href={"/forgot-password"}>
               <FieldLabel>Forgot Password?</FieldLabel>
             </Link>
           </div>
@@ -46,10 +46,7 @@ export default function LoginForm() {
 
           <FieldDescription className="text-center">
             Don&apos;t have an account?{" "}
-            <Link
-              href="/auth/register"
-              className="underline underline-offset-4"
-            >
+            <Link href="/register" className="underline underline-offset-4">
               Sign up
             </Link>
           </FieldDescription>

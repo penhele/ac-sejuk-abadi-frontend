@@ -32,7 +32,7 @@ export default function ForgotPasswordForm() {
         <Field>
           <Button>Reset Password</Button>
 
-          <Link href={"/auth/login"}>
+          <Link href={"/login"}>
             <Button variant={"outline"} className="w-full">
               Back to login
             </Button>
