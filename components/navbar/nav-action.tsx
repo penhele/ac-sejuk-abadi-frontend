@@ -8,12 +8,14 @@ export default function NavAction() {
   return (
     <div className="flex flex-row gap-2 items-center">
       <div className="flex flex-row gap-4 items-center">
-        <ButtonGroup>
+        <ButtonGroup className="xs:flex hidden">
           <Input placeholder="Search..." />
           <Button variant="outline" aria-label="Search">
             <SearchIcon />
           </Button>
         </ButtonGroup>
+
+        <SearchIcon size={16} className="block xs:hidden" />
 
         <ShoppingCart size={16} />
 

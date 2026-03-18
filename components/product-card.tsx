@@ -19,7 +19,7 @@ export default function ProductCard({ id }: { id: string }) {
 
         <div className="p-4 flex flex-col gap-2">
           <span className="text-xs text-gray-400">Daikin</span>
-          <h1 className="text-sm h-16">
+          <h1 className="text-sm h-16 line-clamp-3">
             Midea AC Wall Mounted Split Standard Double Gold Fin 1/2 PK
           </h1>
 
@@ -42,7 +42,7 @@ export default function ProductCard({ id }: { id: string }) {
               </div>
             </div>
 
-            <Button variant={"outline"}>
+            <Button variant={"outline"} className="hidden xs:block">
               <ShoppingCart />
             </Button>
           </div>

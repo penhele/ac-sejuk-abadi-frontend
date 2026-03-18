@@ -19,7 +19,7 @@ export default function NavItem() {
 
   return (
     <NavigationMenu>
-      <NavigationMenuList className="flex gap-2">
+      <NavigationMenuList>
         {menuItems.map((item, index) => (
           <NavigationMenuItem key={index}>
             <NavigationMenuLink

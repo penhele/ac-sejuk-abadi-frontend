@@ -10,7 +10,7 @@ export default function PublicLayout({
     <div className="">
       <Navbar />
       {children}
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

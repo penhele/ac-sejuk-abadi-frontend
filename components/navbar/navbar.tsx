@@ -7,8 +7,8 @@ export default function Navbar() {
   return (
     <div className="sticky top-0 z-50 bg-white">
       <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-center h-16">
-          <div className="flex flex-row gap-16">
+        <div className="flex lg:flex-row flex-col lg:justify-between items-center py-2">
+          <div className="flex w-full lg:w-fit xs:justify-between justify-center flex-row gap-16 items-center ">
             <Link href={"/"} className="relative h-12 w-28">
               <Image
                 src="/logo.png"
@@ -18,7 +18,9 @@ export default function Navbar() {
               />
             </Link>
 
-            <NavItem />
+            <div className="hidden xs:block">
+              <NavItem />
+            </div>
           </div>
 
           <NavAction />
