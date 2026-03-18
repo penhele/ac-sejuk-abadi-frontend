@@ -1,10 +1,10 @@
-import Portofolio from "@/components/pages/portofolio/portofolio";
+import PortofolioPage from "@/components/pages/portofolio/portofolio-page";
 
 export default function page() {
   return (
     <div className="max-w-7xl mx-auto">
       <div className="py-4">
-        <Portofolio />
+        <PortofolioPage />
       </div>
     </div>
   );

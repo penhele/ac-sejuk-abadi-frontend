@@ -9,12 +9,12 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-export default function PortofolioDetail() {
+export default function PortofolioDetailPage() {
   return (
     <div className="">
       <div className="space-y-8">
         <div className="space-y-4">
-          <h1 className="text-xl font-bold">Hardi's House</h1>
+          <h1 className="text-header-h2 font-bold">Hardi's House</h1>
 
           <div className="space-y-4">
             <p className="text-body">

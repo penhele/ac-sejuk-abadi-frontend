@@ -1,4 +1,4 @@
-import { Slider } from "./ui/slider";
+import { Slider } from "../ui/slider";
 
 export default function SliderFilter({ title }: { title: string }) {
   return (

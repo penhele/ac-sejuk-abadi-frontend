@@ -1,7 +1,7 @@
 import { Button } from "../../ui/button";
 import PortofolioList from "@/components/lists/portofolio-list";
 
-export default function Portofolio() {
+export default function PortofolioPage() {
   return (
     <div className="max-w-7xl mx-auto">
       <div className="space-y-4">

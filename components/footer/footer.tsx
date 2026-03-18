@@ -39,7 +39,7 @@ export default function Footer() {
               <Image src="/logo.png" alt="" fill className="object-contain" />
             </div>
 
-            <p className="text-sm">
+            <p className="text-body">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima,
               consequuntur.
             </p>

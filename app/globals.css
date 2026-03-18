@@ -13,6 +13,7 @@
   --text-header-h1: 1.875rem;
   --text-header-h2: 1.5rem;
   --text-header-h3: 1.25rem;
+  --text-header-4: 1rem;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);

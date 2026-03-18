@@ -23,7 +23,10 @@ export default function PortofolioCard({
           {portofolio.description}
         </p>
 
-        <Link href={"/portofolio/qwerty"} className="text-sm text-primary">
+        <Link
+          href={`/portofolio/${portofolio.id}`}
+          className="text-sm text-primary"
+        >
           Lihat Detail &gt;
         </Link>
       </div>

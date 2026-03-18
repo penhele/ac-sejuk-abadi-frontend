@@ -1,8 +1,8 @@
-import CheckboxFilter from "@/components/checkbox-filter";
+import CheckboxFilter from "@/components/filters/checkbox-filter";
 import ProductList from "@/components/lists/product-list";
-import SliderFilter from "@/components/slider-filter";
+import SliderFilter from "@/components/filters/slider-filter";
 
-export default function Shop() {
+export default function ShopPage() {
   const brandList = [
     { name: "Daikin", id: "clh123abc0001" },
     { name: "Samsung", id: "clh123abc0002" },

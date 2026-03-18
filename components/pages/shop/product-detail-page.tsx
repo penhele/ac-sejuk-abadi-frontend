@@ -4,7 +4,7 @@ import ProductImages from "@/components/product/product-images";
 import ProductInfo from "@/components/product/product-info";
 import ProductPriceAction from "@/components/product/product-price-action";
 
-export default function ProductDetail() {
+export default function ProductDetailPage() {
   const data: AcSpecification[] = [
     { property: "Brand", value: "Daikin" },
     { property: "Kapasitas", value: "1/2 PK" },
@@ -32,7 +32,7 @@ export default function ProductDetail() {
 
       <div className="flex flex-col gap-8">
         <div className="flex flex-col gap-2">
-          <h1 className="font-medium">Detail</h1>
+          <h1 className="text-header-4 font-medium">Detail</h1>
 
           <p className="text-body">
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Placeat,
@@ -61,7 +61,7 @@ export default function ProductDetail() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <h1 className="font-medium">Spesifikasi</h1>
+          <h1 className="text-header-4 font-medium">Spesifikasi</h1>
           <DataTable columns={columns} data={data} />
         </div>
       </div>
