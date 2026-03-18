@@ -19,7 +19,7 @@ export default function ProductInfo() {
 
       <div className="flex flex-col gap-1">
         <h1 className="font-medium">Deskripsi</h1>
-        <p className="text-sm">
+        <p className="text-body">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem
           tempora cum quos error voluptatum quibusdam hic ratione vitae pariatur
           sit, cumque maxime impedit dignissimos dolores culpa perspiciatis,

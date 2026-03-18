@@ -34,7 +34,7 @@ export default function ProductDetail() {
         <div className="flex flex-col gap-2">
           <h1 className="font-medium">Detail</h1>
 
-          <p className="text-sm">
+          <p className="text-body">
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Placeat,
             fugit voluptate unde modi odit assumenda accusamus inventore nisi
             fugiat, minima fuga aperiam maxime ducimus laudantium ex ipsam

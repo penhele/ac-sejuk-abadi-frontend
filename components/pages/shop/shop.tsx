@@ -1,5 +1,5 @@
 import CheckboxFilter from "@/components/checkbox-filter";
-import ProductList from "@/components/product-list";
+import ProductList from "@/components/lists/product-list";
 import SliderFilter from "@/components/slider-filter";
 
 export default function Shop() {

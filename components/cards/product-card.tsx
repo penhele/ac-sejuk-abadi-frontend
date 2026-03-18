@@ -1,6 +1,6 @@
 import { Heart, ShoppingCart } from "lucide-react";
-import { AspectRatio } from "./ui/aspect-ratio";
-import { Button } from "./ui/button";
+import { AspectRatio } from "../ui/aspect-ratio";
+import { Button } from "../ui/button";
 import Link from "next/link";
 
 export default function ProductCard({ id }: { id: string }) {

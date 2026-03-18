@@ -1,4 +1,4 @@
-import ProductCard from "@/components/product-card";
+import ProductCard from "@/components/cards/product-card";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import {
   Table,
@@ -17,7 +17,7 @@ export default function PortofolioDetail() {
           <h1 className="text-xl font-bold">Hardi's House</h1>
 
           <div className="space-y-4">
-            <p>
+            <p className="text-body">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Harum
               laboriosam cumque porro exercitationem quibusdam id inventore
               repellendus eveniet ea et ullam culpa labore neque saepe delectus
@@ -31,7 +31,7 @@ export default function PortofolioDetail() {
               laudantium mollitia fugiat quaerat ipsa provident at accusantium!
               Cumque commodi dolore illo debitis officiis, quos a cum molestiae.
             </p>
-            <p>
+            <p className="text-body">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt,
               tempora natus! Fuga numquam mollitia voluptates architecto quia
               non incidunt excepturi quod fugit sequi reprehenderit sint libero
