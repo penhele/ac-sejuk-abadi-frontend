@@ -1,8 +1,8 @@
-import { AcSpecification, columns } from "../../product/columns";
 import { DataTable } from "../../product/data-table";
 import ProductImages from "@/components/product/product-images";
 import ProductInfo from "@/components/product/product-info";
 import ProductPriceAction from "@/components/product/product-price-action";
+import { AcSpecification, columns } from "@/components/tables/product-columns";
 
 export default function ProductDetailPage() {
   const data: AcSpecification[] = [
