@@ -51,15 +51,14 @@ export default function PortofolioDetailPage() {
             </p>
           </div>
 
-        <div className="grid grid-cols-3 gap-4">
-          <AspectRatio ratio={16 / 9} className="bg-muted rounded-t-lg" />
-          <AspectRatio ratio={16 / 9} className="bg-muted rounded-t-lg" />
-          <AspectRatio ratio={16 / 9} className="bg-muted rounded-t-lg" />
-          <AspectRatio ratio={16 / 9} className="bg-muted rounded-t-lg" />
-          <AspectRatio ratio={16 / 9} className="bg-muted rounded-t-lg" />
+          <div className="grid grid-cols-3 gap-4">
+            <AspectRatio ratio={16 / 9} className="bg-muted rounded-t-lg" />
+            <AspectRatio ratio={16 / 9} className="bg-muted rounded-t-lg" />
+            <AspectRatio ratio={16 / 9} className="bg-muted rounded-t-lg" />
+            <AspectRatio ratio={16 / 9} className="bg-muted rounded-t-lg" />
+            <AspectRatio ratio={16 / 9} className="bg-muted rounded-t-lg" />
+          </div>
         </div>
-        </div>
-
 
         <div className="space-y-4">
           <h2 className="text-lg font-bold">Produk</h2>
@@ -87,7 +86,7 @@ export default function PortofolioDetailPage() {
             </TableBody>
           </Table>
 
-          <Separator/>
+          <Separator />
 
           <div className="grid grid-cols-3 gap-4">
             <ProductCard id="qwertyuiop" />

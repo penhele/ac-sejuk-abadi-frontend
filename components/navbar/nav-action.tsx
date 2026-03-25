@@ -17,9 +17,13 @@ export default function NavAction() {
 
         <SearchIcon size={16} className="block xs:hidden" />
 
-        <ShoppingCart size={16} />
+        <Link href={"/cart"}>
+          <ShoppingCart size={16} />
+        </Link>
 
-        <User size={16} />
+        <Link href={"/account"}>
+          <User size={16} />
+        </Link>
       </div>
 
       <div className="flex flex-row gap-2 items-center">

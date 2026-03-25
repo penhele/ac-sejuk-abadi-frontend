@@ -1,5 +1,5 @@
-import { Button } from "../../ui/button";
 import PortofolioList from "@/components/lists/portofolio-list";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function PortofolioPage() {
   return (
@@ -14,13 +14,14 @@ export default function PortofolioPage() {
           </p>
         </div>
 
-        <div className="">
-          <Button variant={"default"}>All</Button>
-          <Button variant={"ghost"}>Apartemen</Button>
-          <Button variant={"ghost"}>Rumah</Button>
-          <Button variant={"ghost"}>Ruko</Button>
-          <Button variant={"ghost"}>Kantor</Button>
-        </div>
+        <Tabs defaultValue="all">
+          <TabsList variant="line">
+            <TabsTrigger value="all">All</TabsTrigger>
+            <TabsTrigger value="apartemen">Apartemen</TabsTrigger>
+            <TabsTrigger value="ruko">Ruko</TabsTrigger>
+            <TabsTrigger value="kantor">Kantor</TabsTrigger>
+          </TabsList>
+        </Tabs>
 
         <div className="">
           <span className="text-sm">Total Project: 3</span>
