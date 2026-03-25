@@ -81,7 +81,7 @@ export default function RegisterForm() {
         </div>
 
         <Field>
-          <Link href={"/auth/login"}>
+          <Link href={"/login"}>
             <Button className="w-full">Register</Button>
           </Link>
         </Field>

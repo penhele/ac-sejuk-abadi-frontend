@@ -1,5 +1,6 @@
 import ProductCard from "@/components/cards/product-card";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Separator } from "@/components/ui/separator";
 import {
   Table,
   TableBody,
@@ -12,7 +13,7 @@ import {
 export default function PortofolioDetailPage() {
   return (
     <div className="">
-      <div className="space-y-8">
+      <div className="space-y-16">
         <div className="space-y-4">
           <h1 className="text-header-h2 font-bold">Hardi's House</h1>
 
@@ -49,7 +50,6 @@ export default function PortofolioDetailPage() {
               unde laborum ducimus corrupti, consectetur rem molestias ab!
             </p>
           </div>
-        </div>
 
         <div className="grid grid-cols-3 gap-4">
           <AspectRatio ratio={16 / 9} className="bg-muted rounded-t-lg" />
@@ -58,6 +58,8 @@ export default function PortofolioDetailPage() {
           <AspectRatio ratio={16 / 9} className="bg-muted rounded-t-lg" />
           <AspectRatio ratio={16 / 9} className="bg-muted rounded-t-lg" />
         </div>
+        </div>
+
 
         <div className="space-y-4">
           <h2 className="text-lg font-bold">Produk</h2>
@@ -84,6 +86,8 @@ export default function PortofolioDetailPage() {
               </TableRow>
             </TableBody>
           </Table>
+
+          <Separator/>
 
           <div className="grid grid-cols-3 gap-4">
             <ProductCard id="qwertyuiop" />
