@@ -13,14 +13,19 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "incremental": true,
+
+    // 🔥 TAMBAHKAN INI
+    "baseUrl": ".",
+
+    "paths": {
+      "@/*": ["./*"]
+    },
+
     "plugins": [
       {
         "name": "next"
       }
-    ],
-    "paths": {
-      "@/*": ["./*"]
-    }
+    ]
   },
   "include": [
     "next-env.d.ts",
@@ -32,4 +37,3 @@
   ],
   "exclude": ["node_modules"]
 }
-
