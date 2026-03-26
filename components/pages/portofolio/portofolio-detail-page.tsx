@@ -1,3 +1,4 @@
+import PortofolioList from "@/components/lists/portofolio-list";
 import ProductCard from "@/components/cards/product-card";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
@@ -143,6 +144,21 @@ export default function PortofolioDetailPage() {
           <ProductCard id="daikin-split" />
           <ProductCard id="daikin-cassette" />
         </div>
+      </section>
+
+      {/* NEW: Related Projects Section */}
+      <section className="space-y-8 pb-16 bg-slate-50/50 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 py-16">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b pb-6">
+          <div className="space-y-1">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900">
+              Lihat Proyek Lainnya
+            </h2>
+            <p className="text-gray-500">
+              Mungkin Anda juga tertarik dengan solusi pendinginan dari proyek-proyek unggulan kami lainnya.
+            </p>
+          </div>
+        </div>
+        <PortofolioList />
       </section>
     </div>
   );
