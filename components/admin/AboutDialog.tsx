@@ -63,7 +63,7 @@ export default function AboutDialog({ open, setOpen, onSave }: any) {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent className="sm:max-w-[500px]">
+      <DialogContent className="sm:max-w-125">
         <DialogHeader>
           <DialogTitle>Tambah Data About</DialogTitle>
         </DialogHeader>
