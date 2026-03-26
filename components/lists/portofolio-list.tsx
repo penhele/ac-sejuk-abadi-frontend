@@ -3,32 +3,41 @@ import PortofolioCard from "../cards/portofolio-card";
 const projects = [
   {
     id: "1",
-    title: "Hardi's House",
+    title: "Luxury Apartemen Menteng",
+    category: "Apartemen",
+    image: "/images/portofolio/apartemen.png",
     description:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Adipisci accusantium assumenda soluta, quia ducimus modi!",
+      "Pemasangan sistem AC Multi-S untuk efisiensi ruang dan energi di apartemen mewah kawasan Menteng.",
   },
   {
     id: "2",
-    title: "Bank MEGA",
-    description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
+    title: "Office Tower Sudirman",
+    category: "Kantor",
+    image: "/images/portofolio/office.png",
+    description:
+      "Solusi pendinginan VRV terintegrasi untuk 5 lantai perkantoran dengan kontrol cerdas.",
   },
   {
     id: "3",
-    title: "Stephen's Kost",
+    title: "Ruko Premium Pantai Indah Kapuk",
+    category: "Ruko",
+    image: "/images/portofolio/hero-bg.png",
     description:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Adipisci accusantium assumenda soluta, quia ducimus modi!",
+      "Instalasi AC Cassette yang estetik dan bertenaga untuk showroom otomotif di kawasan PIK.",
   },
   {
     id: "4",
-    title: "Hardi's House",
+    title: "Penthouse Residence",
+    category: "Apartemen",
+    image: "/images/portofolio/apartemen.png",
     description:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Adipisci accusantium assumenda soluta, quia ducimus modi!",
+      "Sistem pendingin udara tersembunyi (ducted) untuk menjaga estetika interior minimalis.",
   },
 ];
 
 export default function PortofolioList() {
   return (
-    <div className="grid grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {projects.map((item) => (
         <PortofolioCard key={item.id} portofolio={item} />
       ))}
