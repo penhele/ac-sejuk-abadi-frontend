@@ -10,7 +10,7 @@ export default function ProductCard({ id }: { id: string }) {
         <div className="relative">
           <AspectRatio ratio={1 / 1} className="bg-muted rounded-t-md" />
 
-          <div className="absolute top-3 left-3 bg-yellow-500 py-1 px-2 text-white text-xs rounded-lg">
+          <div className="absolute top-3 left-3 bg-discount py-1 px-2 text-white text-xs rounded-lg">
             -20%
           </div>
 

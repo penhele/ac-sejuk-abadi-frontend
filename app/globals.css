@@ -5,8 +5,15 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  /* spacing */
+  --spacing-default-page: 4px;
+
+  /* breakpoint */
   --breakpoint-2xs: 24rem;
   --breakpoint-xs: 32rem;
+
+  /* color */
+  --color-discount: var(--color-yellow-500);
 
   /* text */
   --text-body: 0.875rem;
@@ -135,5 +142,17 @@
   }
   html {
     @apply font-sans;
+  }
+}
+
+@layer components {
+  .header-h1 {
+    font-size: var(--text-header-h1);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .header-h2 {
+    font-size: var(--text-header-h2);
+    font-weight: var(--font-weight-bold);
   }
 }

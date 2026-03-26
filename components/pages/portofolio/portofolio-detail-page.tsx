@@ -12,10 +12,10 @@ import {
 
 export default function PortofolioDetailPage() {
   return (
-    <div className="">
+    <div className="defaultt">
       <div className="space-y-16">
         <div className="space-y-4">
-          <h1 className="text-header-h2 font-bold">Hardi's House</h1>
+          <h1 className="header-h2">Hardi's House</h1>
 
           <div className="space-y-4">
             <p className="text-body">

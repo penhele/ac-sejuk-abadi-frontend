@@ -6,7 +6,7 @@ export default function HomePage() {
   return (
     <div className="">
       <div className="flex flex-col gap-4">
-        <h2 className="text-header-h2 font-bold">Featured Product</h2>
+        <h2 className="header-h2">Featured Product</h2>
 
         <Tabs defaultValue="overview" className="items-center">
           <TabsList variant="line">
