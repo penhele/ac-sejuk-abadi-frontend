@@ -1,4 +1,11 @@
-import { Search, SearchIcon, ShoppingCart, User } from "lucide-react";
+import {
+  Languages,
+  LanguagesIcon,
+  Search,
+  SearchIcon,
+  ShoppingCart,
+  User,
+} from "lucide-react";
 import { Button } from "../ui/button";
 import { ButtonGroup } from "../ui/button-group";
 import { Input } from "../ui/input";
@@ -8,6 +15,11 @@ export default function NavAction() {
   return (
     <div className="flex flex-row gap-2 items-center">
       <div className="flex flex-row gap-4 items-center">
+        <Button variant={"outline"} className="space-x-1 flex items-center">
+          <Languages size={16} />
+          <span>EN</span>
+        </Button>
+
         <ButtonGroup className="xs:flex hidden">
           <Input placeholder="Search..." />
           <Button variant="outline" aria-label="Search">

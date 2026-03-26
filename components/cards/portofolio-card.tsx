@@ -3,7 +3,7 @@ import { AspectRatio } from "../ui/aspect-ratio";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-import { DescriptionCard, TitleCard } from "../util/header";
+import { DescriptionCard, TitleCard } from "../util/card-content";
 
 export default function PortofolioCard({
   portofolio,

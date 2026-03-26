@@ -32,7 +32,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <Table>
-      <TableHeader>
+      {/* <TableHeader>
         {table.getHeaderGroups().map((headerGroup) => (
           <TableRow key={headerGroup.id}>
             {headerGroup.headers.map((header) => (
@@ -47,7 +47,7 @@ export function DataTable<TData, TValue>({
             ))}
           </TableRow>
         ))}
-      </TableHeader>
+      </TableHeader> */}
       <TableBody>
         {table.getRowModel().rows?.length ? (
           table.getRowModel().rows.map((row) => (

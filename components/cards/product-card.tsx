@@ -2,17 +2,16 @@ import { Heart, ShoppingCart } from "lucide-react";
 import { AspectRatio } from "../ui/aspect-ratio";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import DiscountBadge from "../util/discount-badge";
 
 export default function ProductCard({ id }: { id: string }) {
   return (
     <Link href={`/shop/${id}`}>
-      <div className="shadow-lg rounded-md bg-gray-50 hover:scale-101 transition">
+      <div className="group block overflow-hidden rounded-xl bg-white shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border">
         <div className="relative">
           <AspectRatio ratio={1 / 1} className="bg-muted rounded-t-md" />
 
-          <div className="absolute top-3 left-3 bg-discount py-1 px-2 text-white text-xs rounded-lg">
-            -20%
-          </div>
+          <DiscountBadge discount="-20%" />
 
           <Heart className="absolute top-3 right-3 size-5 text-gray-400 hover:text-gray-600" />
         </div>

@@ -3,6 +3,8 @@ import ProductImages from "@/components/product/product-images";
 import ProductInfo from "@/components/product/product-info";
 import ProductPriceAction from "@/components/product/product-price-action";
 import { AcSpecification, columns } from "@/components/tables/product-columns";
+import { DescriptionCard } from "@/components/util/card-content";
+import { DescriptionSection, HeaderSection } from "@/components/util/header";
 
 export default function ProductDetailPage() {
   const data: AcSpecification[] = [
@@ -31,37 +33,14 @@ export default function ProductDetailPage() {
       </div>
 
       <div className="flex flex-col gap-8">
-        <div className="flex flex-col gap-2">
-          <h1 className="text-header-4 font-medium">Detail</h1>
+        <div className="flex flex-col ">
+          <HeaderSection title="Detail" />
 
-          <p className="text-body">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Placeat,
-            fugit voluptate unde modi odit assumenda accusamus inventore nisi
-            fugiat, minima fuga aperiam maxime ducimus laudantium ex ipsam
-            doloribus, non expedita. Iusto magnam tempore possimus quod
-            laboriosam nesciunt similique ratione, commodi debitis provident
-            deleniti quidem modi nobis vero natus cumque magni. Eius id nisi,
-            quam quibusdam est ex culpa quia sed, ab, quidem natus porro amet
-            alias aut? Quas ex ut, quae recusandae placeat quo modi at aliquam
-            consequuntur sed rerum inventore amet quod sunt voluptatum nobis
-            commodi error fugiat atque! Dolorem pariatur sunt excepturi aut
-            ratione maiores fugiat recusandae esse amet ipsa minus reiciendis
-            soluta, cupiditate cum quae atque temporibus quam nisi harum
-            officiis eligendi tenetur doloremque provident quos. Nemo iure
-            perferendis iste atque asperiores et magni illo fugit, vitae
-            inventore, aliquam exercitationem impedit. Consequatur, error quasi.
-            Quisquam dolor officiis eveniet quibusdam iste dolorum numquam ipsam
-            ad suscipit perferendis, enim ipsum repellendus fuga iusto alias
-            sequi autem blanditiis cum veritatis minus? Fugit sint eveniet aut
-            recusandae veritatis, dolorem eum nesciunt officia! Ex earum quia
-            temporibus iusto repudiandae enim quasi? Harum nisi magnam quis
-            tempore velit soluta ipsa! Repudiandae, veniam earum sint asperiores
-            architecto libero natus atque consectetur maiores? Porro, corrupti.
-          </p>
+          <DescriptionSection description="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo laborum blanditiis unde sint ut esse nulla magnam rem nihil. Iste id, voluptate dolor nisi architecto voluptates sint debitis commodi accusamus velit consequatur minima voluptatum exercitationem maiores illo dignissimos et ex pariatur nobis ipsum natus ab. Eum esse nesciunt asperiores earum expedita totam eaque sit itaque quis qui voluptates beatae in tenetur similique voluptatibus praesentium reiciendis distinctio nostrum, aperiam laborum nobis ea voluptatum repudiandae quibusdam! Dolorum et illum quos qui quam laboriosam a vero, blanditiis, accusamus consequuntur inventore sed, necessitatibus debitis soluta neque aspernatur porro praesentium eveniet libero itaque magni quae." />
         </div>
 
         <div className="flex flex-col gap-2">
-          <h1 className="text-header-4 font-medium">Spesifikasi</h1>
+          <HeaderSection title="Spesifikasi" />
           <DataTable columns={columns} data={data} />
         </div>
       </div>

@@ -15,11 +15,12 @@
   /* color */
   --color-discount: var(--color-yellow-500);
   --color-text-description: var(--color-gray-400);
+  --color-text-title: var(--color-gray-900);
 
   /* text */
   --text-body: 0.875rem;
   --text-header-h1: 1.875rem;
-  --text-header-h2: 1.5rem;
+  --text-header-h2: var(--text-2xl);
   --text-header-h3: 1.25rem;
   --text-header-4: 1rem;
 
@@ -160,12 +161,13 @@
   .header-h2 {
     font-size: var(--text-header-h2);
     font-weight: var(--font-weight-bold);
+    color: var(--color-text-title);
   }
 
   .title {
     font-size: var(--text-title);
     font-weight: var(--font-weight-bold);
-    color: var(--color-gray-900);
+    color: var(--color-text-title);
   }
 
   .description {

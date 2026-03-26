@@ -1,5 +1,4 @@
 import PortofolioList from "@/components/lists/portofolio-list";
-import ProductCard from "@/components/cards/product-card";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 import {
@@ -17,6 +16,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import ProductCard from "@/components/cards/product-card";
+import { DescriptionSection, HeaderSection } from "@/components/util/header";
 
 export default function PortofolioDetailPage() {
   return (
@@ -78,20 +79,20 @@ export default function PortofolioDetailPage() {
       {/* Description and Specs */}
       <section className="grid grid-cols-1 lg:grid-cols-3 gap-16">
         <div className="lg:col-span-2 space-y-6">
-          <h2 className="text-2xl font-bold text-gray-900">Deskripsi Proyek</h2>
-          <div className="prose prose-blue max-w-none text-gray-600 leading-relaxed space-y-4">
-            <p>
-              Proyek ini melibatkan perancangan dan instalasi sistem tata udara
+          <HeaderSection title="Deskripsi Proyek" />
+          <div className="space-y-4">
+            <DescriptionSection
+              description="Proyek ini melibatkan perancangan dan instalasi sistem tata udara
               terpadu untuk unit apartemen mewah di kawasan Menteng. Tantangan
               utama adalah menjaga efisiensi energi sambil memastikan unit
               indoor tidak mengganggu estetika interior yang minimalis dan
-              elegan.
-            </p>
-            <p>
-              Kami menggunakan sistem Daikin Multi-S yang memungkinkan beberapa
+              elegan."
+            />
+            <DescriptionSection
+              description="Kami menggunakan sistem Daikin Multi-S yang memungkinkan beberapa
               unit indoor terhubung ke satu unit outdoor, menghemat ruang di
-              area balkon dan mengurangi kebisingan.
-            </p>
+              area balkon dan mengurangi kebisingan."
+            />
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 pt-6">
@@ -145,15 +146,8 @@ export default function PortofolioDetailPage() {
       </section>
 
       {/* Product Table and Cards */}
-      <section className="space-y-8 pb-16">
-        <div className="flex items-center justify-between border-b pb-4">
-          <h2 className="text-2xl font-bold text-gray-900">
-            Produk yang Terpasang
-          </h2>
-          <span className="text-sm text-primary font-semibold">
-            Tersedia di Toko Kami
-          </span>
-        </div>
+      <section className="space-y-8">
+        <HeaderSection title="Produk yang digunakan" />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <ProductCard id="daikin-vrv" />
@@ -163,18 +157,9 @@ export default function PortofolioDetailPage() {
       </section>
 
       {/* NEW: Related Projects Section */}
-      <section className="space-y-8 pb-16 bg-slate-50/50 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 py-16">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b pb-6">
-          <div className="space-y-1">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900">
-              Lihat Proyek Lainnya
-            </h2>
-            <p className="text-gray-500">
-              Mungkin Anda juga tertarik dengan solusi pendinginan dari
-              proyek-proyek unggulan kami lainnya.
-            </p>
-          </div>
-        </div>
+      <section className="space-y-8">
+        <HeaderSection title="Lihat Proyek Lainnya" />
+
         <PortofolioList />
       </section>
     </div>
