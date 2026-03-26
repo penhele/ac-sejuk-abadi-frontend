@@ -14,6 +14,7 @@
 
   /* color */
   --color-discount: var(--color-yellow-500);
+  --color-text-description: var(--color-gray-400);
 
   /* text */
   --text-body: 0.875rem;
@@ -21,6 +22,9 @@
   --text-header-h2: 1.5rem;
   --text-header-h3: 1.25rem;
   --text-header-4: 1rem;
+
+  --text-title: var(--text-lg);
+  --text-description: var(--text-sm);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -137,9 +141,11 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+
   html {
     @apply font-sans;
   }
@@ -154,5 +160,16 @@
   .header-h2 {
     font-size: var(--text-header-h2);
     font-weight: var(--font-weight-bold);
+  }
+
+  .title {
+    font-size: var(--text-title);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-gray-900);
+  }
+
+  .description {
+    font-size: var(--text-description);
+    color: var(--color-text-description);
   }
 }
