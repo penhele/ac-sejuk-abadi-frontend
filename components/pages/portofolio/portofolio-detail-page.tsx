@@ -2,12 +2,12 @@ import PortofolioList from "@/components/lists/portofolio-list";
 import ProductCard from "@/components/cards/product-card";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
-import { 
-  CheckCircle2, 
-  Settings, 
-  MapPin, 
-  Calendar, 
-  Building2 
+import {
+  CheckCircle2,
+  Settings,
+  MapPin,
+  Calendar,
+  Building2,
 } from "lucide-react";
 import {
   Table,
@@ -81,27 +81,39 @@ export default function PortofolioDetailPage() {
           <h2 className="text-2xl font-bold text-gray-900">Deskripsi Proyek</h2>
           <div className="prose prose-blue max-w-none text-gray-600 leading-relaxed space-y-4">
             <p>
-              Proyek ini melibatkan perancangan dan instalasi sistem tata udara terpadu untuk unit apartemen mewah di kawasan Menteng. Tantangan utama adalah menjaga efisiensi energi sambil memastikan unit indoor tidak mengganggu estetika interior yang minimalis dan elegan.
+              Proyek ini melibatkan perancangan dan instalasi sistem tata udara
+              terpadu untuk unit apartemen mewah di kawasan Menteng. Tantangan
+              utama adalah menjaga efisiensi energi sambil memastikan unit
+              indoor tidak mengganggu estetika interior yang minimalis dan
+              elegan.
             </p>
             <p>
-              Kami menggunakan sistem Daikin Multi-S yang memungkinkan beberapa unit indoor terhubung ke satu unit outdoor, menghemat ruang di area balkon dan mengurangi kebisingan.
+              Kami menggunakan sistem Daikin Multi-S yang memungkinkan beberapa
+              unit indoor terhubung ke satu unit outdoor, menghemat ruang di
+              area balkon dan mengurangi kebisingan.
             </p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 pt-6">
             <div className="p-4 rounded-2xl bg-slate-50 border space-y-2">
               <CheckCircle2 className="w-5 h-5 text-primary" />
-              <span className="block text-xs font-semibold text-gray-500 uppercase">Efisiensi Energi</span>
+              <span className="block text-xs font-semibold text-gray-500 uppercase">
+                Efisiensi Energi
+              </span>
               <span className="text-sm font-bold">Inverter Technology</span>
             </div>
             <div className="p-4 rounded-2xl bg-slate-50 border space-y-2">
               <Settings className="w-5 h-5 text-primary" />
-              <span className="block text-xs font-semibold text-gray-500 uppercase">Kontrol</span>
+              <span className="block text-xs font-semibold text-gray-500 uppercase">
+                Kontrol
+              </span>
               <span className="text-sm font-bold">Smart Home Sync</span>
             </div>
             <div className="p-4 rounded-2xl bg-slate-50 border space-y-2">
               <Building2 className="w-5 h-5 text-primary" />
-              <span className="block text-xs font-semibold text-gray-500 uppercase">Kapasitas</span>
+              <span className="block text-xs font-semibold text-gray-500 uppercase">
+                Kapasitas
+              </span>
               <span className="text-sm font-bold">3 HP Total</span>
             </div>
           </div>
@@ -135,8 +147,12 @@ export default function PortofolioDetailPage() {
       {/* Product Table and Cards */}
       <section className="space-y-8 pb-16">
         <div className="flex items-center justify-between border-b pb-4">
-          <h2 className="text-2xl font-bold text-gray-900">Produk yang Terpasang</h2>
-          <span className="text-sm text-primary font-semibold">Tersedia di Toko Kami</span>
+          <h2 className="text-2xl font-bold text-gray-900">
+            Produk yang Terpasang
+          </h2>
+          <span className="text-sm text-primary font-semibold">
+            Tersedia di Toko Kami
+          </span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -154,7 +170,8 @@ export default function PortofolioDetailPage() {
               Lihat Proyek Lainnya
             </h2>
             <p className="text-gray-500">
-              Mungkin Anda juga tertarik dengan solusi pendinginan dari proyek-proyek unggulan kami lainnya.
+              Mungkin Anda juga tertarik dengan solusi pendinginan dari
+              proyek-proyek unggulan kami lainnya.
             </p>
           </div>
         </div>

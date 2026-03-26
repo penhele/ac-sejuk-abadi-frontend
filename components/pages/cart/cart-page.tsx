@@ -15,6 +15,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { ArrowUpRight, MinusIcon, PlusIcon, TrashIcon } from "lucide-react";
+import Link from "next/link";
 import React, { useState } from "react";
 
 export default function CartPage() {
@@ -157,7 +158,9 @@ export default function CartPage() {
                       <Tooltip>
                         <TooltipTrigger asChild>
                           <Button variant={"outline"}>
-                            <ArrowUpRight />
+                            <Link href="/shop/qwertyuiop">
+                              <ArrowUpRight />
+                            </Link>
                           </Button>
                         </TooltipTrigger>
                         <TooltipContent>

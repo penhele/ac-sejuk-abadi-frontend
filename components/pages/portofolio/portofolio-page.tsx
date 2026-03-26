@@ -14,16 +14,25 @@ export default function PortofolioPage() {
               Proyek Kami
             </h2>
             <p className="text-gray-500 max-w-lg">
-              Jelajahi berbagai proyek instalasi dan perawatan AC yang telah kami selesaikan dengan standar kualitas tinggi.
+              Jelajahi berbagai proyek instalasi dan perawatan AC yang telah
+              kami selesaikan dengan standar kualitas tinggi.
             </p>
           </div>
 
           <Tabs defaultValue="all" className="w-full md:w-auto">
             <TabsList variant="line" className="w-full md:w-auto justify-start">
-              <TabsTrigger value="all" className="px-6">Semua</TabsTrigger>
-              <TabsTrigger value="apartemen" className="px-6">Apartemen</TabsTrigger>
-              <TabsTrigger value="ruko" className="px-6">Ruko</TabsTrigger>
-              <TabsTrigger value="kantor" className="px-6">Kantor</TabsTrigger>
+              <TabsTrigger value="all" className="px-6">
+                Semua
+              </TabsTrigger>
+              <TabsTrigger value="apartemen" className="px-6">
+                Apartemen
+              </TabsTrigger>
+              <TabsTrigger value="ruko" className="px-6">
+                Ruko
+              </TabsTrigger>
+              <TabsTrigger value="kantor" className="px-6">
+                Kantor
+              </TabsTrigger>
             </TabsList>
           </Tabs>
         </div>
@@ -32,7 +41,9 @@ export default function PortofolioPage() {
           <span>Menampilkan 4 Proyek Unggulan</span>
           <div className="flex gap-2">
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            <span className="text-xs font-medium text-primary uppercase tracking-wider">Paling Baru</span>
+            <span className="text-xs font-medium text-primary uppercase tracking-wider">
+              Paling Baru
+            </span>
           </div>
         </div>
 

@@ -18,10 +18,12 @@ export default function PortofolioHero() {
       {/* Content */}
       <div className="relative z-10 max-w-4xl px-6 text-center text-white space-y-6">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight">
-          Karya Kami untuk <span className="text-primary italic">Kenyamanan</span> Anda
+          Karya Kami untuk{" "}
+          <span className="text-primary italic">Kenyamanan</span> Anda
         </h1>
         <p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed">
-          Dedikasi kami dalam menghadirkan solusi pendinginan udara yang personal, estetik, dan efisien untuk setiap ruangan Anda.
+          Dedikasi kami dalam menghadirkan solusi pendinginan udara yang
+          personal, estetik, dan efisien untuk setiap ruangan Anda.
         </p>
         <div className="flex items-center justify-center gap-4 pt-4">
           <div className="h-[2px] w-12 bg-primary" />

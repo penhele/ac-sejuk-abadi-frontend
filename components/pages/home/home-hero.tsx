@@ -30,23 +30,38 @@ export default function HomeHero() {
           </div>
 
           <h1 className="text-5xl md:text-6xl font-extrabold text-white leading-[1.1] tracking-tight uppercase">
-            Solusi <span className="text-primary italic">Pendingin</span> Udara Terpercaya
+            Solusi <span className="text-primary italic">Pendingin</span> Udara
+            Terpercaya
           </h1>
 
           <p className="text-lg text-slate-300 leading-relaxed max-w-lg">
-            Kami menyediakan layanan instalasi, perawatan, dan pengadaan AC terbaik untuk rumah, kantor, dan industri Anda dengan standar profesional.
+            Kami menyediakan layanan instalasi, perawatan, dan pengadaan AC
+            terbaik untuk rumah, kantor, dan industri Anda dengan standar
+            profesional.
           </p>
 
           <div className="flex flex-wrap gap-4 pt-4">
-            <Button asChild size="lg" className="rounded-full h-14 px-8 text-base font-bold shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all">
+            <Button
+              asChild
+              size="lg"
+              className="rounded-full h-14 px-8 text-base font-bold shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all"
+            >
               <Link href="/shop" className="flex items-center gap-2">
                 Lihat Katalog
                 <ArrowRight className="w-5 h-5" />
               </Link>
             </Button>
-            
-            <Button asChild variant="outline" size="lg" className="rounded-full h-14 px-8 text-base font-bold bg-white/10 backdrop-blur-md border-white/20 text-white hover:bg-white hover:text-slate-900 transition-all">
-              <Link href="https://wa.me/your-number" className="flex items-center gap-2">
+
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="rounded-full h-14 px-8 text-base font-bold bg-white/10 backdrop-blur-md border-white/20 text-white hover:bg-white hover:text-slate-900 transition-all"
+            >
+              <Link
+                href="https://wa.me/your-number"
+                className="flex items-center gap-2"
+              >
                 <PhoneCall className="w-5 h-5" />
                 Konsultasi Gratis
               </Link>
@@ -54,17 +69,21 @@ export default function HomeHero() {
           </div>
         </div>
       </div>
-      
+
       {/* Scroll Indicator or Stats (Optional Decor) */}
       <div className="absolute bottom-10 right-10 hidden md:flex items-center gap-8 text-white/60">
         <div className="flex flex-col">
           <span className="text-2xl font-bold text-white">10+</span>
-          <span className="text-[10px] uppercase tracking-widest font-semibold">Tahun Pengalaman</span>
+          <span className="text-[10px] uppercase tracking-widest font-semibold">
+            Tahun Pengalaman
+          </span>
         </div>
         <div className="h-10 w-[1px] bg-white/20" />
         <div className="flex flex-col">
           <span className="text-2xl font-bold text-white">5000+</span>
-          <span className="text-[10px] uppercase tracking-widest font-semibold">Pelanggan Puas</span>
+          <span className="text-[10px] uppercase tracking-widest font-semibold">
+            Pelanggan Puas
+          </span>
         </div>
       </div>
     </div>
