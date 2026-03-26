@@ -26,10 +26,10 @@ export default function ProductCatalogPage() {
   const [category, setCategory] = useState("Semua");
   const [products, setProducts] = useState([
     { 
-      name: "AC Panasonic 1 PK", 
+      name: "AC Polytron 1 PK", 
       category: "AC", 
       price: "4500000", 
-      image: "https://p-id.pstatic.net/83/831411/530598501_600.jpg" 
+      image: "https://cdn.polytron.co.id/public-assets/polytroncoid/2025/03/05VZ-1.jpg" 
     },
   ]);
 

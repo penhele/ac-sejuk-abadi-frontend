@@ -20,7 +20,7 @@ export default function ArticlePage() {
     {
       title: "Tips Perawatan AC Berkala",
       description: "Menjaga AC tetap dingin dan hemat listrik dengan cuci rutin.",
-      image: "https://images.unsplash.com/photo-1581094288338-2314dddb7bc3?q=80&w=400",
+      image: "https://statik.unesa.ac.id/profileunesa_konten_statik%2Fuploads%2Fmesinft/thumbnail/6d99cd22-17c3-46a8-8e5a-ec05ba4f7534.jpg",
     },
   ]);
 
@@ -133,7 +133,7 @@ export default function ArticlePage() {
 
       {/* 🔥 MODAL SECTION (DIALOG SHADCN) */}
       <Dialog open={showModal} onOpenChange={setShowModal}>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="sm:max-w-106.25">
           <DialogHeader>
             <DialogTitle>
               {isEdit ? "Edit Artikel" : "Tambah Artikel Baru"}
