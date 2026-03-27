@@ -1,47 +1,123 @@
+"use client";
+
+import Autoplay from "embla-carousel-autoplay";
 import CheckboxFilter from "@/components/filters/checkbox-filter";
 import ProductList from "@/components/lists/product-list";
 import SliderFilter from "@/components/filters/slider-filter";
+import ShopFilter from "@/components/filters/shop-filter";
+import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Carousel,
+  CarouselApi,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { ButtonGroup } from "@/components/ui/button-group";
+import { SearchIcon } from "lucide-react";
+import { Input } from "@/components/ui/input";
 
 export default function ShopPage() {
-  const brandList = [
-    { name: "Daikin", id: "clh123abc0001" },
-    { name: "Samsung", id: "clh123abc0002" },
-    { name: "Gree", id: "clh123abc0003" },
-    { name: "LG", id: "clh123abc0004" },
-    { name: "Panasonic", id: "clh123abc0005" },
+  const banners = [
+    { image: "/iklan.png" },
+    { image: "/iklan.png" },
+    { image: "/iklan.png" },
   ];
 
-  const pkList = [
-    { name: "1/2 PK", id: "clh456def0001" },
-    { name: "3/4 PK", id: "clh456def0002" },
-    { name: "1 PK", id: "clh456def0003" },
-    { name: "1,5 PK", id: "clh456def0004" },
-    { name: "2 PK", id: "clh456def0005" },
-  ];
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const [count, setCount] = useState(0);
 
-  const typeList = [
-    { name: "AC Split Wall", id: "clh789ghi0001" },
-    { name: "AC Floor Standing", id: "clh789ghi0002" },
-    { name: "AC Cassette", id: "clh789ghi0003" },
-    { name: "AC Split Duct", id: "clh789ghi0004" },
-    { name: "AC Inverter", id: "clh789ghi0005" },
-    { name: "AC Portable", id: "clh789ghi0006" },
-    { name: "AC Window", id: "clh789ghi0007" },
-  ];
+  useEffect(() => {
+    if (!api) {
+      return;
+    }
+    setCount(api.scrollSnapList().length);
+    setCurrent(api.selectedScrollSnap() + 1);
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap() + 1);
+    });
+  }, [api]);
 
   return (
-    <div className="flex flex-row gap-8 items-start">
-      <aside className="w-3xs hidden md:flex flex-col gap-8 sticky md:top-16 h-[calc(100vh-64px)] overflow-y-auto">
-        <CheckboxFilter title="Brand" listFilter={brandList} />
+    <div className="space-y-8">
+      <Carousel
+        opts={{
+          loop: true,
+        }}
+        setApi={setApi}
+        plugins={[
+          Autoplay({
+            delay: 5000,
+          }),
+        ]}
+      >
+        <CarouselContent>
+          {banners.map((item, index) => (
+            <CarouselItem key={index}>
+              <AspectRatio ratio={3 / 1}>
+                <Image src={item.image} alt="" fill className="object-cover" />
+              </AspectRatio>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
 
-        <CheckboxFilter title="PK" listFilter={pkList} />
+        <CarouselPrevious />
+        <CarouselNext />
+      </Carousel>
 
-        <CheckboxFilter title="Jenis" listFilter={typeList} />
+      <div className="flex flex-row gap-8 items-start">
+        <ShopFilter />
 
-        <SliderFilter title="Harga" />
-      </aside>
+        <div className="flex-1 space-y-8">
+          <div className="flex justify-between items-center">
+            <span className="text-gray-600 text-sm">
+              Showing 12 products per page
+            </span>
 
-      <ProductList />
+            <div className="flex gap-4">
+              <div className="flex space-x-2 items-center">
+                <span className="w-full text-gray-600 text-sm">
+                  Urutkan dari :
+                </span>
+
+                <Select>
+                  <SelectTrigger className="w-full max-w-48">
+                    <SelectValue placeholder="Default Sorting" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="apple">Harga Termurah</SelectItem>
+                      <SelectItem value="banana">Harga Termahal</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div>
+              <ButtonGroup className="xs:flex hidden">
+                <Input placeholder="Cari Produk" />
+                <Button variant="outline" aria-label="Search">
+                  <SearchIcon />
+                </Button>
+              </ButtonGroup>
+            </div>
+          </div>
+
+          <ProductList />
+        </div>
+      </div>
     </div>
   );
 }

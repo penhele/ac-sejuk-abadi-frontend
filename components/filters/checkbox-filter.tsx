@@ -12,7 +12,9 @@ export default function CheckboxFilter({
     <div className="flex flex-col gap-2">
       <div className="flex justify-between items-center">
         <h1 className="font-medium text-sm">{title}</h1>
-        <span className="text-xs text-gray-400 cursor-pointer">Reset</span>
+        <span className="text-xs text-gray-400 cursor-pointer transition-colors hover:text-primary">
+          Reset
+        </span>
       </div>
 
       <div className="flex flex-col gap-2">

@@ -6,7 +6,7 @@
 
 @theme inline {
   /* spacing */
-  --spacing-default-page: 4px;
+  --spacing-default-page: 1rem;
 
   /* breakpoint */
   --breakpoint-2xs: 24rem;
