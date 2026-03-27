@@ -2,7 +2,7 @@ import { Separator } from "../ui/separator";
 
 export function HeaderSection({ title }: { title: string }) {
   return (
-    <div className="space-y-2 mb-2">
+    <div className="space-y-2 mb-4">
       <h1 className="header-h2">{title}</h1>
       <Separator />
     </div>

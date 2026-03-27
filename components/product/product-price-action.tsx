@@ -7,6 +7,7 @@ import { FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { useState } from "react";
 import { formatCurrency } from "@/lib/currency";
 import { Input } from "../ui/input";
+import Link from "next/link";
 
 export default function ProductPriceAction() {
   const price = 2500000;
@@ -58,9 +59,11 @@ export default function ProductPriceAction() {
       </div>
 
       <div className="flex justify-between gap-4">
-        <Button variant={"outline"} className="flex-1">
-          Keranjang
-        </Button>
+        <Link href={"/cart"} className="flex-1">
+          <Button variant={"outline"} className="w-full">
+            Keranjang
+          </Button>
+        </Link>
         <Button className="flex-1">Beli</Button>
       </div>
 

@@ -7,6 +7,7 @@ import WhyUs from "./why-us";
 import HomePortfolio from "./home-portfolio";
 import { ArrowRight, ShoppingBag } from "lucide-react";
 import Link from "next/link";
+import EducationSection from "@/components/education-section";
 
 export default function HomePage() {
   return (
@@ -16,6 +17,8 @@ export default function HomePage() {
 
       {/* Brand Partners Showcase */}
       <BrandShowcase />
+
+      <EducationSection />
 
       {/* Featured Products Section */}
       <section className="py-20 mb-16">
