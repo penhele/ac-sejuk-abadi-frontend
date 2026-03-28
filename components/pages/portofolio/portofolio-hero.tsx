@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function PortofolioHero() {
   return (
-    <section className="relative h-[400px] flex items-center justify-center overflow-hidden rounded-3xl mb-12">
+    <section className="relative h-[400px] flex items-center justify-center overflow-hidden rounded-sm mb-12">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -12,7 +12,7 @@ export default function PortofolioHero() {
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/30" />
+        <div className="absolute inset-0 bg-linear-to-r from-black/70 to-black/30" />
       </div>
 
       {/* Content */}

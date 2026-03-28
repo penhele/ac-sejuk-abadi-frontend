@@ -69,14 +69,16 @@ export default function ShopPage() {
           {banners.map((item, index) => (
             <CarouselItem key={index}>
               <AspectRatio ratio={3 / 1}>
-                <Image src={item.image} alt="" fill className="object-cover" />
+                <Image
+                  src={item.image}
+                  alt=""
+                  fill
+                  className="object-cover  rounded-sm"
+                />
               </AspectRatio>
             </CarouselItem>
           ))}
         </CarouselContent>
-
-        <CarouselPrevious />
-        <CarouselNext />
       </Carousel>
 
       <div className="flex flex-row gap-8 items-start">

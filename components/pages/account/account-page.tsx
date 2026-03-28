@@ -1,3 +1,8 @@
+import { Button } from "@/components/ui/button";
+import { Field, FieldGroup, FieldLabel, FieldSet } from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import React, { useState } from "react";
 
 export default function AccountPage() {
@@ -173,51 +178,141 @@ export default function AccountPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-10 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Akun Saya</h1>
+    <div className="min-h-screen">
+      <div className="">
+        <Tabs
+          defaultValue="account"
+          orientation="vertical"
+          className="space-x-10"
+        >
+          <TabsList className="w-56">
+            <TabsTrigger value="account">Account</TabsTrigger>
+            <TabsTrigger value="password">Password</TabsTrigger>
+            <TabsTrigger value="notifications">Notifications</TabsTrigger>
+          </TabsList>
 
-        <div className="flex flex-col md:flex-row gap-8">
-          {/* Sidebar Menu */}
-          <div className="w-full md:w-64 flex-shrink-0">
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-              <nav className="flex flex-col">
-                <button
-                  onClick={() => setActiveTab("personal")}
-                  className={`px-6 py-4 text-left text-sm font-medium transition ${activeTab === "personal" ? "bg-blue-50 text-blue-700 border-l-4 border-blue-600" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900 border-l-4 border-transparent"}`}
-                >
-                  Informasi Personal
-                </button>
-                <button
-                  onClick={() => setActiveTab("riwayat")}
-                  className={`px-6 py-4 text-left text-sm font-medium transition ${activeTab === "riwayat" ? "bg-blue-50 text-blue-700 border-l-4 border-blue-600" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900 border-l-4 border-transparent"}`}
-                >
-                  Riwayat Pembelian
-                </button>
-                <button
-                  onClick={() => setActiveTab("diproses")}
-                  className={`px-6 py-4 text-left text-sm font-medium transition ${activeTab === "diproses" ? "bg-blue-50 text-blue-700 border-l-4 border-blue-600" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900 border-l-4 border-transparent"}`}
-                >
-                  Pesanan Diproses
-                </button>
-                <button
-                  onClick={handleLogout}
-                  className="px-6 py-4 text-left text-sm font-medium text-red-600 hover:bg-red-50 border-l-4 border-transparent transition"
-                >
-                  Logout
-                </button>
-              </nav>
-            </div>
-          </div>
+          <TabsContent value="account">
+            <div className="space-y-4">
+              <div className="border p-8 rounded-lg space-y-8">
+                <h1 className="text-lg font-semibold">Informasi Personal</h1>
 
-          {/* Main Content Area */}
-          <div className="flex-1">
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 md:p-8 min-h-[400px]">
-              {renderContent()}
+                <FieldGroup>
+                  <div className="grid grid-cols-2 gap-4">
+                    <Field className="">
+                      <FieldLabel>Nama Depan</FieldLabel>
+                      <Input disabled placeholder="John" />
+                    </Field>
+                    <Field className="">
+                      <FieldLabel>Nama Akhir</FieldLabel>
+                      <Input disabled placeholder="Doe" />
+                    </Field>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <Field className="">
+                      <FieldLabel>Email</FieldLabel>
+                      <Input disabled placeholder="john@doe.com" />
+                    </Field>
+                    <Field className="">
+                      <FieldLabel>No. HP</FieldLabel>
+                      <Input disabled placeholder="1234567890" />
+                    </Field>
+                  </div>
+                </FieldGroup>
+              </div>
+
+              <div className="border p-8 rounded-lg space-y-8">
+                <h1 className="text-lg font-semibold">Informasi Personal</h1>
+
+                <FieldGroup>
+                  <div className="grid grid-cols-2 gap-4">
+                    <Field className="">
+                      <FieldLabel>Provinsi</FieldLabel>
+                      <Input disabled placeholder="Jawa Barat" />
+                    </Field>
+                    <Field className="">
+                      <FieldLabel>Kota/Kabupaten</FieldLabel>
+                      <Input disabled placeholder="Depok" />
+                    </Field>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <Field className="">
+                      <FieldLabel>Alamat</FieldLabel>
+                      <Input disabled placeholder="Jl. Kecapi" />
+                    </Field>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <Field className="">
+                        <FieldLabel>Kode Pos</FieldLabel>
+                        <Input disabled placeholder="123456" />
+                      </Field>
+
+                      <div className="grid grid-cols-2 gap-4">
+                        <Field className="">
+                          <FieldLabel>RT</FieldLabel>
+                          <Input disabled placeholder="001" />
+                        </Field>
+                        <Field className="">
+                          <FieldLabel>RW</FieldLabel>
+                          <Input disabled placeholder="008" />
+                        </Field>
+                      </div>
+                    </div>
+                  </div>
+                </FieldGroup>
+              </div>
             </div>
-          </div>
-        </div>
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
+
+    // <div className="min-h-screen bg-gray-50 py-10 px-4 sm:px-6 lg:px-8">
+    //   <div className="max-w-6xl mx-auto">
+    //     <h1 className="text-3xl font-bold text-gray-900 mb-8">Akun Saya</h1>
+
+    //     <div className="flex flex-col md:flex-row gap-8">
+    //       {/* Sidebar Menu */}
+    //       <div className="w-full md:w-64 flex-shrink-0">
+    //         <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+    //           <nav className="flex flex-col">
+    //             <button
+    //               onClick={() => setActiveTab("personal")}
+    //               className={`px-6 py-4 text-left text-sm font-medium transition ${activeTab === "personal" ? "bg-blue-50 text-blue-700 border-l-4 border-blue-600" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900 border-l-4 border-transparent"}`}
+    //             >
+    //               Informasi Personal
+    //             </button>
+    //             <button
+    //               onClick={() => setActiveTab("riwayat")}
+    //               className={`px-6 py-4 text-left text-sm font-medium transition ${activeTab === "riwayat" ? "bg-blue-50 text-blue-700 border-l-4 border-blue-600" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900 border-l-4 border-transparent"}`}
+    //             >
+    //               Riwayat Pembelian
+    //             </button>
+    //             <button
+    //               onClick={() => setActiveTab("diproses")}
+    //               className={`px-6 py-4 text-left text-sm font-medium transition ${activeTab === "diproses" ? "bg-blue-50 text-blue-700 border-l-4 border-blue-600" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900 border-l-4 border-transparent"}`}
+    //             >
+    //               Pesanan Diproses
+    //             </button>
+    //             <button
+    //               onClick={handleLogout}
+    //               className="px-6 py-4 text-left text-sm font-medium text-red-600 hover:bg-red-50 border-l-4 border-transparent transition"
+    //             >
+    //               Logout
+    //             </button>
+    //           </nav>
+    //         </div>
+    //       </div>
+
+    //       {/* Main Content Area */}
+    //       <div className="flex-1">
+    //         <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 md:p-8 min-h-[400px]">
+    //           {renderContent()}
+    //         </div>
+    //       </div>
+    //     </div>
+    //   </div>
+    // </div>
   );
 }

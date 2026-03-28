@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/table";
 import ProductCard from "@/components/cards/product-card";
 import { DescriptionSection, HeaderSection } from "@/components/util/header";
+import ProductList from "@/components/lists/product-list";
 
 export default function PortofolioDetailPage() {
   return (
@@ -149,11 +150,7 @@ export default function PortofolioDetailPage() {
       <section className="space-y-8">
         <HeaderSection title="Produk yang digunakan" />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <ProductCard id="daikin-vrv" />
-          <ProductCard id="daikin-split" />
-          <ProductCard id="daikin-cassette" />
-        </div>
+        <ProductList className="!grid-cols-4" />
       </section>
 
       {/* NEW: Related Projects Section */}
