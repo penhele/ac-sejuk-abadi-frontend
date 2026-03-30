@@ -222,7 +222,7 @@ export default function AccountPage() {
               </div>
 
               <div className="border p-8 rounded-lg space-y-8">
-                <h1 className="text-lg font-semibold">Informasi Personal</h1>
+                <h1 className="text-lg font-semibold">Alamat</h1>
 
                 <FieldGroup>
                   <div className="grid grid-cols-2 gap-4">
@@ -267,52 +267,5 @@ export default function AccountPage() {
         </Tabs>
       </div>
     </div>
-
-    // <div className="min-h-screen bg-gray-50 py-10 px-4 sm:px-6 lg:px-8">
-    //   <div className="max-w-6xl mx-auto">
-    //     <h1 className="text-3xl font-bold text-gray-900 mb-8">Akun Saya</h1>
-
-    //     <div className="flex flex-col md:flex-row gap-8">
-    //       {/* Sidebar Menu */}
-    //       <div className="w-full md:w-64 flex-shrink-0">
-    //         <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-    //           <nav className="flex flex-col">
-    //             <button
-    //               onClick={() => setActiveTab("personal")}
-    //               className={`px-6 py-4 text-left text-sm font-medium transition ${activeTab === "personal" ? "bg-blue-50 text-blue-700 border-l-4 border-blue-600" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900 border-l-4 border-transparent"}`}
-    //             >
-    //               Informasi Personal
-    //             </button>
-    //             <button
-    //               onClick={() => setActiveTab("riwayat")}
-    //               className={`px-6 py-4 text-left text-sm font-medium transition ${activeTab === "riwayat" ? "bg-blue-50 text-blue-700 border-l-4 border-blue-600" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900 border-l-4 border-transparent"}`}
-    //             >
-    //               Riwayat Pembelian
-    //             </button>
-    //             <button
-    //               onClick={() => setActiveTab("diproses")}
-    //               className={`px-6 py-4 text-left text-sm font-medium transition ${activeTab === "diproses" ? "bg-blue-50 text-blue-700 border-l-4 border-blue-600" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900 border-l-4 border-transparent"}`}
-    //             >
-    //               Pesanan Diproses
-    //             </button>
-    //             <button
-    //               onClick={handleLogout}
-    //               className="px-6 py-4 text-left text-sm font-medium text-red-600 hover:bg-red-50 border-l-4 border-transparent transition"
-    //             >
-    //               Logout
-    //             </button>
-    //           </nav>
-    //         </div>
-    //       </div>
-
-    //       {/* Main Content Area */}
-    //       <div className="flex-1">
-    //         <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 md:p-8 min-h-[400px]">
-    //           {renderContent()}
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
   );
 }
