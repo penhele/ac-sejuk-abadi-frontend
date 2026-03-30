@@ -16,6 +16,9 @@ export default function CarouselBrand() {
     { src: "/panasonic.png", name: "Panasonic" },
     { src: "/polytron.png", name: "Polytron" },
     { src: "/samsung.png", name: "Samsung" },
+    { src: "/panasonic.png", name: "Panasonic" },
+    { src: "/polytron.png", name: "Polytron" },
+    { src: "/samsung.png", name: "Samsung" },
   ];
 
   return (

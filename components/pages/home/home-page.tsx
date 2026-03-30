@@ -11,12 +11,38 @@ import { ArrowRight, ShoppingBag } from "lucide-react";
 import Link from "next/link";
 import EducationSection from "@/components/education-section";
 import CarouselBrand from "@/carousel/carousel-brand";
+import { HeaderSection } from "@/components/util/header";
+import CarouselBanner from "@/carousel/carousel-banner";
+import PortofolioList from "@/components/lists/portofolio-list";
 
 export default function HomePage() {
+  const banner = [
+    { src: "/iklan.png", name: "Banner" },
+    { src: "/iklan.png", name: "Banner" },
+    { src: "/iklan.png", name: "Banner" },
+  ];
+
   return (
-    <main>
+    <main className="space-y-16">
       <div className="">
+        <CarouselBanner banner={banner} />
+      </div>
+
+      <div className="space-y-4 flex flex-col items-center">
+        <h1 className="text-xl font-bold">
+          Menyediakan Unit AC dari Brand Terkemuka Dunia
+        </h1>
         <CarouselBrand />
+      </div>
+
+      <div className="">
+        <HeaderSection title="Produk" href="/shop" />
+        <ProductList className="grid-cols-4!" />
+      </div>
+
+      <div className="">
+        <HeaderSection title="Portofolio" href="/portofolio" />
+        <PortofolioList />
       </div>
     </main>
 
