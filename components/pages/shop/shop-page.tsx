@@ -1,33 +1,18 @@
-import Autoplay from "embla-carousel-autoplay";
-import CheckboxFilter from "@/components/filters/checkbox-filter";
-import ProductList from "@/components/lists/product-list";
-import SliderFilter from "@/components/filters/slider-filter";
+import CarouselBanner from "@/carousel/carousel-banner";
 import ShopFilter from "@/components/filters/shop-filter";
+import ProductList from "@/components/lists/product-list";
 import { Button } from "@/components/ui/button";
+import { ButtonGroup } from "@/components/ui/button-group";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
-  SelectValue,
+  SelectValue
 } from "@/components/ui/select";
-import {
-  Carousel,
-  CarouselApi,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import { ButtonGroup } from "@/components/ui/button-group";
 import { SearchIcon } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import CarouselBanner from "@/carousel/carousel-banner";
 
 export default function ShopPage() {
   const banner = [
