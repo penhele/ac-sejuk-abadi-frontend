@@ -2,7 +2,6 @@ import {
   Mail,
   MapPin,
   Phone,
-  Send,
   Facebook,
   Instagram,
   Twitter,
@@ -10,8 +9,8 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import FooterList from "../lists/footer-list";
 import { Separator } from "../ui/separator";
+import FooterList from "../lists/footer-list";
 
 export default function Footer() {
   const topBrandList = [
@@ -96,7 +95,7 @@ export default function Footer() {
 
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15860.6720448135!2d106.817176!3d-6.349912!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69ed007042b1c1%3A0xad5a9a5e28f1f5a!2sPT.Alfa%20Cakrawala%20Sejuk%20Abadi!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid"
-                className="w-full rounded-lg"
+                className="w-full rounded-lg h-56"
                 allowFullScreen
                 loading="lazy"
               />
@@ -109,7 +108,7 @@ export default function Footer() {
 
               <div className="space-y-2">
                 {contactList.map((item, index) => (
-                  <div className="flex gap-4 items-center">
+                  <div className="flex gap-4 items-center" key={index}>
                     <div className="border w-8 h-8 items-center flex justify-center rounded-lg">
                       <item.Icon size={24} />
                     </div>
@@ -125,21 +124,26 @@ export default function Footer() {
             </div>
           </div>
 
-          <Separator />
+          <div className="space-y-4">
+            <Separator />
 
-          <div className="text-xs flex justify-between font-medium">
-            <p>© 2026 PT. Alfa Cakrawala Sejuk Abadi. All rights reserved.</p>
+            <div className="text-xs flex justify-between font-medium">
+              <p>© 2026 PT. Alfa Cakrawala Sejuk Abadi. All rights reserved.</p>
 
-            <div className="flex gap-8">
-              <Link href="/privacy" className="hover: transition-colors">
-                Privacy Policy
-              </Link>
-              <Link href="/terms" className="hover: transition-colors">
-                Terms of Service
-              </Link>
-              <Link href="/cookie-policy" className="hover: transition-colors">
-                Cookie Policy
-              </Link>
+              <div className="flex gap-8">
+                <Link href="/privacy" className="hover: transition-colors">
+                  Privacy Policy
+                </Link>
+                <Link href="/terms" className="hover: transition-colors">
+                  Terms of Service
+                </Link>
+                <Link
+                  href="/cookie-policy"
+                  className="hover: transition-colors"
+                >
+                  Cookie Policy
+                </Link>
+              </div>
             </div>
           </div>
         </div>
