@@ -47,7 +47,7 @@ export default function PortofolioDetailPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 h-[500px]">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 h-125">
           <div className="md:col-span-8 relative rounded-3xl overflow-hidden shadow-2xl">
             <Image
               src="/images/portofolio/apartemen.png"
@@ -150,7 +150,7 @@ export default function PortofolioDetailPage() {
       <section className="space-y-8">
         <HeaderSection title="Produk yang digunakan" />
 
-        <ProductList className="!grid-cols-4" />
+        <ProductList className="grid-cols-4!" />
       </section>
 
       {/* NEW: Related Projects Section */}
