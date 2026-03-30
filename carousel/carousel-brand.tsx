@@ -3,7 +3,6 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import Image from "next/image";
 import Autoplay from "embla-carousel-autoplay";
 
 export default function CarouselBrand() {
@@ -23,7 +22,7 @@ export default function CarouselBrand() {
     <Carousel
       opts={{
         loop: true,
-        align: "start",
+        align: "center",
       }}
       plugins={[
         Autoplay({
@@ -32,15 +31,14 @@ export default function CarouselBrand() {
         }),
       ]}
     >
-      <CarouselContent className="flex items-center">
+      <CarouselContent className="flex items-center gap-4">
         {brandLogo.map((item, index) => (
           <CarouselItem key={index} className="basis-auto">
-            <div className="relative h-6 w-auto ">
-              <Image
+            <div className="relative h-6 w-fit flex items-center justify-center">
+              <img
                 src={item.src}
                 alt={item.name}
-                fill
-                className="object-contain"
+                className="h-full w-auto object-contain"
               />
             </div>
           </CarouselItem>
