@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function PortofolioHero() {
   return (
-    <section className="relative h-[400px] flex items-center justify-center overflow-hidden rounded-sm mb-12">
+    <section className="relative h-100 flex items-center justify-center overflow-hidden rounded-sm mb-12">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -26,11 +26,11 @@ export default function PortofolioHero() {
           personal, estetik, dan efisien untuk setiap ruangan Anda.
         </p>
         <div className="flex items-center justify-center gap-4 pt-4">
-          <div className="h-[2px] w-12 bg-primary" />
+          <div className="h-0.5 w-12 bg-primary" />
           <span className="uppercase tracking-[0.2em] text-sm font-semibold text-primary">
             AC Sejuk Abadi
           </span>
-          <div className="h-[2px] w-12 bg-primary" />
+          <div className="h-0.5 w-12 bg-primary" />
         </div>
       </div>
     </section>

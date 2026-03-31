@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function HomeHero() {
   return (
-    <div className="relative overflow-hidden rounded-[2.5rem] bg-slate-900 min-h-[500px] flex items-center mb-16">
+    <div className="relative overflow-hidden rounded-[2.5rem] bg-slate-900 min-h-125 flex items-center mb-16">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -15,7 +15,7 @@ export default function HomeHero() {
           className="object-cover opacity-60"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/40 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-r from-slate-950 via-slate-900/40 to-transparent" />
       </div>
 
       {/* Content */}
@@ -78,7 +78,7 @@ export default function HomeHero() {
             Tahun Pengalaman
           </span>
         </div>
-        <div className="h-10 w-[1px] bg-white/20" />
+        <div className="h-10 w-px bg-white/20" />
         <div className="flex flex-col">
           <span className="text-2xl font-bold text-white">5000+</span>
           <span className="text-[10px] uppercase tracking-widest font-semibold">

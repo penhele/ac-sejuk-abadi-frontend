@@ -1,7 +1,7 @@
 "use client";
 
-import CarouselBanner from "@/carousel/carousel-banner";
-import CarouselBrand from "@/carousel/carousel-brand";
+import CarouselBanner from "@/components/carousel/carousel-banner";
+import CarouselBrand from "@/components/carousel/carousel-brand";
 import PortofolioList from "@/components/lists/portofolio-list";
 import ProductList from "@/components/lists/product-list";
 import { HeaderSection } from "@/components/util/header";

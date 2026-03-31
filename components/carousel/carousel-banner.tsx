@@ -29,8 +29,12 @@ export default function CarouselBanner({
       <CarouselContent className="flex items-center gap-4 ">
         {banner.map((item, index) => (
           <CarouselItem key={index} className="">
-            <AspectRatio ratio={3 / 1} className="">
-              <img src={item.src} alt={item.src} className="" />
+            <AspectRatio ratio={3 / 1} className="overflow-hidden rounded-lg">
+              <img
+                src={item.src}
+                alt={item.name}
+                className="object-cover w-full h-full"
+              />
             </AspectRatio>
           </CarouselItem>
         ))}
