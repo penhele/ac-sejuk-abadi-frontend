@@ -40,7 +40,9 @@ export default function ProductDetailPage() {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>Midea AC Wall Mounted Split Standard Double Gold Fin 1/2 PK</BreadcrumbPage>
+            <BreadcrumbPage>
+              Midea AC Wall Mounted Split Standard Double Gold Fin 1/2 PK
+            </BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
