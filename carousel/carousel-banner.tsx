@@ -1,3 +1,5 @@
+"use client"
+
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import {
   Carousel,

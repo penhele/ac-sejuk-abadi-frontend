@@ -1,19 +1,10 @@
 "use client";
 
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import ProductList from "@/components/lists/product-list";
-import { Button } from "@/components/ui/button";
-import HomeHero from "./home-hero";
-import BrandShowcase from "./brand-showcase";
-import WhyUs from "./why-us";
-import HomePortfolio from "./home-portfolio";
-import { ArrowRight, ShoppingBag } from "lucide-react";
-import Link from "next/link";
-import EducationSection from "@/components/education-section";
-import CarouselBrand from "@/carousel/carousel-brand";
-import { HeaderSection } from "@/components/util/header";
 import CarouselBanner from "@/carousel/carousel-banner";
+import CarouselBrand from "@/carousel/carousel-brand";
 import PortofolioList from "@/components/lists/portofolio-list";
+import ProductList from "@/components/lists/product-list";
+import { HeaderSection } from "@/components/util/header";
 
 export default function HomePage() {
   const banner = [

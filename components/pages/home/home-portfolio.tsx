@@ -1,8 +1,8 @@
-import { PortfolioProps } from "@/types/portofolio";
 import PortofolioCard from "@/components/cards/portofolio-card";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { PortfolioProps } from "@/types/portofolio";
 import { LayoutGrid } from "lucide-react";
+import Link from "next/link";
 
 export default function HomePortfolio() {
   const featuredProjects: PortfolioProps[] = [

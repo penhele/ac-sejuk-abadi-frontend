@@ -17,6 +17,13 @@ export default function CarouselBrand() {
     { src: "/polytron.png", name: "Polytron" },
     { src: "/samsung.png", name: "Samsung" },
     { src: "/panasonic.png", name: "Panasonic" },
+    { src: "/daikin.png", name: "Daikin" },
+    { src: "/aqua.png", name: "Aqua" },
+    { src: "/changhong.png", name: "Changhong" },
+    { src: "/gree.png", name: "Gree" },
+    { src: "/lg.png", name: "LG" },
+    { src: "/midea.png", name: "Midea" },
+    { src: "/panasonic.png", name: "Panasonic" },
     { src: "/polytron.png", name: "Polytron" },
     { src: "/samsung.png", name: "Samsung" },
   ];
@@ -34,10 +41,10 @@ export default function CarouselBrand() {
         }),
       ]}
     >
-      <CarouselContent className="flex items-center gap-4">
+      <CarouselContent>
         {brandLogo.map((item, index) => (
           <CarouselItem key={index} className="basis-auto">
-            <div className="relative h-6 w-fit flex items-center justify-center">
+            <div className="relative h-6 w-fit mx-4 flex items-center justify-center">
               <img
                 src={item.src}
                 alt={item.name}

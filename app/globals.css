@@ -7,6 +7,7 @@
 @theme inline {
   /* spacing */
   --spacing-default-page: 1rem;
+  --spacing-between-section: 2rem;
 
   /* breakpoint */
   --breakpoint-2xs: 24rem;
@@ -16,6 +17,7 @@
   --color-discount: var(--color-yellow-500);
   --color-text-description: var(--color-gray-400);
   --color-text-title: var(--color-gray-900);
+  /*   */
 
   /* text */
   --text-body: 0.875rem;

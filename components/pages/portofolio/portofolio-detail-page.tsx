@@ -1,24 +1,15 @@
 import PortofolioList from "@/components/lists/portofolio-list";
-import { Separator } from "@/components/ui/separator";
-import Image from "next/image";
-import {
-  CheckCircle2,
-  Settings,
-  MapPin,
-  Calendar,
-  Building2,
-} from "lucide-react";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import ProductCard from "@/components/cards/product-card";
-import { DescriptionSection, HeaderSection } from "@/components/util/header";
 import ProductList from "@/components/lists/product-list";
+import { Separator } from "@/components/ui/separator";
+import { DescriptionSection, HeaderSection } from "@/components/util/header";
+import {
+  Building2,
+  Calendar,
+  CheckCircle2,
+  MapPin,
+  Settings,
+} from "lucide-react";
+import Image from "next/image";
 
 export default function PortofolioDetailPage() {
   return (

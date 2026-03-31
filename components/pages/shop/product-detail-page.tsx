@@ -1,10 +1,17 @@
-import { DataTable } from "../../product/data-table";
 import ProductImages from "@/components/product/product-images";
 import ProductInfo from "@/components/product/product-info";
 import ProductPriceAction from "@/components/product/product-price-action";
 import { AcSpecification, columns } from "@/components/tables/product-columns";
-import { DescriptionCard } from "@/components/util/card-content";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 import { DescriptionSection, HeaderSection } from "@/components/util/header";
+import { DataTable } from "../../product/data-table";
 
 export default function ProductDetailPage() {
   const data: AcSpecification[] = [
@@ -21,7 +28,23 @@ export default function ProductDetailPage() {
   ];
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="space-y-between-section">
+      <Breadcrumb>
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/">Home</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbLink>Shop</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>Midea AC Wall Mounted Split Standard Double Gold Fin 1/2 PK</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+
       <div className="grid grid-cols-2 gap-4">
         <ProductImages jumlah={8} />
 

@@ -1,5 +1,13 @@
 import BrandCard from "@/components/cards/brand-card";
 import ProductList from "@/components/lists/product-list";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 import { HeaderSection } from "@/components/util/header";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,6 +15,22 @@ import Link from "next/link";
 export default function BrandDetailPage() {
   return (
     <div className="space-y-8">
+      <Breadcrumb>
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/">Home</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbLink>Brand</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>Daikin</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+
       <div className="">
         <HeaderSection title="Tentang Brand" />
 

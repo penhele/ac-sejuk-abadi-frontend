@@ -1,6 +1,14 @@
 import CarouselBanner from "@/carousel/carousel-banner";
 import ShopFilter from "@/components/filters/shop-filter";
 import ProductList from "@/components/lists/product-list";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
 import { Input } from "@/components/ui/input";
@@ -10,7 +18,7 @@ import {
   SelectGroup,
   SelectItem,
   SelectTrigger,
-  SelectValue
+  SelectValue,
 } from "@/components/ui/select";
 import { SearchIcon } from "lucide-react";
 
@@ -22,8 +30,20 @@ export default function ShopPage() {
   ];
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-between-section">
       <CarouselBanner banner={banner} />
+
+      <Breadcrumb>
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/">Home</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>Shop</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
 
       <div className="flex flex-row gap-8 items-start">
         <ShopFilter />
