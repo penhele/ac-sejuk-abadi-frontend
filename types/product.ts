@@ -1,12 +1,25 @@
-export type Product = {
-  id: string;
-  name: string;
-  description: string;
+export interface ProductSpecs {
+  brand: string;
   type: string;
-  price: number;
-  pk: number;
-  quantity: number;
-  createdAt: string;
-  updatedAt: string;
-  brandId: string;
-};
+  series: string;
+  produksi: string;
+  pk: string;
+  watt: string;
+  label: string;
+  btu: string;
+  refrigerant: string;
+  warranty: string;
+  dimensiindoor: string;
+  dimensioutdoor: string;
+  beratindoor: string;
+  beratoutdoor: string;
+  ukuranpipa: string;
+}
+
+export interface Product {
+  name: string;
+  category: string;
+  price: string;
+  images: string[];
+  specs: ProductSpecs;
+}
