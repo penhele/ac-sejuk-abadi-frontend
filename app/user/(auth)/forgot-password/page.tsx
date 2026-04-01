@@ -1,5 +1,5 @@
 // src/app/(auth)/forgot-password/page.tsx
-import { ForgotPasswordForm } from "@/components/user/auth/forgot-password-form";
+import { ForgotPasswordForm } from "@/components/user/forms/forgot-password-form";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
