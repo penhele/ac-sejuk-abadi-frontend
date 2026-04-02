@@ -1,16 +1,16 @@
 import {
+  Facebook,
+  Instagram,
   Mail,
   MapPin,
   Phone,
-  Facebook,
-  Instagram,
   Twitter,
   Youtube,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Separator } from "../ui/separator";
 import FooterList from "../lists/footer-list";
+import { Separator } from "../ui/separator";
 
 export default function Footer() {
   const topBrandList = [
@@ -32,7 +32,7 @@ export default function Footer() {
   ];
 
   const quickLinks = [
-    { name: "Tentang Kami", href: "/about" },
+    { name: "Tentang Kami", href: "/about-us" },
     { name: "Layanan Kami", href: "/services" },
     { name: "Proyek / Portofolio", href: "/portofolio" },
     { name: "Katalog Produk", href: "/shop" },
