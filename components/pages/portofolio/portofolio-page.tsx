@@ -1,4 +1,5 @@
 import PortofolioList from "@/components/lists/portofolio-list";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -8,18 +9,14 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import PortofolioHero from "./portofolio-hero";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 export default function PortofolioPage() {
   return (
     <div className="space-y-between-section">
-      {/* <PortofolioHero /> */}
-
       <AspectRatio
         ratio={3 / 1}
         className="overflow-hidden rounded-lg bg-muted"
-      ></AspectRatio>
+      />
 
       <Breadcrumb>
         <BreadcrumbList>
@@ -62,9 +59,11 @@ export default function PortofolioPage() {
         </Tabs>
       </div>
 
-      <span className="text-sm text-gray-400">
-        Menampilkan 4 Proyek Unggulan
-      </span>
+      <div className="">
+        <span className="text-sm text-gray-400">
+          Menampilkan 4 Proyek Unggulan
+        </span>
+      </div>
 
       <PortofolioList />
     </div>

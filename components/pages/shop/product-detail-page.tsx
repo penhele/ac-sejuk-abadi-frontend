@@ -12,6 +12,8 @@ import {
 } from "@/components/ui/breadcrumb";
 import { DescriptionSection, HeaderSection } from "@/components/util/header";
 import { DataTable } from "../../product/data-table";
+import ProductList from "@/components/lists/product-list";
+import { DUMMY_PRODUCTS } from "@/constants/products";
 
 export default function ProductDetailPage() {
   const data: AcSpecification[] = [
@@ -68,6 +70,15 @@ export default function ProductDetailPage() {
           <HeaderSection title="Spesifikasi" />
           <DataTable columns={columns} data={data} />
         </div>
+      </div>
+
+      <div className="">
+        <HeaderSection title="Produk Serupa" href="Lihat selengkapnya>>>" />
+        <ProductList
+          products={DUMMY_PRODUCTS}
+          className="grid-cols-4!"
+          limit={8}
+        />
       </div>
     </div>
   );

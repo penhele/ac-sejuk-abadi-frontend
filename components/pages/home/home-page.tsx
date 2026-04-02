@@ -2,18 +2,17 @@
 
 import CarouselBanner from "@/components/carousel/carousel-banner";
 import CarouselBrand from "@/components/carousel/carousel-brand";
+import CarouselTestimoni from "@/components/carousel/carousel-testimoni";
 import PortofolioList from "@/components/lists/portofolio-list";
 import ProductList from "@/components/lists/product-list";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Separator } from "@/components/ui/separator";
 import { HeaderSection } from "@/components/util/header";
 import { DUMMY_PRODUCTS } from "@/constants/products";
 import {
-  ChartNoAxesColumn,
   ChartNoAxesCombined,
   Handshake,
   ShieldCheck,
-  Users,
+  Users
 } from "lucide-react";
 
 export default function HomePage() {
@@ -36,7 +35,7 @@ export default function HomePage() {
         <CarouselBrand />
       </div>
 
-      <div className="flex justify-around bg-primary py-8 rounded-lg">
+      <div className="flex justify-evenly bg-primary py-8 rounded-lg">
         <div className="flex flex-col items-center space-y-2">
           <span className="text-3xl font-bold text-white">100+</span>
           <span className="text-white">Proyek Selesai</span>
@@ -68,19 +67,19 @@ export default function HomePage() {
 
       <div className="grid grid-cols-3 gap-8">
         <div className="col-span-2 grid grid-cols-2 gap-4">
-          <div className="space-y-2 flex flex-col items-center bg-muted p-4 border rounded-lg">
+          <div className="space-y-2 flex flex-col items-center bg-muted p-4 border rounded-lg transition-colors hover:border-gray-600">
             <ShieldCheck size={56} />
             <span className="text-lg">Kualitas Tinggi</span>
           </div>
-          <div className="space-y-2 flex flex-col items-center bg-muted p-4 border rounded-lg">
+          <div className="space-y-2 flex flex-col items-center bg-muted p-4 border rounded-lg transition-colors hover:border-gray-600">
             <Handshake size={56} />
             <span className="text-lg">Kepuasan Pelanggan</span>
           </div>
-          <div className="space-y-2 flex flex-col items-center bg-muted p-4 border rounded-lg">
+          <div className="space-y-2 flex flex-col items-center bg-muted p-4 border rounded-lg transition-colors hover:border-gray-600">
             <Users size={56} />
             <span className="text-lg">Staff Profesional</span>
           </div>
-          <div className="space-y-2 flex flex-col items-center bg-muted p-4 border rounded-lg">
+          <div className="space-y-2 flex flex-col items-center bg-muted p-4 border rounded-lg transition-colors hover:border-gray-600">
             <ChartNoAxesCombined size={56} />
             <span className="text-lg">Skala Proyek</span>
           </div>
@@ -102,6 +101,17 @@ export default function HomePage() {
       <div className="">
         <HeaderSection title="Portofolio" href="/portofolio" />
         <PortofolioList />
+      </div>
+
+      <div className="">
+        <h1 className="text-2xl font-bold text-center">
+          Kata Mereka Tentang Kami
+        </h1>
+        <CarouselTestimoni />
+        <p className="text-center text-sm text-gray-600">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse,
+          molestiae!
+        </p>
       </div>
     </main>
   );
