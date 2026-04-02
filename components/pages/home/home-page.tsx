@@ -5,8 +5,115 @@ import CarouselBrand from "@/components/carousel/carousel-brand";
 import PortofolioList from "@/components/lists/portofolio-list";
 import ProductList from "@/components/lists/product-list";
 import { HeaderSection } from "@/components/util/header";
+import { ProductType } from "@/types/product";
 
 export default function HomePage() {
+  const DUMMY_PRODUCTS: ProductType[] = [
+    {
+      id: "p1",
+      name: "Midea AC Standard Gold Fin",
+      description:
+        "Lapisan anti karat ganda yang tahan lama dan mendinginkan lebih cepat.",
+      type: "Split Wall",
+      price: 2450000,
+      pk: 0.5,
+      quantity: 15,
+      brandId: "midea-01",
+      createdAt: "2024-01-10T08:00:00Z",
+      updatedAt: "2024-01-10T08:00:00Z",
+    },
+    {
+      id: "p2",
+      name: "Daikin Thailand FTNE Series",
+      description:
+        "AC Thailand yang terkenal dengan ketahanan kompresor dan efisiensi tinggi.",
+      type: "Split Wall",
+      price: 4200000,
+      pk: 1,
+      quantity: 8,
+      brandId: "daikin-01",
+      createdAt: "2024-01-12T09:00:00Z",
+      updatedAt: "2024-01-12T09:00:00Z",
+    },
+    {
+      id: "p3",
+      name: "Sharp Sayonara Zen Plasmacluster",
+      description:
+        "Teknologi ion generator untuk udara lebih bersih dan bebas bakteri.",
+      type: "Inverter",
+      price: 3850000,
+      pk: 0.75,
+      quantity: 12,
+      brandId: "sharp-01",
+      createdAt: "2024-01-15T10:00:00Z",
+      updatedAt: "2024-01-15T10:00:00Z",
+    },
+    {
+      id: "p4",
+      name: "LG Dual Inverter Eco",
+      description: "Hemat listrik hingga 70% dengan teknologi kompresor ganda.",
+      type: "Inverter",
+      price: 3600000,
+      pk: 0.5,
+      quantity: 0, // Contoh stok habis
+      brandId: "lg-01",
+      createdAt: "2024-01-18T11:00:00Z",
+      updatedAt: "2024-01-18T11:00:00Z",
+    },
+    {
+      id: "p5",
+      name: "Panasonic Standard Non-Inverter",
+      description:
+        "Eco-tough casing yang tahan terhadap cuaca ekstrem di luar ruangan.",
+      type: "Split Wall",
+      price: 3100000,
+      pk: 0.5,
+      quantity: 20,
+      brandId: "panasonic-01",
+      createdAt: "2024-01-20T12:00:00Z",
+      updatedAt: "2024-01-20T12:00:00Z",
+    },
+    {
+      id: "p6",
+      name: "Gree Combo Split Multi",
+      description:
+        "Satu outdoor untuk dua indoor, solusi hemat tempat untuk apartemen.",
+      type: "Multi Split",
+      price: 7500000,
+      pk: 2,
+      quantity: 4,
+      brandId: "gree-01",
+      createdAt: "2024-01-22T13:00:00Z",
+      updatedAt: "2024-01-22T13:00:00Z",
+    },
+    {
+      id: "p7",
+      name: "Samsung WindFree Lite",
+      description:
+        "Mendinginkan tanpa hembusan angin langsung yang menusuk kulit.",
+      type: "Inverter",
+      price: 4900000,
+      pk: 1,
+      quantity: 6,
+      brandId: "samsung-01",
+      createdAt: "2024-01-25T14:00:00Z",
+      updatedAt: "2024-01-25T14:00:00Z",
+    },
+    {
+      id: "p8",
+      name: "Aqua Japan Turbo Cool",
+      description:
+        "Fitur turbo cooling mendinginkan ruangan hanya dalam waktu 5 menit.",
+      type: "Split Wall",
+      price: 2300000,
+      pk: 0.5,
+      quantity: 18,
+      brandId: "aqua-01",
+      createdAt: "2024-01-28T15:00:00Z",
+      updatedAt: "2024-01-28T15:00:00Z",
+    },
+  ];
+
   const banner = [
     { src: "/iklan.png", name: "Banner" },
     { src: "/iklan.png", name: "Banner" },
@@ -28,7 +135,7 @@ export default function HomePage() {
 
       <div className="">
         <HeaderSection title="Produk" href="/shop" />
-        <ProductList className="grid-cols-4!" />
+        <ProductList className="grid-cols-4!" products={DUMMY_PRODUCTS} limit={4} />
       </div>
 
       <div className="">
@@ -36,106 +143,5 @@ export default function HomePage() {
         <PortofolioList />
       </div>
     </main>
-
-    // <div className="pb-20">
-    //   {/* Hero Section */}
-    //   <HomeHero />
-
-    //   {/* Brand Partners Showcase */}
-    //   <BrandShowcase />
-
-    //   <EducationSection />
-
-    //   {/* Featured Products Section */}
-    //   <section className="py-20 mb-16">
-    //     <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-    //       <div className="space-y-3">
-    //         <h2 className="text-[10px] font-bold uppercase tracking-[0.3em] text-primary">
-    //           Katalog Produk
-    //         </h2>
-    //         <p className="text-4xl font-extrabold text-slate-800 tracking-tight leading-tight uppercase">
-    //           Pilihan <span className="text-primary italic">Terbaik</span> Untuk
-    //           Anda
-    //         </p>
-    //       </div>
-
-    //       <Tabs defaultValue="new-arrival" className="w-full md:w-auto">
-    //         <TabsList
-    //           variant="line"
-    //           className="bg-transparent border-b-0 gap-8 h-12"
-    //         >
-    //           <TabsTrigger
-    //             value="new-arrival"
-    //             className="text-xs font-bold uppercase tracking-widest px-0 data-[state=active]:text-primary data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none h-full transition-all"
-    //           >
-    //             New Arrival
-    //           </TabsTrigger>
-    //           <TabsTrigger
-    //             value="best-selling"
-    //             className="text-xs font-bold uppercase tracking-widest px-0 data-[state=active]:text-primary data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none h-full transition-all"
-    //           >
-    //             Best Selling
-    //           </TabsTrigger>
-    //           <TabsTrigger
-    //             value="top-rated"
-    //             className="text-xs font-bold uppercase tracking-widest px-0 data-[state=active]:text-primary data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none h-full transition-all"
-    //           >
-    //             Top Rated
-    //           </TabsTrigger>
-    //         </TabsList>
-    //       </Tabs>
-    //     </div>
-
-    //     <ProductList className="lg:grid-cols-4" />
-
-    //     <div className="mt-16 text-center">
-    //       <Button
-    //         asChild
-    //         variant="outline"
-    //         size="lg"
-    //         className="rounded-full font-bold px-10 h-14 border-slate-200 hover:bg-slate-50 group"
-    //       >
-    //         <Link href="/shop" className="flex items-center gap-2">
-    //           <ShoppingBag className="w-5 h-5 text-primary" />
-    //           Eksplorasi Seluruh Katalog
-    //           <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-    //         </Link>
-    //       </Button>
-    //     </div>
-    //   </section>
-
-    //   {/* Why Choose Us Section */}
-    //   <WhyUs />
-
-    //   {/* Portofolio Highlights */}
-    //   <HomePortfolio />
-
-    //   {/* Final Call to Action Section */}
-    //   <section className="relative overflow-hidden rounded-[3rem] bg-primary py-20 px-8 sm:px-16 text-center">
-    //     <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-96 h-96 bg-white/10 rounded-full blur-3xl" />
-    //     <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/4 w-96 h-96 bg-slate-900/10 rounded-full blur-3xl" />
-
-    //     <div className="relative z-10 max-w-3xl mx-auto space-y-8">
-    //       <h2 className="text-4xl md:text-5xl font-extrabold text-white leading-tight uppercase">
-    //         Siap Menciptakan Lingkungan yang Lebih{" "}
-    //         <span className="text-slate-900">Sejuk</span> dan{" "}
-    //         <span className="text-slate-900">Nyaman</span>?
-    //       </h2>
-    //       <p className="text-white/80 text-lg">
-    //         Hubungi tim ahli kami hari ini untuk konsultasi gratis mengenai
-    //         kebutuhan AC Anda.
-    //       </p>
-    //       <div className="flex flex-wrap justify-center gap-4">
-    //         <Button
-    //           asChild
-    //           size="lg"
-    //           className="rounded-full h-16 px-10 bg-slate-900 text-white hover:bg-slate-800 font-bold text-lg shadow-xl shadow-slate-900/20"
-    //         >
-    //           <Link href="https://wa.me/your-number">Hubungi WhatsApp</Link>
-    //         </Button>
-    //       </div>
-    //     </div>
-    //   </section>
-    // </div>
   );
 }

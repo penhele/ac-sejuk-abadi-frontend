@@ -188,7 +188,7 @@ export default function ShopPage() {
             </div>
           </div>
 
-          <ProductList products={DUMMY_PRODUCTS} />
+          <ProductList products={DUMMY_PRODUCTS} limit={20} />
         </div>
       </div>
     </div>
