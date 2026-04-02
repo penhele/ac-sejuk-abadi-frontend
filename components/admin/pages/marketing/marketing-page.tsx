@@ -10,10 +10,10 @@ import { MarketingForm } from "@/components/admin/forms/marketing-form";
 export default function MarketingPage() {
   // Data States
   const [discounts, setDiscounts] = useState<PromoItem[]>([
-    { title: "Diskon Lebaran", percent: 20, description: "Promo spesial lebaran.", image: "https://via.placeholder.com/400x200" },
+    { title: "Diskon Lebaran", percent: 20, description: "Promo spesial lebaran.", image: "https://awsimages.detik.net.id/community/media/visual/2026/01/17/ac-transmart-full-day-sale-1768598208540_43.jpeg?w=600&q=90" },
   ]);
   const [flashNews, setFlashNews] = useState<PromoItem[]>([
-    { title: "Promo hari ini!", description: "Diskon unit Gree.", image: "https://via.placeholder.com/400x200" },
+    { title: "Promo hari ini!", description: "Diskon unit Gree.", image: "https://www.permatateknik.com/wp-content/uploads/2018/08/AC-SPLIT-DAIKIN-INVERTER-FLASH-R32-AC-Terbaik-Hemat-Listrik-1-1.jpg" },
   ]);
 
   // UI States
