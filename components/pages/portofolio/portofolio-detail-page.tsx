@@ -2,6 +2,7 @@ import PortofolioList from "@/components/lists/portofolio-list";
 import ProductList from "@/components/lists/product-list";
 import { Separator } from "@/components/ui/separator";
 import { DescriptionSection, HeaderSection } from "@/components/util/header";
+import { DUMMY_PRODUCTS } from "@/constants/products";
 import {
   Building2,
   Calendar,
@@ -141,7 +142,11 @@ export default function PortofolioDetailPage() {
       <section className="space-y-8">
         <HeaderSection title="Produk yang digunakan" />
 
-        <ProductList className="grid-cols-4!" />
+        <ProductList
+          className="grid-cols-4!"
+          products={DUMMY_PRODUCTS}
+          limit={5}
+        />
       </section>
 
       {/* NEW: Related Projects Section */}

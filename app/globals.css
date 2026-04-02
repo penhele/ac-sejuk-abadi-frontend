@@ -17,7 +17,9 @@
   --color-discount: var(--color-yellow-500);
   --color-text-description: var(--color-gray-400);
   --color-text-title: var(--color-gray-900);
-  /*   */
+
+  /* rounded */
+  --radius-card: var(--radius-lg);
 
   /* text */
   --text-body: 0.875rem;
