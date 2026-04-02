@@ -1,48 +1,13 @@
 "use client";
 
-import { useState } from "react";
 import RegisterForm from "@/components/user/forms/register-form";
 
 export default function RegisterPage() {
-  const [loading, setLoading] = useState(false);
-
-  const handleRegister = async (data: any) => {
-    try {
-      setLoading(true);
-
-      const res = await fetch("http://localhost:5000/api/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      const result = await res.json();
-
-      if (!res.ok) {
-        alert(result.message || "Register gagal");
-        return;
-      }
-
-      alert("Register berhasil!");
-      window.location.href = "/login";
-
-    } catch (error) {
-      console.error(error);
-      alert("Terjadi kesalahan pada server");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <div className="bg-slate-50 grid lg:grid-cols-2 h-screen overflow-hidden">
 
       {/* LEFT SIDE */}
       <div className="relative bg-primary hidden lg:flex flex-col justify-center items-center p-12 overflow-hidden">
-        
-        {/* Background effect */}
         <div className="absolute top-[-10%] left-[-10%] w-80 h-80 bg-white/10 rounded-full blur-3xl" />
         <div className="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-black/10 rounded-full blur-3xl" />
 
@@ -70,33 +35,41 @@ export default function RegisterPage() {
         </div>
       </div>
 
-      {/* RIGHT SIDE */}
-      <div className="flex justify-center items-center p-6 sm:p-12 bg-white lg:rounded-l-[40px] overflow-y-auto">
-        <div className="w-full max-w-md">
+{/* RIGHT SIDE */}
+<div className="flex flex-col bg-white lg:rounded-l-[40px] shadow-2xl overflow-y-auto">
+  {/* PENTING: 
+    1. Gunakan min-h-full bukan h-screen.
+    2. Ganti items-center menjadi items-start agar konten mulai dari atas.
+    3. Tambahkan padding py (top & bottom) yang lega agar tidak mepet.
+  */}
+  <div className="flex justify-center items-start min-h-full py-16 px-6 sm:px-12">
+    <div className="w-full max-w-md">
 
-          {/* Mobile Header */}
-          <div className="lg:hidden text-center mb-6">
-            <h2 className="text-xl font-bold">AC SEJUK ABADI</h2>
-          </div>
-
-          {/* Title */}
-          <div className="mb-6">
-            <h2 className="text-3xl font-extrabold text-slate-900">
-              Daftar Akun
-            </h2>
-            <p className="text-slate-500 mt-1 text-sm">
-              Buat akun untuk mulai menggunakan sistem
-            </p>
-          </div>
-
-          {/* FORM */}
-          <RegisterForm 
-            onSubmit={handleRegister} 
-            loading={loading} // 🔥 kirim ke form
-          />
-
-        </div>
+      {/* Mobile Header (Hanya muncul di HP) */}
+      <div className="lg:hidden text-center mb-8">
+        <h2 className="text-xl font-bold text-primary">AC SEJUK ABADI</h2>
       </div>
+
+      {/* Title Section */}
+      <div className="mb-8 text-center lg:text-left">
+        <h2 className="text-3xl font-black text-slate-900 tracking-tight">
+          Daftar Akun
+        </h2>
+        <p className="text-slate-500 mt-2 text-sm">
+          Buat akun untuk mulai menggunakan sistem
+        </p>
+      </div>
+
+      {/* FORM CONTAINER */}
+      <div className="pb-10"> {/* Memberi jarak di bawah form agar tidak mentok footer */}
+        <RegisterForm 
+          backendUrl="http://localhost:5000/api" 
+        />
+      </div>
+
+    </div>
+  </div>
+</div>
     </div>
   );
 }
