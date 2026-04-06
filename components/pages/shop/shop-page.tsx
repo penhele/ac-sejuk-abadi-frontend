@@ -1,4 +1,7 @@
+"use client";
+
 import CarouselBanner from "@/components/carousel/carousel-banner";
+import SearchBar from "@/components/filters/search-bar";
 import ShopFilter from "@/components/filters/shop-filter";
 import ProductList from "@/components/lists/product-list";
 import {
@@ -9,9 +12,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { Button } from "@/components/ui/button";
-import { ButtonGroup } from "@/components/ui/button-group";
-import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -21,7 +21,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { DUMMY_PRODUCTS } from "@/constants/products";
-import { SearchIcon } from "lucide-react";
+import { useMemo, useState } from "react";
 
 export default function ShopPage() {
   const banner = [
@@ -29,6 +29,18 @@ export default function ShopPage() {
     { src: "/iklan.png", name: "Banner" },
     { src: "/iklan.png", name: "Banner" },
   ];
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const displayedProducts = useMemo(() => {
+    return DUMMY_PRODUCTS.filter((product) => {
+      // Filter Nama (Search)
+      const matchesSearch = product.name
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase());
+
+      return matchesSearch;
+    });
+  }, [searchQuery]);
 
   return (
     <div className="space-y-between-section">
@@ -73,16 +85,12 @@ export default function ShopPage() {
                   </SelectContent>
                 </Select>
               </div>
-              <ButtonGroup className="xs:flex hidden">
-                <Input placeholder="Cari Produk" />
-                <Button variant="outline" aria-label="Search">
-                  <SearchIcon />
-                </Button>
-              </ButtonGroup>
+
+              <SearchBar onChange={(val) => setSearchQuery(val)} />
             </div>
           </div>
 
-          <ProductList products={DUMMY_PRODUCTS} limit={20} />
+          <ProductList products={displayedProducts} limit={20} />
         </div>
       </div>
     </div>
