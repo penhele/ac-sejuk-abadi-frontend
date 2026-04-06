@@ -14,7 +14,7 @@ export default function ProductList({
   const displayedProducts = limit ? products.slice(0, limit) : products;
 
   return (
-    <div className={cn("grid grid-cols-2 lg:grid-cols-3 gap-4", className)}>
+    <div className={cn("grid grid-cols-2 lg:grid-cols-3 gap-between-card", className)}>
       {displayedProducts.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}

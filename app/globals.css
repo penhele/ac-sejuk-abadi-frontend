@@ -8,6 +8,7 @@
   /* spacing */
   --spacing-default-page: 1rem;
   --spacing-between-section: 2rem;
+  --spacing-between-card: 1rem;
 
   /* breakpoint */
   --breakpoint-2xs: 24rem;

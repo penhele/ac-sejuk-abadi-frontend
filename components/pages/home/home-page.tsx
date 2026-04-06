@@ -66,7 +66,7 @@ export default function HomePage() {
       </div>
 
       <div className="grid grid-cols-3 gap-8">
-        <div className="col-span-2 grid grid-cols-2 gap-4">
+        <div className="col-span-2 grid grid-cols-2 gap-between-card">
           <div className="space-y-2 flex flex-col items-center bg-muted p-4 border rounded-lg transition-colors hover:border-gray-600">
             <ShieldCheck size={56} />
             <span className="text-lg">Kualitas Tinggi</span>
