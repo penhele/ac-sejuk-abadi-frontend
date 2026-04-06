@@ -2,7 +2,8 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+// Simpan Textarea dan Gambar jika BE berencana menambahkannya nanti, 
+// tapi untuk sekarang kita fokus ke yang wajib di DTO.
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { PromoItem, MarketingType } from "@/types/marketing";
 
@@ -11,22 +12,13 @@ interface MarketingFormProps {
   onOpenChange: (open: boolean) => void;
   type: MarketingType;
   isEdit: boolean;
-  form: Partial<PromoItem>;
+  form: any;
   setForm: (data: any) => void;
   onSubmit: () => void;
 }
 
 export function MarketingForm({ open, onOpenChange, type, isEdit, form, setForm, onSubmit }: MarketingFormProps) {
   
-  const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => setForm({ ...form, image: reader.result as string });
-      reader.readAsDataURL(file);
-    }
-  };
-
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-md">
@@ -35,38 +27,71 @@ export function MarketingForm({ open, onOpenChange, type, isEdit, form, setForm,
         </DialogHeader>
 
         <div className="space-y-4 py-4">
+          {/* Sesuai DTO: id_product */}
           <div className="space-y-1.5">
-            <label className="text-xs font-bold uppercase text-slate-500">Judul Konten</label>
-            <Input placeholder="Masukkan judul..." value={form.title || ""} onChange={(e) => setForm({ ...form, title: e.target.value })} />
+            <label className="text-xs font-bold uppercase text-slate-500">ID Produk</label>
+            <Input 
+              placeholder="Contoh: PROD-001" 
+              value={form.id_product || ""} 
+              onChange={(e) => setForm({ ...form, id_product: e.target.value })} 
+            />
           </div>
 
           {type === "diskon" && (
-            <div className="space-y-1.5">
-              <label className="text-xs font-bold uppercase text-slate-500">Persentase (%)</label>
-              <Input type="number" placeholder="20" value={form.percent || ""} onChange={(e) => setForm({ ...form, percent: Number(e.target.value) })} />
-            </div>
+            <>
+              {/* Sesuai DTO: price (Harga setelah diskon) */}
+              <div className="space-y-1.5">
+                <label className="text-xs font-bold uppercase text-slate-500">Harga Promo (Rp)</label>
+                <Input 
+                  type="number" 
+                  placeholder="50000" 
+                  value={form.price || ""} 
+                  onChange={(e) => setForm({ ...form, price: Number(e.target.value) })} 
+                />
+              </div>
+
+              {/* Sesuai DTO: start_date */}
+              <div className="space-y-1.5">
+                <label className="text-xs font-bold uppercase text-slate-500">Tanggal Mulai</label>
+                <Input 
+                  type="date" 
+                  value={form.start_date ? new Date(form.start_date).toISOString().split('T')[0] : ""} 
+                  onChange={(e) => setForm({ ...form, start_date: e.target.value })} 
+                />
+              </div>
+
+              {/* Sesuai DTO: end_date */}
+              <div className="space-y-1.5">
+                <label className="text-xs font-bold uppercase text-slate-500">Tanggal Berakhir</label>
+                <Input 
+                  type="date" 
+                  value={form.end_date ? new Date(form.end_date).toISOString().split('T')[0] : ""} 
+                  onChange={(e) => setForm({ ...form, end_date: e.target.value })} 
+                />
+              </div>
+            </>
           )}
 
-          <div className="space-y-1.5">
-            <label className="text-xs font-bold uppercase text-slate-500">Deskripsi</label>
-            <Textarea className="h-24" placeholder="Detail informasi..." value={form.description || ""} onChange={(e) => setForm({ ...form, description: e.target.value })} />
-          </div>
-
-          <div className="space-y-1.5">
-            <label className="text-xs font-bold uppercase text-slate-500">Gambar Banner</label>
-            <Input type="file" accept="image/*" onChange={handleImage} />
-            {form.image && (
-              <div className="mt-2 rounded-lg overflow-hidden border h-32">
-                <img src={form.image} className="w-full h-full object-cover" alt="Preview" />
-              </div>
-            )}
-          </div>
+          {/* Field tambahan (Opsional, pastikan BE mengizinkan field ini) */}
+          {type !== "diskon" && (
+             <div className="space-y-1.5">
+                <label className="text-xs font-bold uppercase text-slate-500">Deskripsi</label>
+                <Input 
+                  placeholder="Info flash news..." 
+                  value={form.description || ""} 
+                  onChange={(e) => setForm({ ...form, description: e.target.value })} 
+                />
+             </div>
+          )}
         </div>
 
         <DialogFooter>
           <Button variant="ghost" onClick={() => onOpenChange(false)}>Batal</Button>
-          <Button onClick={onSubmit} className={type === 'diskon' ? 'bg-blue-600' : 'bg-orange-600'}>
-            Simpan Konten
+          <Button 
+            onClick={onSubmit} 
+            className={type === 'diskon' ? 'bg-blue-600' : 'bg-orange-600'}
+          >
+            {isEdit ? "Simpan Perubahan" : "Tambah Diskon"}
           </Button>
         </DialogFooter>
       </DialogContent>
