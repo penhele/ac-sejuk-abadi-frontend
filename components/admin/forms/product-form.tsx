@@ -3,214 +3,256 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
-import { ImagePlus, LayoutList, X, Zap, Maximize, ShieldCheck } from "lucide-react";
-import { Product } from "@/types/product";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Textarea } from "@/components/ui/textarea"; // Opsional: untuk deskripsi yang lebih panjang
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { 
+  ImageIcon, 
+  Tag, 
+  Hash, 
+  X, 
+  Package, 
+  BadgeDollarSign, 
+  Layers, 
+  FileText 
+} from "lucide-react";
+
+// 1. Update Interface sesuai DTO Backend Produk
+export interface Product {
+  id?: number;
+  id_brand: number;
+  name: string;
+  description: string;
+  type: string;
+  price: number;
+  quantity: number;
+  pk: string;
+  category_ids: number[];
+  image?: string; // Untuk preview visual
+}
 
 interface ProductFormProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   isEdit: boolean;
-  form: Product;
-  setForm: React.Dispatch<React.SetStateAction<Product>>;
-  onSubmit: () => void;
+  form: Partial<Product>;
+  setForm: (form: any) => void;
+  onSubmit: (file: File | null) => void;
+  isLoading?: boolean;
 }
 
-export function ProductForm({ open, onOpenChange, isEdit, form, setForm, onSubmit }: ProductFormProps) {
+export function ProductForm({
+  open,
+  onOpenChange,
+  isEdit,
+  form,
+  setForm,
+  onSubmit,
+  isLoading,
+}: ProductFormProps) {
   
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (files) {
-      Array.from(files).forEach((file) => {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          setForm((prev) => ({
-            ...prev,
-            images: [...prev.images, reader.result as string],
-          }));
-        };
-        reader.readAsDataURL(file);
-      });
+  const [localPreview, setLocalPreview] = React.useState<string | null>(null);
+  const [selectedFile, setSelectedFile] = React.useState<File | null>(null);
+
+  const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setSelectedFile(file);
+      setLocalPreview(URL.createObjectURL(file));
     }
   };
 
-  const removeImage = (indexToRemove: number) => {
-    setForm((prev) => ({
-      ...prev,
-      images: prev.images.filter((_, index) => index !== indexToRemove),
-    }));
-  };
-
-  const updateSpec = (key: keyof typeof form.specs, value: string) => {
-    setForm({
-      ...form,
-      specs: { ...form.specs, [key]: value }
-    });
+  const clearImage = () => {
+    setSelectedFile(null);
+    setLocalPreview(null);
   };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      {/* PENTING: overflow-hidden pada DialogContent dan h-[90vh] */}
-      <DialogContent className="sm:max-w-5xl p-0 overflow-hidden flex flex-col h-[90vh] max-h-[90vh]">
-        
-        {/* HEADER: Tetap di atas */}
-        <DialogHeader className="p-6 border-b bg-white shrink-0">
-          <DialogTitle className="text-xl flex items-center gap-2">
-            <LayoutList className="w-5 h-5 text-blue-600" />
-            {isEdit ? "Edit Detail Produk" : "Tambah Produk Baru"}
+      <DialogContent className="sm:max-w-lg p-0 overflow-hidden rounded-2xl flex flex-col h-[90vh]">
+        <DialogHeader className="p-6 pb-2">
+          <DialogTitle className="text-xl font-bold">
+            {isEdit ? "Edit Produk" : "Tambah Produk Baru"}
           </DialogTitle>
         </DialogHeader>
-        
-        {/* BODY: Menggunakan native scroll (paling aman) */}
-        <div className="flex-1 overflow-y-auto bg-white custom-scrollbar">
-          <div className="p-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pb-6">
-              
-              {/* KOLOM KIRI: INFO UTAMA & GAMBAR */}
-              <div className="space-y-6">
-                <div className="space-y-3">
-                  <label className="text-sm font-bold text-slate-700">Foto Unit</label>
-                  <div className="grid grid-cols-3 gap-3">
-                    {form.images.map((img, idx) => (
-                      <div key={idx} className="relative aspect-square rounded-xl overflow-hidden border-2 group">
-                        <img src={img} className="w-full h-full object-cover" alt="preview" />
-                        <button 
-                          type="button"
-                          onClick={() => removeImage(idx)} 
-                          className="absolute top-1 right-1 bg-red-500 hover:bg-red-600 text-white p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"
-                        >
-                          <X className="w-3 h-3" />
-                        </button>
-                      </div>
-                    ))}
-                    <label className="aspect-square border-2 border-dashed rounded-xl flex flex-col items-center justify-center bg-slate-50 hover:bg-blue-50 hover:border-blue-300 transition-all cursor-pointer group">
-                      <ImagePlus className="w-8 h-8 text-slate-400 group-hover:text-blue-500" />
-                      <span className="text-[10px] mt-1 text-slate-500 font-medium">Tambah Foto</span>
-                      <input type="file" className="hidden" accept="image/*" multiple onChange={handleImageUpload} />
-                    </label>
-                  </div>
-                </div>
 
-                <div className="space-y-4 pt-2">
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-slate-700">Nama Produk</label>
-                    <Input 
-                      placeholder="Contoh: AC Daikin Inverter Smile..." 
-                      value={form.name} 
-                      onChange={(e) => setForm({ ...form, name: e.target.value })} 
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label className="text-sm font-bold text-slate-700">Harga (Rp)</label>
-                      <Input 
-                        type="number" 
-                        placeholder="0" 
-                        value={form.price} 
-                        onChange={(e) => setForm({ ...form, price: e.target.value })} 
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-sm font-bold text-slate-700">Kategori</label>
-                      <select 
-                        className="w-full h-10 border rounded-md px-3 text-sm bg-white focus:ring-2 focus:ring-blue-500 outline-none" 
-                        value={form.category} 
-                        onChange={(e) => setForm({ ...form, category: e.target.value })}
-                      >
-                        <option value="AC">AC</option>
-                        <option value="Sparepart">Sparepart</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
+        <ScrollArea className="flex-1 px-6">
+          <div className="space-y-5 pb-6">
+            
+            {/* Row 1: ID Brand & PK */}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <label className="text-sm font-semibold text-slate-700 flex items-center gap-2">
+                  <Hash className="w-4 h-4 text-blue-500" /> ID Brand *
+                </label>
+                <Input
+                  type="number"
+                  placeholder="1"
+                  value={form.id_brand || ""}
+                  onChange={(e) => setForm({ ...form, id_brand: parseInt(e.target.value) })}
+                  className="rounded-xl"
+                />
               </div>
+              <div className="space-y-2">
+                <label className="text-sm font-semibold text-slate-700 flex items-center gap-2">
+                  <Layers className="w-4 h-4 text-blue-500" /> Kode PK *
+                </label>
+                <Input
+                  placeholder="Contoh: SGS24"
+                  value={form.pk || ""}
+                  onChange={(e) => setForm({ ...form, pk: e.target.value })}
+                  className="rounded-xl"
+                />
+              </div>
+            </div>
 
-              {/* KOLOM KANAN: SPECS TEKNIS */}
-              <div className="bg-slate-50 p-6 rounded-2xl space-y-8 border shadow-sm h-fit">
-                {/* Section 1: Identitas */}
-                <section>
-                  <div className="flex items-center gap-2 mb-4 text-blue-700">
-                    <LayoutList className="w-4 h-4" />
-                    <h3 className="text-xs font-bold uppercase tracking-widest">Informasi Produk</h3>
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <SpecInput label="Brand" value={form.specs.brand} onChange={(v) => updateSpec('brand', v)} />
-                    <SpecInput label="Type" value={form.specs.type} onChange={(v) => updateSpec('type', v)} />
-                    <SpecInput label="Series" value={form.specs.series} onChange={(v) => updateSpec('series', v)} />
-                    <SpecInput label="Produksi" placeholder="Thailand / Indonesia" value={form.specs.produksi} onChange={(v) => updateSpec('produksi', v)} />
-                  </div>
-                </section>
+            {/* Name */}
+            <div className="space-y-2">
+              <label className="text-sm font-semibold text-slate-700">Nama Produk *</label>
+              <Input
+                placeholder="AC Daikin Inverter 1 PK"
+                value={form.name || ""}
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
+                className="rounded-xl"
+              />
+            </div>
 
-                {/* Section 2: Performa */}
-                <section>
-                  <div className="flex items-center gap-2 mb-4 text-orange-600">
-                    <Zap className="w-4 h-4" />
-                    <h3 className="text-xs font-bold uppercase tracking-widest">Kelistrikan & BTU</h3>
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <SpecInput label="Kapasitas (PK)" value={form.specs.pk} onChange={(v) => updateSpec('pk', v)} />
-                    <SpecInput label="Daya (Watt)" value={form.specs.watt} onChange={(v) => updateSpec('watt', v)} />
-                    <SpecInput label="BTU/h" value={form.specs.btu} onChange={(v) => updateSpec('btu', v)} />
-                    <SpecInput label="Bintang Label" placeholder="1-5" value={form.specs.label} onChange={(v) => updateSpec('label', v)} />
-                  </div>
-                </section>
+            {/* Description */}
+            <div className="space-y-2">
+              <label className="text-sm font-semibold text-slate-700 flex items-center gap-2">
+                <FileText className="w-4 h-4 text-blue-500" /> Deskripsi
+              </label>
+              <Input
+                placeholder="AC terbaru dengan fitur canggih..."
+                value={form.description || ""}
+                onChange={(e) => setForm({ ...form, description: e.target.value })}
+                className="rounded-xl"
+              />
+            </div>
 
-                {/* Section 3: Teknis */}
-                <section>
-                  <div className="flex items-center gap-2 mb-4 text-emerald-600">
-                    <ShieldCheck className="w-4 h-4" />
-                    <h3 className="text-xs font-bold uppercase tracking-widest">Teknis & Garansi</h3>
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <SpecInput label="Refrigerant" value={form.specs.refrigerant} onChange={(v) => updateSpec('refrigerant', v)} />
-                    <SpecInput label="Garansi" value={form.specs.warranty} onChange={(v) => updateSpec('warranty', v)} />
-                    <div className="col-span-2">
-                      <SpecInput label="Ukuran Pipa" placeholder="Contoh: 1/4 + 3/8" value={form.specs.ukuranpipa} onChange={(v) => updateSpec('ukuranpipa', v)} />
+            {/* Row 2: Type & Price */}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <label className="text-sm font-semibold text-slate-700 flex items-center gap-2">
+                  <Tag className="w-4 h-4 text-blue-500" /> Tipe
+                </label>
+                <Input
+                  placeholder="AC"
+                  value={form.type || ""}
+                  onChange={(e) => setForm({ ...form, type: e.target.value })}
+                  className="rounded-xl"
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-sm font-semibold text-slate-700 flex items-center gap-2">
+                  <BadgeDollarSign className="w-4 h-4 text-green-600" /> Harga *
+                </label>
+                <Input
+                  type="number"
+                  placeholder="15000000"
+                  value={form.price || ""}
+                  onChange={(e) => setForm({ ...form, price: parseInt(e.target.value) })}
+                  className="rounded-xl"
+                />
+              </div>
+            </div>
+
+            {/* Row 3: Quantity & Category IDs */}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <label className="text-sm font-semibold text-slate-700 flex items-center gap-2">
+                  <Package className="w-4 h-4 text-blue-500" /> Stok *
+                </label>
+                <Input
+                  type="number"
+                  placeholder="50"
+                  value={form.quantity || ""}
+                  onChange={(e) => setForm({ ...form, quantity: parseInt(e.target.value) })}
+                  className="rounded-xl"
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-sm font-semibold text-slate-700 flex items-center gap-2">
+                  <Hash className="w-4 h-4 text-blue-500" /> Category IDs (CSV)
+                </label>
+                <Input
+                  placeholder="1, 2"
+                  value={form.category_ids?.join(", ") || ""}
+                  onChange={(e) => {
+                    const ids = e.target.value.split(",").map(id => parseInt(id.trim())).filter(id => !isNaN(id));
+                    setForm({ ...form, category_ids: ids });
+                  }}
+                  className="rounded-xl"
+                />
+              </div>
+            </div>
+
+            {/* Image Upload */}
+            <div className="space-y-2">
+              <label className="text-sm font-semibold text-slate-700">Foto Produk</label>
+              <div className="relative group">
+                <label className={`
+                  flex flex-col items-center justify-center aspect-video rounded-xl border-2 border-dashed transition-all cursor-pointer
+                  ${localPreview || form.image ? 'border-transparent' : 'border-slate-300 hover:border-blue-400 hover:bg-blue-50'}
+                `}>
+                  {localPreview || form.image ? (
+                    <div className="relative w-full h-full rounded-xl overflow-hidden">
+                      <img 
+                        src={localPreview || form.image} 
+                        className="w-full h-full object-contain bg-slate-100" 
+                        alt="Preview" 
+                      />
+                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <p className="text-white text-xs font-bold">Ganti Gambar</p>
+                      </div>
                     </div>
-                  </div>
-                </section>
-
-                {/* Section 4: Fisik */}
-                <section>
-                  <div className="flex items-center gap-2 mb-4 text-purple-600">
-                    <Maximize className="w-4 h-4" />
-                    <h3 className="text-xs font-bold uppercase tracking-widest">Dimensi & Berat</h3>
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <SpecInput label="Dimensi Indoor" placeholder="P x L x T" value={form.specs.dimensiindoor} onChange={(v) => updateSpec('dimensiindoor', v)} />
-                    <SpecInput label="Dimensi Outdoor" placeholder="P x L x T" value={form.specs.dimensioutdoor} onChange={(v) => updateSpec('dimensioutdoor', v)} />
-                    <SpecInput label="Berat Indoor" placeholder="kg" value={form.specs.beratindoor} onChange={(v) => updateSpec('beratindoor', v)} />
-                    <SpecInput label="Berat Outdoor" placeholder="kg" value={form.specs.beratoutdoor} onChange={(v) => updateSpec('beratoutdoor', v)} />
-                  </div>
-                </section>
+                  ) : (
+                    <>
+                      <ImageIcon className="w-8 h-8 text-slate-400 mb-2" />
+                      <span className="text-xs font-medium text-slate-500 text-center px-4">
+                        Klik untuk unggah foto produk
+                      </span>
+                    </>
+                  )}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImage}
+                    className="hidden"
+                  />
+                </label>
+                {(localPreview || form.image) && (
+                  <button 
+                    type="button"
+                    onClick={clearImage}
+                    className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 shadow-md hover:bg-red-600 transition-colors"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                )}
               </div>
             </div>
           </div>
-        </div>
+        </ScrollArea>
 
-        {/* FOOTER: Tetap di bawah */}
-        <DialogFooter className="p-6 bg-white border-t shrink-0 flex gap-3">
-          <Button type="button" variant="ghost" onClick={() => onOpenChange(false)}>Batal</Button>
-          <Button type="button" onClick={onSubmit} className="bg-blue-600 hover:bg-blue-700 px-10 shadow-md text-white">
-            Simpan Perubahan
+        <div className="p-6 bg-slate-50 border-t flex justify-end gap-3 mt-auto">
+          <Button variant="ghost" onClick={() => onOpenChange(false)} className="rounded-xl">
+            Batal
           </Button>
-        </DialogFooter>
+          <Button 
+            onClick={() => onSubmit(selectedFile)} 
+            disabled={isLoading || !form.name || !form.id_brand || !form.price || !form.pk}
+            className="bg-blue-600 hover:bg-blue-700 px-8 rounded-xl font-bold shadow-lg shadow-blue-100"
+          >
+            {isLoading ? "Memproses..." : isEdit ? "Simpan Perubahan" : "Simpan Produk"}
+          </Button>
+        </div>
       </DialogContent>
     </Dialog>
-  );
-}
-
-function SpecInput({ label, value, onChange, placeholder = "" }: { label: string, value: string, onChange: (v: string) => void, placeholder?: string }) {
-  return (
-    <div className="space-y-1.5">
-      <label className="text-[10px] font-bold text-slate-500 uppercase ml-1">{label}</label>
-      <Input 
-        className="h-9 text-sm bg-white border-slate-200 focus:border-blue-400 transition-colors shadow-sm" 
-        placeholder={placeholder}
-        value={value || ""} 
-        onChange={(e) => onChange(e.target.value)} 
-      />
-    </div>
   );
 }

@@ -1,24 +1,16 @@
-// lib/auth.ts
+import axios from 'axios';
 
-export async function login(data: {
-  email: string;
-  password: string;
-  captchaToken: string;
-}) {
-  console.log("Kirim ke backend:", data);
+// 1. GANTILAH Link Vercel dengan path proxy yang kita buat di next.config.js
+// Ini akan menipu browser agar mengira kita memanggil domain sendiri
+const API_URL = '/api-backend'; 
 
-  // simulasi delay API
-  await new Promise((res) => setTimeout(res, 1000));
-
-  // mock login
-  if (data.email === "admin@gmail.com" && data.password === "12345678") {
-    return {
-      token: "fake-jwt-token",
-      user: {
-        email: data.email,
-      },
-    };
-  }
-
-  throw new Error("Email atau password salah");
-}
+export const login = async (data: any) => {
+  // 2. Sekarang request ini akan ke: http://localhost:3000/api-backend/auth/login
+  // Next.js secara otomatis akan meneruskannya ke https://acsa-backend.vercel.app/auth/login
+  const response = await axios.post(`${API_URL}/api/auth/login`, {
+    email: data.email,
+    password: data.password
+  });
+  
+  return response.data; 
+};

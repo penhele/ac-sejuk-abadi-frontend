@@ -1,55 +1,48 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { FaGoogle } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { Field, FieldDescription, FieldLabel, FieldSeparator } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { Loader2, AlertCircle } from "lucide-react";
-import ReCAPTCHA from "react-google-recaptcha";
 
-type LoginFormProps = {
-  onSubmit: (data: { email: string; password: string; captchaToken: string }) => void;
-  loading?: boolean;
-};
+// 1. DEFINISIKAN TYPE PROPS (Agar TypeScript tidak marah)
+interface LoginFormProps {
+  onSubmit: (data: { email: string; password: string }) => void;
+  loading: boolean;
+}
 
-export default function LoginForm({ onSubmit, loading = false }: LoginFormProps) {
+// 2. TANGKAP PROPS DI SINI
+export default function LoginForm({ onSubmit, loading }: LoginFormProps) {
   const [isMounted, setIsMounted] = useState(false);
-  const captchaRef = useRef<ReCAPTCHA>(null);
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [captchaToken, setCaptchaToken] = useState("");
   const [error, setError] = useState("");
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  const handleCaptchaChange = (token: string | null) => {
-    setCaptchaToken(token || "");
-    if (token) setError(""); // clear error jika captcha diisi
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
-    // Validasi frontend
+    // Validasi Input Dasar
     if (!email.trim() || !password.trim()) {
       setError("Email dan password wajib diisi");
       return;
     }
 
-    if (!captchaToken) {
-      setError("Silakan centang Captcha untuk keamanan");
-      return;
-    }
-
-    // Panggil parent untuk kirim API
-    onSubmit({ email: email.trim(), password: password.trim(), captchaToken });
+    // 3. KIRIM DATA KE PARENT (LoginPage)
+    onSubmit({ 
+      email: email.trim(), 
+      password: password.trim() 
+    });
   };
+
+  if (!isMounted) return null;
 
   return (
     <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto space-y-4">
@@ -59,13 +52,14 @@ export default function LoginForm({ onSubmit, loading = false }: LoginFormProps)
         <Input
           id="email"
           type="email"
-          placeholder="john@doe.com"
+          placeholder="admin@xyz.com"
           value={email}
           onChange={(e) => {
             setEmail(e.target.value);
             setError("");
           }}
           disabled={loading}
+          required
         />
       </Field>
 
@@ -89,24 +83,9 @@ export default function LoginForm({ onSubmit, loading = false }: LoginFormProps)
             setError("");
           }}
           disabled={loading}
+          required
         />
       </Field>
-
-      {/* Captcha */}
-      <div className="flex justify-center py-2">
-        {isMounted ? (
-          <ReCAPTCHA
-            ref={captchaRef}
-            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "MASUKKAN_SITE_KEY_ANDA"}
-            onChange={handleCaptchaChange}
-            theme="light"
-          />
-        ) : (
-          <div className="h-20 w-full bg-slate-100 animate-pulse rounded-md flex items-center justify-center text-xs text-slate-400">
-            Loading Security...
-          </div>
-        )}
-      </div>
 
       {/* Error Message */}
       {error && (
