@@ -1,13 +1,14 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://acsa-backend.vercel.app',
+  // Ubah ini! Pakai prefix yang ada di next.config.mjs
+  baseURL: '/api-backend', 
   headers: {
     'Content-Type': 'application/json'
   }
 });
 
-// Otomatis pasang token kalau sudah login
+// Interceptor tetap sama...
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
   if (token) {

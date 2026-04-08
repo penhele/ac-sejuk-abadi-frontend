@@ -62,16 +62,30 @@ const DialogHeader = ({
 DialogHeader.displayName = "DialogHeader";
 
 const DialogTitle = React.forwardRef<
-  HTMLHeadingElement,
-  React.HTMLAttributes<HTMLHeadingElement>
+  React.ElementRef<typeof DialogPrimitive.Title>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
 >(({ className, ...props }, ref) => (
-  <h2
+  <DialogPrimitive.Title
     ref={ref}
     className={cn("text-lg font-semibold", className)}
     {...props}
   />
 ));
 DialogTitle.displayName = "DialogTitle";
+
+// --- INI BAGIAN YANG DITAMBAHKAN ---
+const DialogDescription = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Description>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
+>(({ className, ...props }, ref) => (
+  <DialogPrimitive.Description
+    ref={ref}
+    className={cn("text-sm text-slate-500", className)}
+    {...props}
+  />
+));
+DialogDescription.displayName = "DialogDescription";
+// ------------------------------------
 
 const DialogFooter = ({
   className,
@@ -93,6 +107,7 @@ export {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription, // Tambahkan ini di export
   DialogClose,
   DialogFooter,
 };
