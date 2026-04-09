@@ -1,8 +1,7 @@
-"use client";
-
 import CarouselBanner from "@/components/carousel/carousel-banner";
 import ShopFilter from "@/components/filters/shop-filter";
-import ProductList from "@/components/lists/product-list";
+import ProductGrid from "@/components/grid/product-grid";
+import ProductCardSkeleton from "@/components/skeletons/product-card-skeleton";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -19,9 +18,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { getProducts } from "@/services/product.service";
-import { Product } from "@/types/product";
-import { useQuery } from "@tanstack/react-query";
+import { Suspense } from "react";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorFallback from "./fallback/error-fallback";
 // import { useMemo, useState } from "react";
 
 export default function ShopPage() {
@@ -42,18 +41,6 @@ export default function ShopPage() {
   //     return matchesSearch;
   //   });
   // }, [searchQuery]);
-
-  const {
-    data: response,
-    isLoading,
-    isError,
-    error,
-  } = useQuery({
-    queryKey: ["products", 1, 10],
-    queryFn: () => getProducts(1, 10),
-  });
-
-  const products = response?.data || [];
 
   return (
     <div className="space-y-between-section">
@@ -104,11 +91,19 @@ export default function ShopPage() {
           </div>
 
           <div className="">
-            {products.length > 0 ? (
-              <ProductList products={products} limit={20} />
-            ) : (
-              <div className="">Data tidak tersedia</div>
-            )}
+            <ErrorBoundary fallback={<ErrorFallback />}>
+              <Suspense
+                fallback={
+                  <div className="grid grid-cols-3 gap-between-card">
+                    {[...Array(3)].map((_, index) => (
+                      <ProductCardSkeleton key={index} />
+                    ))}
+                  </div>
+                }
+              >
+                <ProductGrid />
+              </Suspense>
+            </ErrorBoundary>
           </div>
         </div>
       </div>
