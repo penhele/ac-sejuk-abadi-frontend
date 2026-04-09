@@ -7,21 +7,23 @@ export interface Product {
   name: string;
   description: string;
   type: string;
-  price: string; // Berdasarkan JSON: "2500000"
+  price: string;
   quantity: number;
   pk: string;
   created_at: string;
   updated_at: string;
   brand: Brand;
   categories: ProductCategory[];
-  images: any[]; // Sesuaikan jika nanti ada objek image
-  discounts: any[]; // Sesuaikan jika nanti ada objek discount
+  images: any[];
+  discounts: any[];
+  reviews: any[];
+  featuredProducts: any[];
 }
 
 export interface ProductResponse {
   success: boolean;
   message: string;
-  data: Product[]; // Array produk
+  data: Product[];
   meta: {
     total: number;
     page: number;

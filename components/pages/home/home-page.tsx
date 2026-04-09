@@ -3,11 +3,11 @@
 import CarouselBanner from "@/components/carousel/carousel-banner";
 import CarouselBrand from "@/components/carousel/carousel-brand";
 import CarouselTestimoni from "@/components/carousel/carousel-testimoni";
+import ProductGrid from "@/components/grid/product-grid";
 import PortofolioList from "@/components/lists/portofolio-list";
 import ProductList from "@/components/lists/product-list";
 import { Separator } from "@/components/ui/separator";
 import { HeaderSection } from "@/components/util/header";
-import { DUMMY_PRODUCTS } from "@/constants/products";
 import {
   ChartNoAxesCombined,
   Handshake,
@@ -58,11 +58,7 @@ export default function HomePage() {
 
       <div className="">
         <HeaderSection title="Produk" href="/shop" />
-        <ProductList
-          className="grid-cols-4!"
-          products={DUMMY_PRODUCTS}
-          limit={4}
-        />
+        <ProductGrid />
       </div>
 
       <div className="grid grid-cols-3 gap-8">

@@ -4,6 +4,7 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 import DiscountBadge from "../util/discount-badge";
 import { Product } from "@/types/product";
+import { formatRupiah } from "../util/formatter";
 
 export default function ProductCard({ product }: { product: Product }) {
   return (
@@ -18,7 +19,7 @@ export default function ProductCard({ product }: { product: Product }) {
         </div>
 
         <div className="p-4 flex flex-col gap-2">
-          <span className="text-xs text-gray-400">{product.id_brand}</span>
+          <span className="text-xs text-gray-400">{product.brand.name}</span>
           <h1 className="text-sm h-16 line-clamp-3">{product.name}</h1>
 
           <div className="flex gap-2">
@@ -32,10 +33,12 @@ export default function ProductCard({ product }: { product: Product }) {
 
           <div className="flex flex-row justify-between">
             <div className="flex flex-col">
-              <span className="line-through text-xs">IDR 3.000.000</span>
+              <span className="line-through text-xs">
+                IDR {formatRupiah(product.price)}
+              </span>
 
               <div className="flex flex-row gap-1">
-                <span>IDR {product.price}</span>
+                <span>IDR {formatRupiah(product.price)}</span>
                 <span className="text-xs text-red-500">(-20%)</span>
               </div>
             </div>

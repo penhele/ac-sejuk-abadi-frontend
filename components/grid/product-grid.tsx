@@ -5,7 +5,13 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import ProductList from "../lists/product-list";
 import { SearchX } from "lucide-react";
 
-export default function ProductGrid() {
+export default function ProductGrid({
+  limit,
+  className,
+}: {
+  limit?: number;
+  className?: string;
+}) {
   const { data: response } = useSuspenseQuery({
     queryKey: ["products", 1, 10],
     queryFn: () => getProducts(1, 10),
@@ -21,5 +27,7 @@ export default function ProductGrid() {
       </div>
     );
 
-  return <ProductList products={products} />;
+  return (
+    <ProductList products={products} className={className} limit={limit} />
+  );
 }

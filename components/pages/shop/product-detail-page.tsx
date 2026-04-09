@@ -1,3 +1,6 @@
+"use client";
+
+import ProductGrid from "@/components/grid/product-grid";
 import ProductImages from "@/components/product/product-images";
 import ProductInfo from "@/components/product/product-info";
 import ProductPriceAction from "@/components/product/product-price-action";
@@ -12,8 +15,9 @@ import {
 } from "@/components/ui/breadcrumb";
 import { DescriptionSection, HeaderSection } from "@/components/util/header";
 import { DataTable } from "../../product/data-table";
-import ProductList from "@/components/lists/product-list";
-import { DUMMY_PRODUCTS } from "@/constants/products";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { getProductById } from "@/services/product.service";
+import { useParams } from "next/navigation";
 
 export default function ProductDetailPage() {
   const data: AcSpecification[] = [
@@ -29,6 +33,14 @@ export default function ProductDetailPage() {
     { property: "Tipe Refrigrant", value: "R32" },
   ];
 
+  const params = useParams();
+  const id = params.id as string;
+
+  const { data: product } = useSuspenseQuery({
+    queryKey: ["products", id],
+    queryFn: () => getProductById(id),
+  });
+
   return (
     <div className="space-y-between-section">
       <Breadcrumb>
@@ -42,9 +54,7 @@ export default function ProductDetailPage() {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>
-              Midea AC Wall Mounted Split Standard Double Gold Fin 1/2 PK
-            </BreadcrumbPage>
+            <BreadcrumbPage>{product.name}</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
@@ -53,7 +63,7 @@ export default function ProductDetailPage() {
         <ProductImages jumlah={8} />
 
         <div className="flex flex-col gap-4">
-          <ProductInfo />
+          <ProductInfo product={product} />
 
           <ProductPriceAction />
         </div>
@@ -74,11 +84,7 @@ export default function ProductDetailPage() {
 
       <div className="">
         <HeaderSection title="Produk Serupa" href="Lihat selengkapnya>>>" />
-        <ProductList
-          products={DUMMY_PRODUCTS}
-          className="grid-cols-4!"
-          limit={8}
-        />
+        <ProductGrid className="grid-cols-4!" limit={4} />
       </div>
     </div>
   );
