@@ -2,6 +2,7 @@ import React from "react";
 
 import Navbar from "@/components/navbar/navbar";
 import Footer from "@/components/footer/footer";
+import QueryProvider from "@/components/providers/query-provider";
 
 export default function PublicLayout({
   children,
@@ -9,7 +10,9 @@ export default function PublicLayout({
   return (
     <div className="">
       <Navbar />
-      <main className="">{children}</main>
+      <main className="">
+        <QueryProvider>{children}</QueryProvider>
+      </main>
       <Footer />
     </div>
   );

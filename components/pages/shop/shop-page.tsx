@@ -1,7 +1,6 @@
 "use client";
 
 import CarouselBanner from "@/components/carousel/carousel-banner";
-import SearchBar from "@/components/filters/search-bar";
 import ShopFilter from "@/components/filters/shop-filter";
 import ProductList from "@/components/lists/product-list";
 import {
@@ -20,8 +19,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { DUMMY_PRODUCTS } from "@/constants/products";
-import { useMemo, useState } from "react";
+import { getProducts } from "@/services/product.service";
+import { Product } from "@/types/product";
+import { useQuery } from "@tanstack/react-query";
+// import { useMemo, useState } from "react";
 
 export default function ShopPage() {
   const banner = [
@@ -29,18 +30,30 @@ export default function ShopPage() {
     { src: "/iklan.png", name: "Banner" },
     { src: "/iklan.png", name: "Banner" },
   ];
-  const [searchQuery, setSearchQuery] = useState("");
+  // const [searchQuery, setSearchQuery] = useState("");
 
-  const displayedProducts = useMemo(() => {
-    return DUMMY_PRODUCTS.filter((product) => {
-      // Filter Nama (Search)
-      const matchesSearch = product.name
-        .toLowerCase()
-        .includes(searchQuery.toLowerCase());
+  // const displayedProducts = useMemo(() => {
+  //   return DUMMY_PRODUCTS.filter((product) => {
+  //     // Filter Nama (Search)
+  //     const matchesSearch = product.name
+  //       .toLowerCase()
+  //       .includes(searchQuery.toLowerCase());
 
-      return matchesSearch;
-    });
-  }, [searchQuery]);
+  //     return matchesSearch;
+  //   });
+  // }, [searchQuery]);
+
+  const {
+    data: response,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["products", 1, 10],
+    queryFn: () => getProducts(1, 10),
+  });
+
+  const products = response?.data || [];
 
   return (
     <div className="space-y-between-section">
@@ -86,11 +99,17 @@ export default function ShopPage() {
                 </Select>
               </div>
 
-              <SearchBar onChange={(val) => setSearchQuery(val)} />
+              {/* <SearchBar onChange={(val) => setSearchQuery(val)} /> */}
             </div>
           </div>
 
-          <ProductList products={displayedProducts} limit={20} />
+          <div className="">
+            {products.length > 0 ? (
+              <ProductList products={products} limit={20} />
+            ) : (
+              <div className="">Data tidak tersedia</div>
+            )}
+          </div>
         </div>
       </div>
     </div>

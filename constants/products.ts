@@ -1,6 +1,6 @@
-import { ProductType } from "@/types/product";
+import { Product } from "@/types/product";
 
-export const DUMMY_PRODUCTS: ProductType[] = [
+export const DUMMY_PRODUCTS: Product[] = [
   {
     id: "p1",
     name: "Midea AC Standard Gold Fin",

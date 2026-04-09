@@ -1,13 +1,13 @@
 import { cn } from "@/lib/utils";
 import ProductCard from "../cards/product-card";
-import { ProductType } from "@/types/product";
+import { Product } from "@/types/product";
 
 export default function ProductList({
   products,
   className,
   limit,
 }: {
-  products: ProductType[];
+  products: Product[];
   className?: string;
   limit?: number;
 }) {

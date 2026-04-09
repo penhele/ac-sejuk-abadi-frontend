@@ -3,9 +3,9 @@ import { AspectRatio } from "../ui/aspect-ratio";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import DiscountBadge from "../util/discount-badge";
-import { ProductType } from "@/types/product";
+import { Product } from "@/types/product";
 
-export default function ProductCard({ product }: { product: ProductType }) {
+export default function ProductCard({ product }: { product: Product }) {
   return (
     <Link href={`/shop/${product.id}`}>
       <div className="group block overflow-hidden rounded-xl bg-white shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border">
@@ -18,7 +18,7 @@ export default function ProductCard({ product }: { product: ProductType }) {
         </div>
 
         <div className="p-4 flex flex-col gap-2">
-          <span className="text-xs text-gray-400">{product.brandId}</span>
+          <span className="text-xs text-gray-400">{product.id_brand}</span>
           <h1 className="text-sm h-16 line-clamp-3">{product.name}</h1>
 
           <div className="flex gap-2">

@@ -28,17 +28,17 @@ export default function AboutUsPage() {
         </div>
 
         <div className="grid grid-cols-3 gap-4">
-          <div className="flex flex-col items-center gap-1 border shadow-sm p-4 rounded-lg transition hover:-translate-y-1 hover:shadow-lg hover:cursor-pointer">
+          <div className="flex flex-col items-center gap-1 border shadow-xs p-4 rounded-lg transition hover:-translate-y-1 hover:shadow-lg hover:cursor-pointer">
             <Phone size={32} />
             <span className="text-xl font-bold">Phone</span>
             <span className="text-sm text-gray-800">+62 1234-567-9000</span>
           </div>
-          <div className="flex flex-col items-center gap-1 border shadow-sm p-4 rounded-lg transition hover:-translate-y-1 hover:shadow-lg hover:cursor-pointer">
+          <div className="flex flex-col items-center gap-1 border shadow-xs p-4 rounded-lg transition hover:-translate-y-1 hover:shadow-lg hover:cursor-pointer">
             <Mail size={32} />
             <span className="text-xl font-bold">Email</span>
             <span className="text-sm text-gray-800">halo@acsejukabadi.com</span>
           </div>
-          <div className="flex flex-col items-center gap-1 border shadow-sm p-4 rounded-lg transition hover:-translate-y-1 hover:shadow-lg hover:cursor-pointer">
+          <div className="flex flex-col items-center gap-1 border shadow-xs p-4 rounded-lg transition hover:-translate-y-1 hover:shadow-lg hover:cursor-pointer">
             <MapPin size={32} />
             <span className="text-xl font-bold">Location</span>
             <span className="text-sm text-gray-800">
