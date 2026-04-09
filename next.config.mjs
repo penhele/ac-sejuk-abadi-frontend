@@ -3,18 +3,20 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        // Setiap request ke /api-backend akan diteruskan ke server asli
+        // Sekarang /api-backend akan diteruskan ke localhost
         source: '/api-backend/:path*',
-        destination: 'https://acsa-backend.vercel.app/:path*', 
+        destination: 'http://localhost:3000/:path*', 
       },
     ]
   },
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'acsa-backend.vercel.app',
-        pathname: '/**', // Mengizinkan semua gambar dari domain tersebut
+        // Mengizinkan Next.js menampilkan gambar yang di-host di server lokal
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '3000', // Sesuaikan dengan port backend kamu
+        pathname: '/**', 
       },
     ],
   },
