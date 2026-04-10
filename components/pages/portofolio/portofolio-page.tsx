@@ -1,5 +1,7 @@
+import ErrorFallback from "@/components/fallback/error-fallback";
 import ProjectGrid from "@/components/grid/project-grid";
 import PortofolioList from "@/components/lists/project-list";
+import ProjectCardSkeleton from "@/components/skeletons/project-card-skeleton";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import {
   Breadcrumb,
@@ -10,6 +12,8 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Suspense } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 
 export default function PortofolioPage() {
   return (
@@ -66,7 +70,19 @@ export default function PortofolioPage() {
         </span>
       </div>
 
-      <ProjectGrid />
+      <ErrorBoundary fallback={<ErrorFallback />}>
+        <Suspense
+          fallback={
+            <div className="grid grid-cols-3 gap-between-card">
+              {[...Array(3)].map((_, index) => (
+                <ProjectCardSkeleton key={index} />
+              ))}
+            </div>
+          }
+        >
+          <ProjectGrid />
+        </Suspense>
+      </ErrorBoundary>
     </div>
   );
 }

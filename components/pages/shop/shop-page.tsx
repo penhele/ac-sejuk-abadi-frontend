@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/select";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import ErrorFallback from "./fallback/error-fallback";
+import ErrorFallback from "../../fallback/error-fallback";
 // import { useMemo, useState } from "react";
 
 export default function ShopPage() {
