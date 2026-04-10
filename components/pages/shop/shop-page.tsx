@@ -22,7 +22,6 @@ import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "../../fallback/error-fallback";
 import { getProducts } from "@/services/product.service";
-// import { useMemo, useState } from "react";
 
 export default async function ShopPage() {
   const banner = [
@@ -30,18 +29,6 @@ export default async function ShopPage() {
     { src: "/iklan.png", name: "Banner" },
     { src: "/iklan.png", name: "Banner" },
   ];
-  // const [searchQuery, setSearchQuery] = useState("");
-
-  // const displayedProducts = useMemo(() => {
-  //   return DUMMY_PRODUCTS.filter((product) => {
-  //     // Filter Nama (Search)
-  //     const matchesSearch = product.name
-  //       .toLowerCase()
-  //       .includes(searchQuery.toLowerCase());
-
-  //     return matchesSearch;
-  //   });
-  // }, [searchQuery]);
 
   const products = await getProducts();
 
@@ -88,8 +75,6 @@ export default async function ShopPage() {
                   </SelectContent>
                 </Select>
               </div>
-
-              {/* <SearchBar onChange={(val) => setSearchQuery(val)} /> */}
             </div>
           </div>
 

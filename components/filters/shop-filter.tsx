@@ -1,7 +1,9 @@
+import { getBrands } from "@/services/brand.service";
+import BrandFilter from "./brand-filter";
 import CheckboxFilter from "./checkbox-filter";
 import SliderFilter from "./slider-filter";
 
-export default function ShopFilter() {
+export default async function ShopFilter() {
   const brandList = [
     { name: "Daikin", id: "clh123abc0001" },
     { name: "Samsung", id: "clh123abc0002" },
@@ -28,18 +30,15 @@ export default function ShopFilter() {
     { name: "AC Window", id: "clh789ghi0007" },
   ];
 
+  const response = await getBrands();
+  const brands = response;
+
   return (
     <aside className="w-3xs sticky md:top-20 space-y-4">
       <h1 className="text-lg font-bold">Filter Products</h1>
 
       <div className="flex flex-col space-y-8 border rounded-lg p-4">
-        <CheckboxFilter title="Brand" listFilter={brandList} />
-
-        <CheckboxFilter title="PK" listFilter={pkList} />
-
-        <CheckboxFilter title="Jenis" listFilter={typeList} />
-
-        <SliderFilter title="Harga" />
+        <BrandFilter brands={brands} />
       </div>
     </aside>
   );
