@@ -4,7 +4,7 @@ import CarouselBanner from "@/components/carousel/carousel-banner";
 import CarouselBrand from "@/components/carousel/carousel-brand";
 import CarouselTestimoni from "@/components/carousel/carousel-testimoni";
 import ProductGrid from "@/components/grid/product-grid";
-import PortofolioList from "@/components/lists/portofolio-list";
+import PortofolioList from "@/components/lists/project-list";
 import ProductList from "@/components/lists/product-list";
 import { Separator } from "@/components/ui/separator";
 import { HeaderSection } from "@/components/util/header";
@@ -14,6 +14,7 @@ import {
   ShieldCheck,
   Users,
 } from "lucide-react";
+import ProjectGrid from "@/components/grid/project-grid";
 
 export default function HomePage() {
   const banner = [
@@ -96,7 +97,7 @@ export default function HomePage() {
 
       <div className="">
         <HeaderSection title="Portofolio" href="/portofolio" />
-        <PortofolioList />
+        <ProjectGrid />
       </div>
 
       <div className="">

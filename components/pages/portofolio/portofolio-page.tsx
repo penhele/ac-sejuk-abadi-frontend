@@ -1,4 +1,5 @@
-import PortofolioList from "@/components/lists/portofolio-list";
+import ProjectGrid from "@/components/grid/project-grid";
+import PortofolioList from "@/components/lists/project-list";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import {
   Breadcrumb,
@@ -65,7 +66,7 @@ export default function PortofolioPage() {
         </span>
       </div>
 
-      <PortofolioList />
+      <ProjectGrid />
     </div>
   );
 }

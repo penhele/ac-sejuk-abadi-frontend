@@ -1,4 +1,4 @@
-import PortofolioList from "@/components/lists/portofolio-list";
+import PortofolioList from "@/components/lists/project-list";
 import { HeaderSection } from "@/components/util/header";
 import { Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";

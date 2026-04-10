@@ -1,4 +1,4 @@
-import PortofolioDetailPage from "@/components/pages/portofolio/portofolio-detail-page";
+import PortofolioDetailPage from "@/components/pages/portofolio/project-detail-page";
 
 export default function page() {
   return (

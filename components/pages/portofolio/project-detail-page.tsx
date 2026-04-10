@@ -1,8 +1,7 @@
-import PortofolioList from "@/components/lists/portofolio-list";
-import ProductList from "@/components/lists/product-list";
+"use client";
+
 import { Separator } from "@/components/ui/separator";
 import { DescriptionSection, HeaderSection } from "@/components/util/header";
-import { DUMMY_PRODUCTS } from "@/constants/products";
 import {
   Building2,
   Calendar,
@@ -11,29 +10,42 @@ import {
   Settings,
 } from "lucide-react";
 import Image from "next/image";
+import ProjectGrid from "@/components/grid/project-grid";
+import ProductGrid from "@/components/grid/product-grid";
+import { useParams } from "next/navigation";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { getProjectById } from "@/services/project.service";
+import { formatDate } from "@/components/util/formatter";
 
-export default function PortofolioDetailPage() {
+export default function ProjectDetailPage() {
+  const params = useParams();
+  const id = params.id as string;
+
+  const { data: project } = useSuspenseQuery({
+    queryKey: ["projects", id],
+    queryFn: () => getProjectById(id),
+  });
+
   return (
     <div className="space-y-16">
-      {/* Detail Hero Section */}
       <section className="space-y-8">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
           <div className="space-y-4">
             <div className="flex items-center gap-2 text-primary font-bold uppercase tracking-widest text-xs">
               <Building2 className="w-4 h-4" />
-              <span>Apartemen Premium</span>
+              <span>{project.category}</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900">
-              Luxury Apartemen Menteng
+              {project.name}
             </h1>
             <div className="flex flex-wrap gap-6 text-sm text-gray-500">
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4" />
-                <span>Menteng, Jakarta Pusat</span>
+                <span>{project.location}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
-                <span>Selesai: Maret 2026</span>
+                <span>Selesai: {formatDate(project.date)}</span>
               </div>
             </div>
           </div>
@@ -69,23 +81,11 @@ export default function PortofolioDetailPage() {
         </div>
       </section>
 
-      {/* Description and Specs */}
       <section className="grid grid-cols-1 lg:grid-cols-3 gap-16">
         <div className="lg:col-span-2 space-y-6">
           <HeaderSection title="Deskripsi Proyek" />
           <div className="space-y-4">
-            <DescriptionSection
-              description="Proyek ini melibatkan perancangan dan instalasi sistem tata udara
-              terpadu untuk unit apartemen mewah di kawasan Menteng. Tantangan
-              utama adalah menjaga efisiensi energi sambil memastikan unit
-              indoor tidak mengganggu estetika interior yang minimalis dan
-              elegan."
-            />
-            <DescriptionSection
-              description="Kami menggunakan sistem Daikin Multi-S yang memungkinkan beberapa
-              unit indoor terhubung ke satu unit outdoor, menghemat ruang di
-              area balkon dan mengurangi kebisingan."
-            />
+            <DescriptionSection description={project.description} />
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 pt-6">
@@ -142,18 +142,14 @@ export default function PortofolioDetailPage() {
       <section className="space-y-8">
         <HeaderSection title="Produk yang digunakan" />
 
-        <ProductList
-          className="grid-cols-4!"
-          products={DUMMY_PRODUCTS}
-          limit={5}
-        />
+        <ProductGrid limit={4} />
       </section>
 
       {/* NEW: Related Projects Section */}
       <section className="space-y-8">
         <HeaderSection title="Lihat Proyek Lainnya" />
 
-        <PortofolioList />
+        <ProjectGrid />
       </section>
     </div>
   );
