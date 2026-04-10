@@ -8,11 +8,6 @@ import { ArticleForm } from "@/components/admin/forms/article-form";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
-/**
- * PERBAIKAN CORS & ROUTING:
- * Menggunakan '/api-backend' sebagai base agar melewati proxy next.config.js.
- * Ditambah '/api' karena backend Vercel kamu membungkus rute di dalam folder tersebut.
- */
 const API_URL = "/api-backend/api";
 
 export default function ArticlePage() {
@@ -32,10 +27,6 @@ export default function ArticlePage() {
     images: [] as any[] 
   });
 
-  /**
-   * Mengambil token dari localStorage. 
-   * Jika tidak ada, user langsung diarahkan ke login.
-   */
   const getAuthConfig = useCallback(() => {
     const token = typeof window !== "undefined" ? localStorage.getItem("access_token") : null;
     if (!token) {
@@ -45,13 +36,9 @@ export default function ArticlePage() {
     return { headers: { Authorization: `Bearer ${token}` } };
   }, [router]);
 
-  /**
-   * Mengambil daftar artikel.
-   */
   const fetchArticles = useCallback(async () => {
     setLoading(true);
     try {
-      // Endpoint final: /api-backend/api/articles
       const res = await axios.get(`${API_URL}/articles`);
       const result = res.data.data || res.data;
       setArticles(Array.isArray(result) ? result : []);
@@ -85,7 +72,7 @@ export default function ArticlePage() {
   };
 
   /**
-   * Alur simpan data: Teks (POST/PUT) -> Gambar (POST)
+   * PERBAIKAN: Fungsi sekarang menerima files: File[] agar sesuai dengan ArticleFormProps
    */
   const handleSubmit = async (files: File[]) => {
     const config = getAuthConfig();
@@ -105,11 +92,10 @@ export default function ArticlePage() {
         await axios.put(`${API_URL}/articles/${articleId}`, payload, config);
       } else {
         const res = await axios.post(`${API_URL}/articles`, payload, config);
-        // Ambil ID dari response untuk upload gambar
         articleId = res.data.id || res.data.data?.id;
       }
 
-      // 2. Upload Gambar jika ada file baru
+      // 2. Upload Gambar jika ada file baru (Multipart Form Data)
       if (files.length > 0 && articleId) {
         const formData = new FormData();
         files.forEach(file => formData.append("files", file));
@@ -124,16 +110,16 @@ export default function ArticlePage() {
 
       setShowModal(false);
       await fetchArticles(); 
-      alert(isEdit ? "Perubahan disimpan!" : "Artikel diterbitkan!");
+      alert(isEdit ? "Artikel berhasil diperbarui!" : "Artikel berhasil diterbitkan!");
     } catch (error: any) {
       console.error("Submit Error:", error.response?.data || error.message);
       
       if (error.response?.status === 401) {
-        alert("Sesi berakhir.");
+        alert("Sesi berakhir, silakan login kembali.");
         localStorage.removeItem("access_token");
         router.push("/login");
       } else {
-        alert(error.response?.data?.message || "Terjadi kesalahan sistem.");
+        alert(error.response?.data?.message || "Gagal menyimpan artikel.");
       }
     } finally {
       setActionLoading(false);
@@ -141,14 +127,14 @@ export default function ArticlePage() {
   };
 
   const handleDelete = async (id: number) => {
-    if (!confirm("Hapus artikel ini?")) return;
+    if (!confirm("Apakah Anda yakin ingin menghapus artikel ini?")) return;
     
     const config = getAuthConfig();
     if (!config) return;
 
     try {
       await axios.delete(`${API_URL}/articles/${id}`, config);
-      fetchArticles();
+      await fetchArticles();
     } catch (error: any) {
       alert("Gagal menghapus artikel.");
     }
@@ -156,31 +142,33 @@ export default function ArticlePage() {
 
   return (
     <div className="p-6 space-y-6 max-w-7xl mx-auto min-h-screen">
+      {/* Header Section */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h1 className="text-3xl font-extrabold tracking-tight flex items-center gap-3 text-slate-900">
-            <div className="bg-blue-100 p-2 rounded-lg text-blue-600">
+            <div className="bg-blue-600 p-2 rounded-2xl text-white shadow-lg shadow-blue-200">
               <BookOpen className="w-6 h-6" />
             </div>
             Manajemen Artikel
           </h1>
-          <p className="text-slate-500 text-sm mt-1">Konten blog layanan AC.</p>
+          <p className="text-slate-500 text-sm mt-1">Kelola konten edukasi dan tips untuk pelanggan.</p>
         </div>
         <Button 
           onClick={handleAdd} 
-          className="bg-blue-600 hover:bg-blue-700 text-white rounded-xl px-6 py-6 h-auto shadow-lg shadow-blue-100"
+          className="bg-slate-900 hover:bg-black text-white rounded-2xl px-6 py-6 h-auto shadow-xl transition-all active:scale-95"
         >
           <Plus className="w-5 h-5 mr-2" />
-          <span className="font-bold">Tulis Artikel</span>
+          <span className="font-bold">Tulis Artikel Baru</span>
         </Button>
       </div>
 
-      <div className="h-px bg-slate-200 w-full" />
+      <div className="h-px bg-slate-100 w-full" />
 
+      {/* Content Section */}
       {loading ? (
         <div className="flex flex-col items-center justify-center h-96">
           <Loader2 className="w-10 h-10 animate-spin text-blue-500" />
-          <p className="mt-4 text-slate-400">Memuat artikel...</p>
+          <p className="mt-4 text-slate-400 font-medium">Menyinkronkan data...</p>
         </div>
       ) : articles.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -195,22 +183,26 @@ export default function ArticlePage() {
           ))}
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center py-24 border-2 border-dashed border-slate-200 rounded-[2.5rem] bg-slate-50/50">
-          <BookOpen className="w-10 h-10 text-slate-300 mb-4" />
-          <h3 className="text-lg font-bold text-slate-900">Belum ada konten</h3>
-          <Button variant="outline" onClick={handleAdd} className="mt-4 rounded-xl">
-            Buat Sekarang
+        <div className="flex flex-col items-center justify-center py-32 border-2 border-dashed border-slate-200 rounded-[3rem] bg-slate-50/30">
+          <div className="w-20 h-20 bg-white rounded-3xl shadow-sm flex items-center justify-center mb-6">
+            <BookOpen className="w-10 h-10 text-slate-200" />
+          </div>
+          <h3 className="text-xl font-bold text-slate-900">Belum ada artikel</h3>
+          <p className="text-slate-400 text-sm mb-6">Mulai edukasi pelanggan Anda dengan tips menarik.</p>
+          <Button onClick={handleAdd} className="rounded-xl bg-blue-600">
+            Tulis Artikel Pertama
           </Button>
         </div>
       )}
 
+      {/* Modal Form */}
       <ArticleForm 
         open={showModal} 
         onOpenChange={setShowModal}
         isEdit={isEdit}
         form={form}
         setForm={setForm}
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit} 
         isLoading={actionLoading}
       />
     </div>
