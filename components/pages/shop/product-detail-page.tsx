@@ -83,7 +83,7 @@ export default function ProductDetailPage() {
       </div>
 
       <div className="">
-        <HeaderSection title="Produk Serupa" href="Lihat selengkapnya>>>" />
+        <HeaderSection title="Produk Serupa" href="/shop" />
         <ProductGrid className="grid-cols-4!" limit={4} />
       </div>
     </div>

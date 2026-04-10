@@ -15,7 +15,7 @@ export function HeaderSection({
 
         {href && (
           <Link href={href}>
-            <span className="text-sm italic text-gray-600">
+            <span className="text-sm italic text-gray-600 hover:text-primary">
               Lihat selengkapnya &gt;&gt;&gt;
             </span>
           </Link>

@@ -21,9 +21,10 @@ import {
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "../../fallback/error-fallback";
+import { getProducts } from "@/services/product.service";
 // import { useMemo, useState } from "react";
 
-export default function ShopPage() {
+export default async function ShopPage() {
   const banner = [
     { src: "/iklan.png", name: "Banner" },
     { src: "/iklan.png", name: "Banner" },
@@ -41,6 +42,8 @@ export default function ShopPage() {
   //     return matchesSearch;
   //   });
   // }, [searchQuery]);
+
+  const products = await getProducts();
 
   return (
     <div className="space-y-between-section">
@@ -64,7 +67,7 @@ export default function ShopPage() {
         <div className="flex-1 space-y-8">
           <div className="flex justify-between items-center">
             <span className="text-gray-600 text-sm">
-              Showing 12 products per page
+              Showing {products.data.length} products per page
             </span>
 
             <div className="flex gap-4">

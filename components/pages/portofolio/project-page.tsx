@@ -1,6 +1,5 @@
 import ErrorFallback from "@/components/fallback/error-fallback";
 import ProjectGrid from "@/components/grid/project-grid";
-import PortofolioList from "@/components/lists/project-list";
 import ProjectCardSkeleton from "@/components/skeletons/project-card-skeleton";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import {
@@ -12,10 +11,13 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { getProjects } from "@/services/project.service";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
-export default function PortofolioPage() {
+export default async function ProjectPage() {
+  const projects = await getProjects();
+
   return (
     <div className="space-y-between-section">
       <AspectRatio
@@ -66,7 +68,7 @@ export default function PortofolioPage() {
 
       <div className="">
         <span className="text-sm text-gray-400">
-          Menampilkan 4 Proyek Unggulan
+          Menampilkan {projects.length} Proyek Unggulan
         </span>
       </div>
 
