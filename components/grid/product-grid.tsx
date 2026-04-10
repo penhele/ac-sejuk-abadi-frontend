@@ -4,6 +4,7 @@ import { getProducts } from "@/services/product.service";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import ProductList from "../lists/product-list";
 import { SearchX } from "lucide-react";
+import { useSearchParams } from "next/navigation";
 
 export default function ProductGrid({
   limit,
@@ -12,9 +13,12 @@ export default function ProductGrid({
   limit?: number;
   className?: string;
 }) {
+  const searchParams = useSearchParams();
+  const id_brand = searchParams.get("id_brand") || undefined;
+
   const { data: response } = useSuspenseQuery({
-    queryKey: ["products", 1, 10],
-    queryFn: () => getProducts(1, 10),
+    queryKey: ["products", 1, 10, id_brand],
+    queryFn: () => getProducts(1, 10, id_brand),
   });
 
   const products = response?.data || [];

@@ -23,14 +23,19 @@ import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "../../fallback/error-fallback";
 import { getProducts } from "@/services/product.service";
 
-export default async function ShopPage() {
+export default async function ShopPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ id_brand?: string }>;
+}) {
   const banner = [
     { src: "/iklan.png", name: "Banner" },
     { src: "/iklan.png", name: "Banner" },
     { src: "/iklan.png", name: "Banner" },
   ];
 
-  const products = await getProducts();
+  const { id_brand } = await searchParams;
+  const products = await getProducts(undefined, undefined, id_brand);
 
   return (
     <div className="space-y-between-section">
