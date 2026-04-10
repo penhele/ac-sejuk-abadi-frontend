@@ -1,3 +1,4 @@
+import BreadcrumbComponent from "@/components/breadcrumb-component";
 import ErrorFallback from "@/components/fallback/error-fallback";
 import ProjectGrid from "@/components/grid/project-grid";
 import ProjectCardSkeleton from "@/components/skeletons/project-card-skeleton";
@@ -25,17 +26,7 @@ export default async function ProjectPage() {
         className="overflow-hidden rounded-lg bg-muted"
       />
 
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/">Home</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>Portofolio</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
+      <BreadcrumbComponent />
 
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b pb-6">
         <div className="space-y-1">

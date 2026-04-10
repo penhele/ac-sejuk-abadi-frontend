@@ -1,23 +1,16 @@
 "use client";
 
+import BreadcrumbComponent from "@/components/breadcrumb-component";
 import ProductGrid from "@/components/grid/product-grid";
 import ProductImages from "@/components/product/product-images";
 import ProductInfo from "@/components/product/product-info";
 import ProductPriceAction from "@/components/product/product-price-action";
 import { AcSpecification, columns } from "@/components/tables/product-columns";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
 import { DescriptionSection, HeaderSection } from "@/components/util/header";
-import { DataTable } from "../../product/data-table";
-import { useSuspenseQuery } from "@tanstack/react-query";
 import { getProductById } from "@/services/product.service";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
+import { DataTable } from "../../product/data-table";
 
 export default function ProductDetailPage() {
   const data: AcSpecification[] = [
@@ -43,21 +36,7 @@ export default function ProductDetailPage() {
 
   return (
     <div className="space-y-between-section">
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/">Home</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink>Shop</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>{product.name}</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
+      <BreadcrumbComponent />
 
       <div className="grid grid-cols-2 gap-4">
         <ProductImages jumlah={8} />

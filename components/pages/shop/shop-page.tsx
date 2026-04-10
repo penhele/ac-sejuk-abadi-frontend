@@ -1,15 +1,8 @@
+import BreadcrumbComponent from "@/components/breadcrumb-component";
 import CarouselBanner from "@/components/carousel/carousel-banner";
 import ShopFilter from "@/components/filters/shop-filter";
 import ProductGrid from "@/components/grid/product-grid";
 import ProductCardSkeleton from "@/components/skeletons/product-card-skeleton";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
 import {
   Select,
   SelectContent,
@@ -18,10 +11,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { getProducts } from "@/services/product.service";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "../../fallback/error-fallback";
-import { getProducts } from "@/services/product.service";
 
 export default async function ShopPage({
   searchParams,
@@ -41,17 +34,7 @@ export default async function ShopPage({
     <div className="space-y-between-section">
       <CarouselBanner banner={banner} />
 
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/">Home</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>Shop</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
+      <BreadcrumbComponent />
 
       <div className="flex flex-row gap-8 items-start">
         <ShopFilter />
