@@ -10,126 +10,127 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { X, ImagePlus } from "lucide-react";
+import { X, UserPlus, Image as ImageIcon } from "lucide-react";
 
 export default function AboutDialog({ open, setOpen, onSave }: any) {
   const [form, setForm] = useState({
-    section: "penghargaan",
-    title: "",
-    description: "",
-    images: [] as string[], // Ubah ke Array
+    name: "",
+    role: "",
+    image_url: null as string | null,
   });
 
-  // Handle Multi Image Upload
-  const handleImages = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (!files) return;
+  // Handle Single Image Upload (Sesuai image_url: null)
+  const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
 
-    const fileArray = Array.from(files);
-    
-    fileArray.forEach((file) => {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setForm((prev) => ({
-          ...prev,
-          images: [...prev.images, reader.result as string],
-        }));
-      };
-      reader.readAsDataURL(file);
-    });
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setForm((prev) => ({
+        ...prev,
+        image_url: reader.result as string,
+      }));
+    };
+    reader.readAsDataURL(file);
   };
 
-  // Hapus satu gambar dari preview sebelum simpan
-  const removeImage = (index: number) => {
-    setForm((prev) => ({
-      ...prev,
-      images: prev.images.filter((_, i) => i !== index),
-    }));
+  const removeImage = () => {
+    setForm((prev) => ({ ...prev, image_url: null }));
   };
 
   const handleSubmit = () => {
-    if (!form.title || form.images.length === 0) return;
+    if (!form.name || !form.role) {
+      alert("Nama dan Role wajib diisi");
+      return;
+    }
     
     onSave(form);
+    // Reset Form
     setForm({
-      section: "penghargaan",
-      title: "",
-      description: "",
-      images: [],
+      name: "",
+      role: "",
+      image_url: null,
     });
     setOpen(false);
   };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent className="sm:max-w-125">
+      <DialogContent className="sm:max-w-106.25 rounded-[1.5rem]">
         <DialogHeader>
-          <DialogTitle>Tambah Data About</DialogTitle>
+          <DialogTitle className="flex items-center gap-2">
+            <UserPlus className="w-5 h-5 text-blue-600" />
+            Tambah Data Staff
+          </DialogTitle>
         </DialogHeader>
 
-        <div className="flex flex-col gap-4 py-4">
-          <div className="space-y-1">
-            <label className="text-sm font-medium">Pilih Kategori</label>
-            <select
-              value={form.section}
-              onChange={(e) => setForm({ ...form, section: e.target.value })}
-              className="w-full border rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-ring"
-            >
-              <option value="penghargaan">Penghargaan</option>
-              <option value="anggota">Anggota</option>
-              <option value="detail">Detail</option>
-              <option value="sponsor">Sponsor</option>
-            </select>
+        <div className="flex flex-col gap-5 py-4">
+          {/* Preview & Upload Foto Profile */}
+          <div className="flex flex-col items-center justify-center gap-3">
+            <div className="relative w-24 h-24 border-2 border-dashed rounded-full overflow-hidden group bg-slate-50 flex items-center justify-center">
+              {form.image_url ? (
+                <>
+                  <img src={form.image_url} className="object-cover w-full h-full" alt="profile" />
+                  <button
+                    onClick={removeImage}
+                    className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                  >
+                    <X className="w-6 h-6 text-white" />
+                  </button>
+                </>
+              ) : (
+                <label className="flex flex-col items-center justify-center cursor-pointer w-full h-full hover:bg-slate-100 transition">
+                  <ImageIcon className="w-8 h-8 text-slate-300" />
+                  <span className="text-[10px] text-slate-400 mt-1 font-bold">FOTO</span>
+                  <input 
+                    type="file" 
+                    className="hidden" 
+                    accept="image/*" 
+                    onChange={handleImage} 
+                  />
+                </label>
+              )}
+            </div>
+            <p className="text-[10px] text-slate-400 font-medium italic">*Klik lingkaran untuk upload foto</p>
           </div>
 
-          <Input
-            placeholder="Judul / Nama"
-            value={form.title}
-            onChange={(e) => setForm({ ...form, title: e.target.value })}
-          />
+          <div className="space-y-4">
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-slate-700 ml-1">Nama Lengkap</label>
+              <Input
+                placeholder="Contoh: Budi Santoso"
+                value={form.name}
+                className="rounded-xl border-slate-200 focus:ring-blue-500"
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
+              />
+            </div>
 
-          <Textarea
-            placeholder="Deskripsi"
-            value={form.description}
-            onChange={(e) => setForm({ ...form, description: e.target.value })}
-          />
-
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Upload Gambar (Bisa banyak)</label>
-            <div className="grid grid-cols-4 gap-2">
-              {/* Preview Images */}
-              {form.images.map((img, idx) => (
-                <div key={idx} className="relative aspect-square border rounded-md overflow-hidden group">
-                  <img src={img} className="object-cover w-full h-full" alt="preview" />
-                  <button
-                    onClick={() => removeImage(idx)}
-                    className="absolute top-1 right-1 bg-red-500 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-                  >
-                    <X className="w-3 h-3" />
-                  </button>
-                </div>
-              ))}
-              
-              {/* Upload Trigger */}
-              <label className="flex flex-col items-center justify-center border-2 border-dashed rounded-md aspect-square cursor-pointer hover:bg-muted transition">
-                <ImagePlus className="w-6 h-6 text-muted-foreground" />
-                <span className="text-[10px] text-muted-foreground mt-1">Tambah</span>
-                <input 
-                  type="file" 
-                  multiple 
-                  className="hidden" 
-                  accept="image/*" 
-                  onChange={handleImages} 
-                />
-              </label>
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-slate-700 ml-1">Jabatan / Role</label>
+              <Input
+                placeholder="Contoh: Manager / Teknisi"
+                value={form.role}
+                className="rounded-xl border-slate-200 focus:ring-blue-500"
+                onChange={(e) => setForm({ ...form, role: e.target.value })}
+              />
             </div>
           </div>
         </div>
 
-        <DialogFooter>
-          <Button variant="outline" onClick={() => setOpen(false)}>Batal</Button>
-          <Button onClick={handleSubmit}>Simpan Data</Button>
+        <DialogFooter className="gap-2 sm:gap-0">
+          <Button 
+            variant="ghost" 
+            className="rounded-xl font-bold text-slate-500" 
+            onClick={() => setOpen(false)}
+          >
+            Batal
+          </Button>
+          <Button 
+            onClick={handleSubmit}
+            className="bg-blue-600 hover:bg-blue-700 rounded-xl font-bold px-8"
+          >
+            Simpan Staff
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

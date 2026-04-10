@@ -3,6 +3,8 @@
 import { useState, useEffect, useCallback } from "react";
 import api from "@/src/services/api"; 
 import { PortfolioForm } from "@/components/admin/forms/portofolio-form";
+// Import PortfolioCard yang sudah kita perbaiki agar desainnya konsisten
+import { PortfolioCard } from "@/components/admin/shared/portofolio-card";
 import { Button } from "@/components/ui/button";
 import { Plus, Loader2, RefreshCw, Briefcase } from "lucide-react";
 import { Portfolio } from "@/types/portofolio";
@@ -25,15 +27,16 @@ export default function PortfolioPage() {
   const [actionLoading, setActionLoading] = useState(false);
   const [form, setForm] = useState<Partial<Portfolio>>(initialForm);
 
-  // Gunakan useCallback agar fungsi stabil dan tidak memicu useEffect terus-menerus
   const fetchProjects = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await api.get("/projects");
-      const result = res.data?.data || res.data;
-      setProjects(Array.isArray(result) ? result : []);
-    } catch (error) {
-      console.error("Gagal mengambil data proyek:", error);
+      const res = await api.get(`/projects?timestamp=${new Date().getTime()}`);
+      const rawData = res.data?.data || res.data;
+      const finalArray = Array.isArray(rawData) ? rawData : [];
+      setProjects(finalArray);
+    } catch (error: any) {
+      console.error("--- API ERROR ---", error);
+      setProjects([]);
     } finally {
       setLoading(false);
     }
@@ -43,147 +46,90 @@ export default function PortfolioPage() {
     fetchProjects();
   }, [fetchProjects]);
 
-  const handleSave = async (files: File[]) => {
-    // Validasi Dasar: Pastikan id_product terisi (Penting!)
-    if (!form.id_product) {
-      alert("Pilih produk terlebih dahulu!");
+  const handleSave = async () => {
+    if (!form.id_product || form.id_product.trim() === "") {
+      alert("ID Produk wajib diisi!");
       return;
     }
 
     setActionLoading(true);
-
-    // STRATEGI MEMBERSIHKAN PAYLOAD
-    // Kita buat objek baru tanpa 'images' dan 'id' (untuk POST) agar sama ringannya dengan fitur diskon
-    const payload = {
-      id_product: form.id_product,
-      name: form.name,
-      description: form.description,
-      date: form.date,
-      location: form.location,
-      category: form.category
-    };
-
     try {
-      let projectId = form.id;
-
-      // STEP 1: Simpan Data Teks
-      if (isEdit && projectId) {
-        await api.put(`/projects/${projectId}`, payload);
+      if (isEdit && form.id) {
+        await api.put(`/projects/${form.id}`, form);
       } else {
-        const res = await api.post("/projects", payload);
-        // Ambil ID dari response untuk lanjut ke upload gambar
-        projectId = res.data?.data?.id || res.data?.id;
+        await api.post("/projects", form);
       }
-
-      // STEP 2: Upload Gambar (Hanya jika ada file baru dan ID valid)
-      if (files.length > 0 && projectId) {
-        const formData = new FormData();
-        files.forEach((file) => formData.append("files", file));
-
-        await api.post(`/projects/${projectId}/images`, formData, {
-          headers: { "Content-Type": "multipart/form-data" },
-        });
-      }
-
-      alert("Data berhasil tersimpan!");
       setShowModal(false);
-      fetchProjects(); 
+      await fetchProjects(); 
     } catch (error: any) {
-      console.error("DETEKSI ERROR:", error.response?.data || error.message);
-      alert(`Gagal: ${error.response?.data?.message || "Internal Server Error"}`);
+      alert(`Gagal menyimpan: ${error.response?.data?.message || "Kesalahan Server"}`);
     } finally {
       setActionLoading(false);
     }
   };
 
   const handleDelete = async (id: string | number) => {
-    if (!confirm("Hapus portofolio ini secara permanen?")) return;
+    if (!confirm("Hapus proyek ini secara permanen?")) return;
     try {
       await api.delete(`/projects/${id}`);
       fetchProjects();
     } catch (error) {
-      alert("Gagal menghapus proyek.");
+      alert("Gagal menghapus data.");
     }
   };
 
   return (
-    <div className="p-6 space-y-8 max-w-7xl mx-auto">
-      <div className="flex justify-between items-center">
+    <div className="p-6 space-y-8 max-w-7xl mx-auto font-sans">
+      {/* HEADER SECTION */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-slate-900">Portofolio</h1>
-          <p className="text-muted-foreground italic text-sm">Manajemen konten proyek aktif</p>
+          <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Portofolio</h1>
+          <p className="text-slate-500 text-sm italic">Kelola proyek dan publikasi aset.</p>
         </div>
-        <div className="flex gap-3">
-          <Button variant="outline" onClick={fetchProjects} disabled={loading} className="rounded-xl">
+        <div className="flex gap-3 w-full sm:w-auto">
+          <Button variant="outline" onClick={fetchProjects} disabled={loading} className="flex-1 sm:flex-none rounded-xl">
             <RefreshCw className={`w-4 h-4 mr-2 ${loading ? "animate-spin" : ""}`} /> Sync
           </Button>
           <Button 
-            onClick={() => { 
-              setIsEdit(false); 
-              setForm(initialForm); 
-              setShowModal(true); 
-            }}
-            className="bg-blue-600 hover:bg-blue-700 shadow-md rounded-xl"
+            onClick={() => { setIsEdit(false); setForm(initialForm); setShowModal(true); }}
+            className="flex-1 sm:flex-none bg-blue-600 hover:bg-blue-700 rounded-xl"
           >
             <Plus className="w-4 h-4 mr-2" /> Tambah Proyek
           </Button>
         </div>
       </div>
 
+      {/* CONTENT SECTION */}
       {loading ? (
-        <div className="flex flex-col items-center justify-center py-24 gap-4">
-          <Loader2 className="w-12 h-12 animate-spin text-blue-600" />
-          <p className="text-slate-500 animate-pulse">Menghubungi Database...</p>
+        <div className="flex flex-col items-center justify-center py-32 gap-4">
+          <Loader2 className="w-10 h-10 animate-spin text-blue-600" />
+          <p className="text-slate-400 animate-pulse">Menghubungkan ke database...</p>
         </div>
       ) : projects.length === 0 ? (
-        <div className="text-center py-32 border-2 border-dashed rounded-[2.5rem] bg-slate-50/50 text-slate-400">
-          <Briefcase className="w-16 h-16 mx-auto mb-4 opacity-20" />
-          <p className="text-lg font-medium">Database Kosong</p>
-          <p className="text-sm">Silakan tambah proyek baru.</p>
+        <div className="text-center py-32 border-2 border-dashed rounded-[2.5rem] bg-slate-50/50 text-slate-400 border-slate-200">
+          <Briefcase className="w-12 h-12 mx-auto mb-3 opacity-20 text-slate-900" />
+          <h3 className="font-bold text-slate-900">Belum Ada Proyek</h3>
+          <p className="text-xs max-w-xs mx-auto mt-2">Database kosong atau koneksi ke /projects terputus.</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        /* GRID MENGGUNAKAN PortfolioCard YANG SUDAH DIPERBAIKI */
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {projects.map((item) => (
-            <div key={item.id} className="group border rounded-3xl p-4 hover:shadow-xl transition-all bg-white relative border-slate-100">
-              <div className="aspect-video rounded-2xl bg-slate-100 mb-4 overflow-hidden">
-                {item.images && item.images.length > 0 ? (
-                  <img 
-                    src={item.images[0]} 
-                    alt={item.name} 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform" 
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center text-slate-300">No Image</div>
-                )}
-              </div>
-              <div className="px-2">
-                <span className="text-[10px] font-bold text-blue-500 uppercase tracking-widest">{item.category}</span>
-                <h3 className="font-bold text-lg text-slate-800 line-clamp-1">{item.name}</h3>
-                <p className="text-xs text-slate-500 mb-4 line-clamp-2">{item.description}</p>
-                <div className="flex gap-2">
-                  <Button 
-                    variant="outline" 
-                    size="sm" 
-                    className="rounded-xl w-full"
-                    onClick={() => { setForm(item); setIsEdit(true); setShowModal(true); }}
-                  >
-                    Edit
-                  </Button>
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    className="rounded-xl text-red-500 hover:bg-red-50"
-                    onClick={() => handleDelete(item.id!)}
-                  >
-                    Hapus
-                  </Button>
-                </div>
-              </div>
-            </div>
+            <PortfolioCard 
+              key={item.id}
+              item={item}
+              onEdit={() => {
+                setForm(item);
+                setIsEdit(true);
+                setShowModal(true);
+              }}
+              onDelete={() => handleDelete(item.id!)}
+            />
           ))}
         </div>
       )}
 
+      {/* MODAL FORM */}
       <PortfolioForm 
         open={showModal} 
         onOpenChange={setShowModal}
