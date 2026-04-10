@@ -58,7 +58,7 @@ export default function HomePage() {
 
       <div className="">
         <HeaderSection title="Produk" href="/shop" />
-        <ProductGrid />
+        <ProductGrid limit={4} />
       </div>
 
       <div className="grid grid-cols-3 gap-8">

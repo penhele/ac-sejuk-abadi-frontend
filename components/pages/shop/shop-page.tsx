@@ -101,7 +101,7 @@ export default function ShopPage() {
                   </div>
                 }
               >
-                <ProductGrid />
+                <ProductGrid className="grid-cols-3!" />
               </Suspense>
             </ErrorBoundary>
           </div>
