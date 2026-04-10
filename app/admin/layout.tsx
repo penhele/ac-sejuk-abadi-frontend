@@ -18,6 +18,7 @@ import {
   Menu,
   Monitor,
   ChevronRight,
+  MessageSquare, // Import ikon untuk Review
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -39,11 +40,13 @@ export default function AdminLayout({ children }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
+  // Update daftar menu
   const menus = [
     { name: "Dashboard", path: "/admin/dashboard", icon: LayoutDashboard },
     { name: "Katalog Produk", path: "/admin/catalog", icon: Package },
     { name: "Pesanan Masuk", path: "/admin/order", icon: ShoppingCart },
     { name: "Pengguna", path: "/admin/user", icon: Users },
+    { name: "Review Pelanggan", path: "/admin/review", icon: MessageSquare }, // Menu baru
     { name: "Portofolio", path: "/admin/portofolio", icon: ImageIcon },
     { name: "Blog Artikel", path: "/admin/article", icon: FileText },
     { name: "Pemasaran", path: "/admin/marketing", icon: Megaphone },
@@ -51,7 +54,7 @@ export default function AdminLayout({ children }: Props) {
     { name: "About Us", path: "/admin/about", icon: Info },
   ];
 
-  // Helper untuk Logo & Brand agar tidak duplikat di Desktop & Mobile Sheet
+  // Helper untuk Logo & Brand
   const BrandLogo = () => (
     <div className="flex items-center gap-3 px-2">
       <div className={`relative w-10 h-10 shrink-0 flex items-center justify-center rounded-xl border overflow-hidden
@@ -82,7 +85,7 @@ export default function AdminLayout({ children }: Props) {
           <BrandLogo />
         </div>
 
-        <nav className="flex-1 space-y-1">
+        <nav className="flex-1 space-y-1 overflow-y-auto pr-2 custom-scrollbar">
           {menus.map((menu, i) => {
             const Icon = menu.icon;
             const isActive = pathname === menu.path;
@@ -113,7 +116,7 @@ export default function AdminLayout({ children }: Props) {
       <div className="flex-1 flex flex-col min-w-0">
         <header className="h-16 border-b flex items-center justify-between px-4 md:px-6 sticky top-0 z-30 backdrop-blur-md bg-white/80 dark:bg-slate-950/80 border-gray-200 dark:border-slate-800">
           <div className="flex items-center gap-3">
-            {/* MOBILE HAMBURGER (SHADCN SHEET) */}
+            {/* MOBILE HAMBURGER */}
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className="md:hidden">
