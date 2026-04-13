@@ -3,106 +3,185 @@
 import { useState, useEffect, useCallback } from "react";
 import api from "@/src/services/api"; 
 import { Button } from "@/components/ui/button";
-import { Loader2, UserPlus, RefreshCw, Users } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Loader2, UserPlus, RefreshCw, Users, Share2, Plus, Globe, Trash2, Edit } from "lucide-react";
+
 import AboutDialog from "@/components/admin/AboutDialog";
-// Asumsi AboutCard juga perlu sedikit penyesuaian untuk menampilkan name & role
 import { AboutCard } from "@/components/admin/shared/about-card";
+import { SocialMediaForm } from "@/components/admin/forms/social-media-form"; // Import baru
 
 export default function AboutPage() {
-  const [data, setData] = useState<any[]>([]);
+  // --- STATE DATA ---
+  const [staffData, setStaffData] = useState<any[]>([]);
+  const [socialData, setSocialData] = useState<any[]>([]);
+  
+  // --- STATE UI ---
   const [loading, setLoading] = useState(true);
-  const [open, setOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState("staff");
+  const [isLoadingAction, setIsLoadingAction] = useState(false);
 
-  // 1. Fetch Data Staff dari API
-  const fetchStaff = useCallback(async () => {
+  // --- STATE MODALS ---
+  const [openStaffModal, setOpenStaffModal] = useState(false);
+  const [openSocialModal, setOpenSocialModal] = useState(false);
+  const [selectedSocial, setSelectedSocial] = useState<any>(null);
+
+  // 1. Fetch Data
+  const fetchData = useCallback(async () => {
     setLoading(true);
     try {
-      // Sesuaikan endpoint ini dengan backend Anda (misal /staff atau /about)
-      const res = await api.get("/staff"); 
-      const rawData = res.data?.data || res.data;
-      setData(Array.isArray(rawData) ? rawData : []);
+      const [staffRes, socialRes] = await Promise.all([
+        api.get("/staff"),
+        api.get("/social-media") // Sesuaikan endpoint Anda
+      ]);
+      setStaffData(staffRes.data?.data || staffRes.data || []);
+      setSocialData(socialRes.data?.data || socialRes.data || []);
     } catch (error) {
-      console.error("Error fetching staff:", error);
-      setData([]);
+      console.error("Error fetching data:", error);
     } finally {
       setLoading(false);
     }
   }, []);
 
-  useEffect(() => {
-    fetchStaff();
-  }, [fetchStaff]);
+  useEffect(() => { fetchData(); }, [fetchData]);
 
-  // 2. Simpan Data Staff Baru
-  const handleAdd = async (item: any) => {
+  // --- HANDLERS STAFF ---
+  const handleAddStaff = async (item: any) => {
     try {
       await api.post("/staff", item);
-      alert("Data staff berhasil ditambahkan!");
-      fetchStaff(); // Refresh data
-    } catch (error) {
-      alert("Gagal menambahkan staff.");
-    }
+      setOpenStaffModal(false);
+      fetchData();
+    } catch (error) { alert("Gagal menambahkan staff."); }
   };
 
-  // 3. Hapus Data Staff
-  const handleDelete = async (id: number | string) => {
+  const handleDeleteStaff = async (id: any) => {
     if (!confirm("Hapus data staff ini?")) return;
     try {
       await api.delete(`/staff/${id}`);
-      fetchStaff();
+      fetchData();
+    } catch (error) { alert("Gagal menghapus staff."); }
+  };
+
+  // --- HANDLERS SOCIAL MEDIA ---
+  const handleSocialSubmit = async (data: any) => {
+    setIsLoadingAction(true);
+    try {
+      if (selectedSocial) {
+        await api.put(`/social-media/${selectedSocial.id}`, data);
+      } else {
+        await api.post("/social-media", data);
+      }
+      setOpenSocialModal(false);
+      fetchData();
     } catch (error) {
-      alert("Gagal menghapus data.");
+      alert("Gagal menyimpan data sosial media.");
+    } finally {
+      setIsLoadingAction(false);
     }
+  };
+
+  const handleDeleteSocial = async (id: any, name: string) => {
+    if (!confirm(`Hapus akun ${name}?`)) return;
+    try {
+      await api.delete(`/social-media/${id}`);
+      fetchData();
+    } catch (error) { alert("Gagal menghapus sosial media."); }
   };
 
   return (
     <div className="p-6 space-y-8 max-w-7xl mx-auto font-sans">
-      {/* Header Section */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Management Staff</h1>
-          <p className="text-slate-500 text-sm italic">Kelola profil anggota tim dan jabatan mereka.</p>
+          <h1 className="text-3xl font-bold text-slate-900 tracking-tight">About Management</h1>
+          <p className="text-slate-500 text-sm italic">Kelola identitas tim dan kehadiran digital perusahaan.</p>
         </div>
-
-        <div className="flex gap-3 w-full sm:w-auto">
-          <Button variant="outline" onClick={fetchStaff} disabled={loading} className="rounded-xl">
-            <RefreshCw className={`w-4 h-4 mr-2 ${loading ? "animate-spin" : ""}`} /> Sync
-          </Button>
-          <Button onClick={() => setOpen(true)} className="bg-blue-600 hover:bg-blue-700 rounded-xl gap-2">
-            <UserPlus className="w-4 h-4" /> Tambah Staff
-          </Button>
-        </div>
+        <Button variant="outline" onClick={fetchData} disabled={loading} className="rounded-xl">
+          <RefreshCw className={`w-4 h-4 mr-2 ${loading ? "animate-spin" : ""}`} /> Sync Data
+        </Button>
       </div>
 
-      {/* Content Section */}
-      {loading ? (
-        <div className="flex flex-col items-center justify-center py-32 gap-4">
-          <Loader2 className="w-10 h-10 animate-spin text-blue-600" />
-          <p className="text-slate-400">Memuat profil staff...</p>
-        </div>
-      ) : data.length === 0 ? (
-        <div className="text-center py-32 border-2 border-dashed rounded-[2.5rem] bg-slate-50/50 text-slate-400 border-slate-200">
-          <Users className="w-12 h-12 mx-auto mb-3 opacity-20 text-slate-900" />
-          <h3 className="font-bold text-slate-900">Belum Ada Staff</h3>
-          <p className="text-xs max-w-xs mx-auto mt-2">Daftar staff masih kosong. Silakan tambah staff baru untuk ditampilkan di halaman About.</p>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {data.map((item) => (
-            <AboutCard 
-              key={item.id} 
-              item={item} 
-              onDelete={() => handleDelete(item.id)} 
-            />
-          ))}
-        </div>
-      )}
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+        <TabsList className="grid w-full grid-cols-2 mb-8 rounded-xl p-1 bg-slate-100 h-12 max-w-md">
+          <TabsTrigger value="staff" className="rounded-lg data-[state=active]:bg-white shadow-sm">
+            <Users className="w-4 h-4 mr-2 text-blue-500" /> Staff Tim
+          </TabsTrigger>
+          <TabsTrigger value="social" className="rounded-lg data-[state=active]:bg-white shadow-sm">
+            <Share2 className="w-4 h-4 mr-2 text-pink-500" /> Sosial Media
+          </TabsTrigger>
+        </TabsList>
 
-      {/* Dialog Form */}
-      <AboutDialog
-        open={open}
-        setOpen={setOpen}
-        onSave={handleAdd}
+        {/* --- TAB STAFF --- */}
+        <TabsContent value="staff" className="space-y-6">
+          <div className="flex justify-between items-center">
+            <h2 className="text-xl font-bold text-slate-800">Profil Anggota Tim</h2>
+            <Button onClick={() => setOpenStaffModal(true)} className="bg-blue-600 rounded-xl">
+              <UserPlus className="w-4 h-4 mr-2" /> Tambah Staff
+            </Button>
+          </div>
+          
+          {loading ? (
+             <div className="flex justify-center py-20"><Loader2 className="animate-spin text-blue-600" /></div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {staffData.map((item) => (
+                <AboutCard key={item.id} item={item} onDelete={() => handleDeleteStaff(item.id)} />
+              ))}
+            </div>
+          )}
+        </TabsContent>
+
+        {/* --- TAB SOSIAL MEDIA --- */}
+        <TabsContent value="social" className="space-y-6">
+          <div className="flex justify-between items-center">
+            <h2 className="text-xl font-bold text-slate-800">Link Sosial Media</h2>
+            <Button onClick={() => { setSelectedSocial(null); setOpenSocialModal(true); }} className="bg-pink-600 hover:bg-pink-700 rounded-xl">
+              <Plus className="w-4 h-4 mr-2" /> Tambah Link
+            </Button>
+          </div>
+
+          <Card className="rounded-2xl overflow-hidden border shadow-sm">
+            <Table>
+              <TableHeader className="bg-slate-50">
+                <TableRow>
+                  <TableHead>Platform</TableHead>
+                  <TableHead>Username/Icon</TableHead>
+                  <TableHead>URL</TableHead>
+                  <TableHead className="text-right">Aksi</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {socialData.length === 0 ? (
+                  <TableRow><TableCell colSpan={4} className="text-center py-10 text-slate-400">Belum ada link sosial media.</TableCell></TableRow>
+                ) : (
+                  socialData.map((s) => (
+                    <TableRow key={s.id}>
+                      <TableCell className="font-bold">{s.name}</TableCell>
+                      <TableCell><code className="bg-slate-100 px-2 py-1 rounded text-xs">{s.icon}</code></TableCell>
+                      <TableCell className="text-blue-600 truncate max-w-[200px]">{s.url}</TableCell>
+                      <TableCell className="text-right">
+                        <div className="flex justify-end gap-2">
+                          <Button variant="ghost" size="sm" onClick={() => { setSelectedSocial(s); setOpenSocialModal(true); }} className="text-blue-600"><Edit className="w-4 h-4"/></Button>
+                          <Button variant="ghost" size="sm" onClick={() => handleDeleteSocial(s.id, s.name)} className="text-red-600"><Trash2 className="w-4 h-4"/></Button>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))
+                )}
+              </TableBody>
+            </Table>
+          </Card>
+        </TabsContent>
+      </Tabs>
+
+      {/* MODALS */}
+      <AboutDialog open={openStaffModal} setOpen={setOpenStaffModal} onSave={handleAddStaff} />
+      <SocialMediaForm 
+        open={openSocialModal} 
+        onOpenChange={setOpenSocialModal} 
+        onSubmit={handleSocialSubmit} 
+        initialData={selectedSocial}
+        isLoading={isLoadingAction}
       />
     </div>
   );

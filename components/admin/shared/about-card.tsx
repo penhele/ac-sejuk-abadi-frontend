@@ -20,7 +20,7 @@ export function AboutCard({ item, onDelete }: AboutCardProps) {
     <Card className="group overflow-hidden border border-slate-200 hover:border-blue-300 hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300 rounded-3xl bg-white">
       <CardContent className="p-0">
         {/* Bagian Atas: Background & Avatar */}
-        <div className="relative h-24 bg-gradient-to-r from-blue-500 to-blue-700">
+        <div className="relative h-24 bg-linear-to-r from-blue-500 to-blue-700">
           <div className="absolute -bottom-10 left-6">
             <div className="relative w-20 h-20 rounded-2xl border-4 border-white overflow-hidden bg-slate-100 shadow-sm">
               {item.image_url ? (
