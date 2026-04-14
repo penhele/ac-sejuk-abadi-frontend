@@ -129,7 +129,7 @@ export function PortfolioForm({
               value={form.description || ""} 
               onChange={(e) => setForm({ ...form, description: e.target.value })} 
               placeholder="Jelaskan detail pengerjaan..." 
-              className="min-h-[80px] rounded-xl border-slate-200 resize-none"
+              className="min-h-20 rounded-xl border-slate-200 resize-none"
               disabled={isLoading}
             />
           </div>

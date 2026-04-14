@@ -1,12 +1,11 @@
 "use client";
 
 import LoginForm from "@/components/user/forms/login-form";
-import { Snowflake } from "lucide-react";
+import { Snowflake, Loader2 } from "lucide-react"; // Tambah Loader2
 import { useRouter } from "next/navigation";
 import { login } from "@/lib/api/auth";
-import { useState } from "react";
+import { useState, Suspense } from "react"; // Tambah Suspense
 
-// Definisikan tipe input agar konsisten dengan LoginForm
 type LoginInput = {
   email: string;
   password: string;
@@ -16,34 +15,28 @@ export default function LoginPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
-  // Gunakan async/await dengan benar
   const handleLogin = async (data: LoginInput): Promise<void> => {
     try {
       setLoading(true);
 
-      // 1. Panggil API login
       const res = await login({
         email: data.email,
         password: data.password,
       });
       
-      // 2. Ambil data (Gunakan res.access_token sesuai hasil Postman)
       const token = res.access_token;
       const role = res.user?.role; 
 
       if (token) {
-        // Simpan data untuk kebutuhan auth kedepannya
         localStorage.setItem("token", token);
         localStorage.setItem("user_role", role || "user");
 
-        // 3. LOGIKA REDIRECT BERDASARKAN ROLE
         if (role === "admin") {
           router.push("/admin/dashboard");
         } else {
           router.push("/user/dashboard");
         }
         
-        // Refresh untuk memastikan middleware/layout mendeteksi token baru
         setTimeout(() => {
           router.refresh();
         }, 100);
@@ -52,7 +45,6 @@ export default function LoginPage() {
       }
 
     } catch (err: any) {
-      // Menampilkan pesan error yang dikirim oleh Express/Vercel
       const errorMessage = 
         err?.response?.data?.message || 
         "Gagal masuk. Silakan cek email dan password Anda.";
@@ -67,7 +59,7 @@ export default function LoginPage() {
   return (
     <div className="bg-slate-50 grid lg:grid-cols-2 gap-0 h-screen overflow-hidden">
       
-      {/* SISI KIRI: Branding */}
+      {/* SISI KIRI: Branding (Desktop Only) */}
       <div className="relative bg-primary w-full h-full hidden lg:flex flex-col justify-center items-center p-12 overflow-hidden">
         <div className="absolute top-[-10%] left-[-10%] w-80 h-80 bg-white/10 rounded-full blur-3xl" />
         <div className="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-black/10 rounded-full blur-3xl" />
@@ -78,7 +70,6 @@ export default function LoginPage() {
               src="/logo.png" 
               alt="ACSA Logo" 
               className="w-20 h-auto object-contain"
-              // Fallback jika logo belum diupload
               onError={(e) => (e.currentTarget.src = "https://placehold.co/80x80?text=ACSA")} 
             />
           </div>
@@ -91,34 +82,44 @@ export default function LoginPage() {
           </p>
         </div>
 
-        <div className="absolute bottom-8 left-12 text-blue-200/50 text-xs">
-          © {new Date().getFullYear()} PT. Sejuk Abadi Teknik.
+        <div className="absolute bottom-8 left-12 text-blue-200/50 text-xs font-mono">
+          © 2026 PT. SEJUK ABADI TEKNIK
         </div>
       </div>
 
-      {/* SISI KANAN: Login Form */}
-      <div className="flex justify-center items-center p-6 sm:p-12 bg-white lg:rounded-l-[40px] shadow-[-20px_0_30px_rgba(0,0,0,0.03)] z-20">
+      {/* SISI KANAN: Login Form Section */}
+      <div className="flex flex-col justify-center items-center p-6 sm:p-12 bg-white lg:rounded-l-[40px] shadow-2xl z-20 overflow-y-auto">
         <div className="w-full max-w-md space-y-8">
           
+          {/* Mobile Header (Hanya muncul di layar kecil) */}
           <div className="lg:hidden flex flex-col items-center mb-8">
             <div className="p-3 bg-primary/10 rounded-xl mb-2">
               <Snowflake className="w-10 h-10 text-primary" />
             </div>
-            <h2 className="text-2xl font-bold text-slate-900">AC Sejuk Abadi</h2>
+            <h2 className="text-2xl font-bold text-slate-900">AC SEJUK ABADI</h2>
           </div>
 
           <div className="text-center lg:text-left">
-            <h2 className="text-3xl font-bold text-slate-900 tracking-tight">
+            <h2 className="text-3xl font-black text-slate-900 tracking-tight">
               Selamat Datang
             </h2>
-            <p className="text-slate-500 mt-2 text-sm">
-              Silakan login untuk mengakses layanan **AC Sejuk Abadi**.
+            <p className="text-slate-500 mt-2 text-sm leading-relaxed">
+              Silakan masuk ke akun Anda untuk mulai menggunakan sistem layanan <strong>AC Sejuk Abadi</strong>.
             </p>
           </div>
 
           <div className="mt-8">
-            {/* Sekarang sudah sinkron dengan LoginFormProps */}
-            <LoginForm onSubmit={handleLogin} loading={loading} />
+            {/* KRITIKAL: Membungkus LoginForm dengan Suspense karena di dalamnya 
+                menggunakan useSearchParams(). Ini mencegah error build Next.js.
+            */}
+            <Suspense fallback={
+              <div className="flex flex-col items-center justify-center p-8 space-y-4">
+                <Loader2 className="w-8 h-8 animate-spin text-primary" />
+                <p className="text-sm text-slate-400">Menyiapkan formulir...</p>
+              </div>
+            }>
+              <LoginForm onSubmit={handleLogin} loading={loading} />
+            </Suspense>
           </div>
         </div>
       </div>

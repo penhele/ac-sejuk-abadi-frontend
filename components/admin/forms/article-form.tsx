@@ -126,7 +126,7 @@ export function ArticleForm({
                 placeholder="Tuliskan isi artikel secara detail..."
                 value={form.description}
                 onChange={(e) => setForm({ ...form, description: e.target.value })}
-                className="min-h-[250px] rounded-xl leading-relaxed border-slate-200 bg-slate-50/30 p-4 focus:border-blue-500 transition-all resize-none"
+                className="min-h-62.5 rounded-xl leading-relaxed border-slate-200 bg-slate-50/30 p-4 focus:border-blue-500 transition-all resize-none"
               />
             </div>
 
