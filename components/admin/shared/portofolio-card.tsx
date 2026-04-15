@@ -19,7 +19,6 @@ export function PortfolioCard({ item, onEdit, onDelete }: PortfolioCardProps) {
         <div className="relative h-48 bg-slate-100">
           {item.images && item.images.length > 0 ? (
             <>
-              {/* Ambil gambar pertama sebagai cover */}
               <img 
                 src={typeof item.images[0] === 'string' ? item.images[0] : URL.createObjectURL(item.images[0])} 
                 alt="cover" 
@@ -46,12 +45,11 @@ export function PortfolioCard({ item, onEdit, onDelete }: PortfolioCardProps) {
 
         <div className="p-4 space-y-3">
           <div>
-            {/* Perbaikan: title menjadi name */}
             <h3 className="font-bold text-lg truncate text-slate-800 leading-tight">
               {item.name}
             </h3>
             
-            {/* Info Lokasi & Kategori (Optional) */}
+            {/* Info Lokasi & Kategori */}
             <div className="flex flex-wrap gap-2 mt-2">
               {item.location && (
                 <div className="flex items-center text-[10px] text-slate-500 gap-1">

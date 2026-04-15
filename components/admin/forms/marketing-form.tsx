@@ -9,7 +9,7 @@ import { MarketingType } from "@/types/marketing";
 interface MarketingFormProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  type: MarketingType; // Tetap dipertahankan jika types masih membutuhkan, namun default ke diskon
+  type: MarketingType; 
   isEdit: boolean;
   form: any;
   setForm: (data: any) => void;
@@ -27,7 +27,6 @@ export function MarketingForm({
   isLoading = false 
 }: MarketingFormProps) {
 
-  // Helper untuk format tanggal dari ISO ke YYYY-MM-DD agar bisa dibaca input type="date"
   const formatDateForInput = (isoString: string) => {
     if (!isoString) return "";
     try {
@@ -47,7 +46,6 @@ export function MarketingForm({
         </DialogHeader>
 
         <div className="space-y-4 py-4">
-          {/* Sesuai DTO: id_product (Wajib UUID dari Admin Management) */}
           <div className="space-y-1.5">
             <label className="text-xs font-bold uppercase text-slate-500">ID Produk (UUID)</label>
             <Input 
@@ -60,7 +58,6 @@ export function MarketingForm({
             <p className="text-[10px] text-slate-400 italic">*Ambil ID dari daftar produk di Admin Management</p>
           </div>
 
-          {/* Sesuai DTO: price (Harga Promo) */}
           <div className="space-y-1.5">
             <label className="text-xs font-bold uppercase text-slate-500">Harga Promo (Rp)</label>
             <Input 
@@ -74,7 +71,6 @@ export function MarketingForm({
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            {/* Sesuai DTO: start_date */}
             <div className="space-y-1.5">
               <label className="text-xs font-bold uppercase text-slate-500">Tanggal Mulai</label>
               <Input 
@@ -89,7 +85,6 @@ export function MarketingForm({
               />
             </div>
 
-            {/* Sesuai DTO: end_date */}
             <div className="space-y-1.5">
               <label className="text-xs font-bold uppercase text-slate-500">Tanggal Berakhir</label>
               <Input 

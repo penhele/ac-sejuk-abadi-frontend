@@ -32,7 +32,6 @@ export function BrandForm({ open, onOpenChange, onSubmit, initialData, isLoading
     image_url: null,
   });
 
-  // Sinkronisasi data saat Edit
   useEffect(() => {
     if (initialData) {
       setForm(initialData);
@@ -70,7 +69,6 @@ export function BrandForm({ open, onOpenChange, onSubmit, initialData, isLoading
           </DialogHeader>
 
           <div className="space-y-6 py-6">
-            {/* Upload Logo Section */}
             <div className="flex flex-col items-center justify-center gap-3">
               <div className="relative w-32 h-32 border-2 border-dashed rounded-2xl overflow-hidden group bg-slate-50 flex items-center justify-center border-slate-200">
                 {form.image_url ? (
@@ -97,7 +95,6 @@ export function BrandForm({ open, onOpenChange, onSubmit, initialData, isLoading
               </p>
             </div>
 
-            {/* Input Name */}
             <div className="space-y-2">
               <label className="text-xs font-bold text-slate-700 ml-1 uppercase tracking-wider">Nama Brand</label>
               <Input

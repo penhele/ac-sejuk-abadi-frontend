@@ -6,13 +6,12 @@ import { Button } from "@/components/ui/button";
 import { Pencil, Trash2, ImageIcon, Zap, Snowflake, Box } from "lucide-react";
 
 interface ProductRowProps {
-  product: any; // Sesuaikan dengan interface Product kamu
+  product: any;
   onEdit: () => void;
   onDelete: () => void;
 }
 
 export function ProductTableRow({ product, onEdit, onDelete }: ProductRowProps) {
-  // Ambil data gambar dari brand jika product.images kosong (sebagai fallback)
   const hasImages = product.images && product.images.length > 0;
   const brandLogo = product.brand?.image_url;
 
@@ -27,7 +26,6 @@ export function ProductTableRow({ product, onEdit, onDelete }: ProductRowProps) 
               </div>
             ))
           ) : brandLogo ? (
-            // Jika tidak ada gambar produk, tampilkan logo brand sebagai identitas
             <div className="w-12 h-12 rounded-xl bg-slate-50 overflow-hidden border-2 border-white shadow-sm shrink-0 flex items-center justify-center p-2">
               <img src={brandLogo} alt="brand logo" className="w-full h-full object-contain opacity-70" />
             </div>
@@ -45,7 +43,6 @@ export function ProductTableRow({ product, onEdit, onDelete }: ProductRowProps) 
             {product.name}
           </span>
           <div className="flex flex-wrap gap-1.5">
-            {/* Menampilkan brand dari relasi data terbaru */}
             {product.brand && (
               <Badge className="bg-indigo-50 text-indigo-600 hover:bg-indigo-100 border-none text-[9px] font-bold px-2 py-0">
                 {product.brand.name}

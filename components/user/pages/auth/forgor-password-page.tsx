@@ -8,9 +8,7 @@ export default function ForgotPasswordPage() {
   return (
     <div className="bg-slate-50 grid lg:grid-cols-2 gap-0 h-screen overflow-hidden">
       
-      {/* SISI KIRI: Branding Section (Identik dengan Login) */}
       <div className="relative bg-primary w-full h-full hidden lg:flex flex-col justify-center items-center p-12 overflow-hidden">
-        {/* Dekorasi Background Bulatan Blur */}
         <div className="absolute top-[-10%] left-[-10%] w-80 h-80 bg-white/10 rounded-full blur-3xl" />
         <div className="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-black/10 rounded-full blur-3xl" />
 
@@ -33,7 +31,7 @@ export default function ForgotPasswordPage() {
         </div>
       </div>
 
-      {/* SISI KANAN: Form Section */}
+      {/* Form Section */}
       <div className="flex justify-center items-center p-6 sm:p-12 bg-white lg:rounded-l-[40px] shadow-[-20px_0_30px_rgba(0,0,0,0.03)] z-20 overflow-y-auto">
         <div className="w-full max-w-md">
           

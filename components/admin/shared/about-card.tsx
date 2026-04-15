@@ -37,7 +37,7 @@ export function AboutCard({ item, onDelete }: AboutCardProps) {
             </div>
           </div>
           
-          {/* Action Button: Delete diletakkan di pojok kanan atas agar tidak offside */}
+          {/* Action Button: Delete  */}
           <div className="absolute top-3 right-3">
             <Button 
               variant="secondary" 

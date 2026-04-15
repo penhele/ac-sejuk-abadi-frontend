@@ -1,4 +1,3 @@
-// src/app/orders/_components/order-card.tsx
 import { motion } from "framer-motion";
 import { Truck, CheckCircle2, XCircle, Loader2, RefreshCcw } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";

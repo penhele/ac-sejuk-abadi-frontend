@@ -1,4 +1,3 @@
-// src/app/wishlist/_components/wishlist-page-content.tsx
 "use client";
 
 import { useState } from "react";
@@ -16,10 +15,8 @@ import {
   CardFooter 
 } from "@/components/ui/card";
 
-// Import Shared Component
 import { UserSidebar } from "@/components/user/user-sidebar";
 
-// Sub-components (Pastikan file ini sudah dipisah sebelumnya)
 import { WishlistItem } from "./wishlist-item";
 import { WishlistEmpty } from "./wishlist-empty";
 

@@ -1,20 +1,19 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react"; // Tambah Suspense
+import { useState, useEffect, Suspense } from "react"; 
 import { FaGoogle } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { Field, FieldDescription, FieldLabel, FieldSeparator } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { Loader2, AlertCircle, CheckCircle2 } from "lucide-react"; // Tambah CheckCircle2
-import { useSearchParams } from "next/navigation"; // Tambah ini
+import { Loader2, AlertCircle, CheckCircle2 } from "lucide-react"; 
+import { useSearchParams } from "next/navigation"; 
 
 interface LoginFormProps {
   onSubmit: (data: { email: string; password: string }) => void;
   loading: boolean;
 }
 
-// Pisahkan isi form ke komponen internal agar bisa menggunakan useSearchParams di dalam Suspense
 function LoginFormContent({ onSubmit, loading }: LoginFormProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -136,7 +135,6 @@ function LoginFormContent({ onSubmit, loading }: LoginFormProps) {
   );
 }
 
-// Komponen Utama yang diekspor
 export default function LoginForm(props: LoginFormProps) {
   const [isMounted, setIsMounted] = useState(false);
 

@@ -1,4 +1,3 @@
-// components/admin/UserDialog.tsx
 import {
   Dialog,
   DialogContent,
@@ -11,7 +10,6 @@ import { Label } from "@/components/ui/label";
 import { Button } from "../ui/button";
 
 export default function UserDialog({ open, setOpen, onSave }: any) {
-  // ... logic form kamu ...
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>

@@ -18,7 +18,7 @@ import {
   Menu,
   Monitor,
   ChevronRight,
-  MessageSquare, // Import ikon untuk Review
+  MessageSquare, 
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -40,13 +40,13 @@ export default function AdminLayout({ children }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  // Update daftar menu
+  // daftar menu
   const menus = [
     { name: "Dashboard", path: "/admin/dashboard", icon: LayoutDashboard },
     { name: "Katalog Produk", path: "/admin/catalog", icon: Package },
     { name: "Pesanan Masuk", path: "/admin/order", icon: ShoppingCart },
     { name: "Pengguna", path: "/admin/user", icon: Users },
-    { name: "Review Pelanggan", path: "/admin/review", icon: MessageSquare }, // Menu baru
+    { name: "Review Pelanggan", path: "/admin/review", icon: MessageSquare },
     { name: "Portofolio", path: "/admin/portofolio", icon: ImageIcon },
     { name: "Blog Artikel", path: "/admin/article", icon: FileText },
     { name: "Pemasaran", path: "/admin/marketing", icon: Megaphone },

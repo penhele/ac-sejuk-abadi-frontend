@@ -1,4 +1,3 @@
-// src/app/orders/page.tsx
 import OrderPageContent from "@/components/user/order/order-page-content";
 
 export const metadata = {

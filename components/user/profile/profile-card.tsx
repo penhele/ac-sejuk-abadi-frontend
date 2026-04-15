@@ -4,9 +4,7 @@ import { Save, AlertCircle, Loader2, ShieldCheck } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { useProfileForm } from "./use-profile-form"; // 
-import { PersonalInfoForm } from "./personal-info-form"; // Pisahkan lagi jika perlu
-
+import { useProfileForm } from "./use-profile-form"; 
 export function ProfileCard() {
   const { formData, isLoading, isDirty, handleSubmit, handleInputChange } = useProfileForm();
 

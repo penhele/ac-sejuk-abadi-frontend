@@ -1,4 +1,3 @@
-// app/profile/_components/personal-info-form.tsx
 import { User, Mail, Phone, MapPin, Hash } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -6,13 +5,12 @@ import { Label } from "@/components/ui/label";
 export function PersonalInfoForm({ formData, handleInputChange }: any) {
   return (
     <div className="space-y-6">
-      {/* SEKSI 1: NAMA & KONTAK */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-2">
           <Label htmlFor="first_name">Nama Depan</Label>
           <Input 
             id="first_name" 
-            name="first_name" // Pastikan ada properti name untuk handler input
+            name="first_name"
             value={formData.first_name} 
             onChange={handleInputChange} 
           />

@@ -12,7 +12,7 @@ import {
   Field, 
   FieldLabel, 
   FieldDescription 
-} from "@/components/ui/field"; // Menggunakan komponen Field yang sama
+} from "@/components/ui/field"; 
 
 export function ForgotPasswordForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -24,7 +24,6 @@ export function ForgotPasswordForm() {
     e.preventDefault();
     setError("");
 
-    // Validasi sederhana
     if (!email.trim()) {
       setError("Alamat email wajib diisi");
       return;
@@ -33,8 +32,7 @@ export function ForgotPasswordForm() {
     setIsLoading(true);
     
     try {
-      // Ganti baris ini dengan panggil API Backend kamu nantinya
-      // await forgotPassword({ email }); 
+
       await new Promise((resolve) => setTimeout(resolve, 2000));
       
       setIsSubmitted(true);

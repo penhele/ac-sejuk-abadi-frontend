@@ -98,13 +98,11 @@ export default function RegisterForm() {
 
       const { password_conf, ...payload } = form;
 
-      // Request POST ke Backend
       await axios.post(`${API_URL}/auth/register`, {
         ...payload,
         captchaToken: token || "dummy_token"
       });
 
-      // PENTING: Pengalihan ke halaman login setelah sukses
       router.push("/user/login");
       
     } catch (err: any) {

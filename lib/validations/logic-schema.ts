@@ -8,7 +8,6 @@ export const loginSchema = z.object({
   password: z
     .string()
     .min(8, "Password minimal 8 karakter"),
-  // Token ini didapat dari widget Google reCAPTCHA
   captchaToken: z
     .string()
     .min(1, "Silakan selesaikan verifikasi Captcha"),

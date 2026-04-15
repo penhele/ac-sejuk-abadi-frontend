@@ -51,7 +51,7 @@ export function SponsoredBrandForm({ open, onOpenChange, onSubmit, initialData, 
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[425px] rounded-2xl">
+      <DialogContent className="sm:max-w-106.25 rounded-2xl">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Megaphone className="w-5 h-5 text-orange-500" />

@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Plus, Loader2, RefreshCw, Image as ImageIcon } from "lucide-react";
 import { BannerCard } from "@/components/admin/shared/banner-card";
 import { BannerForm, type Banner } from "@/components/admin/forms/banner-form";
-// Menggunakan instance api yang sudah ada (services/api) agar header auth otomatis jika sudah di-setup
 import api from "@/src/services/api"; 
 
 export default function BannerPage() {
@@ -13,11 +12,10 @@ export default function BannerPage() {
   const [loading, setLoading] = useState(true);
   const [actionLoading, setActionLoading] = useState(false);
   
-  // State Form diselaraskan dengan CURL DTO
   const initialForm: Partial<Banner> = {
     id_brand: 0,
     name: "",
-    category: "promo", // Default category sesuai contoh curl
+    category: "promo", 
     start_date: new Date().toISOString(),
     end_date: new Date().toISOString(),
   };
@@ -31,7 +29,6 @@ export default function BannerPage() {
     setLoading(true);
     try {
       const res = await api.get("/banners");
-      // Menangani jika backend membungkus response dalam properti 'data'
       const result = res.data.data || res.data;
       setBanners(Array.isArray(result) ? result : []);
     } catch (error) {
@@ -58,13 +55,13 @@ export default function BannerPage() {
     setShowModal(true);
   };
 
-  // 3. Submit (Sync dengan logic 2-step Backend)
+  // 3. Submit 
   const handleSubmit = async (file: File | null) => {
     setActionLoading(true);
     try {
       let bannerId = form.id;
 
-      // STEP 1: Payload Data (id_brand dipastikan Number)
+      // STEP 1: Payload Data 
       const payload = {
         ...form,
         id_brand: Number(form.id_brand)
@@ -74,11 +71,10 @@ export default function BannerPage() {
         await api.put(`/banners/${bannerId}`, payload);
       } else {
         const res = await api.post("/banners", payload);
-        // Ambil ID dari hasil create untuk upload gambar
         bannerId = res.data.data?.id || res.data.id;
       }
 
-      // STEP 2: Upload Gambar (Hanya jika user memilih file baru)
+      // STEP 2: Upload Gambar 
       if (file && bannerId) {
         const formData = new FormData();
         formData.append("file", file);

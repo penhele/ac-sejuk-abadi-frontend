@@ -26,7 +26,7 @@ interface ArticleFormProps {
     images?: any[] 
   };
   setForm: (form: any) => void;
-  onSubmit: (files: File[]) => void; // Sinkron dengan ArticlePage
+  onSubmit: (files: File[]) => void; 
   isLoading?: boolean;
 }
 
@@ -39,12 +39,9 @@ export function ArticleForm({
   onSubmit,
   isLoading
 }: ArticleFormProps) {
-  // State untuk menampung file fisik yang baru dipilih
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-  // State untuk preview URL (blob) gambar baru
   const [previews, setPreviews] = useState<string[]>([]);
 
-  // Cleanup URL saat modal tutup untuk mencegah memory leak
   useEffect(() => {
     if (!open) {
       previews.forEach(url => URL.revokeObjectURL(url));
@@ -73,7 +70,6 @@ export function ArticleForm({
     setPreviews((prev) => prev.filter((_, i) => i !== index));
   };
 
-  // Fungsi untuk menghapus gambar yang sudah ada di cloud (jika backend mendukung)
   const removeExistingImage = (index: number) => {
     const updatedImages = [...(form.images || [])];
     updatedImages.splice(index, 1);
@@ -139,7 +135,6 @@ export function ArticleForm({
               </div>
               
               <div className="grid grid-cols-3 gap-4">
-                {/* 1. Render Gambar dari Cloud (Edit Mode) */}
                 {isEdit && form.images?.map((img, idx) => (
                   <div key={`cloud-${idx}`} className="relative aspect-square rounded-2xl overflow-hidden border border-slate-100 group shadow-sm">
                     <img src={img.url || img} alt="cloud" className="w-full h-full object-cover" />
@@ -156,7 +151,6 @@ export function ArticleForm({
                   </div>
                 ))}
 
-                {/* 2. Render Preview Gambar Baru */}
                 {previews.map((src, idx) => (
                   <div key={`new-${idx}`} className="relative aspect-square rounded-2xl overflow-hidden border-2 border-blue-100 group animate-in fade-in zoom-in-95 shadow-md">
                     <img src={src} alt="preview" className="w-full h-full object-cover" />
@@ -170,7 +164,6 @@ export function ArticleForm({
                   </div>
                 ))}
 
-                {/* 3. Tombol Upload */}
                 {((form.images?.length || 0) + selectedFiles.length) < 10 && (
                   <label className="aspect-square rounded-2xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center cursor-pointer hover:bg-slate-50 hover:border-blue-300 transition-all group">
                     <ImageIcon className="w-6 h-6 text-slate-300 group-hover:text-blue-500 transition-colors" />
@@ -206,7 +199,7 @@ export function ArticleForm({
             Batal
           </Button>
           <Button 
-            onClick={() => onSubmit(selectedFiles)} // Mengirim file ke ArticlePage
+            onClick={() => onSubmit(selectedFiles)}
             disabled={!form.name || !form.description || isLoading}
             className="bg-blue-600 hover:bg-blue-700 text-white px-8 rounded-xl font-semibold shadow-lg shadow-blue-100 transition-all active:scale-95"
           >

@@ -19,7 +19,6 @@ export default function AboutDialog({ open, setOpen, onSave }: any) {
     image_url: null as string | null,
   });
 
-  // Handle Single Image Upload (Sesuai image_url: null)
   const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -45,7 +44,6 @@ export default function AboutDialog({ open, setOpen, onSave }: any) {
     }
     
     onSave(form);
-    // Reset Form
     setForm({
       name: "",
       role: "",

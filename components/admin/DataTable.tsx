@@ -9,7 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Edit2, Trash2 } from "lucide-react"; // Tambahkan icon agar lebih pro
+import { Edit2, Trash2 } from "lucide-react"; 
 
 interface Column {
   label: string;
@@ -30,7 +30,6 @@ export default function DataTable({
   onDelete,
 }: Props) {
   return (
-    // Mengganti bg-white dengan bg-card agar otomatis mengikuti tema
     <div className="rounded-xl border border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm overflow-hidden">
       <Table>
         <TableHeader className="bg-gray-50/50 dark:bg-slate-800/50">

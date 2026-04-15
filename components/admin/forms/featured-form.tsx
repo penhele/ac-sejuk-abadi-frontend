@@ -13,7 +13,7 @@ interface FeaturedFormProps {
   onOpenChange: (open: boolean) => void;
   onSubmit: (data: any) => void;
   initialData?: any;
-  products: any[]; // Daftar produk dari parent untuk dropdown
+  products: any[];
   isLoading: boolean;
 }
 
@@ -26,13 +26,11 @@ export function FeaturedForm({ open, onOpenChange, onSubmit, initialData, produc
     end_date: "",
   });
 
-  // Sinkronisasi data saat Edit Mode
   useEffect(() => {
     if (initialData) {
       setFormData({
         id_product: initialData.id_product || "",
         priority: initialData.priority || 1,
-        // Format tanggal ke YYYY-MM-DD agar bisa dibaca input type="date"
         start_date: initialData.start_date ? new Date(initialData.start_date).toISOString().split("T")[0] : "",
         end_date: initialData.end_date ? new Date(initialData.end_date).toISOString().split("T")[0] : "",
       });
@@ -43,7 +41,6 @@ export function FeaturedForm({ open, onOpenChange, onSubmit, initialData, produc
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Kirim data dengan format ISO String untuk tanggal (menyesuaikan format Postman Anda)
     const payload = {
       ...formData,
       priority: Number(formData.priority),
@@ -55,7 +52,7 @@ export function FeaturedForm({ open, onOpenChange, onSubmit, initialData, produc
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[425px] rounded-2xl">
+      <DialogContent className="sm:max-w-106.25 rounded-2xl">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Star className="w-5 h-5 text-yellow-500 fill-yellow-500" />
@@ -64,13 +61,12 @@ export function FeaturedForm({ open, onOpenChange, onSubmit, initialData, produc
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4 py-4">
-          {/* PILIH PRODUK */}
           <div className="space-y-2">
             <Label>Pilih Produk</Label>
             <Select 
               value={formData.id_product} 
               onValueChange={(val) => setFormData({ ...formData, id_product: val })}
-              disabled={!!initialData} // Opsional: Jangan biarkan ganti produk saat edit
+              disabled={!!initialData} 
             >
               <SelectTrigger>
                 <SelectValue placeholder="Cari produk..." />
@@ -85,7 +81,6 @@ export function FeaturedForm({ open, onOpenChange, onSubmit, initialData, produc
             </Select>
           </div>
 
-          {/* PRIORITAS */}
           <div className="space-y-2">
             <Label htmlFor="priority">Prioritas Tampilan</Label>
             <Input
@@ -101,7 +96,6 @@ export function FeaturedForm({ open, onOpenChange, onSubmit, initialData, produc
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            {/* TANGGAL MULAI */}
             <div className="space-y-2">
               <Label htmlFor="start_date">Tanggal Mulai</Label>
               <Input
@@ -113,7 +107,6 @@ export function FeaturedForm({ open, onOpenChange, onSubmit, initialData, produc
               />
             </div>
 
-            {/* TANGGAL BERAKHIR */}
             <div className="space-y-2">
               <Label htmlFor="end_date">Tanggal Selesai</Label>
               <Input

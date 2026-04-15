@@ -1,15 +1,5 @@
-
-export interface Order {
-  id: string;
-  date: string;
-  customer: string;
-  email: string;
-  detail: string;
-  productType: string;
-  amount: number;
-  status: OrderStatus;
-}
 export type OrderStatus = "Pending" | "Diproses" | "Dikirim" | "Selesai" | "Dibatalkan";
+export type PaymentStatus = "Lunas" | "Belum Bayar";
 
 export interface OrderItem {
   id: string;
@@ -19,23 +9,43 @@ export interface OrderItem {
   price: number;
 }
 
-export interface OrderDetail {
+export interface Customer {
   id: string;
-  createdAt: string;
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+}
+
+export interface PaymentInfo {
+  method: string;
+  status: PaymentStatus;
+  subtotal: number;
+  discount: number;
+  total: number;
+}
+
+export interface Order {
+  id: string;
   status: OrderStatus;
-  customer: {
-    id: string;
-    name: string;
-    email: string;
-    phone: string;
-    address: string;
-  };
+  date: string; 
+  customer: Customer;
   items: OrderItem[];
-  payment: {
-    method: string;
-    status: "Lunas" | "Belum Bayar";
-    subtotal: number;
-    discount: number;
-  };
+  amount: number; 
+  payment?: PaymentInfo;
   notes?: string;
+  trackingHistory?: {
+    status: OrderStatus;
+    timestamp: string;
+    description: string;
+  }[];
+}
+
+
+export interface OrderSummary {
+  id: string;
+  date: string;
+  customerName: string;
+  amount: number;
+  status: OrderStatus;
 }

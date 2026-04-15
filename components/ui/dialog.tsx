@@ -73,7 +73,6 @@ const DialogTitle = React.forwardRef<
 ));
 DialogTitle.displayName = "DialogTitle";
 
-// --- INI BAGIAN YANG DITAMBAHKAN ---
 const DialogDescription = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Description>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
@@ -85,7 +84,6 @@ const DialogDescription = React.forwardRef<
   />
 ));
 DialogDescription.displayName = "DialogDescription";
-// ------------------------------------
 
 const DialogFooter = ({
   className,
@@ -107,7 +105,7 @@ export {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogDescription, // Tambahkan ini di export
+  DialogDescription, 
   DialogClose,
   DialogFooter,
 };

@@ -1,4 +1,4 @@
-// src/app/orders/_components/order-page-content.tsx
+// Ini dummy data dan fungsi untuk simulasi, nanti akan diganti dengan API call ke backend
 "use client";
 
 import { useState } from "react";
@@ -8,10 +8,8 @@ import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-// Import Shared Component
 import { UserSidebar } from "@/components/user/user-sidebar";
 
-// Import Sub-components Terpisah
 import { OrderCard } from "./order-card";
 import { TrackingModal } from "./tracking-modal";
 

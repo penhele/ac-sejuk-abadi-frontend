@@ -2,16 +2,15 @@
 
 import { Edit, Trash2, Calendar, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Banner } from "@/components/admin/forms/banner-form"; // Import interface yang sudah kita buat
+import { Banner } from "@/components/admin/forms/banner-form"; 
 
 interface BannerCardProps {
-  item: Banner; // Pastikan menggunakan interface Banner yang baru
+  item: Banner; 
   onEdit: () => void;
   onDelete: () => void;
 }
 
 export function BannerCard({ item, onEdit, onDelete }: BannerCardProps) {
-  // Helper untuk format tanggal agar lebih enak dibaca
   const formatDate = (dateStr: string | Date) => {
     return new Date(dateStr).toLocaleDateString("id-ID", {
       day: "numeric",

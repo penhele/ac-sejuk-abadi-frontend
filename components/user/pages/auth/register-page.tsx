@@ -6,9 +6,8 @@ export default function RegisterPage() {
   return (
     <div className="bg-slate-50 grid lg:grid-cols-2 h-screen overflow-hidden">
       
-      {/* LEFT SIDE: Visual & Branding */}
+      {/* Visual & Branding */}
       <div className="relative bg-primary hidden lg:flex flex-col justify-center items-center p-12 overflow-hidden">
-        {/* Decorative Elements */}
         <div className="absolute top-[-10%] left-[-10%] w-80 h-80 bg-white/10 rounded-full blur-3xl" />
         <div className="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-black/10 rounded-full blur-3xl" />
 
@@ -36,12 +35,12 @@ export default function RegisterPage() {
         </div>
       </div>
 
-      {/* RIGHT SIDE: Form Section */}
+      {/* Form Section */}
       <div className="flex flex-col bg-white lg:rounded-l-[40px] shadow-2xl overflow-y-auto">
         <div className="flex justify-center items-start min-h-full py-12 px-6 sm:px-12">
           <div className="w-full max-w-md">
 
-            {/* Mobile Header (Hanya muncul di layar HP) */}
+            {/* Mobile Header */}
             <div className="lg:hidden text-center mb-8">
               <h2 className="text-2xl font-bold text-primary">AC SEJUK ABADI</h2>
             </div>

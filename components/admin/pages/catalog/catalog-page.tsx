@@ -14,7 +14,7 @@ import { ProductForm, Product } from "@/components/admin/forms/product-form";
 import { BrandForm } from "@/components/admin/forms/brand-form";
 import { CategoryForm } from "@/components/admin/forms/category-form";
 import { FeaturedForm } from "@/components/admin/forms/featured-form";
-import { SponsoredBrandForm } from "@/components/admin/forms/sponsored-brand-form"; // Import baru
+import { SponsoredBrandForm } from "@/components/admin/forms/sponsored-brand-form";
 import api from "@/src/services/api";
 
 export default function AdminManagementPage() {
@@ -57,7 +57,7 @@ export default function AdminManagementPage() {
         api.get("/brands"),
         api.get("/categories"),
         api.get("/featured-products"),
-        api.get("/sponsored-brands") // Endpoint sponsored
+        api.get("/sponsored-brands") 
       ]);
       setProducts(prodRes.data.data || prodRes.data || []);
       setBrands(brandRes.data.data || brandRes.data || []);
@@ -170,7 +170,7 @@ export default function AdminManagementPage() {
           </TabsTrigger>
         </TabsList>
 
-        {/* --- TAB PRODUK & FEATURED TETAP SAMA --- */}
+        {/* --- TAB PRODUK & FEATURED --- */}
         <TabsContent value="products" className="space-y-4">
           <div className="flex justify-between items-center">
             <h2 className="text-xl font-semibold text-slate-800">Daftar Inventaris</h2>
@@ -231,7 +231,7 @@ export default function AdminManagementPage() {
           </Card>
         </TabsContent>
 
-        {/* --- TAB SPONSORED (BARU) --- */}
+        {/* --- TAB SPONSORED --- */}
         <TabsContent value="sponsored" className="space-y-4">
           <div className="flex justify-between items-center">
             <h2 className="text-xl font-semibold text-slate-800">Brand Bersponsor</h2>
@@ -267,7 +267,7 @@ export default function AdminManagementPage() {
           </Card>
         </TabsContent>
 
-        {/* --- TAB BRAND & KATEGORI TETAP SAMA --- */}
+        {/* --- TAB BRAND & KATEGORI --- */}
         <TabsContent value="brands" className="space-y-4">
           <div className="flex justify-between items-center">
             <h2 className="text-xl font-semibold text-slate-800">Manajemen Brand</h2>
@@ -323,7 +323,7 @@ export default function AdminManagementPage() {
         onOpenChange={setShowSponsoredModal} 
         onSubmit={handleSponsoredSubmit} 
         initialData={selectedSponsored} 
-        brands={brands} // Menggunakan daftar brand
+        brands={brands} 
         isLoading={isLoading} 
       />
     </div>

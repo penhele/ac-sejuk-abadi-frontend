@@ -20,14 +20,13 @@ import {
   FileText 
 } from "lucide-react";
 
-// INTERFACE DISAMAKAN DENGAN HASIL JSON (Price dikirim sebagai string)
 export interface Product {
-  id?: string; // Menggunakan UUID (string)
+  id?: string; 
   id_brand: number;
   name: string;
   description: string;
   type: string;
-  price: string; // Backend kamu mengirim/menerima string "15000000"
+  price: string; 
   quantity: number;
   pk: string;
   category_ids: number[];
@@ -68,7 +67,6 @@ export function ProductForm({
         <ScrollArea className="flex-1 px-6">
           <div className="space-y-5 pb-6">
             
-            {/* Row 1: id_brand & pk */}
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <label className="text-sm font-semibold text-slate-700 flex items-center gap-2">
@@ -95,7 +93,6 @@ export function ProductForm({
               </div>
             </div>
 
-            {/* name */}
             <div className="space-y-2">
               <label className="text-sm font-semibold text-slate-700 flex items-center gap-2">
                 <Tag className="w-4 h-4 text-blue-500" /> Nama Produk (name) *
@@ -108,7 +105,6 @@ export function ProductForm({
               />
             </div>
 
-            {/* description */}
             <div className="space-y-2">
               <label className="text-sm font-semibold text-slate-700 flex items-center gap-2">
                 <FileText className="w-4 h-4 text-blue-500" /> Deskripsi (description)
@@ -121,7 +117,6 @@ export function ProductForm({
               />
             </div>
 
-            {/* type & price */}
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <label className="text-sm font-semibold text-slate-700 flex items-center gap-2">
@@ -142,14 +137,12 @@ export function ProductForm({
                   type="text" 
                   placeholder="15000000"
                   value={form.price || ""}
-                  // Mengirim sebagai string sesuai JSON contoh
                   onChange={(e) => setForm({ ...form, price: e.target.value })}
                   className="rounded-xl border-slate-200"
                 />
               </div>
             </div>
 
-            {/* quantity & category_ids */}
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <label className="text-sm font-semibold text-slate-700 flex items-center gap-2">

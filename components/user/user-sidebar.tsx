@@ -1,4 +1,3 @@
-// src/components/user/user-sidebar.tsx
 "use client";
 
 import Link from "next/link";
@@ -18,7 +17,6 @@ export function UserSidebar() {
   const pathname = usePathname();
 
   return (
-    // min-w-[256px] menjaga lebar tetap 64 (16rem/256px) agar tidak goyang
     <aside className="w-full lg:w-64 lg:min-w-[256px] shrink-0 space-y-6">
       <div className="space-y-1">
         <h2 className="px-4 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-4">
@@ -26,8 +24,7 @@ export function UserSidebar() {
         </h2>
         <nav className="space-y-1.5">
           {MENU_ITEMS.map((item) => {
-            // Perbaikan Logika Active: 
-            // Cek apakah pathname sama persis ATAU dimulai dengan href (untuk sub-halaman)
+    
             const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
 
             return (
@@ -42,7 +39,6 @@ export function UserSidebar() {
                   )}
                 >
                   <div className="flex items-center gap-3 font-bold text-sm">
-                    {/* Indikator Bar Putih di Kiri saat Aktif */}
                     {isActive && (
                       <span className="absolute left-0 w-1 h-5 bg-white rounded-r-full" />
                     )}

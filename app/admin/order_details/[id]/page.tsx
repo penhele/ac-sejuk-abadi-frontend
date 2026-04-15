@@ -1,14 +1,10 @@
 import { OrderDetailClient } from "@/components/admin/orders/detail/order-detail-client";
 
-interface PageProps {
-  params: {
-    id: string;
-  };
-}
+export const metadata = {
+  title: "Detail Pesanan | AC Sejuk Abadi",
+  description: "Halaman rincian transaksi pelanggan",
+};
 
-export default function OrderDetailPage({ params }: PageProps) {
-  // Di sini nantinya kamu bisa melakukan fetching data server-side jika diperlukan
-  // const order = await getOrderById(params.id);
-
+export default function Page({ params }: { params: { id: string } }) {
   return <OrderDetailClient orderId={params.id} />;
 }

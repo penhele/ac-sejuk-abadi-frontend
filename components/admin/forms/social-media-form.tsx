@@ -41,7 +41,7 @@ export function SocialMediaForm({ open, onOpenChange, onSubmit, initialData, isL
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[425px] rounded-2xl">
+      <DialogContent className="sm:max-w-106.25 rounded-2xl">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Share2 className="w-5 h-5 text-pink-500" />

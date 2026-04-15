@@ -28,7 +28,6 @@ export function PortfolioForm({
   isLoading = false 
 }: PortfolioFormProps) {
   
-  // Helper Format Tanggal (Sama dengan MarketingForm agar stabil)
   const formatDateForInput = (dateValue?: string | Date) => {
     if (!dateValue) return "";
     try {
@@ -39,7 +38,6 @@ export function PortfolioForm({
     }
   };
 
-  // Fungsi internal untuk validasi sebelum memanggil onSubmit dari Page
   const handleAction = () => {
     if (!form.id_product || form.id_product.trim() === "") {
       alert("ID Produk (UUID) wajib diisi!");
@@ -49,7 +47,6 @@ export function PortfolioForm({
       alert("Nama proyek wajib diisi!");
       return;
     }
-    // Panggil onSubmit dari PortfolioPage dengan array kosong (karena fitur gambar ditiadakan)
     onSubmit([]);
   };
 
@@ -64,7 +61,6 @@ export function PortfolioForm({
         </DialogHeader>
 
         <div className="space-y-4 py-4">
-          {/* UUID Produk */}
           <div className="space-y-1.5">
             <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 flex items-center gap-1.5">
               <Box className="w-3 h-3 text-blue-600" /> ID Produk (UUID)
@@ -78,7 +74,6 @@ export function PortfolioForm({
             />
           </div>
 
-          {/* Nama Proyek */}
           <div className="space-y-1.5">
             <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500">Nama Proyek</label>
             <Input 
@@ -91,7 +86,6 @@ export function PortfolioForm({
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            {/* Kategori */}
             <div className="space-y-1.5">
               <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 flex items-center gap-1.5">
                 <Tag className="w-3 h-3 text-blue-600" /> Kategori
@@ -104,7 +98,6 @@ export function PortfolioForm({
                 disabled={isLoading}
               />
             </div>
-            {/* Tanggal */}
             <div className="space-y-1.5">
               <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 flex items-center gap-1.5">
                 <Calendar className="w-3 h-3 text-blue-600" /> Tanggal
@@ -121,8 +114,6 @@ export function PortfolioForm({
               />
             </div>
           </div>
-
-          {/* Deskripsi */}
           <div className="space-y-1.5">
             <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500">Deskripsi Proyek</label>
             <Textarea 

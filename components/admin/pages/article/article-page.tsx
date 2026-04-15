@@ -95,7 +95,7 @@ export default function ArticlePage() {
         articleId = res.data.id || res.data.data?.id;
       }
 
-      // 2. Upload Gambar jika ada file baru (Multipart Form Data)
+      // 2. Upload Gambar jika ada file baru 
       if (files.length > 0 && articleId) {
         const formData = new FormData();
         files.forEach(file => formData.append("files", file));

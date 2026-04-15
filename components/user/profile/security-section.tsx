@@ -1,6 +1,5 @@
-// components/user/profile/security-section.tsx
 import { ShieldCheck } from "lucide-react";
-import { PasswordField } from "./password-field"; // Pastikan path import benar
+import { PasswordField } from "./password-field"; 
 
 export function SecuritySection({ formData, showPass, setShowPass, handleInputChange }: any) {
   return (
@@ -19,7 +18,7 @@ export function SecuritySection({ formData, showPass, setShowPass, handleInputCh
           show={showPass.old} 
           onToggle={() => setShowPass({ ...showPass, old: !showPass.old })} 
           value={formData.oldPassword} 
-          onChange={handleInputChange} // <-- HARUS ADA INI
+          onChange={handleInputChange} 
         />
         
         <PasswordField 
@@ -28,7 +27,7 @@ export function SecuritySection({ formData, showPass, setShowPass, handleInputCh
           show={showPass.new} 
           onToggle={() => setShowPass({ ...showPass, new: !showPass.new })} 
           value={formData.newPassword} 
-          onChange={handleInputChange} // <-- HARUS ADA INI
+          onChange={handleInputChange} 
           helper="Min. 8 Karakter"
         />
         
@@ -38,7 +37,7 @@ export function SecuritySection({ formData, showPass, setShowPass, handleInputCh
           show={showPass.confirm} 
           onToggle={() => setShowPass({ ...showPass, confirm: !showPass.confirm })} 
           value={formData.confirmPassword} 
-          onChange={handleInputChange} // <-- HARUS ADA INI
+          onChange={handleInputChange} 
         />
       </div>
 

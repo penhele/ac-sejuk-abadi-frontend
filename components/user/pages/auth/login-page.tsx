@@ -1,10 +1,10 @@
 "use client";
 
 import LoginForm from "@/components/user/forms/login-form";
-import { Snowflake, Loader2 } from "lucide-react"; // Tambah Loader2
+import { Snowflake, Loader2 } from "lucide-react"; 
 import { useRouter } from "next/navigation";
 import { login } from "@/lib/api/auth";
-import { useState, Suspense } from "react"; // Tambah Suspense
+import { useState, Suspense } from "react"; 
 
 type LoginInput = {
   email: string;
@@ -59,7 +59,7 @@ export default function LoginPage() {
   return (
     <div className="bg-slate-50 grid lg:grid-cols-2 gap-0 h-screen overflow-hidden">
       
-      {/* SISI KIRI: Branding (Desktop Only) */}
+      {/* Branding (Desktop Only) */}
       <div className="relative bg-primary w-full h-full hidden lg:flex flex-col justify-center items-center p-12 overflow-hidden">
         <div className="absolute top-[-10%] left-[-10%] w-80 h-80 bg-white/10 rounded-full blur-3xl" />
         <div className="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-black/10 rounded-full blur-3xl" />
@@ -87,11 +87,11 @@ export default function LoginPage() {
         </div>
       </div>
 
-      {/* SISI KANAN: Login Form Section */}
+      {/* Login Form Section */}
       <div className="flex flex-col justify-center items-center p-6 sm:p-12 bg-white lg:rounded-l-[40px] shadow-2xl z-20 overflow-y-auto">
         <div className="w-full max-w-md space-y-8">
           
-          {/* Mobile Header (Hanya muncul di layar kecil) */}
+          {/* Mobile Header  */}
           <div className="lg:hidden flex flex-col items-center mb-8">
             <div className="p-3 bg-primary/10 rounded-xl mb-2">
               <Snowflake className="w-10 h-10 text-primary" />
@@ -109,9 +109,6 @@ export default function LoginPage() {
           </div>
 
           <div className="mt-8">
-            {/* KRITIKAL: Membungkus LoginForm dengan Suspense karena di dalamnya 
-                menggunakan useSearchParams(). Ini mencegah error build Next.js.
-            */}
             <Suspense fallback={
               <div className="flex flex-col items-center justify-center p-8 space-y-4">
                 <Loader2 className="w-8 h-8 animate-spin text-primary" />

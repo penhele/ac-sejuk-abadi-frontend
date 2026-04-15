@@ -45,7 +45,6 @@ export function BannerForm({
   const [localPreview, setLocalPreview] = React.useState<string | null>(null);
   const [selectedFile, setSelectedFile] = React.useState<File | null>(null);
 
-  // Reset preview saat modal ditutup atau dibuka untuk data baru
   useEffect(() => {
     if (!open) {
       setLocalPreview(null);
@@ -75,7 +74,6 @@ export function BannerForm({
     }
   };
 
-  // Validasi sederhana agar tombol tidak aktif jika field wajib kosong
   const isInvalid = !form.name || !form.id_brand || !form.start_date || !form.end_date || (!selectedFile && !form.image);
 
   return (
@@ -91,12 +89,11 @@ export function BannerForm({
         <ScrollArea className="flex-1 px-6 bg-white">
           <div className="space-y-5 pb-6">
             
-            {/* Visual Banner Preview */}
             <div className="space-y-2">
               <label className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Media Utama</label>
               <div className="relative group">
                 <label className={`
-                  flex flex-col items-center justify-center aspect-[21/9] rounded-xl border-2 border-dashed transition-all cursor-pointer overflow-hidden
+                  flex flex-col items-center justify-center aspect-21/9 rounded-xl border-2 border-dashed transition-all cursor-pointer overflow-hidden
                   ${localPreview || form.image ? 'border-blue-200' : 'border-slate-200 hover:border-blue-400 hover:bg-blue-50/50'}
                 `}>
                   {localPreview || form.image ? (
@@ -135,7 +132,6 @@ export function BannerForm({
               </div>
             </div>
 
-            {/* id_brand & Category */}
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1.5">
                 <label className="text-[11px] font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
@@ -162,7 +158,6 @@ export function BannerForm({
               </div>
             </div>
 
-            {/* name: Wajib */}
             <div className="space-y-1.5">
               <label className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Judul Banner *</label>
               <Input

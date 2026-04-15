@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
-// Shared & Sub-components
 import { UserSidebar } from "@/components/user/user-sidebar";
 import { PersonalInfoForm } from "@/components/user/profile/personal-info-form";
 import { SecuritySection } from "@/components/user/profile/security-section";
@@ -40,7 +39,6 @@ export default function ProfilePageContent() {
     }
     
     setIsLoading(true);
-    // Simulasi API Call
     setTimeout(() => {
       setIsLoading(false);
       setIsDirty(false);

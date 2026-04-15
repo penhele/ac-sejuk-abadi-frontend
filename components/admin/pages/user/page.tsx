@@ -26,7 +26,6 @@ export default function UserManagementPage() {
       setLoading(true);
       setError("");
       
-      // Mengambil token dari localStorage (jika API dilindungi Bearer Token)
       const token = localStorage.getItem("token");
       
       const response = await axios.get(`${API_URL}/users`, {
@@ -35,8 +34,7 @@ export default function UserManagementPage() {
         }
       });
       
-      // Sesuaikan response.data dengan struktur dari Express kamu
-      // Jika Express mengirim { data: [...] }, gunakan response.data.data
+     
       setUsers(Array.isArray(response.data) ? response.data : response.data.users || []);
     } catch (err: any) {
       console.error("Fetch Error:", err);
@@ -70,7 +68,6 @@ export default function UserManagementPage() {
         await axios.delete(`${API_URL}/users/${id}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
-        // Refresh data setelah hapus
         fetchUsers();
       } catch (err) {
         alert("Gagal menghapus pengguna.");
@@ -91,7 +88,7 @@ export default function UserManagementPage() {
         });
       }
       setShowModal(false);
-      fetchUsers(); // Refresh data setelah simpan
+      fetchUsers(); 
     } catch (err) {
       alert("Gagal menyimpan data.");
     }
