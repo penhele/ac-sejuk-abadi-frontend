@@ -11,8 +11,11 @@ import Image from "next/image";
 import Link from "next/link";
 import FooterList from "../lists/footer-list";
 import { Separator } from "../ui/separator";
+import { getSponsoredBrands } from "@/services/brand.service";
+import SponsoredBrandList from "../lists/sponsored-brand-list";
+import { getCompany } from "@/services/company.service";
 
-export default function Footer() {
+export default async function Footer() {
   const topBrandList = [
     { name: "Daikin", href: "/shop?brand=daikin" },
     { name: "Samsung", href: "/shop?brand=samsung" },
@@ -40,14 +43,17 @@ export default function Footer() {
     { name: "FAQ", href: "/faq" },
   ];
 
+  const sponsoredBrands = await getSponsoredBrands();
+  const company = await getCompany();
+
   const contactList = [
     {
       Icon: MapPin,
       title: "Lokasi",
-      value: "Jl. Margonda Raya No. 123, Depok, Jawa Barat",
+      value: company.location,
     },
-    { Icon: Phone, title: "No. Telepon", value: "+62 123-4567-8900" },
-    { Icon: Mail, title: "Email", value: "halo@acsejukabadi.com" },
+    { Icon: Phone, title: "No. Telepon", value: company.phone },
+    { Icon: Mail, title: "Email", value: company.email },
   ];
 
   return (
@@ -82,7 +88,10 @@ export default function Footer() {
               </div>
             </div>
 
-            <FooterList title="Top Brand" list={topBrandList} />
+            <SponsoredBrandList
+              title="Top Brand"
+              sponsoredBrand={sponsoredBrands}
+            />
             <FooterList title="Category" list={categoryList} />
             <FooterList title="Informasi" list={quickLinks} />
           </div>
@@ -101,7 +110,7 @@ export default function Footer() {
               />
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-4 min-w-3xs">
               <h1 className="font-semibold text-xs tracking-widest uppercase">
                 Hubungi kami
               </h1>
