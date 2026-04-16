@@ -11,6 +11,8 @@ export default async function ShopFilter() {
 
       <div className="flex flex-col space-y-8 border rounded-lg p-4">
         <BrandFilter brands={brands} />
+
+        <ShopFilter />
       </div>
     </aside>
   );
