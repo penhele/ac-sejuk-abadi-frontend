@@ -16,6 +16,7 @@ import { useParams } from "next/navigation";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { getProjectById } from "@/services/project.service";
 import { formatDate } from "@/components/util/formatter";
+import BreadcrumbComponent from "@/components/breadcrumb-component";
 
 export default function ProjectDetailPage() {
   const params = useParams();
@@ -27,7 +28,9 @@ export default function ProjectDetailPage() {
   });
 
   return (
-    <div className="space-y-16">
+    <div className="space-y-between-section">
+      <BreadcrumbComponent />
+
       <section className="space-y-8">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
           <div className="space-y-4">

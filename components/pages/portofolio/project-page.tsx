@@ -3,14 +3,6 @@ import ErrorFallback from "@/components/fallback/error-fallback";
 import ProjectGrid from "@/components/grid/project-grid";
 import ProjectCardSkeleton from "@/components/skeletons/project-card-skeleton";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getProjects } from "@/services/project.service";
 import { Suspense } from "react";
