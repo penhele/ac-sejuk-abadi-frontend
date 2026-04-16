@@ -1,13 +1,12 @@
+import { Product } from "@/types/product";
 import { Heart, ShoppingCart } from "lucide-react";
+import Link from "next/link";
 import { AspectRatio } from "../ui/aspect-ratio";
 import { Button } from "../ui/button";
-import Link from "next/link";
 import DiscountBadge from "../util/discount-badge";
-import { Product } from "@/types/product";
 import { formatRupiah } from "../util/formatter";
-import { getDiscountById } from "@/services/discount.service";
 
-export default async function ProductCard({ product }: { product: Product }) {
+export default function ProductCard({ product }: { product: Product }) {
   const hasDiscount = product.discounts && product.discounts.length > 0;
   const discountData = hasDiscount ? product.discounts[0] : null;
 
