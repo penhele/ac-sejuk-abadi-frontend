@@ -44,7 +44,7 @@ export default function ProductDetailPage() {
         <div className="flex flex-col gap-4">
           <ProductInfo product={product} />
 
-          <ProductPriceAction />
+          <ProductPriceAction product={product} />
         </div>
       </div>
 

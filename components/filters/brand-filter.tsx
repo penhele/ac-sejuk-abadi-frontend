@@ -51,7 +51,10 @@ export default function BrandFilter({ brands }: { brands: Brand[] }) {
 
       <div className="flex flex-col gap-2">
         {brands.map((brand) => (
-          <div key={brand.id} className="group flex justify-between items-center">
+          <div
+            key={brand.id}
+            className="group flex justify-between items-center"
+          >
             <div className="flex gap-2 items-center">
               <Checkbox
                 id={`brand-${brand.id}`}

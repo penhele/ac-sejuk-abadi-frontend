@@ -12,7 +12,7 @@ export default async function ShopFilter() {
       <div className="flex flex-col space-y-8 border rounded-lg p-4">
         <BrandFilter brands={brands} />
 
-        <PriceFilter/>
+        <PriceFilter />
       </div>
     </aside>
   );

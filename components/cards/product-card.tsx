@@ -41,7 +41,7 @@ export default function ProductCard({ product }: { product: Product }) {
 
           <div className="flex flex-row justify-between">
             <div className="flex flex-col min-h-8 justify-end">
-              {discountPercentage != 0 && (
+              {discountPrice != 0 && (
                 <span className="line-through text-xs">
                   IDR {formatRupiah(originalPrice.toString())}
                 </span>
@@ -56,7 +56,7 @@ export default function ProductCard({ product }: { product: Product }) {
                       : originalPrice.toString(),
                   )}
                 </span>
-                {discountPercentage != 0 && (
+                {discountPrice != 0 && (
                   <span className="text-xs text-red-500">
                     (-{discountPercentage}%)
                   </span>

@@ -1,18 +1,16 @@
 "use client";
 
+import { formatCurrency } from "@/lib/currency";
+import { Product } from "@/types/product";
 import { MinusIcon, PlusIcon } from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
+import { FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
-import { FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa";
-import { useState } from "react";
-import { formatCurrency } from "@/lib/currency";
-import { Input } from "../ui/input";
-import Link from "next/link";
+import { formatRupiah } from "../util/formatter";
 
-export default function ProductPriceAction() {
-  const price = 2500000;
-  const originalPrice = 3000000;
-
+export default function ProductPriceAction({ product }: { product: Product }) {
   const [quantity, setQuantity] = useState(1);
 
   const increaseQty = () => {
@@ -23,19 +21,42 @@ export default function ProductPriceAction() {
     setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
   };
 
-  const totalPrice = price * quantity;
+  const hasDiscount = product.discounts && product.discounts.length > 0;
+  const discountData = hasDiscount ? product.discounts[0] : null;
+
+  const originalPrice = parseInt(product.price);
+  const discountPrice = discountData ? parseInt(discountData?.price) : 0;
+  const totalPrice =
+    discountPrice != 0 ? discountPrice * quantity : originalPrice * quantity;
+
+  const discountPercentage = (discountPrice / originalPrice) * 100;
 
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col">
         <span className="line-through text-xs">
-          {formatCurrency(originalPrice)}
+          {discountPrice != 0 && (
+            <span className="line-through text-xs">
+              IDR {formatRupiah(originalPrice.toString())}
+            </span>
+          )}
         </span>
 
         <div className="flex flex-row gap-2 items-end">
           <div className="flex flex-row gap-1">
-            <span>{formatCurrency(price)}</span>
-            <span className="text-xs text-red-500">(-20%)</span>
+            <span>
+              IDR{" "}
+              {formatRupiah(
+                discountPrice != 0
+                  ? discountPrice.toString()
+                  : originalPrice.toString(),
+              )}
+            </span>
+            {discountPrice != 0 && (
+              <span className="text-xs text-red-500">
+                (-{discountPercentage}%)
+              </span>
+            )}
           </div>
 
           <span className="text-xs">/item</span>
