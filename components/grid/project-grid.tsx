@@ -21,5 +21,7 @@ export default function ProjectGrid() {
       </div>
     );
 
+  
+
   return <ProjectList projects={projects} />;
 }

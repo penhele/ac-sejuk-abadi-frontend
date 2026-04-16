@@ -5,15 +5,24 @@ import Link from "next/link";
 import DiscountBadge from "../util/discount-badge";
 import { Product } from "@/types/product";
 import { formatRupiah } from "../util/formatter";
+import { getDiscountById } from "@/services/discount.service";
 
-export default function ProductCard({ product }: { product: Product }) {
+export default async function ProductCard({ product }: { product: Product }) {
+  const hasDiscount = product.discounts && product.discounts.length > 0;
+  const discountData = hasDiscount ? product.discounts[0] : null;
+
+  const originalPrice = parseInt(product.price);
+  const discountPrice = discountData ? parseInt(discountData?.price) : 0;
+
+  const discountPercentage = (discountPrice / originalPrice) * 100;
+
   return (
     <Link href={`/shop/${product.id}`}>
       <div className="group block overflow-hidden rounded-xl bg-white shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border">
         <div className="relative">
           <AspectRatio ratio={1 / 1} className="bg-muted rounded-t-md" />
 
-          <DiscountBadge discount="-20%" />
+          <DiscountBadge discount={discountPercentage.toString()} />
 
           <Heart className="absolute top-3 right-3 size-5 text-gray-400 hover:text-gray-600" />
         </div>
@@ -32,14 +41,27 @@ export default function ProductCard({ product }: { product: Product }) {
           </div>
 
           <div className="flex flex-row justify-between">
-            <div className="flex flex-col">
-              <span className="line-through text-xs">
-                IDR {formatRupiah(product.price)}
-              </span>
+            <div className="flex flex-col min-h-8 justify-end">
+              {discountPercentage != 0 && (
+                <span className="line-through text-xs">
+                  IDR {formatRupiah(originalPrice.toString())}
+                </span>
+              )}
 
               <div className="flex flex-row gap-1">
-                <span>IDR {formatRupiah(product.price)}</span>
-                <span className="text-xs text-red-500">(-20%)</span>
+                <span>
+                  IDR{" "}
+                  {formatRupiah(
+                    discountPrice != 0
+                      ? discountPrice.toString()
+                      : originalPrice.toString(),
+                  )}
+                </span>
+                {discountPercentage != 0 && (
+                  <span className="text-xs text-red-500">
+                    (-{discountPercentage}%)
+                  </span>
+                )}
               </div>
             </div>
 
