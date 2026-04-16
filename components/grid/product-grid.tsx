@@ -17,8 +17,8 @@ export default function ProductGrid({
   const id_brand = searchParams.get("id_brand") || undefined;
 
   const { data: response } = useSuspenseQuery({
-    queryKey: ["products", 1, 10, id_brand],
-    queryFn: () => getProducts(1, 10, id_brand),
+    queryKey: ["products"],
+    queryFn: () => getProducts(1, 50, id_brand),
   });
 
   const products = response?.data || [];
