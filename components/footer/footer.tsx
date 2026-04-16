@@ -1,3 +1,5 @@
+import { getSponsoredBrands } from "@/services/brand.service";
+import { getCompany } from "@/services/company.service";
 import {
   Facebook,
   Instagram,
@@ -10,21 +12,10 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import FooterList from "../lists/footer-list";
-import { Separator } from "../ui/separator";
-import { getSponsoredBrands } from "@/services/brand.service";
 import SponsoredBrandList from "../lists/sponsored-brand-list";
-import { getCompany } from "@/services/company.service";
+import { Separator } from "../ui/separator";
 
 export default async function Footer() {
-  const topBrandList = [
-    { name: "Daikin", href: "/shop?brand=daikin" },
-    { name: "Samsung", href: "/shop?brand=samsung" },
-    { name: "Gree", href: "/shop?brand=gree" },
-    { name: "LG", href: "/shop?brand=lg" },
-    { name: "Panasonic", href: "/shop?brand=panasonic" },
-    { name: "Mitsubishi", href: "/shop?brand=mitsubishi" },
-  ];
-
   const categoryList = [
     { name: "AC Split Wall", href: "/shop?category=split" },
     { name: "AC Cassette", href: "/shop?category=cassette" },
