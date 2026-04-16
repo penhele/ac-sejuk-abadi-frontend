@@ -1,9 +1,9 @@
 import { getBrands } from "@/services/brand.service";
 import BrandFilter from "./brand-filter";
+import PriceFilter from "./price-filter";
 
 export default async function ShopFilter() {
-  const response = await getBrands();
-  const brands = response;
+  const brands = await getBrands();
 
   return (
     <aside className="w-3xs sticky md:top-20 space-y-4">
@@ -12,7 +12,7 @@ export default async function ShopFilter() {
       <div className="flex flex-col space-y-8 border rounded-lg p-4">
         <BrandFilter brands={brands} />
 
-        <ShopFilter />
+        <PriceFilter />
       </div>
     </aside>
   );

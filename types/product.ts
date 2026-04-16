@@ -1,5 +1,6 @@
 import { Brand } from "./brand";
 import { ProductCategory } from "./category";
+import { Discounts } from "./discount";
 
 export interface Product {
   id: string;
@@ -15,7 +16,7 @@ export interface Product {
   brand: Brand;
   categories: ProductCategory[];
   images: any[];
-  discounts: any[];
+  discounts: Discounts[];
   reviews: any[];
   featuredProducts: any[];
 }
