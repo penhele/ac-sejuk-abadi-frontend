@@ -1,89 +1,114 @@
-import { FaGoogle } from "react-icons/fa";
-import { Button } from "../ui/button";
-import {
-  Field,
-  FieldDescription,
-  FieldGroup,
-  FieldLabel,
-  FieldSeparator,
-} from "../ui/field";
-import { Input } from "../ui/input";
+"use client";
+
+import { api } from "@/lib/axios";
+import { User } from "@/lib/user";
 import Link from "next/link";
-import { Textarea } from "../ui/textarea";
+import { useRouter } from "next/navigation";
+import { startTransition } from "react";
+import { useForm } from "react-hook-form";
+import { FaGoogle } from "react-icons/fa";
+import { InputTextController } from "../inputs/input-text-controller";
+import { Button } from "../ui/button";
+import { Field, FieldDescription, FieldSeparator } from "../ui/field";
+import { toast } from "sonner";
 
 export default function RegisterForm() {
+  const router = useRouter();
+
+  const form = useForm<User>({
+    defaultValues: {
+      first_name: "",
+      last_name: "",
+      email: "",
+      password: "",
+      address: "",
+      rt: "",
+      rw: "",
+      zip_code: "",
+    },
+  });
+
+  const onSubmit = (data: User) => {
+    startTransition(async () => {
+      try {
+        const res = await api.post("/auth/register", data);
+
+        console.log("Response:", res.data);
+
+        toast("Register Berhasil");
+        router.push("/login");
+      } catch (err: any) {
+        toast(err.response?.data?.message || "Terjadi kesalahan");
+      }
+    });
+  };
+
   return (
-    <form action="">
+    <form onSubmit={form.handleSubmit(onSubmit)}>
       <div className="space-y-4">
         <div className="grid xs:grid-cols-2 gap-4">
-          <Field>
-            <FieldLabel htmlFor="first_name">Nama Depan</FieldLabel>
-            <Input id="first_name" placeholder="John" required />
-          </Field>
-          <Field>
-            <FieldLabel htmlFor="last_name">Nama Belakang</FieldLabel>
-            <Input id="last_name" placeholder="Doe" required />
-          </Field>
+          <InputTextController
+            label="Nama Depan"
+            name="first_name"
+            control={form.control}
+            placeholder="Stephen"
+          />
+          <InputTextController
+            label="Nama Belakang"
+            name="last_name"
+            control={form.control}
+            placeholder="Helenus"
+          />
         </div>
 
-        <Field>
-          <FieldLabel htmlFor="phone">Nomor Telpon</FieldLabel>
-          <Input id="phone" required />
-        </Field>
-
-        <Field>
-          <FieldLabel htmlFor="address">Alamat</FieldLabel>
-          <Input
-            id="address"
-            placeholder="Jl. Srengseng Sawah No.2"
-            className="hidden xs:block"
-            required
-          />
-          <Textarea
-            id="address"
-            placeholder="Jl. Srengseng Sawah No.2"
-            className="block xs:hidden"
-            required
-          />
-        </Field>
+        <InputTextController
+          label="Alamat"
+          name="address"
+          control={form.control}
+          placeholder="Jl. Srengseng Sawah No.2"
+        />
 
         <div className="grid xs:grid-cols-2 gap-2">
           <div className="grid grid-cols-2 gap-2">
-            <Field>
-              <FieldLabel htmlFor="rt">RT</FieldLabel>
-              <Input id="rt" required placeholder="12" type="number" />
-            </Field>
-            <Field>
-              <FieldLabel htmlFor="rw">RW</FieldLabel>
-              <Input id="rw" required placeholder="7" type="number" />
-            </Field>
+            <InputTextController
+              label="RT"
+              name="rt"
+              control={form.control}
+              placeholder="001"
+            />
+            <InputTextController
+              label="RW"
+              name="rw"
+              control={form.control}
+              placeholder="008"
+            />
           </div>
-          <Field>
-            <FieldLabel htmlFor="zip_code">Kode Pos</FieldLabel>
-            <Input id="zip_code" required placeholder="12640" type="number" />
-          </Field>
+
+          <InputTextController
+            label="Kode Pos"
+            name="zip_code"
+            control={form.control}
+            placeholder="123456"
+          />
         </div>
 
-        <Field>
-          <FieldLabel htmlFor="email">Email</FieldLabel>
-          <Input id="email" type="email" placeholder="john@doe.com" required />
-        </Field>
+        <InputTextController
+          label="Email"
+          name="email"
+          control={form.control}
+          placeholder="john"
+        />
 
-        <div className="grid xs:grid-cols-2 gap-2">
-          <Field>
-            <FieldLabel htmlFor="password">Password</FieldLabel>
-            <Input id="password" type="password" required />
-          </Field>
-          <Field>
-            <FieldLabel htmlFor="password">Konfirmasi Password</FieldLabel>
-            <Input id="password" type="password" required />
-          </Field>
-        </div>
+        <InputTextController
+          label="Password"
+          name="password"
+          control={form.control}
+          placeholder="********"
+          isPassword
+        />
 
         <Field>
-          <Link href={"/login"}>
-            <Button className="w-full">Register</Button>
-          </Link>
+          <Button className="w-full">Register</Button>
         </Field>
 
         <Field className="my-8">

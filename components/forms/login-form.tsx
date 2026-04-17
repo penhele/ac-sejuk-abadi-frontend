@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FaGoogle } from "react-icons/fa";
 import { Button } from "../ui/button";
 import {
@@ -7,11 +8,10 @@ import {
   FieldSeparator,
 } from "../ui/field";
 import { Input } from "../ui/input";
-import Link from "next/link";
 
 export default function LoginForm() {
   return (
-    <form action="">
+    <form>
       <div className="space-y-4">
         <Field>
           <FieldLabel htmlFor="email">Email</FieldLabel>
