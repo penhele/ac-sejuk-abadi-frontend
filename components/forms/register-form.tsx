@@ -1,7 +1,7 @@
 "use client";
 
 import { api } from "@/lib/axios";
-import { User } from "@/lib/user";
+import { Register } from "@/lib/user";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { startTransition } from "react";
@@ -15,7 +15,7 @@ import { toast } from "sonner";
 export default function RegisterForm() {
   const router = useRouter();
 
-  const form = useForm<User>({
+  const form = useForm<Register>({
     defaultValues: {
       first_name: "",
       last_name: "",
@@ -28,7 +28,7 @@ export default function RegisterForm() {
     },
   });
 
-  const onSubmit = (data: User) => {
+  const onSubmit = (data: Register) => {
     startTransition(async () => {
       try {
         const res = await api.post("/auth/register", data);

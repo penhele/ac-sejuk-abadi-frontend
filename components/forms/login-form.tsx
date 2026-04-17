@@ -1,38 +1,63 @@
+"use client";
+
+import { api } from "@/lib/axios";
+import { Login } from "@/lib/user";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { startTransition } from "react";
+import { useForm } from "react-hook-form";
 import { FaGoogle } from "react-icons/fa";
+import { toast } from "sonner";
+import { InputTextController } from "../inputs/input-text-controller";
 import { Button } from "../ui/button";
-import {
-  Field,
-  FieldDescription,
-  FieldLabel,
-  FieldSeparator,
-} from "../ui/field";
-import { Input } from "../ui/input";
+import { Field, FieldDescription, FieldSeparator } from "../ui/field";
 
 export default function LoginForm() {
+  const router = useRouter();
+
+  const form = useForm<Login>({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  const onSubmit = (data: Login) => {
+    startTransition(async () => {
+      try {
+        const res = await api.post("/auth/login", data);
+
+        console.log("Response:", res.data);
+
+        toast("Login Berhasil");
+        router.push("/");
+        router.refresh();
+      } catch (err: any) {
+        toast(err.response?.data?.message || "Terjadi kesalahan");
+      }
+    });
+  };
+
   return (
-    <form>
+    <form onSubmit={form.handleSubmit(onSubmit)}>
       <div className="space-y-4">
-        <Field>
-          <FieldLabel htmlFor="email">Email</FieldLabel>
-          <Input id="email" type="email" placeholder="john@doe.com" required />
-        </Field>
+        <InputTextController
+          label="Email"
+          name="email"
+          placeholder="john@doe.com"
+          control={form.control}
+        />
+
+        <InputTextController
+          label="Password"
+          name="password"
+          isPassword
+          placeholder="********"
+          control={form.control}
+        />
 
         <Field>
-          <div className="flex flex-row justify-between">
-            <FieldLabel htmlFor="password">Password</FieldLabel>
-
-            <Link href={"/forgot-password"}>
-              <FieldLabel>Forgot Password?</FieldLabel>
-            </Link>
-          </div>
-          <Input id="password" type="password" required />
-        </Field>
-
-        <Field>
-          <Link href={"/"}>
-            <Button className="w-full">Login</Button>
-          </Link>
+          <Button className="w-full">Login</Button>
         </Field>
 
         <Field className="my-8">
@@ -45,7 +70,7 @@ export default function LoginForm() {
           </Button>
 
           <FieldDescription className="text-center">
-            Don&apos;t have an account?{" "}
+            Don&apos;t have an account?
             <Link href="/register" className="underline underline-offset-4">
               Sign up
             </Link>
