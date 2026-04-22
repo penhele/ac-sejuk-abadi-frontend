@@ -4,8 +4,8 @@ import CarouselBanner from "@/components/carousel/carousel-banner";
 import CarouselBrand from "@/components/carousel/carousel-brand";
 import CarouselTestimoni from "@/components/carousel/carousel-testimoni";
 import ProductGrid from "@/components/grid/product-grid";
-import PortofolioList from "@/components/lists/project-list";
-import ProductList from "@/components/lists/product-list";
+import ProjectGrid from "@/components/grid/project-grid";
+import StatsSection from "@/components/sections/stats-section";
 import { Separator } from "@/components/ui/separator";
 import { HeaderSection } from "@/components/util/header";
 import {
@@ -14,7 +14,6 @@ import {
   ShieldCheck,
   Users,
 } from "lucide-react";
-import ProjectGrid from "@/components/grid/project-grid";
 
 export default function HomePage() {
   const banner = [
@@ -36,26 +35,7 @@ export default function HomePage() {
         <CarouselBrand />
       </div>
 
-      <div className="flex justify-evenly bg-primary py-8 rounded-lg">
-        <div className="flex flex-col items-center space-y-2">
-          <span className="text-3xl font-bold text-white">100+</span>
-          <span className="text-white">Proyek Selesai</span>
-        </div>
-
-        <Separator orientation="vertical" />
-
-        <div className="flex flex-col items-center space-y-2">
-          <span className="text-3xl font-bold text-white">10+</span>
-          <span className="text-white">Brand</span>
-        </div>
-
-        <Separator orientation="vertical" />
-
-        <div className="flex flex-col items-center space-y-2">
-          <span className="text-3xl font-bold text-white">1200+</span>
-          <span className="text-white">Produk</span>
-        </div>
-      </div>
+      <StatsSection />
 
       <div className="">
         <HeaderSection title="Produk" href="/shop" />
@@ -97,6 +77,7 @@ export default function HomePage() {
 
       <div className="">
         <HeaderSection title="Portofolio" href="/portofolio" />
+
         <ProjectGrid />
       </div>
 

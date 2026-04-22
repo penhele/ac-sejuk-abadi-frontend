@@ -1,9 +1,20 @@
-import PortofolioList from "@/components/lists/project-list";
+import ProjectGrid from "@/components/grid/project-grid";
 import { HeaderSection } from "@/components/util/header";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { getCompany } from "@/services/company.service";
+import { getStaff } from "@/services/staff.service";
+import { ImageOff, Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
 
-export default function AboutUsPage() {
+export default async function AboutUsPage() {
+  const staff = await getStaff();
+  const company = await getCompany();
+
+  const contactList = [
+    { Icon: Phone, label: "Phone", value: company.phone },
+    { Icon: Mail, label: "Email", value: company.email },
+    { Icon: MapPin, label: "Location", value: company.location },
+  ];
+
   return (
     <main className="">
       <div className="space-y-between-section">
@@ -17,34 +28,17 @@ export default function AboutUsPage() {
             />
           </div>
 
-          <p className="text-sm text-gray-800">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. A
-            dignissimos autem, libero doloremque ut placeat. Corporis error non
-            temporibus nobis sint magni dicta qui maxime animi mollitia nemo
-            voluptatem dolore vero nesciunt voluptatum excepturi molestias
-            ducimus eligendi earum repudiandae, provident rerum a eveniet ullam!
-            Adipisci, fugit natus. Praesentium, omnis ratione!
-          </p>
+          <p className="text-sm text-gray-800">{company.description}</p>
         </div>
 
         <div className="grid grid-cols-3 gap-4">
-          <div className="flex flex-col items-center gap-1 border shadow-xs p-4 rounded-lg transition hover:-translate-y-1 hover:shadow-lg hover:cursor-pointer">
-            <Phone size={32} />
-            <span className="text-xl font-bold">Phone</span>
-            <span className="text-sm text-gray-800">+62 1234-567-9000</span>
-          </div>
-          <div className="flex flex-col items-center gap-1 border shadow-xs p-4 rounded-lg transition hover:-translate-y-1 hover:shadow-lg hover:cursor-pointer">
-            <Mail size={32} />
-            <span className="text-xl font-bold">Email</span>
-            <span className="text-sm text-gray-800">halo@acsejukabadi.com</span>
-          </div>
-          <div className="flex flex-col items-center gap-1 border shadow-xs p-4 rounded-lg transition hover:-translate-y-1 hover:shadow-lg hover:cursor-pointer">
-            <MapPin size={32} />
-            <span className="text-xl font-bold">Location</span>
-            <span className="text-sm text-gray-800">
-              Jl. Margonda Raya No. 123, Depok, Jawa Barat
-            </span>
-          </div>
+          {contactList.map((item, index) => (
+            <div className="flex flex-col items-center gap-1 border shadow-xs p-4 rounded-lg transition hover:-translate-y-1 hover:shadow-lg hover:cursor-pointer">
+              <item.Icon size={32} />
+              <span className="text-xl font-bold">{item.label}</span>
+              <span className="text-sm text-gray-800">{item.value}</span>
+            </div>
+          ))}
         </div>
 
         <iframe
@@ -66,36 +60,30 @@ export default function AboutUsPage() {
           </div>
 
           <div className="flex space-x-8 justify-center">
-            <div className="rounded-xl bg-muted shadow-xl  w-64">
-              <div className="relative aspect-2/3 overflow-hidden rounded-t-lg">
-                <Image
-                  src={"/jokowi.png"}
-                  alt=""
-                  fill
-                  className="object-cover"
-                />
-              </div>
+            {staff.map((staf) => (
+              <div key={staf.id} className="rounded-xl bg-muted shadow-lg w-64">
+                <div className="relative aspect-2/3 overflow-hidden rounded-t-lg">
+                  {staf.image_url ? (
+                    <Image
+                      src={staf.image_url}
+                      alt=""
+                      fill
+                      className="object-cover"
+                    />
+                  ) : (
+                    <div className="flex flex-col justify-center h-full items-center space-y-2">
+                      <ImageOff size={24} className="text-gray-400" />
+                      <span className="font-medium">No Image</span>
+                    </div>
+                  )}
+                </div>
 
-              <div className="bg-white h-20 flex flex-col text-center justify-center rounded-b-lg">
-                <span className="text-xl font-bold">Fernando Alfa</span>
-                <span className="font-light">Direktur</span>
+                <div className="bg-white h-20 flex flex-col text-center justify-center rounded-b-lg">
+                  <span className="text-xl font-bold">{staf.name}</span>
+                  <span className="font-light">{staf.role}</span>
+                </div>
               </div>
-            </div>
-            <div className="rounded-xl bg-muted shadow-xl  w-64">
-              <div className="relative aspect-2/3 overflow-hidden rounded-t-lg">
-                <Image
-                  src={"/jokowi.png"}
-                  alt=""
-                  fill
-                  className="object-cover"
-                />
-              </div>
-
-              <div className="bg-white h-20 flex flex-col text-center justify-center rounded-b-lg">
-                <span className="text-xl font-bold">John Doe</span>
-                <span className="font-light">Sekretaris</span>
-              </div>
-            </div>
+            ))}
           </div>
 
           <div className="aspect-21/9 relative rounded-lg overflow-hidden shadow-lg">
@@ -110,7 +98,7 @@ export default function AboutUsPage() {
 
         <div className="">
           <HeaderSection title="Portofolio" href="/portofolio" />
-          <PortofolioList />
+          <ProjectGrid />
         </div>
       </div>
     </main>
