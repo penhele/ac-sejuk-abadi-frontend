@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef } from "react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import {
   Carousel,
@@ -13,22 +14,24 @@ export default function CarouselBanner({
 }: {
   banner: { src: string; name: string }[];
 }) {
+  const autoplay = useRef(
+    Autoplay({
+      delay: 4000,
+      stopOnInteraction: false,
+    }),
+  );
+
   return (
     <Carousel
       opts={{
         loop: true,
         align: "center",
       }}
-      plugins={[
-        Autoplay({
-          delay: 4000,
-          stopOnInteraction: false,
-        }),
-      ]}
+      plugins={[autoplay.current]}
     >
-      <CarouselContent className="flex items-center gap-4 ">
+      <CarouselContent className="flex items-center gap-4">
         {banner.map((item, index) => (
-          <CarouselItem key={index} className="">
+          <CarouselItem key={index}>
             <AspectRatio ratio={3 / 1} className="overflow-hidden rounded-lg">
               <img
                 src={item.src}

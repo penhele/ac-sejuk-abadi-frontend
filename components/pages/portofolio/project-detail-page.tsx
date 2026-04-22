@@ -19,6 +19,11 @@ import { getProjectById } from "@/services/project.service";
 import { formatDate } from "@/components/util/formatter";
 import BreadcrumbComponent from "@/components/breadcrumb-component";
 import ProductList from "@/components/lists/product-list";
+import ErrorFallback from "@/components/fallback/error-fallback";
+import ProductCardSkeleton from "@/components/skeletons/product-card-skeleton";
+import ProjectCardSkeleton from "@/components/skeletons/project-card-skeleton";
+import { Suspense } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 
 export default function ProjectDetailPage() {
   const params = useParams();
@@ -139,14 +144,38 @@ export default function ProjectDetailPage() {
       <section className="space-y-8">
         <HeaderSection title="Produk yang digunakan" />
 
-        <ProductList products={[project.product]} />
+        <ErrorBoundary fallback={<ErrorFallback />}>
+          <Suspense
+            fallback={
+              <div className="grid grid-cols-3 gap-between-card">
+                {[...Array(3)].map((_, index) => (
+                  <ProductCardSkeleton key={index} />
+                ))}
+              </div>
+            }
+          >
+            <ProductList products={[project.product]} />
+          </Suspense>
+        </ErrorBoundary>
       </section>
 
       {/* NEW: Related Projects Section */}
       <section className="space-y-8">
         <HeaderSection title="Lihat Proyek Lainnya" />
 
-        <ProjectGrid />
+        <ErrorBoundary fallback={<ErrorFallback />}>
+          <Suspense
+            fallback={
+              <div className="grid grid-cols-3 gap-between-card">
+                {[...Array(3)].map((_, index) => (
+                  <ProjectCardSkeleton key={index} />
+                ))}
+              </div>
+            }
+          >
+            <ProjectGrid />
+          </Suspense>
+        </ErrorBoundary>
       </section>
     </div>
   );
