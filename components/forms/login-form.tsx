@@ -29,6 +29,8 @@ export default function LoginForm() {
 
         console.log("Response:", res.data);
 
+        localStorage.setItem("access_token", res.data.access_token);
+
         toast("Login Berhasil");
         router.push("/");
         router.refresh();
