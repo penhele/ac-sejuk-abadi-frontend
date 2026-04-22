@@ -2,6 +2,7 @@ import { getBrands } from "@/services/brand.service";
 import { getProducts } from "@/services/product.service";
 import { getProjects } from "@/services/project.service";
 import { Separator } from "../ui/separator";
+import { Fragment } from "react/jsx-runtime";
 
 export default async function StatsSection() {
   const brands = await getBrands();
@@ -17,7 +18,7 @@ export default async function StatsSection() {
   return (
     <div className="flex justify-evenly bg-primary py-8 rounded-lg">
       {statsList.map((stats, index) => (
-        <div key={index}>
+        <Fragment key={index}>
           <div className="flex flex-col items-center space-y-2">
             <span className="text-3xl font-bold text-white">
               {stats.value}+
@@ -25,10 +26,8 @@ export default async function StatsSection() {
             <span className="text-white">{stats.label}</span>
           </div>
 
-          {index < statsList.length - 1 && (
-            <Separator className="text-white" orientation="vertical" />
-          )}
-        </div>
+          {index < statsList.length - 1 && <Separator orientation="vertical" />}
+        </Fragment>
       ))}
     </div>
   );

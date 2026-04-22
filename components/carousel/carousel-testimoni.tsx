@@ -1,6 +1,8 @@
+"use client"
+
 import Autoplay from "embla-carousel-autoplay";
 import { Carousel, CarouselContent, CarouselItem } from "../ui/carousel";
-
+  
 export default function CarouselTestimoni() {
   const testimoniList = [
     {

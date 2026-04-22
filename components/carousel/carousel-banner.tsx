@@ -1,6 +1,5 @@
 "use client";
 
-import { useRef } from "react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import {
   Carousel,
@@ -8,26 +7,25 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
+import { useRef } from "react";
 
 export default function CarouselBanner({
   banner,
 }: {
   banner: { src: string; name: string }[];
 }) {
-  const autoplay = useRef(
-    Autoplay({
-      delay: 4000,
-      stopOnInteraction: false,
-    }),
-  );
-
   return (
     <Carousel
       opts={{
         loop: true,
         align: "center",
       }}
-      plugins={[autoplay.current]}
+      plugins={[
+        Autoplay({
+          delay: 4000,
+          stopOnInteraction: false,
+        }),
+      ]}
     >
       <CarouselContent className="flex items-center gap-4">
         {banner.map((item, index) => (

@@ -1,3 +1,6 @@
+import CarouselBanner from "@/components/carousel/carousel-banner";
+import CarouselBrand from "@/components/carousel/carousel-brand";
+import CarouselTestimoni from "@/components/carousel/carousel-testimoni";
 import ErrorFallback from "@/components/fallback/error-fallback";
 import ProductGrid from "@/components/grid/product-grid";
 import ProjectGrid from "@/components/grid/project-grid";
@@ -23,16 +26,16 @@ export default function HomePage() {
 
   return (
     <main className="space-y-16">
-      {/* <div className="">
+      <div className="">
         <CarouselBanner banner={banner} />
-      </div> */}
+      </div>
 
-      {/* <div className="space-y-4 flex flex-col items-center">
+      <div className="space-y-4 flex flex-col items-center">
         <h1 className="text-xl font-bold">
           Menyediakan Unit AC dari Brand Terkemuka Dunia
         </h1>
         <CarouselBrand />
-      </div> */}
+      </div>
 
       <StatsSection />
 
@@ -104,7 +107,7 @@ export default function HomePage() {
         </ErrorBoundary>
       </div>
 
-      {/* <div className="">
+      <div className="">
         <h1 className="text-2xl font-bold text-center">
           Kata Mereka Tentang Kami
         </h1>
@@ -113,7 +116,7 @@ export default function HomePage() {
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse,
           molestiae!
         </p>
-      </div> */}
+      </div>
     </main>
   );
 }
