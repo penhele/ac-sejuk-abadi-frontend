@@ -27,7 +27,7 @@ export default function ProductCard({ product }: { product: Product }) {
         </div>
 
         <div className="p-4 flex flex-col gap-2">
-          <span className="text-xs text-gray-400">{product.brand.name}</span>
+          <span className="text-xs text-gray-400">{product.brand?.name}</span>
           <h1 className="text-sm h-16 line-clamp-3">{product.name}</h1>
 
           <div className="flex gap-2">

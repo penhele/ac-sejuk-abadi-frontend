@@ -6,6 +6,7 @@ import {
   Building2,
   Calendar,
   CheckCircle2,
+  ImageOff,
   MapPin,
   Settings,
 } from "lucide-react";
@@ -17,6 +18,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { getProjectById } from "@/services/project.service";
 import { formatDate } from "@/components/util/formatter";
 import BreadcrumbComponent from "@/components/breadcrumb-component";
+import ProductList from "@/components/lists/product-list";
 
 export default function ProjectDetailPage() {
   const params = useParams();
@@ -55,30 +57,29 @@ export default function ProjectDetailPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 h-125">
-          <div className="md:col-span-8 relative rounded-3xl overflow-hidden shadow-2xl">
-            <Image
-              src="/images/portofolio/apartemen.png"
-              alt="Main Project Image"
-              fill
-              className="object-cover"
-            />
-          </div>
-          <div className="md:col-span-4 grid grid-rows-2 gap-6">
-            <div className="relative rounded-3xl overflow-hidden shadow-lg">
+          {project.images?.[0] ? (
+            <div className="md:col-span-8 relative rounded-lg overflow-hidden shadow-2xl">
               <Image
-                src="/images/portofolio/hero-bg.png"
-                alt="Detail 1"
+                src={project.images?.[0]}
+                alt="Main Project Image"
                 fill
                 className="object-cover"
               />
             </div>
-            <div className="relative rounded-3xl overflow-hidden shadow-lg">
-              <Image
-                src="/images/portofolio/office.png"
-                alt="Detail 2"
-                fill
-                className="object-cover"
-              />
+          ) : (
+            <div className="flex flex-col space-y-2 justify-center items-center md:col-span-8 relative rounded-lg overflow-hidden shadow-sm">
+              <ImageOff size={40} className="text-gray-400" />
+              <span className="font-bold text-gray-600">No Image</span>
+            </div>
+          )}
+          <div className="md:col-span-4 grid grid-rows-2 gap-6">
+            <div className="flex flex-col items-center justify-center space-y-2 relative rounded-lg overflow-hidden shadow-lg">
+              <ImageOff size={20} className="text-gray-400" />
+              <span className="font-bold text-sm text-gray-600">No Image</span>
+            </div>
+            <div className="flex flex-col items-center justify-center space-y-2 relative rounded-lg overflow-hidden shadow-lg">
+              <ImageOff size={20} className="text-gray-400" />
+              <span className="font-bold text-sm text-gray-600">No Image</span>
             </div>
           </div>
         </div>
@@ -117,21 +118,14 @@ export default function ProjectDetailPage() {
         </div>
 
         <div className="space-y-8">
-          <div className="bg-gray-900 text-white rounded-3xl p-8 space-y-6 shadow-xl">
+          <div className="bg-gray-900 text-white rounded-lg p-8 space-y-6 shadow-xl">
             <h3 className="text-xl font-bold">Produk Digunakan</h3>
             <Separator className="bg-gray-700" />
+
             <div className="space-y-4">
               <div className="flex justify-between items-center text-sm">
                 <span className="text-gray-400">Unit Outdoor</span>
-                <span className="font-medium">Daikin Multi-S 3 Connection</span>
-              </div>
-              <div className="flex justify-between items-center text-sm">
-                <span className="text-gray-400">Unit Indoor</span>
-                <span className="font-medium">2x Wall Mounted, 1x Duct</span>
-              </div>
-              <div className="flex justify-between items-center text-sm">
-                <span className="text-gray-400">Pemipaan</span>
-                <span className="font-medium">Premium Copper Insulated</span>
+                <span className="font-medium">{project.product.name}</span>
               </div>
             </div>
             <button className="w-full py-4 bg-primary text-white rounded-xl font-bold hover:bg-primary/90 transition-colors">
@@ -145,7 +139,7 @@ export default function ProjectDetailPage() {
       <section className="space-y-8">
         <HeaderSection title="Produk yang digunakan" />
 
-        <ProductGrid limit={4} />
+        <ProductList products={[project.product]} />
       </section>
 
       {/* NEW: Related Projects Section */}
