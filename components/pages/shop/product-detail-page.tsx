@@ -2,12 +2,13 @@
 
 import ErrorFallback from "@/components/fallback/error-fallback";
 import ProductGrid from "@/components/grid/product-grid";
-import ProductDetailContent from "@/components/sections/contents/product-detail-content";
+import ProductDetailContent from "@/components/contents/product-detail-content";
 import ProductCardSkeleton from "@/components/skeletons/product-card-skeleton";
 import { HeaderSection } from "@/components/util/header";
 import { useParams } from "next/navigation";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
+import ProductDetailSkeleton from "@/components/skeletons/product-detail-skeleton";
 
 export default function ProductDetailPage() {
   const params = useParams();
@@ -16,7 +17,7 @@ export default function ProductDetailPage() {
   return (
     <div className="space-y-between-section">
       <ErrorBoundary fallback={<ErrorFallback />}>
-        <Suspense>
+        <Suspense fallback={<ProductDetailSkeleton />}>
           <ProductDetailContent id={id} />
         </Suspense>
       </ErrorBoundary>
