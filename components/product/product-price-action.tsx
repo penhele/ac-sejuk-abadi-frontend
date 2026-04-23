@@ -9,9 +9,13 @@ import { FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { formatRupiah } from "../util/formatter";
+import { addToWishlist } from "@/services/wishlist.service";
+import { toast } from "sonner";
+import { Spinner } from "../ui/spinner";
 
 export default function ProductPriceAction({ product }: { product: Product }) {
   const [quantity, setQuantity] = useState(1);
+  const [loading, setLoading] = useState(false);
 
   const increaseQty = () => {
     setQuantity((prev) => prev + 1);
@@ -30,6 +34,23 @@ export default function ProductPriceAction({ product }: { product: Product }) {
     discountPrice != 0 ? discountPrice * quantity : originalPrice * quantity;
 
   const discountPercentage = (discountPrice / originalPrice) * 100;
+
+  const handleAddToWishlist = async () => {
+    setLoading(true);
+
+    try {
+      await addToWishlist(product.id);
+      toast.success("Produk berhasil ditambahkan");
+    } catch (error: any) {
+      if (error.response?.status === 409) {
+        toast.info(error.response?.data?.message);
+      } else {
+        toast.error("Terjadi kesalahan saat menambahkan produk");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="flex flex-col gap-4">
@@ -80,11 +101,13 @@ export default function ProductPriceAction({ product }: { product: Product }) {
       </div>
 
       <div className="flex justify-between gap-4">
-        <Link href={"/cart"} className="flex-1">
-          <Button variant={"outline"} className="w-full">
-            Keranjang
-          </Button>
-        </Link>
+        <Button
+          variant={"outline"}
+          onClick={handleAddToWishlist}
+          className="flex-1"
+        >
+          {loading ? <Spinner /> : "Keranjang"}
+        </Button>
         <Button className="flex-1">Beli</Button>
       </div>
 
