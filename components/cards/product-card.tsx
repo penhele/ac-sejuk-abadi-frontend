@@ -1,6 +1,7 @@
 import { Product } from "@/types/product";
-import { Heart, ShoppingCart } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
+import WishlistButton from "../buttons/wishlist-button";
 import { AspectRatio } from "../ui/aspect-ratio";
 import { Button } from "../ui/button";
 import DiscountBadge from "../util/discount-badge";
@@ -23,7 +24,10 @@ export default function ProductCard({ product }: { product: Product }) {
 
           <DiscountBadge discount={discountPercentage.toString()} />
 
-          <Heart className="absolute top-3 right-3 size-5 text-gray-400 hover:text-gray-600" />
+          <WishlistButton
+            productId={product.id}
+            className="absolute top-3 right-3"
+          />
         </div>
 
         <div className="p-4 flex flex-col gap-2">
