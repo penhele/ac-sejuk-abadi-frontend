@@ -33,8 +33,6 @@ export default function RegisterForm() {
       try {
         const res = await api.post("/auth/register", data);
 
-        console.log("Response:", res.data);
-
         toast("Register Berhasil");
         router.push("/login");
       } catch (err: any) {

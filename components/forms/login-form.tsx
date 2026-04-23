@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import { InputTextController } from "../inputs/input-text-controller";
 import { Button } from "../ui/button";
 import { Field, FieldDescription, FieldSeparator } from "../ui/field";
+import Cookies from "js-cookie";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -27,9 +28,18 @@ export default function LoginForm() {
       try {
         const res = await api.post("/auth/login", data);
 
-        console.log("Response:", res.data);
+        const { access_token, user } = res.data;
 
-        localStorage.setItem("access_token", res.data.access_token);
+        Cookies.set("access_token", access_token, {
+          expires: 7,
+          secure: true,
+          sameSite: "strict",
+        });
+        Cookies.set("user_role", user.role, {
+          expires: 7,
+          secure: true,
+          sameSite: "strict",
+        });
 
         toast("Login Berhasil");
         router.push("/");
