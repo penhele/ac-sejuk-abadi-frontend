@@ -4,17 +4,10 @@ import CartGrid from "@/components/grid/cart-grid";
 import CartSummarySkeleton from "@/components/skeletons/cart-summary-skeletont";
 import TableCartSkeleton from "@/components/skeletons/table-cart-skeleton";
 import { HeaderSection } from "@/components/util/header";
-import { getMe } from "@/services/auth.service";
-import { useQuery } from "@tanstack/react-query";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 export default function CartPage() {
-  const { data } = useQuery({
-    queryKey: ["users"],
-    queryFn: () => getMe(),
-  });
-
   return (
     <div className="space-y-between-section">
       <HeaderSection title="Cart" />

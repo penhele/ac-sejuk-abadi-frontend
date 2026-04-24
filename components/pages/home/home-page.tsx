@@ -45,8 +45,8 @@ export default function HomePage() {
         <ErrorBoundary fallback={<ErrorFallback />}>
           <Suspense
             fallback={
-              <div className="grid grid-cols-3 gap-between-card">
-                {[...Array(3)].map((_, index) => (
+              <div className="grid grid-cols-4 gap-between-card">
+                {[...Array(4)].map((_, index) => (
                   <ProductCardSkeleton key={index} />
                 ))}
               </div>
