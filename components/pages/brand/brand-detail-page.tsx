@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/breadcrumb";
 import { HeaderSection } from "@/components/util/header";
 import { DUMMY_PRODUCTS } from "@/constants/products";
-import { ProductType } from "@/types/product";
 import Image from "next/image";
 import Link from "next/link";
 
