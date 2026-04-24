@@ -1,6 +1,7 @@
 import CartSummary from "@/components/cart-summary";
 import ErrorFallback from "@/components/fallback/error-fallback";
 import CartGrid from "@/components/grid/cart-grid";
+import CartSummarySkeleton from "@/components/skeletons/cart-summary-skeletont";
 import TableCartSkeleton from "@/components/skeletons/table-cart-skeleton";
 import { HeaderSection } from "@/components/util/header";
 import { Suspense } from "react";
@@ -19,7 +20,7 @@ export default function CartPage() {
         </ErrorBoundary>
 
         <ErrorBoundary fallback={<ErrorFallback />}>
-          <Suspense>
+          <Suspense fallback={<CartSummarySkeleton />}>
             <CartSummary />
           </Suspense>
         </ErrorBoundary>
