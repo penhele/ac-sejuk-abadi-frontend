@@ -1,9 +1,12 @@
+"use client";
+
 import { useState } from "react";
 import { Button } from "../ui/button";
 import { addToCart } from "@/services/cart.service";
 import { toast } from "sonner";
 import { Spinner } from "../ui/spinner";
 import { cn } from "@/lib/utils";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export default function CartButton({
   productId,
@@ -14,29 +17,26 @@ export default function CartButton({
   quantity: number;
   className?: string;
 }) {
-  const [loading, setLoading] = useState(false);
+  const queryClient = useQueryClient();
 
-  const handleAddToCart = async () => {
-    try {
-      setLoading(true);
-      const response = await addToCart(productId, quantity);
-      console.log(response);
-
+  const { mutate, isPending } = useMutation({
+    mutationFn: () => addToCart(productId, quantity),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["cart"] });
       toast.success("Berhasil menambahkan ke keranjang");
-    } catch (error) {
+    },
+    onError: () => {
       toast.error("Gagal menambahkan ke keranjang");
-    } finally {
-      setLoading(false);
-    }
-  };
+    },
+  });
 
   return (
     <Button
       variant={"outline"}
-      onClick={handleAddToCart}
+      onClick={() => mutate()}
       className={cn(className)}
     >
-      {loading ? <Spinner /> : "Keranjang"}
+      {isPending ? <Spinner /> : "Keranjang"}
     </Button>
   );
 }

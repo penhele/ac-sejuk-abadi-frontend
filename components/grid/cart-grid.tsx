@@ -22,18 +22,18 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { ArrowUpRight, MinusIcon, PlusIcon, ShoppingBag } from "lucide-react";
 import Link from "next/link";
 import RemoveCartById from "../buttons/delete-button";
+import { cn } from "@/lib/utils";
 
-export default function CartGrid() {
+export default function CartGrid({ className }: { className?: string }) {
   const { data: response } = useSuspenseQuery({
     queryKey: ["cart"],
     queryFn: () => getCart(),
   });
 
   const cart = response.items;
-  console.log(cart);
 
   return (
-    <div className="">
+    <div className={cn(className)}>
       {cart.length > 0 ? (
         <Table>
           <TableHeader>
