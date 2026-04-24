@@ -1,69 +1,66 @@
-import { getMe, updateMe } from "@/services/auth.service";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Field, FieldGroup, FieldLabel } from "../ui/field";
-import { Input } from "../ui/input";
+import { useAppForm } from "@/hooks/use-app-form";
+import { getMe } from "@/services/auth.service";
+import { useQuery } from "@tanstack/react-query";
+import { PencilLine, Save } from "lucide-react";
+import { useState } from "react";
 import { Button } from "../ui/button";
-import { PencilLine, Save, X } from "lucide-react";
-import { useEffect, useState } from "react";
-import { InputTextController } from "../inputs/input-text-controller";
-import { useForm } from "react-hook-form";
-import { User } from "@/types/user";
-import { toast } from "sonner";
 
 export default function PersonaLInformationForm() {
   const [isEditing, setIsEditing] = useState(false);
 
   const handleDisabled = () => {
-    const handleDisabled = () => {
-      setIsEditing((prev) => !prev);
-    };
+    setIsEditing((prev) => !prev);
   };
 
+  const { data } = useQuery({
+    queryKey: ["users"],
+    queryFn: () => getMe(),
+  });
+
+  const { handleSubmit, AppField } = useAppForm({
+    defaultValues: {
+      first_name: data?.first_name,
+      last_name: data?.last_name,
+      email: data?.email,
+    },
+  });
+
   return (
-    <div className="border p-8 rounded-lg space-y-8">
-      <div className="flex flrow justify-between items-center">
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSubmit();
+      }}
+      className="border p-8 rounded-lg space-y-8 "
+    >
+      <div className="flex flex-row justify-between">
         <h1 className="text-lg font-semibold">Informasi Personal</h1>
 
-        {isEditing ? (
-          <Button variant={"outline"} onClick={handleDisabled}>
-            <PencilLine />
-          </Button>
-        ) : (
-          <Button variant={"outline"} onClick={handleDisabled}>
-            <Save />
-          </Button>
-        )}
+        <Button variant={"outline"} onClick={handleDisabled}>
+          {isEditing ? <PencilLine /> : <Save />}
+        </Button>
       </div>
 
-      <FieldGroup>
-        {/* <div className="grid grid-cols-2 gap-4">
-          <InputTextController
-            label="Nama Depan"
-            name="first_name"
-            control={form.control}
-            isDisabled={!isEditing}
-          />
-          <InputTextController
-            label="Nama Belakang"
-            name="last_name"
-            control={form.control}
-            isDisabled={!isEditing}
-          />
-        </div>
-
-        <div className="grid grid-cols-2 gap-4">
-          <InputTextController
-            label="Email"
-            name="email"
-            control={form.control}
-            isDisabled={!isEditing}
-          />
-          <Field className="">
-            <FieldLabel>No. HP</FieldLabel>
-            <Input disabled placeholder="1234567890" />
-          </Field>
-        </div> */}
-      </FieldGroup>
-    </div>
+      <div className="grid grid-cols-2 gap-4">
+        <AppField
+          name="first_name"
+          children={(field) => (
+            <field.TextField label="Nama Depan" isDisable={isEditing} />
+          )}
+        />
+        <AppField
+          name="last_name"
+          children={(field) => (
+            <field.TextField label="Nama Belakang" isDisable={isEditing} />
+          )}
+        />
+        <AppField
+          name="email"
+          children={(field) => (
+            <field.TextField label="Email" isDisable={isEditing} />
+          )}
+        />
+      </div>
+    </form>
   );
 }
