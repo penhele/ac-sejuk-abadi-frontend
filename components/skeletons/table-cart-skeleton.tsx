@@ -24,7 +24,7 @@ export default function TableCartSkeleton() {
 
         <TableBody>
           {Array.from({ length: 4 }).map((_, index) => (
-            <TableRow>
+            <TableRow key={index}>
               <TableCell>
                 <div className="flex flex-row items-center space-x-4">
                   <Skeleton className="aspect-square w-24" />

@@ -1,12 +1,13 @@
 export interface User {
+  id: string;
   first_name: string;
   last_name: string;
+  address: string;
+  rt: string;
+  rw: string;
+  zip_code: string;
   email: string;
-  password: string;
-  address?: string;
-  rt?: string;
-  rw?: string;
-  zip_code?: string;
+  role: string;
 }
 
 export interface Login {

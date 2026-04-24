@@ -21,7 +21,7 @@ export default function CartButton({
 
   const { mutate, isPending } = useMutation({
     mutationFn: () => addToCart(productId, quantity),
-    onSuccess: () => {
+    onSuccess: () => {w
       queryClient.invalidateQueries({ queryKey: ["cart"] });
       toast.success("Berhasil menambahkan ke keranjang");
     },

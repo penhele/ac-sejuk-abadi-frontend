@@ -8,12 +8,14 @@ export const InputTextController = <T extends FieldValues>({
   placeholder = "",
   control,
   isPassword = false,
+  isDisabled = false,
 }: {
   label: string;
   name: Path<T>;
   placeholder?: string;
   control: Control<T>;
   isPassword?: boolean;
+  isDisabled?: boolean;
 }) => {
   return (
     <Controller
@@ -28,6 +30,7 @@ export const InputTextController = <T extends FieldValues>({
             aria-invalid={fieldState.invalid}
             placeholder={placeholder}
             type={isPassword ? "password" : "text"}
+            disabled={isDisabled}
             required
           />
           {fieldState.invalid && <FieldError errors={[fieldState.error]} />}

@@ -1,9 +1,8 @@
-import { Button } from "@/components/ui/button";
-import { Field, FieldGroup, FieldLabel, FieldSet } from "@/components/ui/field";
+import PersonaLInformationForm from "@/components/forms/personal-information-form";
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import React, { useState } from "react";
+import { useState } from "react";
 
 export default function AccountPage() {
   const [activeTab, setActiveTab] = useState("personal");
@@ -45,75 +44,7 @@ export default function AccountPage() {
   const renderContent = () => {
     switch (activeTab) {
       case "personal":
-        return (
-          <div className="animate-fadeIn">
-            <h2 className="text-2xl font-semibold mb-6 text-gray-800">
-              Informasi Personal
-            </h2>
-            <form className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Nama Depan
-                  </label>
-                  <input
-                    type="text"
-                    defaultValue="Stephen"
-                    className="w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500 outline-none transition"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Nama Belakang
-                  </label>
-                  <input
-                    type="text"
-                    defaultValue="Doe"
-                    className="w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500 outline-none transition"
-                  />
-                </div>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  defaultValue="stephen@example.com"
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500 outline-none transition"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  placeholder="********"
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500 outline-none transition"
-                />
-                <p className="text-xs text-gray-500 mt-1">
-                  Biarkan kosong jika tidak ingin mengubah password.
-                </p>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Alamat Pengiriman
-                </label>
-                <textarea
-                  defaultValue="Jl. Raya Serpong No. 123, Tangerang Selatan, Banten"
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500 outline-none transition"
-                ></textarea>
-              </div>
-              <button
-                type="button"
-                className="mt-4 px-6 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition w-full md:w-auto"
-              >
-                Simpan Perubahan
-              </button>
-            </form>
-          </div>
-        );
+        return <PersonaLInformationForm />;
       case "riwayat":
         return (
           <div className="animate-fadeIn">
@@ -193,33 +124,7 @@ export default function AccountPage() {
 
           <TabsContent value="account">
             <div className="space-y-4">
-              <div className="border p-8 rounded-lg space-y-8">
-                <h1 className="text-lg font-semibold">Informasi Personal</h1>
-
-                <FieldGroup>
-                  <div className="grid grid-cols-2 gap-4">
-                    <Field className="">
-                      <FieldLabel>Nama Depan</FieldLabel>
-                      <Input disabled placeholder="John" />
-                    </Field>
-                    <Field className="">
-                      <FieldLabel>Nama Akhir</FieldLabel>
-                      <Input disabled placeholder="Doe" />
-                    </Field>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-4">
-                    <Field className="">
-                      <FieldLabel>Email</FieldLabel>
-                      <Input disabled placeholder="john@doe.com" />
-                    </Field>
-                    <Field className="">
-                      <FieldLabel>No. HP</FieldLabel>
-                      <Input disabled placeholder="1234567890" />
-                    </Field>
-                  </div>
-                </FieldGroup>
-              </div>
+              <PersonaLInformationForm/>
 
               <div className="border p-8 rounded-lg space-y-8">
                 <h1 className="text-lg font-semibold">Alamat</h1>

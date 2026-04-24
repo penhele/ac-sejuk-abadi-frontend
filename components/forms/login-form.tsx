@@ -1,7 +1,7 @@
 "use client";
 
 import { api } from "@/lib/axios";
-import { Login } from "@/lib/user";
+import { Login } from "@/types/user";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { startTransition } from "react";
