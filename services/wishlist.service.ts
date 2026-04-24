@@ -12,10 +12,9 @@ export const addToWishlist = async (productId: string) => {
 
 export const getWishlist = async (): Promise<WishlistResponse> => {
   const token = Cookies.get("access_token");
-
   const response = await api.get("/wishlist", {
     headers: {
-      // Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   });
 

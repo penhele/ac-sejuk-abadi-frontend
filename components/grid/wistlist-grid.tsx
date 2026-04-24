@@ -4,6 +4,7 @@ import EmptyState from "@/app/empty-state/empty-state";
 import { getWishlist } from "@/services/wishlist.service";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import ProductList from "../lists/product-list";
+import { Cuboid } from "lucide-react";
 
 export default function WishlistGrid() {
   const { data: response } = useSuspenseQuery({
@@ -18,7 +19,12 @@ export default function WishlistGrid() {
       {products.length > 0 ? (
         <ProductList products={products} />
       ) : (
-        <EmptyState />
+        <EmptyState
+          Icon={Cuboid}
+          label="No wishlist yet"
+          description="You haven’t added any HVAC products to your wishlist. Start exploring
+          and save your favorites here."
+        />
       )}
     </div>
   );

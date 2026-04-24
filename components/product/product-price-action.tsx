@@ -8,6 +8,7 @@ import { FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { formatRupiah } from "../util/formatter";
+import CartButton from "../buttons/cart-button";
 
 export default function ProductPriceAction({ product }: { product: Product }) {
   const [quantity, setQuantity] = useState(1);
@@ -79,9 +80,11 @@ export default function ProductPriceAction({ product }: { product: Product }) {
       </div>
 
       <div className="flex justify-between gap-4">
-        <Button variant={"outline"} className="flex-1">
-          Keranjang
-        </Button>
+        <CartButton
+          productId={product.id}
+          quantity={quantity}
+          className="flex-1"
+        />
         <Button className="flex-1">Beli</Button>
       </div>
 
