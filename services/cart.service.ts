@@ -22,3 +22,9 @@ export const removeCart = async (cartId: number) => {
 
   return response.data;
 };
+
+export const updateCart = async (cartId: number, quantity: number) => {
+  const response = await api.put(`/cart/items/${cartId}`, { quantity });
+
+  return response.data;
+};

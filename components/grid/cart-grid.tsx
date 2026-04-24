@@ -23,6 +23,7 @@ import { ArrowUpRight, MinusIcon, PlusIcon, ShoppingBag } from "lucide-react";
 import Link from "next/link";
 import RemoveCartById from "../buttons/delete-button";
 import { cn } from "@/lib/utils";
+import QuantityButton from "../buttons/quantity-button";
 
 export default function CartGrid({ className }: { className?: string }) {
   const { data: response } = useSuspenseQuery({
@@ -64,19 +65,10 @@ export default function CartGrid({ className }: { className?: string }) {
                   </div>
                 </TableCell>
                 <TableCell>
-                  <div className="flex flex-row gap-4 items-center">
-                    <Button variant={"outline"}>
-                      <MinusIcon />
-                    </Button>
-
-                    <span className="text-lg w-4 flex justify-center">
-                      {item.quantity}
-                    </span>
-
-                    <Button variant={"outline"}>
-                      <PlusIcon />
-                    </Button>
-                  </div>
+                  <QuantityButton
+                    itemId={item.id}
+                    initialQuantity={item.quantity}
+                  />
                 </TableCell>
 
                 <TableCell>
