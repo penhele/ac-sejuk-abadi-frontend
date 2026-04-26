@@ -10,7 +10,7 @@ export default function TextField({
 }: {
   label: string;
   isDisable?: boolean;
-  type?: "text" | "number";
+  type?: "text" | "number" | "password" | "email";
 }) {
   const field = useFieldContext<string>();
 

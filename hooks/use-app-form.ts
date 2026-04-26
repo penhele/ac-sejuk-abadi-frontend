@@ -1,3 +1,5 @@
+"use client";
+
 import TextField from "@/components/fields/text-field";
 import { createFormHook, createFormHookContexts } from "@tanstack/react-form";
 

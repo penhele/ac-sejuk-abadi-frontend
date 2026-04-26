@@ -1,3 +1,4 @@
+import QueryProvider from "@/components/providers/query-provider";
 import { Geist } from "next/font/google";
 
 const geist = Geist({
@@ -7,5 +8,9 @@ const geist = Geist({
 export default function AuthLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  return <div className="p-4 lg:p-0">{children}</div>;
+  return (
+    <div className="p-4 lg:p-0">
+      <QueryProvider>{children}</QueryProvider>
+    </div>
+  );
 }

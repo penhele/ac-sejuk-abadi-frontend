@@ -1,21 +1,35 @@
 "use client";
 
-import { api } from "@/lib/axios";
-import { Register } from "@/types/user";
+import { useAppForm } from "@/hooks/use-app-form";
+import { register } from "@/services/auth.service";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { startTransition } from "react";
-import { useForm } from "react-hook-form";
 import { FaGoogle } from "react-icons/fa";
-import { InputTextController } from "../inputs/input-text-controller";
+import { toast } from "sonner";
 import { Button } from "../ui/button";
 import { Field, FieldDescription, FieldSeparator } from "../ui/field";
-import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { Register } from "@/types/auth";
 
 export default function RegisterForm() {
   const router = useRouter();
+  const queryClient = useQueryClient();
 
-  const form = useForm<Register>({
+  const mutation = useMutation({
+    mutationFn: (data: Register) => register(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["register"] });
+      toast.success("Register berhasil");
+      router.push("/login");
+    },
+    onError: (error: any) => {
+      const errorMessage =
+        error?.response?.data?.message || "Terjadi kesalahan saat registrasi";
+      toast.error(errorMessage);
+    },
+  });
+
+  const { handleSubmit, AppField } = useAppForm({
     defaultValues: {
       first_name: "",
       last_name: "",
@@ -26,83 +40,63 @@ export default function RegisterForm() {
       rw: "",
       zip_code: "",
     },
+    onSubmit: async ({ value }) => {
+      await mutation.mutateAsync(value);
+    },
   });
 
-  const onSubmit = (data: Register) => {
-    startTransition(async () => {
-      try {
-        const res = await api.post("/auth/register", data);
-
-        toast("Register Berhasil");
-        router.push("/login");
-      } catch (err: any) {
-        toast(err.response?.data?.message || "Terjadi kesalahan");
-      }
-    });
-  };
-
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)}>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSubmit();
+      }}
+    >
       <div className="space-y-4">
         <div className="grid xs:grid-cols-2 gap-4">
-          <InputTextController
-            label="Nama Depan"
+          <AppField
             name="first_name"
-            control={form.control}
-            placeholder="Stephen"
+            children={(field) => <field.TextField label="Nama Depan" />}
           />
-          <InputTextController
-            label="Nama Belakang"
+          <AppField
             name="last_name"
-            control={form.control}
-            placeholder="Helenus"
+            children={(field) => <field.TextField label="Nama Belakang" />}
           />
         </div>
 
-        <InputTextController
-          label="Alamat"
+        <AppField
           name="address"
-          control={form.control}
-          placeholder="Jl. Srengseng Sawah No.2"
+          children={(field) => <field.TextField label="Alamat" />}
         />
 
         <div className="grid xs:grid-cols-2 gap-2">
           <div className="grid grid-cols-2 gap-2">
-            <InputTextController
-              label="RT"
+            <AppField
               name="rt"
-              control={form.control}
-              placeholder="001"
+              children={(field) => <field.TextField label="RT" />}
             />
-            <InputTextController
-              label="RW"
+            <AppField
               name="rw"
-              control={form.control}
-              placeholder="008"
+              children={(field) => <field.TextField label="RW" />}
             />
           </div>
 
-          <InputTextController
-            label="Kode Pos"
+          <AppField
             name="zip_code"
-            control={form.control}
-            placeholder="123456"
+            children={(field) => <field.TextField label="Kode Pos" />}
           />
         </div>
 
-        <InputTextController
-          label="Email"
+        <AppField
           name="email"
-          control={form.control}
-          placeholder="john"
+          children={(field) => <field.TextField label="Email" type="email" />}
         />
 
-        <InputTextController
-          label="Password"
+        <AppField
           name="password"
-          control={form.control}
-          placeholder="********"
-          isPassword
+          children={(field) => (
+            <field.TextField label="Password" type="password" />
+          )}
         />
 
         <Field>

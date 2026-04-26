@@ -1,3 +1,5 @@
+"use client";
+
 import { useAppForm } from "@/hooks/use-app-form";
 import { getMe, updateMe } from "@/services/auth.service";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";

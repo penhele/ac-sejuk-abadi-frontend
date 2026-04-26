@@ -1,71 +1,79 @@
 "use client";
 
-import { api } from "@/lib/axios";
-import { Login } from "@/types/user";
+import { useAppForm } from "@/hooks/use-app-form";
+import { login } from "@/services/auth.service";
+import { Login } from "@/types/auth";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import Cookies from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { startTransition } from "react";
-import { useForm } from "react-hook-form";
 import { FaGoogle } from "react-icons/fa";
 import { toast } from "sonner";
-import { InputTextController } from "../inputs/input-text-controller";
 import { Button } from "../ui/button";
 import { Field, FieldDescription, FieldSeparator } from "../ui/field";
-import Cookies from "js-cookie";
 
 export default function LoginForm() {
+  const queryClient = useQueryClient();
   const router = useRouter();
 
-  const form = useForm<Login>({
+  const mutation = useMutation({
+    mutationFn: (data: Login) => login(data),
+    onSuccess: (res) => {
+      const { access_token, user } = res;
+
+      Cookies.set("access_token", access_token, {
+        expires: 7,
+        secure: true,
+        sameSite: "strict",
+      });
+
+      Cookies.set("user_role", user.role, {
+        expires: 7,
+        secure: true,
+        sameSite: "strict",
+      });
+
+      queryClient.invalidateQueries({ queryKey: ["login"] });
+      toast.success("Login berhasil");
+
+      router.push("/");
+      router.refresh();
+    },
+    onError: (error: any) => {
+      const errorMessage =
+        error?.response?.data?.message || "Terjadi kesalahan saat login";
+      toast.error(errorMessage);
+    },
+  });
+
+  const { handleSubmit, AppField } = useAppForm({
     defaultValues: {
       email: "",
       password: "",
     },
+    onSubmit: async ({ value }) => {
+      await mutation.mutateAsync(value);
+    },
   });
 
-  const onSubmit = (data: Login) => {
-    startTransition(async () => {
-      try {
-        const res = await api.post("/auth/login", data);
-
-        const { access_token, user } = res.data;
-
-        Cookies.set("access_token", access_token, {
-          expires: 7,
-          secure: true,
-          sameSite: "strict",
-        });
-        Cookies.set("user_role", user.role, {
-          expires: 7,
-          secure: true,
-          sameSite: "strict",
-        });
-
-        toast("Login Berhasil");
-        router.push("/");
-        router.refresh();
-      } catch (err: any) {
-        toast(err.response?.data?.message || "Terjadi kesalahan");
-      }
-    });
-  };
-
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)}>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSubmit();
+      }}
+    >
       <div className="space-y-4">
-        <InputTextController
-          label="Email"
+        <AppField
           name="email"
-          placeholder="john@doe.com"
-          control={form.control}
+          children={(field) => <field.TextField label="Email" type="email" />}
         />
 
-        <InputTextController
-          label="Password"
+        <AppField
           name="password"
-          isPassword
-          placeholder="********"
-          control={form.control}
+          children={(field) => (
+            <field.TextField label="Password" type="password" />
+          )}
         />
 
         <Field>
