@@ -6,9 +6,11 @@ import { Input } from "../ui/input";
 export default function TextField({
   label,
   isDisable = false,
+  type = "text",
 }: {
   label: string;
   isDisable?: boolean;
+  type?: "text" | "number";
 }) {
   const field = useFieldContext<string>();
 
@@ -19,6 +21,7 @@ export default function TextField({
         value={field.state.value}
         onChange={(e) => field.handleChange(e.target.value)}
         disabled={isDisable}
+        type={type}
       />
       <FieldInfo field={field} />
     </Field>

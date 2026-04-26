@@ -1,11 +1,5 @@
 import { api } from "@/lib/axios";
-import { User } from "@/types/user";
-
-interface UpdateUserPayload {
-  first_name?: string;
-  last_name?: string;
-  email?: string;
-}
+import { UpdateUserPayload, User } from "@/types/user";
 
 export const getMe = async (): Promise<User> => {
   const response = await api.get("/auth/me");

@@ -10,6 +10,16 @@ export interface User {
   role: string;
 }
 
+export interface UpdateUserPayload {
+  first_name?: string;
+  last_name?: string;
+  email?: string;
+  address?: string;
+  rt?: string;
+  rw?: string;
+  zip_code?: string;
+}
+
 export interface Login {
   email: string;
   password: string;

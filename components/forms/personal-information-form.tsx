@@ -1,11 +1,14 @@
 import { useAppForm } from "@/hooks/use-app-form";
-import { getMe } from "@/services/auth.service";
-import { useQuery } from "@tanstack/react-query";
+import { getMe, updateMe } from "@/services/auth.service";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { PencilLine, Save } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
 import { Button } from "../ui/button";
+import { UpdateUserPayload } from "@/types/user";
 
 export default function PersonaLInformationForm() {
+  const queryClient = useQueryClient();
   const [isEditing, setIsEditing] = useState(false);
 
   const handleDisabled = () => {
@@ -13,15 +16,29 @@ export default function PersonaLInformationForm() {
   };
 
   const { data } = useQuery({
-    queryKey: ["users"],
+    queryKey: ["me"],
     queryFn: () => getMe(),
+  });
+
+  const mutation = useMutation({
+    mutationFn: (newData: UpdateUserPayload) => updateMe(data?.id!, newData),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["me"] });
+
+      setIsEditing(false);
+
+      toast.success("Berhasil menyimpan data");
+    },
   });
 
   const { handleSubmit, AppField } = useAppForm({
     defaultValues: {
-      first_name: data?.first_name,
-      last_name: data?.last_name,
-      email: data?.email,
+      first_name: data?.first_name ?? "",
+      last_name: data?.last_name ?? "",
+      email: data?.email ?? "",
+    },
+    onSubmit: async ({ value }) => {
+      await mutation.mutateAsync(value);
     },
   });
 
@@ -36,8 +53,12 @@ export default function PersonaLInformationForm() {
       <div className="flex flex-row justify-between">
         <h1 className="text-lg font-semibold">Informasi Personal</h1>
 
-        <Button variant={"outline"} onClick={handleDisabled}>
-          {isEditing ? <PencilLine /> : <Save />}
+        <Button
+          variant={isEditing ? "default" : "outline"}
+          onClick={handleDisabled}
+          type={isEditing ? "button" : "submit"}
+        >
+          {isEditing ? <Save /> : <PencilLine />}
         </Button>
       </div>
 
@@ -45,19 +66,19 @@ export default function PersonaLInformationForm() {
         <AppField
           name="first_name"
           children={(field) => (
-            <field.TextField label="Nama Depan" isDisable={isEditing} />
+            <field.TextField label="Nama Depan" isDisable={!isEditing} />
           )}
         />
         <AppField
           name="last_name"
           children={(field) => (
-            <field.TextField label="Nama Belakang" isDisable={isEditing} />
+            <field.TextField label="Nama Belakang" isDisable={!isEditing} />
           )}
         />
         <AppField
           name="email"
           children={(field) => (
-            <field.TextField label="Email" isDisable={isEditing} />
+            <field.TextField label="Email" isDisable={!isEditing} />
           )}
         />
       </div>

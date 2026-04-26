@@ -1,11 +1,14 @@
 import { useAppForm } from "@/hooks/use-app-form";
-import { getMe } from "@/services/auth.service";
-import { useQuery } from "@tanstack/react-query";
+import { getMe, updateMe } from "@/services/auth.service";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { PencilLine, Save } from "lucide-react";
 import { useState } from "react";
 import { Button } from "../ui/button";
+import { UpdateUserPayload } from "@/types/user";
+import { toast } from "sonner";
 
 export default function AddressForm() {
+  const queryClient = useQueryClient();
   const [isEditing, setIsEditing] = useState(false);
 
   const handleDisabled = () => {
@@ -13,16 +16,30 @@ export default function AddressForm() {
   };
 
   const { data } = useQuery({
-    queryKey: ["users"],
+    queryKey: ["me"],
     queryFn: () => getMe(),
+  });
+
+  const mutation = useMutation({
+    mutationFn: (newData: UpdateUserPayload) => updateMe(data?.id!, newData),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["me"] });
+
+      setIsEditing(false);
+
+      toast.success("Berhasil menyimpan data");
+    },
   });
 
   const { handleSubmit, AppField } = useAppForm({
     defaultValues: {
-      rt: data?.rt,
-      rw: data?.rw,
-      address: data?.address,
-      zip_code: data?.zip_code,
+      rt: data?.rt ?? "",
+      rw: data?.rw ?? "",
+      address: data?.address ?? "",
+      zip_code: data?.zip_code ?? "",
+    },
+    onSubmit: async ({ value }) => {
+      await mutation.mutateAsync(value);
     },
   });
 
@@ -37,8 +54,12 @@ export default function AddressForm() {
       <div className="flex flex-row justify-between">
         <h1 className="text-lg font-semibold">Alamat</h1>
 
-        <Button variant={"outline"} onClick={handleDisabled}>
-          {isEditing ? <PencilLine /> : <Save />}
+        <Button
+          variant={isEditing ? "default" : "outline"}
+          onClick={handleDisabled}
+          type={isEditing ? "button" : "submit"}
+        >
+          {isEditing ? <Save /> : <PencilLine />}
         </Button>
       </div>
 
@@ -46,27 +67,35 @@ export default function AddressForm() {
         <AppField
           name="address"
           children={(field) => (
-            <field.TextField label="Alamat" isDisable={isEditing} />
+            <field.TextField label="Alamat" isDisable={!isEditing} />
           )}
         />
         <div className="flex flex-row gap-4">
           <AppField
             name="zip_code"
             children={(field) => (
-              <field.TextField label="Kode Pos" isDisable={isEditing} />
+              <field.TextField label="Kode Pos" isDisable={!isEditing} />
             )}
           />
           <div className="flex flex-row gap-4">
             <AppField
               name="rt"
               children={(field) => (
-                <field.TextField label="RT" isDisable={isEditing} />
+                <field.TextField
+                  label="RT"
+                  isDisable={!isEditing}
+                  type="number"
+                />
               )}
             />
             <AppField
               name="rw"
               children={(field) => (
-                <field.TextField label="RW" isDisable={isEditing} />
+                <field.TextField
+                  label="RW"
+                  isDisable={!isEditing}
+                  type="number"
+                />
               )}
             />
           </div>
