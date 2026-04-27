@@ -10,12 +10,13 @@ import { Button } from "../ui/button";
 import { Field, FieldDescription, FieldSeparator } from "../ui/field";
 import { useRouter } from "next/navigation";
 import { Register } from "@/types/auth";
+import { Spinner } from "../ui/spinner";
 
 export default function RegisterForm() {
   const router = useRouter();
   const queryClient = useQueryClient();
 
-  const mutation = useMutation({
+  const { isPending, mutateAsync } = useMutation({
     mutationFn: (data: Register) => register(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["register"] });
@@ -41,7 +42,7 @@ export default function RegisterForm() {
       zip_code: "",
     },
     onSubmit: async ({ value }) => {
-      await mutation.mutateAsync(value);
+      await mutateAsync(value);
     },
   });
 
@@ -56,51 +57,83 @@ export default function RegisterForm() {
         <div className="grid xs:grid-cols-2 gap-4">
           <AppField
             name="first_name"
-            children={(field) => <field.TextField label="Nama Depan" />}
+            children={(field) => (
+              <field.TextField label="Nama Depan" isDisable={isPending} />
+            )}
           />
           <AppField
             name="last_name"
-            children={(field) => <field.TextField label="Nama Belakang" />}
+            children={(field) => (
+              <field.TextField label="Nama Belakang" isDisable={isPending} />
+            )}
           />
         </div>
 
         <AppField
           name="address"
-          children={(field) => <field.TextField label="Alamat" />}
+          children={(field) => (
+            <field.TextField label="Alamat" isDisable={isPending} />
+          )}
         />
 
         <div className="grid xs:grid-cols-2 gap-2">
           <div className="grid grid-cols-2 gap-2">
             <AppField
               name="rt"
-              children={(field) => <field.TextField label="RT" />}
+              children={(field) => (
+                <field.TextField
+                  label="RT"
+                  type="number"
+                  isDisable={isPending}
+                />
+              )}
             />
             <AppField
               name="rw"
-              children={(field) => <field.TextField label="RW" />}
+              children={(field) => (
+                <field.TextField
+                  label="RW"
+                  type="number"
+                  isDisable={isPending}
+                />
+              )}
             />
           </div>
 
           <AppField
             name="zip_code"
-            children={(field) => <field.TextField label="Kode Pos" />}
+            children={(field) => (
+              <field.TextField
+                label="Kode Pos"
+                type="number"
+                isDisable={isPending}
+              />
+            )}
           />
         </div>
 
         <AppField
           name="email"
-          children={(field) => <field.TextField label="Email" type="email" />}
+          children={(field) => (
+            <field.TextField label="Email" type="email" isDisable={isPending} />
+          )}
         />
 
         <AppField
           name="password"
           children={(field) => (
-            <field.TextField label="Password" type="password" />
+            <field.TextField
+              label="Password"
+              type="password"
+              isDisable={isPending}
+            />
           )}
         />
 
         <Field>
-          <Button className="w-full">Register</Button>
+          <Button className="w-full">
+            {isPending ? <Spinner /> : "Register"}
+          </Button>
         </Field>
 
         <Field className="my-8">

@@ -11,12 +11,13 @@ import { FaGoogle } from "react-icons/fa";
 import { toast } from "sonner";
 import { Button } from "../ui/button";
 import { Field, FieldDescription, FieldSeparator } from "../ui/field";
+import { Spinner } from "../ui/spinner";
 
 export default function LoginForm() {
   const queryClient = useQueryClient();
   const router = useRouter();
 
-  const mutation = useMutation({
+  const { isPending, mutateAsync } = useMutation({
     mutationFn: (data: Login) => login(data),
     onSuccess: (res) => {
       const { access_token, user } = res;
@@ -52,7 +53,7 @@ export default function LoginForm() {
       password: "",
     },
     onSubmit: async ({ value }) => {
-      await mutation.mutateAsync(value);
+      await mutateAsync(value);
     },
   });
 
@@ -66,18 +67,26 @@ export default function LoginForm() {
       <div className="space-y-4">
         <AppField
           name="email"
-          children={(field) => <field.TextField label="Email" type="email" />}
+          children={(field) => (
+            <field.TextField label="Email" type="email" isDisable={isPending} />
+          )}
         />
 
         <AppField
           name="password"
           children={(field) => (
-            <field.TextField label="Password" type="password" />
+            <field.TextField
+              label="Password"
+              type="password"
+              isDisable={isPending}
+            />
           )}
         />
 
         <Field>
-          <Button className="w-full">Login</Button>
+          <Button className="w-full" disabled={isPending}>
+            {isPending ? <Spinner /> : "Login"}
+          </Button>
         </Field>
 
         <Field className="my-8">
@@ -90,7 +99,7 @@ export default function LoginForm() {
           </Button>
 
           <FieldDescription className="text-center">
-            Don&apos;t have an account?
+            Don&apos;t have an account?{" "}
             <Link href="/register" className="underline underline-offset-4">
               Sign up
             </Link>
