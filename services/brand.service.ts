@@ -1,4 +1,4 @@
-import { api } from "@/lib/axios";
+import { api } from "@/lib/api/axios";
 import { Brand, SponsoredBrand } from "@/types/brand";
 
 export const getBrands = async (): Promise<Brand[]> => {

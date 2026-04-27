@@ -1,14 +1,13 @@
 "use client";
 
-import { formatCurrency } from "@/lib/currency";
 import { Product } from "@/types/product";
 import { MinusIcon, PlusIcon } from "lucide-react";
 import { useState } from "react";
 import { FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
-import { formatRupiah } from "../util/formatter";
 import CartButton from "../buttons/cart-button";
+import { formatRupiah } from "@/lib/format/currency";
 
 export default function ProductPriceAction({ product }: { product: Product }) {
   const [quantity, setQuantity] = useState(1);
@@ -37,7 +36,7 @@ export default function ProductPriceAction({ product }: { product: Product }) {
         <span className="line-through text-xs">
           {discountPrice != 0 && (
             <span className="line-through text-xs">
-              IDR {formatRupiah(originalPrice.toString())}
+              IDR {formatRupiah(originalPrice)}
             </span>
           )}
         </span>
@@ -46,11 +45,7 @@ export default function ProductPriceAction({ product }: { product: Product }) {
           <div className="flex flex-row gap-1">
             <span>
               IDR{" "}
-              {formatRupiah(
-                discountPrice != 0
-                  ? discountPrice.toString()
-                  : originalPrice.toString(),
-              )}
+              {formatRupiah(discountPrice != 0 ? discountPrice : originalPrice)}
             </span>
             {discountPrice != 0 && (
               <span className="text-xs text-red-500">
@@ -76,7 +71,7 @@ export default function ProductPriceAction({ product }: { product: Product }) {
           </Button>
         </div>
 
-        <span>{formatCurrency(totalPrice)}</span>
+        <span>{formatRupiah(totalPrice)}</span>
       </div>
 
       <div className="flex justify-between gap-4">

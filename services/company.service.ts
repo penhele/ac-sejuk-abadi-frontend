@@ -1,4 +1,4 @@
-import { api } from "@/lib/axios";
+import { api } from "@/lib/api/axios";
 import { Company } from "@/types/company";
 
 export const getCompany = async (): Promise<Company> => {

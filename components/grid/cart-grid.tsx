@@ -16,7 +16,6 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { formatCurrency } from "@/lib/currency";
 import { getCart } from "@/services/cart.service";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { ArrowUpRight, MinusIcon, PlusIcon, ShoppingBag } from "lucide-react";
@@ -24,6 +23,7 @@ import Link from "next/link";
 import RemoveCartById from "../buttons/delete-button";
 import { cn } from "@/lib/utils";
 import QuantityButton from "../buttons/quantity-button";
+import { formatRupiah } from "@/lib/format/currency";
 
 export default function CartGrid({ className }: { className?: string }) {
   const { data: response } = useSuspenseQuery({
@@ -58,9 +58,7 @@ export default function CartGrid({ className }: { className?: string }) {
                     <div className="flex flex-col">
                       <span className="text-sm text-gray-400">...</span>
                       <span>{item.product.name}</span>
-                      <span>
-                        {formatCurrency(parseInt(item.product.price))}
-                      </span>
+                      <span>{formatRupiah(parseInt(item.product.price))}</span>
                     </div>
                   </div>
                 </TableCell>
@@ -73,9 +71,7 @@ export default function CartGrid({ className }: { className?: string }) {
 
                 <TableCell>
                   <span>
-                    {formatCurrency(
-                      item.quantity * parseInt(item.product.price),
-                    )}
+                    {formatRupiah(item.quantity * parseInt(item.product.price))}
                   </span>
                 </TableCell>
 

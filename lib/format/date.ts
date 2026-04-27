@@ -1,7 +1,3 @@
-export const formatRupiah = (number: string) => {
-  return new Intl.NumberFormat("id-ID").format(parseInt(number));
-};
-
 export const formatDate = (isoString: string) => {
   const date = new Date(isoString);
 

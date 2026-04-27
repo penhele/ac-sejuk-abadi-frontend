@@ -4,8 +4,8 @@ import { getCart } from "@/services/cart.service";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Button } from "./ui/button";
 import { Separator } from "./ui/separator";
-import { formatCurrency } from "@/lib/currency";
 import { useMemo } from "react";
+import { formatRupiah } from "@/lib/format/currency";
 
 export default function CartSummary() {
   const { data: response } = useSuspenseQuery({
@@ -39,9 +39,7 @@ export default function CartSummary() {
         </div>
         <div className="flex flex-row justify-between">
           <span className="text-sm text-gray-400">Subtotal</span>
-          <span className="text-sm font-medium">
-            {formatCurrency(subtotal)}
-          </span>
+          <span className="text-sm font-medium">{formatRupiah(subtotal)}</span>
         </div>
         <div className="flex flex-row justify-between">
           <span className="text-sm text-gray-400">Ongkos Kirim</span>
@@ -53,7 +51,7 @@ export default function CartSummary() {
 
       <div className="flex flex-row justify-between">
         <span className="text-sm">Total</span>
-        <span className="text-sm">{formatCurrency(total)}</span>
+        <span className="text-sm">{formatRupiah(total)}</span>
       </div>
 
       <Button className="w-full">Checkout</Button>

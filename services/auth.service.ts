@@ -1,4 +1,4 @@
-import { api } from "@/lib/axios";
+import { api } from "@/lib/api/axios";
 import { Login, Register } from "@/types/auth";
 import { UpdateUserPayload, User } from "@/types/user";
 

@@ -1,4 +1,4 @@
-import { api } from "@/lib/axios";
+import { api } from "@/lib/api/axios";
 import { Project } from "@/types/project";
 
 export const getProjects = async (): Promise<Project[]> => {

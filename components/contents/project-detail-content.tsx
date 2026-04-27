@@ -9,9 +9,9 @@ import {
   Settings,
 } from "lucide-react";
 import Image from "next/image";
-import { formatDate } from "../util/formatter";
 import { DescriptionSection, HeaderSection } from "../util/header";
 import { Separator } from "../ui/separator";
+import { formatDate } from "@/lib/format/date";
 
 export default function ProjectDetailContent({ id }: { id: string }) {
   const { data: project } = useSuspenseQuery({

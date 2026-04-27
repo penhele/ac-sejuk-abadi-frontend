@@ -1,4 +1,4 @@
-import { api } from "@/lib/axios";
+import { api } from "@/lib/api/axios";
 import { Cart } from "@/types/cart";
 import Cookies from "js-cookie";
 
