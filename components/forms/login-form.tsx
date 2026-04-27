@@ -12,6 +12,7 @@ import { toast } from "sonner";
 import { Button } from "../ui/button";
 import { Field, FieldDescription, FieldSeparator } from "../ui/field";
 import { Spinner } from "../ui/spinner";
+import { loginSchema } from "@/schemas/auth.schema";
 
 export default function LoginForm() {
   const queryClient = useQueryClient();
@@ -54,6 +55,9 @@ export default function LoginForm() {
     },
     onSubmit: async ({ value }) => {
       await mutateAsync(value);
+    },
+    validators: {
+      onChange: loginSchema,
     },
   });
 

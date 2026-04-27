@@ -2,15 +2,16 @@
 
 import { useAppForm } from "@/hooks/use-app-form";
 import { register } from "@/services/auth.service";
+import { Register } from "@/types/auth";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { FaGoogle } from "react-icons/fa";
 import { toast } from "sonner";
 import { Button } from "../ui/button";
 import { Field, FieldDescription, FieldSeparator } from "../ui/field";
-import { useRouter } from "next/navigation";
-import { Register } from "@/types/auth";
 import { Spinner } from "../ui/spinner";
+import { registerSchema } from "@/schemas/auth.schema";
 
 export default function RegisterForm() {
   const router = useRouter();
@@ -43,6 +44,9 @@ export default function RegisterForm() {
     },
     onSubmit: async ({ value }) => {
       await mutateAsync(value);
+    },
+    validators: {
+      onChange: registerSchema,
     },
   });
 
