@@ -34,7 +34,7 @@ export default function CartGrid({ className }: { className?: string }) {
   const cart = response.items;
 
   return (
-    <div className={cn(className)}>
+    <div className={cn('flex items-center justify-center', className)}>
       {cart.length > 0 ? (
         <Table>
           <TableHeader>

@@ -5,7 +5,7 @@ import WishlistButton from "../buttons/wishlist-button";
 import { AspectRatio } from "../ui/aspect-ratio";
 import { Button } from "../ui/button";
 import DiscountBadge from "../util/discount-badge";
-import { formatRupiah } from "../util/formatter";
+import { formatRupiah } from "@/lib/format/currency";
 
 export default function ProductCard({ product }: { product: Product }) {
   const hasDiscount = product.discounts && product.discounts.length > 0;
@@ -47,7 +47,7 @@ export default function ProductCard({ product }: { product: Product }) {
             <div className="flex flex-col min-h-8 justify-end">
               {discountPrice != 0 && (
                 <span className="line-through text-xs">
-                  IDR {formatRupiah(originalPrice.toString())}
+                  IDR {formatRupiah(originalPrice)}
                 </span>
               )}
 
@@ -55,9 +55,7 @@ export default function ProductCard({ product }: { product: Product }) {
                 <span>
                   IDR{" "}
                   {formatRupiah(
-                    discountPrice != 0
-                      ? discountPrice.toString()
-                      : originalPrice.toString(),
+                    discountPrice != 0 ? discountPrice : originalPrice,
                   )}
                 </span>
                 {discountPrice != 0 && (

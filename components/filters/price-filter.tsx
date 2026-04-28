@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Slider } from "../ui/slider";
-import { formatRupiah } from "../util/formatter";
+import { formatRupiah } from "@/lib/format/currency";
 
 export default function PriceFilter() {
   const MIN_PRICE = 0;
@@ -32,7 +32,7 @@ export default function PriceFilter() {
 
         <div className="flex justify-between text-sm">
           <span>{value[0]}</span>
-          <span>{formatRupiah(value[1].toString())}</span>
+          <span>{formatRupiah(value[1])}</span>
         </div>
       </div>
     </div>
