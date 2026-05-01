@@ -13,8 +13,8 @@ export default function HeroSection({
 
       <div className="max-w-7xl absolute">
         <div className="flex flex-col space-y-2 items-center text-center">
-          <span className="text-4xl font-bold">{title}</span>
-          <span className="text-sm">{description}</span>
+          <span className="text-4xl font-bold text-white ">{title}</span>
+          <span className="text-sm text-white">{description}</span>
         </div>
       </div>
     </section>
