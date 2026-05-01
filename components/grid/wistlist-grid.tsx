@@ -1,6 +1,6 @@
 "use client";
 
-import EmptyState from "@/app/empty-state/empty-state";
+import EmptyState from "@/components/empty-state/empty-state";
 import { getWishlist } from "@/services/wishlist.service";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import ProductList from "../lists/product-list";

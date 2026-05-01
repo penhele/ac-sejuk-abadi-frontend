@@ -6,12 +6,11 @@ import {
   getWishlist,
   removeWishlist,
 } from "@/services/wishlist.service";
-import { Heart, Trash } from "lucide-react";
-import { toast } from "sonner";
-import { Button } from "../ui/button";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Cookies from "js-cookie";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { toast } from "sonner";
+import { Button } from "../ui/button";
 
 export default function WishlistButton({
   productId,

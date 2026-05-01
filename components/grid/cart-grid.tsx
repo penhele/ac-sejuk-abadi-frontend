@@ -1,6 +1,6 @@
 "use client";
 
-import EmptyState from "@/app/empty-state/empty-state";
+import EmptyState from "@/components/empty-state/empty-state";
 import { cn } from "@/lib/utils";
 import { getCart } from "@/services/cart.service";
 import { useSuspenseQuery } from "@tanstack/react-query";
