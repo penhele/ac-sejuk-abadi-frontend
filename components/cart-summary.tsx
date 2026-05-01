@@ -30,7 +30,7 @@ export default function CartSummary() {
   const isEmpty = response.items.length <= 0;
 
   return (
-    <div className="min-w-2xs space-y-4 border p-4 rounded-lg shadow-md h-fit">
+    <div className="min-w-2xs space-y-4 border p-4 rounded-lg shadow-sm h-fit">
       <h2 className="">Pemesanan</h2>
 
       <div className="space-y-2">
@@ -58,7 +58,9 @@ export default function CartSummary() {
 
       <div className="flex flex-row justify-between">
         <span className="text-sm">Total</span>
-        <span className="text-sm font-medium">{isEmpty ? "-" : formatRupiah(total)}</span>
+        <span className="text-sm font-medium">
+          {isEmpty ? "-" : formatRupiah(total)}
+        </span>
       </div>
 
       <Button className="w-full">Checkout</Button>

@@ -36,7 +36,7 @@ export default function ProductPriceAction({ product }: { product: Product }) {
         <span className="line-through text-xs">
           {discountPrice != 0 && (
             <span className="line-through text-xs">
-              IDR {formatRupiah(originalPrice)}
+              {formatRupiah(originalPrice)}
             </span>
           )}
         </span>
@@ -44,7 +44,6 @@ export default function ProductPriceAction({ product }: { product: Product }) {
         <div className="flex flex-row gap-2 items-end">
           <div className="flex flex-row gap-1">
             <span>
-              IDR{" "}
               {formatRupiah(discountPrice != 0 ? discountPrice : originalPrice)}
             </span>
             {discountPrice != 0 && (

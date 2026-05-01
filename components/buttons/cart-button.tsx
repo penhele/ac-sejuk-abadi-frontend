@@ -1,12 +1,9 @@
-"use client";
-
-import { useState } from "react";
-import { Button } from "../ui/button";
-import { addToCart } from "@/services/cart.service";
-import { toast } from "sonner";
-import { Spinner } from "../ui/spinner";
 import { cn } from "@/lib/utils";
+import { addToCart } from "@/services/cart.service";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
+import { Button } from "../ui/button";
+import { Spinner } from "../ui/spinner";
 
 export default function CartButton({
   productId,
@@ -35,6 +32,7 @@ export default function CartButton({
       variant={"outline"}
       onClick={() => mutate()}
       className={cn(className)}
+      disabled={isPending}
     >
       {isPending ? <Spinner /> : "Keranjang"}
     </Button>
