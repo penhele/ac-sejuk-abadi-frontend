@@ -2,7 +2,6 @@ import BreadcrumbComponent from "@/components/breadcrumb-component";
 import ErrorFallback from "@/components/fallback/error-fallback";
 import ProjectGrid from "@/components/grid/project-grid";
 import ProjectCardSkeleton from "@/components/skeletons/project-card-skeleton";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getProjects } from "@/services/project.service";
 import { Suspense } from "react";
@@ -13,11 +12,6 @@ export default async function ProjectPage() {
 
   return (
     <div className="space-y-between-section">
-      <AspectRatio
-        ratio={3 / 1}
-        className="overflow-hidden rounded-lg bg-muted"
-      />
-
       <BreadcrumbComponent />
 
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b pb-6">
