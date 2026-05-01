@@ -13,6 +13,7 @@ import Image from "next/image";
 import Link from "next/link";
 import FooterList from "../lists/footer-list";
 import SponsoredBrandList from "../lists/sponsored-brand-list";
+import Maps from "../maps/maps";
 import { Separator } from "../ui/separator";
 
 export default async function Footer() {
@@ -92,13 +93,8 @@ export default async function Footer() {
               <h1 className="font-semibold text-xs tracking-widest uppercase">
                 Lokasi kami
               </h1>
-
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15860.6720448135!2d106.817176!3d-6.349912!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69ed007042b1c1%3A0xad5a9a5e28f1f5a!2sPT.Alfa%20Cakrawala%20Sejuk%20Abadi!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid"
-                className="w-full rounded-lg h-56"
-                allowFullScreen
-                loading="lazy"
-              />
+              
+              <Maps className="w-full rounded-lg h-56" />
             </div>
 
             <div className="space-y-4 min-w-3xs">
