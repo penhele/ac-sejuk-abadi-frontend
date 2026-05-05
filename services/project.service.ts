@@ -1,12 +1,8 @@
 import { api } from "@/lib/api/axios";
 import { Project } from "@/types/project";
-import axios from "axios";
 
 export const getProjects = async (): Promise<Project[]> => {
-  // const response = await api.get<Project[]>("/projects");
-  const response = await axios.get(
-    "https://acsa-backend.vercel.app/api/projects",
-  );
+  const response = await api.get<Project[]>("/projects");
 
   return response.data;
 };

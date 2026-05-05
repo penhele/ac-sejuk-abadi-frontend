@@ -4,6 +4,7 @@ import ProjectGrid from "@/components/grid/project-grid";
 import ProjectCardSkeleton from "@/components/skeletons/project-card-skeleton";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getProjects } from "@/services/project.service";
+import { Project } from "@/types/project";
 import {
   dehydrate,
   HydrationBoundary,
@@ -13,12 +14,16 @@ import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 export default async function ProjectPage() {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: { queries: { staleTime: 60 * 1000 } },
+  });
 
   await queryClient.prefetchQuery({
     queryKey: ["projects"],
     queryFn: getProjects,
   });
+
+  const initialProjects = queryClient.getQueryData<Project[]>(["projects"]);
 
   return (
     <div className="space-y-between-section">
@@ -70,7 +75,7 @@ export default async function ProjectPage() {
               </div>
             }
           >
-            <ProjectGrid />
+            <ProjectGrid initialProjects={initialProjects} />
           </Suspense>
         </ErrorBoundary>
       </HydrationBoundary>

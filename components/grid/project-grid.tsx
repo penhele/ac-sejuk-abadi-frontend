@@ -13,8 +13,11 @@ export default function ProjectGrid({
 }) {
   const { data: projects } = useSuspenseQuery({
     queryKey: ["projects"],
-    queryFn: () => getProjects(),
+    queryFn: getProjects,
     initialData: initialProjects,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    staleTime: 5 * 60 * 1000,
   });
 
   if (!projects || projects.length === 0)

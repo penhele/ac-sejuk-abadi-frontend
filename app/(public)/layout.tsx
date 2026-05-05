@@ -1,7 +1,6 @@
 import React from "react";
 
 import Navbar from "@/components/navbar/navbar";
-import Footer from "@/components/footer/footer";
 import QueryProvider from "@/components/providers/query-provider";
 
 export default function PublicLayout({
@@ -9,7 +8,7 @@ export default function PublicLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <div className="">
-      {/* <Navbar /> */}
+      <Navbar />
       <main className="">
         <QueryProvider>{children}</QueryProvider>
       </main>
