@@ -9,11 +9,11 @@ export default function PublicLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <div className="">
-      <Navbar />
+      {/* <Navbar /> */}
       <main className="">
         <QueryProvider>{children}</QueryProvider>
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

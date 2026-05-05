@@ -4,11 +4,21 @@ import ProjectGrid from "@/components/grid/project-grid";
 import ProjectCardSkeleton from "@/components/skeletons/project-card-skeleton";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getProjects } from "@/services/project.service";
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 export default async function ProjectPage() {
-  const projects = await getProjects();
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: ["projects"],
+    queryFn: getProjects,
+  });
 
   return (
     <div className="space-y-between-section">
@@ -45,23 +55,25 @@ export default async function ProjectPage() {
 
       <div className="">
         <span className="text-sm text-gray-400">
-          Menampilkan {projects.length} Proyek Unggulan
+          Menampilkan ... Proyek Unggulan
         </span>
       </div>
 
-      <ErrorBoundary fallback={<ErrorFallback />}>
-        <Suspense
-          fallback={
-            <div className="grid grid-cols-3 gap-between-card">
-              {[...Array(3)].map((_, index) => (
-                <ProjectCardSkeleton key={index} />
-              ))}
-            </div>
-          }
-        >
-          <ProjectGrid />
-        </Suspense>
-      </ErrorBoundary>
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <ErrorBoundary fallback={<ErrorFallback />}>
+          <Suspense
+            fallback={
+              <div className="grid grid-cols-3 gap-between-card">
+                {[...Array(3)].map((_, index) => (
+                  <ProjectCardSkeleton key={index} />
+                ))}
+              </div>
+            }
+          >
+            <ProjectGrid />
+          </Suspense>
+        </ErrorBoundary>
+      </HydrationBoundary>
     </div>
   );
 }
