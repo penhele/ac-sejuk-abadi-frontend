@@ -11,24 +11,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { getProducts } from "@/services/product.service";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "../../fallback/error-fallback";
 
-export default async function ShopPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ id_brand?: string }>;
-}) {
+export default async function ShopPage() {
   const banner = [
     { src: "/iklan.png", name: "Banner" },
     { src: "/iklan.png", name: "Banner" },
     { src: "/iklan.png", name: "Banner" },
   ];
-
-  const { id_brand } = await searchParams;
-  const products = await getProducts(undefined, undefined, id_brand);
 
   return (
     <div className="space-y-between-section">
@@ -42,7 +34,7 @@ export default async function ShopPage({
         <div className="flex-1 space-y-8">
           <div className="flex justify-between items-center">
             <span className="text-gray-600 text-sm">
-              Showing {products.data.length} products per page
+              Showing ... products per page
             </span>
 
             <div className="flex gap-4">
