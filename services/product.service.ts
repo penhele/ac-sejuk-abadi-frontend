@@ -10,6 +10,8 @@ export const getProducts = async (
     params: { page, limit, id_brand },
   });
 
+  console.log(response.data);
+
   return response.data;
 };
 

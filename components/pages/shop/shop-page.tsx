@@ -14,6 +14,12 @@ import {
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "../../fallback/error-fallback";
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
+import { getProducts } from "@/services/product.service";
 
 export default async function ShopPage() {
   const banner = [
@@ -21,6 +27,19 @@ export default async function ShopPage() {
     { src: "/iklan.png", name: "Banner" },
     { src: "/iklan.png", name: "Banner" },
   ];
+
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: ["products", { page: 1, limit: 30 }],
+    queryFn: ({ queryKey }) => {
+      const [_key, params] = queryKey as [
+        string,
+        { page: number; limit: number },
+      ];
+      return getProducts(params.page, params.limit);
+    },
+  });
 
   return (
     <div className="space-y-between-section">
@@ -59,19 +78,21 @@ export default async function ShopPage() {
           </div>
 
           <div className="">
-            <ErrorBoundary fallback={<ErrorFallback />}>
-              <Suspense
-                fallback={
-                  <div className="grid grid-cols-3 gap-between-card">
-                    {[...Array(3)].map((_, index) => (
-                      <ProductCardSkeleton key={index} />
-                    ))}
-                  </div>
-                }
-              >
-                <ProductGrid className="grid-cols-3!" />
-              </Suspense>
-            </ErrorBoundary>
+            <HydrationBoundary state={dehydrate(queryClient)}>
+              <ErrorBoundary fallback={<ErrorFallback />}>
+                <Suspense
+                  fallback={
+                    <div className="grid grid-cols-3 gap-between-card">
+                      {[...Array(3)].map((_, index) => (
+                        <ProductCardSkeleton key={index} />
+                      ))}
+                    </div>
+                  }
+                >
+                  <ProductGrid className="grid-cols-3!" />
+                </Suspense>
+              </ErrorBoundary>
+            </HydrationBoundary>
           </div>
         </div>
       </div>

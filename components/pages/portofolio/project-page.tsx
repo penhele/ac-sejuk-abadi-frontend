@@ -23,9 +23,7 @@ export default async function ProjectPage() {
     queryFn: getProjects,
   });
 
-  const initialProjects = queryClient.getQueryData<Project[]>(["projects"]);
-
-  return (
+    return (
     <div className="space-y-between-section">
       <BreadcrumbComponent />
 
@@ -75,7 +73,7 @@ export default async function ProjectPage() {
               </div>
             }
           >
-            <ProjectGrid initialProjects={initialProjects} />
+            <ProjectGrid />
           </Suspense>
         </ErrorBoundary>
       </HydrationBoundary>

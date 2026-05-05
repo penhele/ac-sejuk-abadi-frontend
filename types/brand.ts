@@ -3,6 +3,7 @@ export interface Brand {
   name: string;
   image_url: string | null;
   _count: BrandCount;
+  is_deleted: boolean;
 }
 
 export interface BrandCount {

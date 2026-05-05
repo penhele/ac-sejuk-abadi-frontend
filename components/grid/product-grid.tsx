@@ -13,8 +13,10 @@ export default function ProductGrid({
   className?: string;
 }) {
   const { data: response } = useSuspenseQuery({
-    queryKey: ["products"],
-    queryFn: () => getProducts(),
+    queryKey: ["products", { page: 1, limit: 30 }],
+    queryFn: () => getProducts(1, 30),
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
   });
 
   const products = response.data || [];

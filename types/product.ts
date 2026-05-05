@@ -1,6 +1,6 @@
 import { Brand } from "./brand";
 import { ProductCategory } from "./category";
-import { Discounts } from "./discount";
+import { Discount } from "./discount";
 
 export interface Product {
   id: string;
@@ -13,17 +13,15 @@ export interface Product {
   pk: string;
   created_at: string;
   updated_at: string;
+  is_deleted: boolean;
+
   brand: Brand;
   categories: ProductCategory[];
   images: any[];
-  discounts: Discounts[];
-  reviews: any[];
-  featuredProducts: any[];
+  discounts: Discount[];
 }
 
 export interface ProductResponse {
-  success: boolean;
-  message: string;
   data: Product[];
   meta: {
     total: number;

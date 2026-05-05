@@ -1,6 +1,7 @@
 export interface CategoryDetail {
   id: number;
   name: string;
+  is_deleted: boolean;
 }
 
 export interface ProductCategory {

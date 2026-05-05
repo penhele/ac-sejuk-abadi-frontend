@@ -6,15 +6,10 @@ import { SearchX } from "lucide-react";
 import ProjectList from "../lists/project-list";
 import { Project } from "@/types/project";
 
-export default function ProjectGrid({
-  initialProjects,
-}: {
-  initialProjects?: Project[];
-}) {
+export default function ProjectGrid() {
   const { data: projects } = useSuspenseQuery({
     queryKey: ["projects"],
     queryFn: getProjects,
-    initialData: initialProjects,
     refetchOnWindowFocus: false,
     refetchOnMount: false,
     staleTime: 5 * 60 * 1000,
