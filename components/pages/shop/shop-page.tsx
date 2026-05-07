@@ -15,7 +15,7 @@ import { getProducts } from "@/services/product.service";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "../../fallback/error-fallback";
-import LoadMoreSection from "@/components/sections/load-more-section";
+import LoadMoreButton from "@/components/buttons/load-more-button";
 
 export default async function ShopPage() {
   const banner = [
@@ -78,7 +78,7 @@ export default async function ShopPage() {
             </ErrorBoundary>
           </div>
 
-          <LoadMoreSection />
+          <LoadMoreButton />
         </div>
       </div>
     </div>

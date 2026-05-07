@@ -6,7 +6,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { Button } from "../ui/button";
 import { Spinner } from "../ui/spinner";
 
-export default function PaginationSection() {
+export default function LoadMoreButton() {
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage } =
     useInfiniteQuery(getProductsInfiniteQueryOptions());
 
@@ -17,6 +17,7 @@ export default function PaginationSection() {
       <Button
         className={cn("w-full")}
         onClick={() => hasNextPage && fetchNextPage()}
+        disabled={isFetchingNextPage || !hasNextPage}
       >
         {isFetchingNextPage ? <Spinner /> : "Load More"}
       </Button>
