@@ -1,7 +1,7 @@
 "use client";
 
-import getProductsQueryOptions from "@/hooks/queries/product-queries";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { getProductsInfiniteQueryOptions } from "@/hooks/queries/product-queries";
+import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
 import { SearchX } from "lucide-react";
 import ProductList from "../lists/product-list";
 
@@ -12,9 +12,9 @@ export default function ProductGrid({
   limit?: number;
   className?: string;
 }) {
-  const { data: response } = useSuspenseQuery(getProductsQueryOptions());
+  const { data } = useSuspenseInfiniteQuery(getProductsInfiniteQueryOptions());
 
-  const products = response.data || [];
+  const products = data?.pages.flatMap((page) => page.data);
 
   if (products.length === 0)
     return (

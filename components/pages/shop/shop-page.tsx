@@ -15,12 +15,9 @@ import { getProducts } from "@/services/product.service";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "../../fallback/error-fallback";
+import LoadMoreSection from "@/components/sections/load-more-section";
 
-export default async function ShopPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ id_brand?: string }>;
-}) {
+export default async function ShopPage() {
   const banner = [
     { src: "/iklan.png", name: "Banner" },
     { src: "/iklan.png", name: "Banner" },
@@ -80,6 +77,8 @@ export default async function ShopPage({
               </Suspense>
             </ErrorBoundary>
           </div>
+
+          <LoadMoreSection />
         </div>
       </div>
     </div>

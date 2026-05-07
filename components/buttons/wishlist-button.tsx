@@ -2,10 +2,7 @@
 
 import { getWishlistQueryOptions } from "@/hooks/queries/wishlist-queries";
 import { cn } from "@/lib/utils";
-import {
-  addToWishlist,
-  removeWishlist
-} from "@/services/wishlist.service";
+import { addToWishlist, removeWishlist } from "@/services/wishlist.service";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { toast } from "sonner";

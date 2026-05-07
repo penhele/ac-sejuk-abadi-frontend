@@ -93,7 +93,7 @@ export default async function Footer() {
               <h1 className="font-semibold text-xs tracking-widest uppercase">
                 Lokasi kami
               </h1>
-              
+
               <Maps className="w-full rounded-lg h-56" />
             </div>
 

@@ -1,8 +1,12 @@
 import { getProducts } from "@/services/product.service";
 import { GetProductOptions, ProductResponse } from "@/types/product";
-import { queryOptions, UseQueryOptions } from "@tanstack/react-query";
+import {
+  infiniteQueryOptions,
+  queryOptions,
+  UseQueryOptions,
+} from "@tanstack/react-query";
 
-export default function getProductsQueryOptions<
+export function getProductsQueryOptions<
   TData = ProductResponse,
   TError = Error,
 >(
@@ -16,5 +20,18 @@ export default function getProductsQueryOptions<
     ...options,
     queryKey: ["products", params],
     queryFn: () => getProducts(params),
+  });
+}
+
+export function getProductsInfiniteQueryOptions() {
+  return infiniteQueryOptions({
+    queryKey: ["products"],
+    queryFn: ({ pageParam }) => getProducts({ page: pageParam, limit: 6 }),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) => {
+      const hasMore = lastPage.meta.total_pages >= lastPage.meta.page;
+
+      return hasMore ? lastPage.meta.page + 1 : undefined;
+    },
   });
 }
