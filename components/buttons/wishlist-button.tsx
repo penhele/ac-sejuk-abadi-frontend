@@ -1,13 +1,12 @@
 "use client";
 
+import { getWishlistQueryOptions } from "@/hooks/queries/wishlist-queries";
 import { cn } from "@/lib/utils";
 import {
   addToWishlist,
-  getWishlist,
-  removeWishlist,
+  removeWishlist
 } from "@/services/wishlist.service";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import Cookies from "js-cookie";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { toast } from "sonner";
 import { Button } from "../ui/button";
@@ -20,24 +19,23 @@ export default function WishlistButton({
   className?: string;
 }) {
   const queryClient = useQueryClient();
-  const token = Cookies.get("access_token");
+  const queryOptions = getWishlistQueryOptions();
 
-  const { data: wishlistData } = useQuery({
-    queryKey: ["wishlist"],
-    queryFn: getWishlist,
-    enabled: !!token,
-  });
+  const { data: wishlistData } = useQuery(queryOptions);
 
   const existingItem = wishlistData?.items?.find(
     (item: any) => item.id_product === productId,
   );
+
   const isWishlisted = !!existingItem;
 
   const addMutation = useMutation({
     mutationFn: () => addToWishlist(productId),
     onSuccess: () => {
       toast.success("Ditambahkan ke wishlist");
-      queryClient.invalidateQueries({ queryKey: ["wishlist"] });
+      queryClient.invalidateQueries({
+        queryKey: queryOptions.queryKey,
+      });
     },
   });
 
@@ -45,7 +43,9 @@ export default function WishlistButton({
     mutationFn: () => removeWishlist(existingItem?.id!),
     onSuccess: () => {
       toast.success("Dihapus dari wishlist");
-      queryClient.invalidateQueries({ queryKey: ["wishlist"] });
+      queryClient.invalidateQueries({
+        queryKey: queryOptions.queryKey,
+      });
     },
   });
 

@@ -1,16 +1,13 @@
 "use client";
 
 import EmptyState from "@/components/empty-state/empty-state";
-import { getWishlist } from "@/services/wishlist.service";
+import { getWishlistQueryOptions } from "@/hooks/queries/wishlist-queries";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import ProductList from "../lists/product-list";
 import { Cuboid } from "lucide-react";
+import ProductList from "../lists/product-list";
 
 export default function WishlistGrid() {
-  const { data: response } = useSuspenseQuery({
-    queryKey: ["wishlist"],
-    queryFn: () => getWishlist(),
-  });
+  const { data: response } = useSuspenseQuery(getWishlistQueryOptions());
 
   const products = response?.items?.map((item) => item.product) || [];
 

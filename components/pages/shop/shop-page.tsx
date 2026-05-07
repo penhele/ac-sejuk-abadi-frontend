@@ -27,8 +27,7 @@ export default async function ShopPage({
     { src: "/iklan.png", name: "Banner" },
   ];
 
-  const { id_brand } = await searchParams;
-  const products = await getProducts(undefined, undefined, id_brand);
+  const products = await getProducts();
 
   return (
     <div className="space-y-between-section">
