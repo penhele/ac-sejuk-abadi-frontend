@@ -4,12 +4,10 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { getProjects } from "@/services/project.service";
 import { SearchX } from "lucide-react";
 import ProjectList from "../lists/project-list";
+import getProjectsQueryOptions from "@/hooks/queries/project-queries";
 
 export default function ProjectGrid() {
-  const { data: response } = useSuspenseQuery({
-    queryKey: ["projects"],
-    queryFn: getProjects,
-  });
+  const { data: response } = useSuspenseQuery(getProjectsQueryOptions());
 
   const projects = response || [];
 

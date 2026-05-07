@@ -32,3 +32,14 @@ export interface ProductResponse {
     total_pages: number;
   };
 }
+
+export interface GetProductOptions {
+  search?: string;
+  id_category?: number | string;
+  min_price?: number | string;
+  max_price?: number | string;
+  sortBy?: "price" | "name" | "created_at" | "quantity";
+  sortOrder?: "asc" | "desc";
+  page?: number;
+  limit?: number;
+}

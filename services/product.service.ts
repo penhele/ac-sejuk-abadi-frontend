@@ -1,13 +1,11 @@
 import { api } from "@/lib/api/axios";
-import { Product, ProductResponse } from "@/types/product";
+import { GetProductOptions, Product, ProductResponse } from "@/types/product";
 
 export const getProducts = async (
-  page = 1,
-  limit = 30,
-  id_brand?: string,
+  options?: GetProductOptions,
 ): Promise<ProductResponse> => {
   const response = await api.get<ProductResponse>("/products", {
-    params: { page, limit, id_brand },
+    params: options,
   });
 
   return response.data;
