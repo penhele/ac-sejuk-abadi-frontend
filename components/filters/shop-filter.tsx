@@ -2,6 +2,7 @@ import { getBrands } from "@/services/brand.service";
 import BrandFilter from "./brand-filter";
 import PriceFilter from "./price-filter";
 import { useQuery } from "@tanstack/react-query";
+import RangePriceFilter from "./range-price-filter";
 
 export default function ShopFilter() {
   const { data: response } = useQuery({
@@ -18,7 +19,7 @@ export default function ShopFilter() {
       <div className="flex flex-col space-y-8 border rounded-lg p-4">
         <BrandFilter brands={brands} />
 
-        <PriceFilter />
+        <RangePriceFilter />
       </div>
     </aside>
   );

@@ -17,6 +17,12 @@ export default function useProductFilters() {
   const id_brand =
     (searchParams.get("id_brand") as GetProductOptions["id_category"]) ??
     undefined;
+  const min_price =
+    (searchParams.get("min_price") as GetProductOptions["min_price"]) ??
+    undefined;
+  const max_price =
+    (searchParams.get("max_price") as GetProductOptions["max_price"]) ??
+    undefined;
 
   const setFilters = useCallback(
     (filters: GetProductOptions) => {
@@ -34,6 +40,8 @@ export default function useProductFilters() {
       if ("sortBy" in filters) applyFilter("sortBy", filters.sortBy);
       if ("sortOrder" in filters) applyFilter("sortOrder", filters.sortOrder);
       if ("id_brand" in filters) applyFilter("id_brand", filters.id_brand);
+      if ("min_price" in filters) applyFilter("min_price", filters.min_price);
+      if ("max_price" in filters) applyFilter("max_price", filters.max_price);
 
       router.push(`${pathname}?${params.toString()}`, { scroll: false });
     },
@@ -45,6 +53,8 @@ export default function useProductFilters() {
     sortBy,
     sortOrder,
     id_brand,
+    min_price,
+    max_price,
     setFilters,
   };
 }

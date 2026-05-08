@@ -10,7 +10,7 @@ export default function EmptyState({
 }: {
   Icon: LucideIcon;
   label: string;
-  description: string;
+  description?: string;
   buttonLabel?: string;
 }) {
   return (
