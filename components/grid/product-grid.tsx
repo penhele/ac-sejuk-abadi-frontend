@@ -7,10 +7,10 @@ import ProductList from "../lists/product-list";
 import useProductFilters from "@/hooks/use-product-filters";
 
 export default function ProductGrid({ className }: { className?: string }) {
-  const { search, sortBy, sortOrder } = useProductFilters();
+  const { search, sortBy, sortOrder, id_brand } = useProductFilters();
 
   const { data } = useSuspenseInfiniteQuery(
-    getProductsInfiniteQueryOptions({ search, sortBy, sortOrder }),
+    getProductsInfiniteQueryOptions({ search, sortBy, sortOrder, id_brand }),
   );
 
   const products = data?.pages.flatMap((page) => page.data);
