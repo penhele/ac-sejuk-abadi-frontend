@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { Field, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
+import { ROUTES } from "@/contants/routes";
 
 export default function ForgotPasswordForm() {
   return (
@@ -32,7 +33,7 @@ export default function ForgotPasswordForm() {
         <Field>
           <Button>Reset Password</Button>
 
-          <Link href={"/login"}>
+          <Link href={ROUTES.LOGIN}>
             <Button variant={"outline"} className="w-full">
               Back to login
             </Button>

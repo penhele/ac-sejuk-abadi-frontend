@@ -7,6 +7,7 @@ import { ButtonGroup } from "../ui/button-group";
 import { Input } from "../ui/input";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import { ROUTES } from "@/contants/routes";
 
 export default function NavAction() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -47,11 +48,11 @@ export default function NavAction() {
       <div className="flex flex-row gap-2 items-center">
         {!isLoggedIn && (
           <>
-            <Link href={"/register"}>
+            <Link href={ROUTES.REGISTER}>
               <Button variant={"ghost"}>Register</Button>
             </Link>
 
-            <Link href={"/login"}>
+            <Link href={ROUTES.LOGIN}>
               <Button>Login</Button>
             </Link>
           </>

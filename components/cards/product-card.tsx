@@ -6,6 +6,7 @@ import { AspectRatio } from "../ui/aspect-ratio";
 import { Button } from "../ui/button";
 import DiscountBadge from "../util/discount-badge";
 import { formatRupiah } from "@/lib/format/currency";
+import { ROUTES } from "@/contants/routes";
 
 export default function ProductCard({ product }: { product: Product }) {
   const hasDiscount = product.discounts && product.discounts.length > 0;
@@ -17,7 +18,7 @@ export default function ProductCard({ product }: { product: Product }) {
   const discountPercentage = (discountPrice / originalPrice) * 100;
 
   return (
-    <Link href={`/shop/${product.id}`}>
+    <Link href={ROUTES.PRODUCT_DETAIL(product.id)}>
       <div className="group block overflow-hidden rounded-xl bg-white shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border">
         <div className="relative">
           <AspectRatio ratio={1 / 1} className="bg-muted rounded-t-md" />

@@ -15,6 +15,7 @@ import FooterList from "../lists/footer-list";
 import SponsoredBrandList from "../lists/sponsored-brand-list";
 import Maps from "../maps/maps";
 import { Separator } from "../ui/separator";
+import { ROUTES } from "@/contants/routes";
 
 export default async function Footer() {
   const categoryList = [
@@ -29,8 +30,8 @@ export default async function Footer() {
   const quickLinks = [
     { name: "Tentang Kami", href: "/about-us" },
     { name: "Layanan Kami", href: "/services" },
-    { name: "Proyek / Portofolio", href: "/portofolio" },
-    { name: "Katalog Produk", href: "/shop" },
+    { name: "Proyek / Portofolio", href: ROUTES.PORTOFOLIO },
+    { name: "Katalog Produk", href: ROUTES.SHOP },
     { name: "Hubungi Kami", href: "/contact" },
     { name: "FAQ", href: "/faq" },
   ];

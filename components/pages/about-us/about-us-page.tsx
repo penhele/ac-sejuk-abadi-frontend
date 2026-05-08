@@ -1,5 +1,6 @@
 import ProjectGrid from "@/components/grid/project-grid";
 import { HeaderSection } from "@/components/util/header";
+import { ROUTES } from "@/contants/routes";
 import { getCompany } from "@/services/company.service";
 import { getStaff } from "@/services/staff.service";
 import { ImageOff, Mail, MapPin, Phone } from "lucide-react";
@@ -97,7 +98,7 @@ export default async function AboutUsPage() {
         </div>
 
         <div className="">
-          <HeaderSection title="Portofolio" href="/portofolio" />
+          <HeaderSection title="Portofolio" href={ROUTES.PORTOFOLIO} />
           <ProjectGrid />
         </div>
       </div>

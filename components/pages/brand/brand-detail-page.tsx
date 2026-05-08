@@ -10,6 +10,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { HeaderSection } from "@/components/util/header";
+import { ROUTES } from "@/contants/routes";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -100,7 +101,7 @@ export default function BrandDetailPage() {
       </div>
 
       <div className="">
-        <HeaderSection title="Produk Daikin" href="/shop/" />
+        <HeaderSection title="Produk Daikin" href={ROUTES.SHOP} />
 
         <ProductGrid />
       </div>

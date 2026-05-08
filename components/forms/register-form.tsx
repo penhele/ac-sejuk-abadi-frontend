@@ -12,6 +12,7 @@ import { Button } from "../ui/button";
 import { Field, FieldDescription, FieldSeparator } from "../ui/field";
 import { Spinner } from "../ui/spinner";
 import { registerSchema } from "@/schemas/auth.schema";
+import { ROUTES } from "@/contants/routes";
 
 export default function RegisterForm() {
   const router = useRouter();
@@ -22,7 +23,7 @@ export default function RegisterForm() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["register"] });
       toast.success("Register berhasil");
-      router.push("/login");
+      router.push(ROUTES.LOGIN);
     },
     onError: (error: any) => {
       const errorMessage =
@@ -151,7 +152,7 @@ export default function RegisterForm() {
 
           <FieldDescription className="text-center">
             Have an account?{" "}
-            <Link href="/login" className="underline underline-offset-4">
+            <Link href={ROUTES.LOGIN} className="underline underline-offset-4">
               Sign in
             </Link>
           </FieldDescription>

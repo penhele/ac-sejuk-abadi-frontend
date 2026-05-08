@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { ROUTES } from "@/contants/routes";
 import { LucideIcon } from "lucide-react";
 import Link from "next/link";
 
@@ -22,7 +23,7 @@ export default function EmptyState({
         <span className="text-sm text-gray-400">{description}</span>
       </div>
 
-      <Link href={"/shop"}>
+      <Link href={ROUTES.SHOP}>
         <Button>{buttonLabel ?? "Browse Products"} </Button>
       </Link>
     </div>

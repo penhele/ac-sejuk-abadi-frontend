@@ -1,20 +1,19 @@
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
+  navigationMenuTriggerStyle
 } from "@/components/ui/navigation-menu";
+import { ROUTES } from "@/contants/routes";
 import Link from "next/link";
 
 export default function NavItem() {
   const menuItems: { label: string; href: string }[] = [
-    { label: "Beranda", href: "/" },
-    { label: "Toko", href: "/shop" },
-    { label: "Portofolio", href: "/portofolio" },
-    { label: "Edukasi", href: "/education" },
+    { label: "Beranda", href: ROUTES.HOME },
+    { label: "Toko", href: ROUTES.SHOP },
+    { label: "Portofolio", href: ROUTES.PORTOFOLIO },
+    { label: "Edukasi", href: ROUTES.EDUCATION },
   ];
 
   return (
