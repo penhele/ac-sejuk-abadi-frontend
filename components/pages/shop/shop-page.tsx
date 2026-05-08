@@ -17,9 +17,9 @@ import ErrorFallback from "../../fallback/error-fallback";
 
 export default function ShopPage() {
   const banner = [
-    { src: "/iklan.png", name: "Banner" },
-    { src: "/iklan.png", name: "Banner" },
-    { src: "/iklan.png", name: "Banner" },
+    { src: "/images/banners/1.png", name: "Banner" },
+    { src: "/images/banners/2.png", name: "Banner" },
+    { src: "/images/banners/3.png", name: "Banner" },
   ];
 
   usePrefetchInfiniteQuery(getProductsInfiniteQueryOptions());

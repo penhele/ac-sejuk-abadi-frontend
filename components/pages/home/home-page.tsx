@@ -19,9 +19,9 @@ import { ErrorBoundary } from "react-error-boundary";
 
 export default function HomePage() {
   const banner = [
-    { src: "/iklan.png", name: "Banner" },
-    { src: "/iklan.png", name: "Banner" },
-    { src: "/iklan.png", name: "Banner" },
+    { src: "/images/banners/1.png", name: "Banner" },
+    { src: "/images/banners/2.png", name: "Banner" },
+    { src: "/images/banners/3.png", name: "Banner" },
   ];
 
   return (
@@ -52,7 +52,7 @@ export default function HomePage() {
               </div>
             }
           >
-            <ProductGrid limit={4} />
+            <ProductGrid />
           </Suspense>
         </ErrorBoundary>
       </div>
