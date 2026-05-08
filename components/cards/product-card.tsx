@@ -47,13 +47,12 @@ export default function ProductCard({ product }: { product: Product }) {
             <div className="flex flex-col min-h-8 justify-end">
               {discountPrice != 0 && (
                 <span className="line-through text-xs">
-                  IDR {formatRupiah(originalPrice)}
+                  {formatRupiah(originalPrice)}
                 </span>
               )}
 
               <div className="flex flex-row gap-1">
                 <span>
-                  IDR{" "}
                   {formatRupiah(
                     discountPrice != 0 ? discountPrice : originalPrice,
                   )}

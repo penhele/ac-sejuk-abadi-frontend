@@ -33,13 +33,17 @@ export interface ProductResponse {
   };
 }
 
+export type SortOrder = "asc" | "desc";
+export type SortBy = "price" | "date";
+
 export interface GetProductOptions {
   search?: string;
   id_category?: number | string;
+  id_brand?: number | string;
   min_price?: number | string;
   max_price?: number | string;
-  sortBy?: "price" | "name" | "created_at" | "quantity";
-  sortOrder?: "asc" | "desc";
+  sortBy?: SortBy;
+  sortOrder?: SortOrder;
   page?: number;
   limit?: number;
 }

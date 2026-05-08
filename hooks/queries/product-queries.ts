@@ -23,10 +23,11 @@ export function getProductsQueryOptions<
   });
 }
 
-export function getProductsInfiniteQueryOptions() {
+export function getProductsInfiniteQueryOptions(params?: GetProductOptions) {
   return infiniteQueryOptions({
-    queryKey: ["products"],
-    queryFn: ({ pageParam }) => getProducts({ page: pageParam, limit: 6 }),
+    queryKey: ["products", "infinite", params],
+    queryFn: ({ pageParam }) =>
+      getProducts({ page: pageParam, limit: 6, ...params }),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
       if (!lastPage?.meta) return undefined;
