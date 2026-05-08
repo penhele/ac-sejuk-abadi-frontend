@@ -3,7 +3,7 @@ import { queryOptions } from "@tanstack/react-query";
 
 export default function getProjectsQueryOptions() {
   return queryOptions({
-    queryKey: ["products"],
+    queryKey: ["projects"],
     queryFn: getProjects,
   });
 }

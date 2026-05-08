@@ -1,14 +1,10 @@
 import ShopPage from "@/components/pages/shop/shop-page";
 
-export default function Page({
-  searchParams,
-}: {
-  searchParams: Promise<{ id_brand?: string }>;
-}) {
+export default function Page() {
   return (
     <div className="max-w-7xl mx-auto">
       <div className="py-default-page">
-        <ShopPage searchParams={searchParams} />
+        <ShopPage />
       </div>
     </div>
   );

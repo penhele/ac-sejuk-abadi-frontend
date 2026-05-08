@@ -1,4 +1,7 @@
+"use client";
+
 import BreadcrumbComponent from "@/components/breadcrumb-component";
+import LoadMoreButton from "@/components/buttons/load-more-button";
 import CarouselBanner from "@/components/carousel/carousel-banner";
 import ShopFilter from "@/components/filters/shop-filter";
 import ProductGrid from "@/components/grid/product-grid";
@@ -11,20 +14,25 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { getProducts } from "@/services/product.service";
+import {
+  getProductsInfiniteQueryOptions,
+  getProductsQueryOptions,
+} from "@/hooks/queries/product-queries";
+import { usePrefetchInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "../../fallback/error-fallback";
-import LoadMoreButton from "@/components/buttons/load-more-button";
+import TotalItems from "@/components/total-items";
 
-export default async function ShopPage() {
+export default function ShopPage() {
   const banner = [
     { src: "/iklan.png", name: "Banner" },
     { src: "/iklan.png", name: "Banner" },
     { src: "/iklan.png", name: "Banner" },
   ];
 
-  const products = await getProducts();
+  usePrefetchInfiniteQuery(getProductsInfiniteQueryOptions());
+  const { data } = useQuery(getProductsQueryOptions());
 
   return (
     <div className="space-y-between-section">
@@ -37,9 +45,7 @@ export default async function ShopPage() {
 
         <div className="flex-1 space-y-8">
           <div className="flex justify-between items-center">
-            <span className="text-gray-600 text-sm">
-              Showing {products.data.length} products per page
-            </span>
+            <TotalItems total={data?.data.length || 0} />
 
             <div className="flex gap-4">
               <div className="flex space-x-2 items-center">

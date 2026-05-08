@@ -1,4 +1,5 @@
 import BrandCard from "@/components/cards/brand-card";
+import ProductGrid from "@/components/grid/product-grid";
 import ProductList from "@/components/lists/product-list";
 import {
   Breadcrumb,
@@ -9,7 +10,6 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { HeaderSection } from "@/components/util/header";
-import { DUMMY_PRODUCTS } from "@/constants/products";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -102,11 +102,7 @@ export default function BrandDetailPage() {
       <div className="">
         <HeaderSection title="Produk Daikin" href="/shop/" />
 
-        <ProductList
-          className="grid-cols-4!"
-          products={DUMMY_PRODUCTS}
-          limit={4}
-        />
+        <ProductGrid />
       </div>
 
       <div className="">

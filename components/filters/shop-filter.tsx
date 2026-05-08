@@ -1,9 +1,15 @@
 import { getBrands } from "@/services/brand.service";
 import BrandFilter from "./brand-filter";
 import PriceFilter from "./price-filter";
+import { useQuery } from "@tanstack/react-query";
 
-export default async function ShopFilter() {
-  const brands = await getBrands();
+export default function ShopFilter() {
+  const { data: response } = useQuery({
+    queryKey: ["brands"],
+    queryFn: getBrands,
+  });
+
+  const brands = response || [];
 
   return (
     <aside className="w-3xs sticky md:top-20 space-y-4">

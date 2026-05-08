@@ -1,18 +1,14 @@
 import { cn } from "@/lib/utils";
-import ProductCard from "../cards/product-card";
 import { Product } from "@/types/product";
+import ProductCard from "../cards/product-card";
 
 export default function ProductList({
   products,
   className,
-  limit,
 }: {
   products: Product[];
   className?: string;
-  limit?: number;
 }) {
-  const displayedProducts = limit ? products.slice(0, limit) : products;
-
   return (
     <div
       className={cn(
@@ -20,7 +16,7 @@ export default function ProductList({
         className,
       )}
     >
-      {displayedProducts.map((product) => (
+      {products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}
     </div>

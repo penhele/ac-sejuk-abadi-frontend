@@ -1,14 +1,18 @@
+"use client";
+
 import BreadcrumbComponent from "@/components/breadcrumb-component";
 import ErrorFallback from "@/components/fallback/error-fallback";
 import ProjectGrid from "@/components/grid/project-grid";
 import ProjectCardSkeleton from "@/components/skeletons/project-card-skeleton";
+import TotalItems from "@/components/total-items";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { getProjects } from "@/services/project.service";
+import getProjectsQueryOptions from "@/hooks/queries/project-queries";
+import { useQuery } from "@tanstack/react-query";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
-export default async function ProjectPage() {
-  const projects = await getProjects();
+export default function ProjectPage() {
+  const { data } = useQuery(getProjectsQueryOptions());
 
   return (
     <div className="space-y-between-section">
@@ -44,8 +48,9 @@ export default async function ProjectPage() {
       </div>
 
       <div className="">
+        <TotalItems total={data?.length || 0} />
         <span className="text-sm text-gray-400">
-          Menampilkan {projects.length} Proyek Unggulan
+          {/* Menampilkan {projects.length} Proyek Unggulan */}
         </span>
       </div>
 

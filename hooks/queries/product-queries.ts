@@ -29,7 +29,8 @@ export function getProductsInfiniteQueryOptions() {
     queryFn: ({ pageParam }) => getProducts({ page: pageParam, limit: 6 }),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
-      const hasMore = lastPage.meta.total_pages >= lastPage.meta.page;
+      if (!lastPage?.meta) return undefined;
+      const hasMore = lastPage.meta.total_pages > lastPage.meta.page;
 
       return hasMore ? lastPage.meta.page + 1 : undefined;
     },

@@ -7,19 +7,18 @@ import { Button } from "../ui/button";
 import { Spinner } from "../ui/spinner";
 
 export default function LoadMoreButton() {
-  const { data, hasNextPage, fetchNextPage, isFetchingNextPage } =
-    useInfiniteQuery(getProductsInfiniteQueryOptions());
-
-  const lastPage = data?.pages[data.pages.length - 1];
+  const { hasNextPage, fetchNextPage, isFetchingNextPage } = useInfiniteQuery(
+    getProductsInfiniteQueryOptions(),
+  );
 
   return (
     <div>
       <Button
         className={cn("w-full")}
         onClick={() => hasNextPage && fetchNextPage()}
-        disabled={isFetchingNextPage || !hasNextPage}
+        disabled={!hasNextPage}
       >
-        {isFetchingNextPage ? <Spinner /> : "Load More"}
+        {isFetchingNextPage ? <Spinner /> : "Muat lebih banyak"}
       </Button>
     </div>
   );
