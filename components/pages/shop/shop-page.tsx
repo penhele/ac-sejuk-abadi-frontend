@@ -23,6 +23,7 @@ import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "../../fallback/error-fallback";
 import TotalItems from "@/components/total-items";
+import SearchFilter from "@/components/filters/search-filter";
 
 export default function ShopPage() {
   const banner = [
@@ -48,7 +49,9 @@ export default function ShopPage() {
             <TotalItems total={data?.data.length || 0} />
 
             <div className="flex gap-4">
-              <div className="flex space-x-2 items-center">
+              <SearchFilter />
+
+              <div className="flex space-x-2 items-center ">
                 <span className="w-full text-gray-600 text-sm">
                   Urutkan dari :
                 </span>

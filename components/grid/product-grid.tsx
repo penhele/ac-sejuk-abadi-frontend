@@ -4,15 +4,14 @@ import { getProductsInfiniteQueryOptions } from "@/hooks/queries/product-queries
 import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
 import { SearchX } from "lucide-react";
 import ProductList from "../lists/product-list";
+import useProductFilters from "@/hooks/use-product-filters";
 
-export default function ProductGrid({
-  limit,
-  className,
-}: {
-  limit?: number;
-  className?: string;
-}) {
-  const { data } = useSuspenseInfiniteQuery(getProductsInfiniteQueryOptions());
+export default function ProductGrid({ className }: { className?: string }) {
+  const { search } = useProductFilters();
+
+  const { data } = useSuspenseInfiniteQuery(
+    getProductsInfiniteQueryOptions({ search }),
+  );
 
   const products = data?.pages.flatMap((page) => page.data);
 
@@ -24,7 +23,5 @@ export default function ProductGrid({
       </div>
     );
 
-  return (
-    <ProductList products={products} className={className} limit={limit} />
-  );
+  return <ProductList products={products} className={className} />;
 }
