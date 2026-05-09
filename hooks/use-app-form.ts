@@ -1,6 +1,7 @@
 "use client";
 
 import TextField from "@/components/fields/text-field";
+import TextareaField from "@/components/fields/textarea-field";
 import { createFormHook, createFormHookContexts } from "@tanstack/react-form";
 
 export const { fieldContext, formContext, useFieldContext } =
@@ -11,6 +12,7 @@ export const { useAppForm } = createFormHook({
   formContext,
   fieldComponents: {
     TextField,
+    TextareaField,
   },
   formComponents: {},
 });

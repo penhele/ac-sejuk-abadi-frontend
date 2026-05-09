@@ -1,7 +1,6 @@
 import { getBrands } from "@/services/brand.service";
-import BrandFilter from "./brand-filter";
-import PriceFilter from "./price-filter";
 import { useQuery } from "@tanstack/react-query";
+import BrandFilter from "./brand-filter";
 import RangePriceFilter from "./range-price-filter";
 
 export default function ShopFilter() {

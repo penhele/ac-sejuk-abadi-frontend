@@ -8,8 +8,13 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { Button } from "../ui/button";
 import { UpdateUserPayload } from "@/types/user";
+import { cn } from "@/lib/utils";
 
-export default function PersonaLInformationForm() {
+export default function PersonaLInformationForm({
+  className,
+}: {
+  className?: string;
+}) {
   const queryClient = useQueryClient();
   const [isEditing, setIsEditing] = useState(false);
 
@@ -50,10 +55,13 @@ export default function PersonaLInformationForm() {
         e.preventDefault();
         handleSubmit();
       }}
-      className="border p-8 rounded-lg space-y-8 "
+      className={cn(
+        "border p-inside-card rounded-lg space-y-8 shadow-xs",
+        className,
+      )}
     >
       <div className="flex flex-row justify-between">
-        <h1 className="text-lg font-semibold">Informasi Personal</h1>
+        <h1 className="font-semibold">Informasi Pribadi</h1>
 
         <Button
           variant={isEditing ? "default" : "outline"}
@@ -64,7 +72,7 @@ export default function PersonaLInformationForm() {
         </Button>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="">
         <AppField
           name="first_name"
           children={(field) => (

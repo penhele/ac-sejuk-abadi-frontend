@@ -1,31 +1,112 @@
 import AddressForm from "@/components/forms/address-form";
 import PersonaLInformationForm from "@/components/forms/personal-information-form";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
 
 export default function AccountPage() {
+  const items = [
+    {
+      value: "item-1",
+      trigger: "Pembelian",
+      content: [
+        {
+          label: "Daftar Transaksi",
+        },
+        {
+          label: "Menunggu Pembayaran",
+        },
+      ],
+    },
+    {
+      value: "item-2",
+      trigger: "Profil",
+      content: [
+        {
+          label: "Daftar Transaksi",
+        },
+        {
+          label: "Pengaturan",
+        },
+      ],
+    },
+  ];
+
   return (
-    <div className="min-h-screen">
-      <div className="">
-        <Tabs
-          defaultValue="account"
-          orientation="vertical"
-          className="space-x-10"
-        >
-          <TabsList className="w-56">
-            <TabsTrigger value="account">Account</TabsTrigger>
-            <TabsTrigger value="password">Password</TabsTrigger>
-            <TabsTrigger value="notifications">Notifications</TabsTrigger>
-          </TabsList>
+    <div className="flex flex-row space-x-between-section h-fit">
+      <div className="min-w-3xs border p-inside-card rounded-lg">
+        <div className="">
+          {items.map((item, index) => (
+            <Accordion
+              key={index}
+              type="single"
+              collapsible
+              defaultValue={item.value}
+            >
+              <AccordionItem value={item.value}>
+                <AccordionTrigger className="font-bold">
+                  {item.trigger}
+                </AccordionTrigger>
 
-          <TabsContent value="account">
-            <div className="space-y-4">
-              <PersonaLInformationForm />
+                <AccordionContent key={index}>
+                  {item.content.map((subItem, index) => (
+                    <Button
+                      key={index}
+                      size={"xs"}
+                      variant={"ghost"}
+                      className="w-full justify-start font-normal h-8"
+                    >
+                      {subItem.label}
+                    </Button>
+                  ))}
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          ))}
+        </div>
+      </div>
 
-              <AddressForm />
-            </div>
-          </TabsContent>
-        </Tabs>
+      <div className="grid grid-cols-2 gap-4 h-fit">
+        <PersonaLInformationForm />
+
+        <AddressForm />
       </div>
     </div>
   );
 }
+
+// import AddressForm from "@/components/forms/address-form";
+// import PersonaLInformationForm from "@/components/forms/personal-information-form";
+// import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
+// export default function AccountPage() {
+//   return (
+//     <div className="min-h-screen">
+//       <div className="">
+//         <Tabs
+//           defaultValue="account"
+//           orientation="vertical"
+//           className="space-x-10"
+//         >
+//           <TabsList className="w-56">
+//             <TabsTrigger value="account">Account</TabsTrigger>
+//             <TabsTrigger value="password">Password</TabsTrigger>
+//             <TabsTrigger value="notifications">Notifications</TabsTrigger>
+//           </TabsList>
+
+//           <TabsContent value="account">
+//             <div className="space-y-4">
+//               <PersonaLInformationForm />
+
+//               <AddressForm />
+//             </div>
+//           </TabsContent>
+//         </Tabs>
+//       </div>
+//     </div>
+//   );
+// }

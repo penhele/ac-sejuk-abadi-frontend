@@ -8,8 +8,9 @@ import { useState } from "react";
 import { Button } from "../ui/button";
 import { UpdateUserPayload } from "@/types/user";
 import { toast } from "sonner";
+import { cn } from "@/lib/utils";
 
-export default function AddressForm() {
+export default function AddressForm({ className }: { className?: string }) {
   const queryClient = useQueryClient();
   const [isEditing, setIsEditing] = useState(false);
 
@@ -51,10 +52,13 @@ export default function AddressForm() {
         e.preventDefault();
         handleSubmit();
       }}
-      className="border p-8 rounded-lg space-y-8 "
+      className={cn(
+        "border p-inside-card rounded-lg space-y-8 shadow-xs",
+        className,
+      )}
     >
       <div className="flex flex-row justify-between">
-        <h1 className="text-lg font-semibold">Alamat</h1>
+        <h1 className=" font-semibold">Alamat</h1>
 
         <Button
           variant={isEditing ? "default" : "outline"}
@@ -65,42 +69,40 @@ export default function AddressForm() {
         </Button>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="">
         <AppField
           name="address"
           children={(field) => (
             <field.TextField label="Alamat" isDisable={!isEditing} />
           )}
         />
-        <div className="flex flex-row gap-4">
+        <AppField
+          name="zip_code"
+          children={(field) => (
+            <field.TextField label="Kode Pos" isDisable={!isEditing} />
+          )}
+        />
+        <div className="grid grid-cols-2 gap-4">
           <AppField
-            name="zip_code"
+            name="rt"
             children={(field) => (
-              <field.TextField label="Kode Pos" isDisable={!isEditing} />
+              <field.TextField
+                label="RT"
+                isDisable={!isEditing}
+                type="number"
+              />
             )}
           />
-          <div className="flex flex-row gap-4">
-            <AppField
-              name="rt"
-              children={(field) => (
-                <field.TextField
-                  label="RT"
-                  isDisable={!isEditing}
-                  type="number"
-                />
-              )}
-            />
-            <AppField
-              name="rw"
-              children={(field) => (
-                <field.TextField
-                  label="RW"
-                  isDisable={!isEditing}
-                  type="number"
-                />
-              )}
-            />
-          </div>
+          <AppField
+            name="rw"
+            children={(field) => (
+              <field.TextField
+                label="RW"
+                isDisable={!isEditing}
+                type="number"
+              />
+            )}
+          />
         </div>
       </div>
     </form>
