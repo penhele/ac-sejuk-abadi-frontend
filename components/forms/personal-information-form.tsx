@@ -10,7 +10,7 @@ import { Button } from "../ui/button";
 import { UpdateUserPayload } from "@/types/user";
 import { cn } from "@/lib/utils";
 
-export default function  PersonaLInformationForm({
+export default function PersonaLInformationForm({
   className,
 }: {
   className?: string;

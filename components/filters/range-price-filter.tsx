@@ -15,25 +15,36 @@ export default function RangePriceFilter() {
   const STEP = 100000;
 
   const [value, setValue] = useState<number[]>([
-    Number(min_price) || MIN_LIMIT,
-    Number(max_price) || MAX_LIMIT,
+    min_price ? Number(min_price) : MIN_LIMIT,
+    max_price ? Number(max_price) : MAX_LIMIT,
   ]);
 
   const debouncedValue = useDebounce(value, 500);
 
   useEffect(() => {
-    const isDefault =
-      debouncedValue[0] === MIN_LIMIT && debouncedValue[1] === MAX_LIMIT;
+    setValue([
+      min_price ? Number(min_price) : MIN_LIMIT,
+      max_price ? Number(max_price) : MAX_LIMIT,
+    ]);
+  }, [min_price, max_price]);
 
-    if (isDefault) {
-      setFilters({ min_price: undefined, max_price: undefined });
-    } else {
+  useEffect(() => {
+    const currentMin = debouncedValue[0];
+    const currentMax = debouncedValue[1];
+
+    const isDifferent =
+      currentMin !== (min_price ? Number(min_price) : MIN_LIMIT) ||
+      currentMax !== (max_price ? Number(max_price) : MAX_LIMIT);
+
+    if (isDifferent) {
+      const isDefault = currentMin === MIN_LIMIT && currentMax === MAX_LIMIT;
+
       setFilters({
-        min_price: debouncedValue[0].toString(),
-        max_price: debouncedValue[1].toString(),
+        min_price: isDefault ? undefined : currentMin.toString(),
+        max_price: isDefault ? undefined : currentMax.toString(),
       });
     }
-  }, [debouncedValue, setFilters]);
+  }, [debouncedValue, setFilters, min_price, max_price]);
 
   const handleReset = () => {
     const defaultRange = [MIN_LIMIT, MAX_LIMIT];

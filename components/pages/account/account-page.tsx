@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/contants/routes";
+import Link from "next/link";
 
 export default function AccountPage() {
   const items = [
@@ -17,9 +18,11 @@ export default function AccountPage() {
       content: [
         {
           label: "Daftar Transaksi",
+          href: "#",
         },
         {
           label: "Menunggu Pembayaran",
+          href: "#",
         },
       ],
     },
@@ -29,15 +32,15 @@ export default function AccountPage() {
       content: [
         {
           label: "Wishlist",
-          href: "",
+          href: ROUTES.WISHLIST,
         },
         {
           label: "Cart",
-          href: "",
+          href: ROUTES.CART,
         },
         {
           label: "Pengaturan",
-          href: "",
+          href: ROUTES.ACCOUNT,
         },
       ],
     },
@@ -61,14 +64,15 @@ export default function AccountPage() {
 
                 <AccordionContent key={index}>
                   {item.content.map((subItem, index) => (
-                    <Button
-                      key={index}
-                      size={"xs"}
-                      variant={"ghost"}
-                      className="w-full justify-start font-normal h-8"
-                    >
-                      {subItem.label}
-                    </Button>
+                    <Link key={index} href={subItem.href}>
+                      <Button
+                        size={"xs"}
+                        variant={"ghost"}
+                        className="w-full justify-start font-normal h-8"
+                      >
+                        {subItem.label}
+                      </Button>
+                    </Link>
                   ))}
                 </AccordionContent>
               </AccordionItem>

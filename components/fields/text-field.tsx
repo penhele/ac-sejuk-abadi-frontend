@@ -20,7 +20,9 @@ export default function TextField({
     <Field className="flex flex-row justify-between">
       <FieldLabel className="text-gray-400 w-fit ">{label}</FieldLabel>
       {!isEditing ? (
-        <span className="h-9 flex items-center justify-end text-foreground text-base md:text-sm text-end font-medium px-2.5 whitespace-nowrap">{field.state.value}</span>
+        <span className="h-9 flex items-center justify-end text-foreground text-base md:text-sm text-end font-medium px-2.5 whitespace-nowrap">
+          {field.state.value}
+        </span>
       ) : (
         <Input
           value={field.state.value}

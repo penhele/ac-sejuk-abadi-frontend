@@ -26,7 +26,7 @@ export default function useProductFilters() {
 
   const setFilters = useCallback(
     (filters: GetProductOptions) => {
-      const params = new URLSearchParams(searchParams.toString());
+      const params = new URLSearchParams(window.location.search);
 
       const applyFilter = (key: string, value: any) => {
         if (value === undefined || value === null || value === "") {

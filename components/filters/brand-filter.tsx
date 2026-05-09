@@ -59,7 +59,7 @@ export default function BrandFilter({ brands }: { brands: Brand[] }) {
                   />
                   <FieldLabel
                     htmlFor={`brand-${brand.id}`}
-                    className="font-normal text-xs"
+                    className="font-normal text-xs "
                   >
                     {brand.name}
                   </FieldLabel>
