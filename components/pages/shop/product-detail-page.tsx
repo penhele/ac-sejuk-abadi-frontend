@@ -9,6 +9,7 @@ import { useParams } from "next/navigation";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import ProductDetailSkeleton from "@/components/skeletons/product-detail-skeleton";
+import { ROUTES } from "@/contants/routes";
 
 export default function ProductDetailPage() {
   const params = useParams();
@@ -23,7 +24,7 @@ export default function ProductDetailPage() {
       </ErrorBoundary>
 
       <div className="">
-        <HeaderSection title="Produk Serupa" href="/shop" />
+        <HeaderSection title="Produk Serupa" href={ROUTES.SHOP} />
 
         <ErrorBoundary fallback={<ErrorFallback />}>
           <Suspense
@@ -35,7 +36,7 @@ export default function ProductDetailPage() {
               </div>
             }
           >
-            <ProductGrid className="grid-cols-4!" limit={4} />
+            <ProductGrid className="grid-cols-4!" />
           </Suspense>
         </ErrorBoundary>
       </div>

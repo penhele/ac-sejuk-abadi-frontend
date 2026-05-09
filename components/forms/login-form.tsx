@@ -13,6 +13,7 @@ import { Button } from "../ui/button";
 import { Field, FieldDescription, FieldSeparator } from "../ui/field";
 import { Spinner } from "../ui/spinner";
 import { loginSchema } from "@/schemas/auth.schema";
+import { ROUTES } from "@/contants/routes";
 
 export default function LoginForm() {
   const queryClient = useQueryClient();
@@ -104,7 +105,7 @@ export default function LoginForm() {
 
           <FieldDescription className="text-center">
             Don&apos;t have an account?{" "}
-            <Link href="/register" className="underline underline-offset-4">
+            <Link href={ROUTES.REGISTER} className="underline underline-offset-4">
               Sign up
             </Link>
           </FieldDescription>

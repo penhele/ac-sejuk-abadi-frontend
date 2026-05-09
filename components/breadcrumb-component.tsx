@@ -10,6 +10,7 @@ import {
   BreadcrumbSeparator,
 } from "./ui/breadcrumb";
 import { Fragment } from "react/jsx-runtime";
+import { ROUTES } from "@/contants/routes";
 
 export default function BreadcrumbComponent() {
   const pathname = usePathname();
@@ -19,7 +20,7 @@ export default function BreadcrumbComponent() {
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink href="/">Home</BreadcrumbLink>
+          <BreadcrumbLink href={ROUTES.HOME}>Home</BreadcrumbLink>
         </BreadcrumbItem>
         {pathSegments.map((path, index) => {
           const href = `/${pathSegments.slice(0, index + 1).join("/")}`;

@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
+import { ROUTES } from "./contants/routes";
 
-const PROTECTED_ROUTES = ["/wishlist", "/cart", "/payment", "/account"];
-const AUTH_ROUTES = ["/login", "/register"];
+const PROTECTED_ROUTES = [
+  ROUTES.WISHLIST,
+  ROUTES.CART,
+  ROUTES.PAYMENT,
+  ROUTES.ACCOUNT,
+];
+const AUTH_ROUTES = [ROUTES.LOGIN, ROUTES.REGISTER];
 const ADMIN_ROUTES = ["/dashboard"];
 
 export function proxy(request: NextRequest) {
@@ -17,16 +23,16 @@ export function proxy(request: NextRequest) {
   const isAdminRoute = ADMIN_ROUTES.some((route) => pathname.startsWith(route));
 
   if (!token && (isProtectedRoute || isAdminRoute)) {
-    return NextResponse.redirect(new URL("/login", request.url));
+    return NextResponse.redirect(new URL(ROUTES.LOGIN, request.url));
   }
 
   if (token && isAuthRoute) {
-    return NextResponse.redirect(new URL("/", request.url));
+    return NextResponse.redirect(new URL(ROUTES.HOME, request.url));
   }
 
   if (token && role !== "admin" && isAdminRoute) {
     // Arahkan ke halaman utama atau halaman "403 Forbidden"
-    return NextResponse.redirect(new URL("/", request.url));
+    return NextResponse.redirect(new URL(ROUTES.HOME, request.url));
   }
 
   return NextResponse.next();

@@ -11,6 +11,7 @@ import { AspectRatio } from "../ui/aspect-ratio";
 import { Button } from "../ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { Checkbox } from "../ui/checkbox";
+import { ROUTES } from "@/contants/routes";
 
 export const cartColumns: ColumnDef<CartItem>[] = [
   {
@@ -93,7 +94,7 @@ export const cartColumns: ColumnDef<CartItem>[] = [
           <Tooltip>
             <TooltipTrigger asChild>
               <Button variant={"outline"}>
-                <Link href={`/shop/${carts.product.id}`}>
+                <Link href={ROUTES.PRODUCT_DETAIL(carts.product.id)}>
                   <ArrowUpRight />
                 </Link>
               </Button>

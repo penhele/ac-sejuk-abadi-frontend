@@ -8,6 +8,7 @@ import StatsSection from "@/components/sections/stats-section";
 import ProductCardSkeleton from "@/components/skeletons/product-card-skeleton";
 import ProjectCardSkeleton from "@/components/skeletons/project-card-skeleton";
 import { HeaderSection } from "@/components/util/header";
+import { ROUTES } from "@/contants/routes";
 import {
   ChartNoAxesCombined,
   Handshake,
@@ -40,7 +41,7 @@ export default function HomePage() {
       <StatsSection />
 
       <div className="">
-        <HeaderSection title="Produk" href="/shop" />
+        <HeaderSection title="Produk" href={ROUTES.SHOP} />
 
         <ErrorBoundary fallback={<ErrorFallback />}>
           <Suspense
@@ -91,7 +92,7 @@ export default function HomePage() {
       </div>
 
       <div className="">
-        <HeaderSection title="Portofolio" href="/portofolio" />
+        <HeaderSection title="Portofolio" href={ROUTES.PORTOFOLIO} />
         <ErrorBoundary fallback={<ErrorFallback />}>
           <Suspense
             fallback={
