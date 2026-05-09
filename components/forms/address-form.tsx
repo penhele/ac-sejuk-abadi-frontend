@@ -73,13 +73,21 @@ export default function AddressForm({ className }: { className?: string }) {
         <AppField
           name="address"
           children={(field) => (
-            <field.TextField label="Alamat" isDisable={!isEditing} />
+            <field.TextField
+              label="Alamat"
+              isDisable={!isEditing}
+              isEditing={isEditing}
+            />
           )}
         />
         <AppField
           name="zip_code"
           children={(field) => (
-            <field.TextField label="Kode Pos" isDisable={!isEditing} />
+            <field.TextField
+              label="Kode Pos"
+              isDisable={!isEditing}
+              isEditing={isEditing}
+            />
           )}
         />
         <div className="grid grid-cols-2 gap-4">
@@ -89,6 +97,7 @@ export default function AddressForm({ className }: { className?: string }) {
               <field.TextField
                 label="RT"
                 isDisable={!isEditing}
+                isEditing={isEditing}
                 type="number"
               />
             )}
@@ -99,6 +108,7 @@ export default function AddressForm({ className }: { className?: string }) {
               <field.TextField
                 label="RW"
                 isDisable={!isEditing}
+                isEditing={isEditing}
                 type="number"
               />
             )}

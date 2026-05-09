@@ -7,6 +7,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
+import { ROUTES } from "@/contants/routes";
 
 export default function AccountPage() {
   const items = [
@@ -27,10 +28,16 @@ export default function AccountPage() {
       trigger: "Profil",
       content: [
         {
-          label: "Daftar Transaksi",
+          label: "Wishlist",
+          href: "",
+        },
+        {
+          label: "Cart",
+          href: "",
         },
         {
           label: "Pengaturan",
+          href: "",
         },
       ],
     },
@@ -70,7 +77,7 @@ export default function AccountPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 h-fit">
+      <div className="grid grid-cols-2 gap-4 h-fit w-full">
         <PersonaLInformationForm />
 
         <AddressForm />

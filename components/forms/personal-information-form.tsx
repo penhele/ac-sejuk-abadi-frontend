@@ -10,7 +10,7 @@ import { Button } from "../ui/button";
 import { UpdateUserPayload } from "@/types/user";
 import { cn } from "@/lib/utils";
 
-export default function PersonaLInformationForm({
+export default function  PersonaLInformationForm({
   className,
 }: {
   className?: string;
@@ -76,19 +76,31 @@ export default function PersonaLInformationForm({
         <AppField
           name="first_name"
           children={(field) => (
-            <field.TextField label="Nama Depan" isDisable={!isEditing} />
+            <field.TextField
+              label="Nama Depan"
+              isDisable={!isEditing}
+              isEditing={isEditing}
+            />
           )}
         />
         <AppField
           name="last_name"
           children={(field) => (
-            <field.TextField label="Nama Belakang" isDisable={!isEditing} />
+            <field.TextField
+              label="Nama Belakang"
+              isDisable={!isEditing}
+              isEditing={isEditing}
+            />
           )}
         />
         <AppField
           name="email"
           children={(field) => (
-            <field.TextField label="Email" isDisable={!isEditing} />
+            <field.TextField
+              label="Email"
+              isDisable={!isEditing}
+              isEditing={isEditing}
+            />
           )}
         />
       </div>
