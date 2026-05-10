@@ -43,7 +43,7 @@ export default async function ShopPage() {
 
           <div className="flex-1 space-y-8">
             <div className="flex justify-between items-center">
-              <Suspense fallback={<Skeleton className="h-4 w-16"/>}>
+              <Suspense fallback={<Skeleton className="h-4 w-16" />}>
                 <TotalItems />
               </Suspense>
 

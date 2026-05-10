@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { getProductsInfiniteQueryOptions } from "@/hooks/queries/product-queries";
 import useProductFilters from "@/hooks/use-product-filters";
