@@ -1,3 +1,5 @@
+"use client"
+
 import { getBrands } from "@/services/brand.service";
 import { useQuery } from "@tanstack/react-query";
 import BrandFilter from "./brand-filter";

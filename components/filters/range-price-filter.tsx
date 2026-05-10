@@ -47,8 +47,7 @@ export default function RangePriceFilter() {
   }, [debouncedValue, setFilters, min_price, max_price]);
 
   const handleReset = () => {
-    const defaultRange = [MIN_LIMIT, MAX_LIMIT];
-    setValue(defaultRange);
+    setValue([MIN_LIMIT, MAX_LIMIT]);
     setFilters({ min_price: undefined, max_price: undefined });
   };
 

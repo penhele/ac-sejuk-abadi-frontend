@@ -1,5 +1,3 @@
-"use client";
-
 import BreadcrumbComponent from "@/components/breadcrumb-component";
 import LoadMoreButton from "@/components/buttons/load-more-button";
 import CarouselBanner from "@/components/carousel/carousel-banner";
@@ -9,8 +7,6 @@ import SortByPriceFilter from "@/components/filters/sort-filter";
 import ProductGrid from "@/components/grid/product-grid";
 import ProductCardSkeleton from "@/components/skeletons/product-card-skeleton";
 import TotalItems from "@/components/total-items";
-import { getProductsInfiniteQueryOptions } from "@/hooks/queries/product-queries";
-import { usePrefetchInfiniteQuery } from "@tanstack/react-query";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "../../fallback/error-fallback";
@@ -21,8 +17,6 @@ export default function ShopPage() {
     { src: "/images/banners/2.png", name: "Banner" },
     { src: "/images/banners/3.png", name: "Banner" },
   ];
-
-  usePrefetchInfiniteQuery(getProductsInfiniteQueryOptions());
 
   return (
     <div className="space-y-between-section">
