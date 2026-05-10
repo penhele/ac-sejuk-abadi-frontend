@@ -17,6 +17,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "../../fallback/error-fallback";
 import { getProductsInfiniteQueryOptions } from "@/hooks/queries/product-queries";
 import getBrandsQueryOptions from "@/hooks/queries/brand-queries";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default async function ShopPage() {
   const banner = [
@@ -42,7 +43,9 @@ export default async function ShopPage() {
 
           <div className="flex-1 space-y-8">
             <div className="flex justify-between items-center">
-              <TotalItems total={0} />
+              <Suspense fallback={<Skeleton className="h-4 w-16"/>}>
+                <TotalItems />
+              </Suspense>
 
               <div className="flex gap-4">
                 <SearchFilter />
