@@ -5,5 +5,6 @@ export default function getProjectsQueryOptions() {
   return queryOptions({
     queryKey: ["projects"],
     queryFn: getProjects,
+    staleTime: 1000 * 60 * 5,
   });
 }

@@ -20,6 +20,7 @@ export function getProductsQueryOptions<
     ...options,
     queryKey: ["products", params],
     queryFn: () => getProducts(params),
+    staleTime: 1000 * 60 * 5,
   });
 }
 
@@ -28,6 +29,7 @@ export function getProductsInfiniteQueryOptions(params?: GetProductOptions) {
     queryKey: ["products", "infinite", params],
     queryFn: ({ pageParam }) =>
       getProducts({ page: pageParam, limit: 6, ...params }),
+    staleTime: 1000 * 60 * 5,
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
       if (!lastPage?.meta) return undefined;

@@ -7,56 +7,70 @@ import SortByPriceFilter from "@/components/filters/sort-filter";
 import ProductGrid from "@/components/grid/product-grid";
 import ProductCardSkeleton from "@/components/skeletons/product-card-skeleton";
 import TotalItems from "@/components/total-items";
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "../../fallback/error-fallback";
+import { getProductsInfiniteQueryOptions } from "@/hooks/queries/product-queries";
+import getBrandsQueryOptions from "@/hooks/queries/brand-queries";
 
-export default function ShopPage() {
+export default async function ShopPage() {
   const banner = [
     { src: "/images/banners/1.png", name: "Banner" },
     { src: "/images/banners/2.png", name: "Banner" },
     { src: "/images/banners/3.png", name: "Banner" },
   ];
 
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchInfiniteQuery(getProductsInfiniteQueryOptions());
+  await queryClient.prefetchQuery(getBrandsQueryOptions());
+
   return (
-    <div className="space-y-between-section">
-      <CarouselBanner banner={banner} />
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <div className="space-y-between-section">
+        <CarouselBanner banner={banner} />
 
-      <BreadcrumbComponent />
+        <BreadcrumbComponent />
 
-      <div className="flex flex-row gap-8 items-start">
-        <ShopFilter />
+        <div className="flex flex-row gap-8 items-start">
+          <ShopFilter />
 
-        <div className="flex-1 space-y-8">
-          <div className="flex justify-between items-center">
-            <TotalItems total={0} />
+          <div className="flex-1 space-y-8">
+            <div className="flex justify-between items-center">
+              <TotalItems total={0} />
 
-            <div className="flex gap-4">
-              <SearchFilter />
+              <div className="flex gap-4">
+                <SearchFilter />
 
-              <SortByPriceFilter />
+                <SortByPriceFilter />
+              </div>
             </div>
-          </div>
 
-          <div className="">
-            <ErrorBoundary fallback={<ErrorFallback />}>
-              <Suspense
-                fallback={
-                  <div className="grid grid-cols-3 gap-between-card">
-                    {[...Array(3)].map((_, index) => (
-                      <ProductCardSkeleton key={index} />
-                    ))}
-                  </div>
-                }
-              >
-                <ProductGrid className="grid-cols-3!" />
-              </Suspense>
-            </ErrorBoundary>
-          </div>
+            <div className="">
+              <ErrorBoundary fallback={<ErrorFallback />}>
+                <Suspense
+                  fallback={
+                    <div className="grid grid-cols-3 gap-between-card">
+                      {[...Array(3)].map((_, index) => (
+                        <ProductCardSkeleton key={index} />
+                      ))}
+                    </div>
+                  }
+                >
+                  <ProductGrid className="grid-cols-3!" />
+                </Suspense>
+              </ErrorBoundary>
+            </div>
 
-          <LoadMoreButton />
+            <LoadMoreButton />
+          </div>
         </div>
       </div>
-    </div>
+    </HydrationBoundary>
   );
 }

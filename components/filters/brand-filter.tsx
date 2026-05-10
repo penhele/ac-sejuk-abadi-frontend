@@ -1,13 +1,17 @@
 "use client";
 
-import { Brand } from "@/types/brand";
+import useProductFilters from "@/hooks/use-product-filters";
+import { getBrands } from "@/services/brand.service";
+import { useQuery } from "@tanstack/react-query";
 import { Button } from "../ui/button";
 import { Checkbox } from "../ui/checkbox";
 import { Field, FieldGroup, FieldLabel } from "../ui/field";
-import useProductFilters from "@/hooks/use-product-filters";
+import getBrandsQueryOptions from "@/hooks/queries/brand-queries";
 
-export default function BrandFilter({ brands }: { brands: Brand[] }) {
+export default function BrandFilter() {
   const { id_brand, setFilters } = useProductFilters();
+
+  const { data: brands } = useQuery(getBrandsQueryOptions());
 
   const handleBrandChange = (brandId: string, checked: boolean) => {
     if (checked) {
@@ -38,9 +42,9 @@ export default function BrandFilter({ brands }: { brands: Brand[] }) {
         )}
       </div>
 
-      {brands.length != 0 ? (
+      {brands?.length != 0 ? (
         <FieldGroup className="gap-2">
-          {brands.map((brand) => {
+          {brands?.map((brand) => {
             const isChecked = id_brand === brand.id.toString();
 
             return (

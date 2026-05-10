@@ -5,5 +5,6 @@ export function getWishlistQueryOptions() {
   return queryOptions({
     queryKey: ["wishlist"],
     queryFn: getWishlist,
+    staleTime: 1000 * 60 * 5,
   });
 }
