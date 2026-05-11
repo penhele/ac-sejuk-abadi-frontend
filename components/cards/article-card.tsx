@@ -9,11 +9,17 @@ export default function ArticleCard({ article }: { article: Article }) {
     <div className="shadow-xs flex flex-col h-full rounded-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
       <div className="relative rounded-t-lg">
         <AspectRatio ratio={16 / 9} className="bg-muted rounded-t-lg">
-          {article.images.length != 0 ? (
-            <Image src={article.images[0]} alt="" fill />
+          {article.images && article.images.length > 0 ? (
+            <Image
+              src={article.images[0].image_url}
+              alt={`${article.name}-image`}
+              fill
+              className="object-cover"
+            />
           ) : (
-            <div className="flex items-center justify-center h-full text-gray-400">
+            <div className="flex flex-col space-y-2 items-center justify-center h-full ">
               <ImageOff />
+              <span className="text-sm">No Image</span>
             </div>
           )}
         </AspectRatio>

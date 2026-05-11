@@ -1,7 +1,7 @@
 import { Brand } from "./brand";
 import { ProductCategory } from "./category";
 import { Discounts } from "./discount";
-import { Images } from "./image";
+import { ProductImages } from "./image";
 
 export interface Product {
   id: string;
@@ -16,7 +16,7 @@ export interface Product {
   updated_at: string;
   brand: Brand;
   categories: ProductCategory[];
-  images: Images[];
+  images: ProductImages[];
   discounts: Discounts[];
   reviews: any[];
   featuredProducts: any[];
