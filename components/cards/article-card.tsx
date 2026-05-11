@@ -24,7 +24,7 @@ export default function ArticleCard({ article }: { article: Article }) {
       </div>
 
       <div className="border flex flex-col flex-1 rounded-b-lg">
-        <div className="flex flex-col space-y-2 p-4 flex-1">
+        <div className="flex flex-col space-y-2 p-inside-card flex-1">
           <span className="font-bold text-gray-600">{article.name}</span>
 
           <span className="text-sm text-gray-600 line-clamp-5">

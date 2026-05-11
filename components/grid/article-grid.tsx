@@ -1,12 +1,11 @@
-import { getArticle } from "@/services/article.service";
+"use client";
+
 import { useSuspenseQuery } from "@tanstack/react-query";
 import ArticleCard from "../cards/article-card";
+import getArticlesQueryOptions from "@/hooks/queries/artcile-queries";
 
 export default function ArticleGrid() {
-  const { data: articles } = useSuspenseQuery({
-    queryKey: ["articles"],
-    queryFn: getArticle,
-  });
+  const { data: articles } = useSuspenseQuery(getArticlesQueryOptions());
 
   return (
     <div className="grid grid-cols-3 gap-between-card">
