@@ -1,5 +1,5 @@
 import BreadcrumbComponent from "@/components/breadcrumb-component";
-import { DataTable } from "@/components/product/data-table";
+import { ProductDataTable } from "@/components/tables/product-data-table";
 import ProductImages from "@/components/product/product-images";
 import ProductInfo from "@/components/product/product-info";
 import ProductPriceAction from "@/components/product/product-price-action";
@@ -50,7 +50,7 @@ export default function ProductDetailContent({ id }: { id: string }) {
 
         <div className="flex flex-col gap-2">
           <HeaderSection title="Spesifikasi" />
-          <DataTable columns={columns} data={data} />
+          <ProductDataTable columns={columns} data={data} />
         </div>
       </div>
     </div>

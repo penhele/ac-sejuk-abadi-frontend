@@ -33,7 +33,7 @@ export default function ProductDetailSkeleton() {
           <div className="space-y-2">
             <Skeleton className="w-40 h-8" />
 
-            <div className="min-h-80">
+            <div className="min-h-80 space-y-1">
               {Array.from({ length: 3 }).map((_, index) => (
                 <Skeleton key={index} className="h-4" />
               ))}

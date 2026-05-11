@@ -1,7 +1,5 @@
-import { cn } from "@/lib/utils";
-import { AspectRatio } from "../ui/aspect-ratio";
-import WishlistButton from "../buttons/wishlist-button";
 import { Product } from "@/types/product";
+import { AspectRatio } from "../ui/aspect-ratio";
 
 export default function ProductImages({
   product,
@@ -14,11 +12,6 @@ export default function ProductImages({
     <div className="flex flex-col gap-2">
       <div className="relative">
         <AspectRatio ratio={1 / 1} className="bg-muted rounded-md" />
-
-        <WishlistButton
-          productId={product.id}
-          className="absolute top-3 right-3"
-        />
       </div>
 
       {jumlah > 1 && (

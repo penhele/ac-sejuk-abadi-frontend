@@ -1,13 +1,12 @@
 "use client";
 
+import { formatRupiah } from "@/lib/format/currency";
 import { Product } from "@/types/product";
 import { MinusIcon, PlusIcon } from "lucide-react";
 import { useState } from "react";
 import { FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
-import CartButton from "../buttons/cart-button";
-import { formatRupiah } from "@/lib/format/currency";
 
 export default function ProductPriceAction({ product }: { product: Product }) {
   const [quantity, setQuantity] = useState(1);
@@ -73,14 +72,7 @@ export default function ProductPriceAction({ product }: { product: Product }) {
         <span>{formatRupiah(totalPrice)}</span>
       </div>
 
-      <div className="flex justify-between gap-4">
-        <CartButton
-          productId={product.id}
-          quantity={quantity}
-          className="flex-1"
-        />
-        <Button className="flex-1">Beli</Button>
-      </div>
+      <Button variant={"outline"}>Tanyakan ke WhatsApp</Button>
 
       <Separator />
 

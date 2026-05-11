@@ -1,4 +1,5 @@
 import { getArticle } from "@/services/article.service";
+
 import { queryOptions } from "@tanstack/react-query";
 
 export default function getArticlesQueryOptions() {

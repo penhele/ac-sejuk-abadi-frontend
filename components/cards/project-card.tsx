@@ -1,10 +1,9 @@
-import { AspectRatio } from "../ui/aspect-ratio";
-import Link from "next/link";
-import Image from "next/image";
-import { ArrowRight } from "lucide-react";
-import { DescriptionCard, TitleCard } from "../util/card-content";
-import { Project } from "@/types/project";
 import { ROUTES } from "@/contants/routes";
+import { Project } from "@/types/project";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { AspectRatio } from "../ui/aspect-ratio";
+import { DescriptionCard, TitleCard } from "../util/card-content";
 
 export default function ProjectCard({ project }: { project: Project }) {
   return (

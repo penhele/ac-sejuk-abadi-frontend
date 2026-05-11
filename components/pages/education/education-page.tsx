@@ -2,7 +2,7 @@ import BreadcrumbComponent from "@/components/breadcrumb-component";
 import ErrorFallback from "@/components/fallback/error-fallback";
 import ArticleGrid from "@/components/grid/article-grid";
 import ArticleCardSkeleton from "@/components/skeletons/article-card-skeleton";
-import getArticlesQueryOptions from "@/hooks/queries/artcile-queries";
+import getArticlesQueryOptions from "@/hooks/queries/article-queries";
 import {
   dehydrate,
   HydrationBoundary,

@@ -6,7 +6,7 @@ import { ImageOff } from "lucide-react";
 
 export default function ArticleCard({ article }: { article: Article }) {
   return (
-    <div className="shadow-xs flex flex-col h-full rounded-t-lg">
+    <div className="shadow-xs flex flex-col h-full rounded-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
       <div className="relative rounded-t-lg">
         <AspectRatio ratio={16 / 9} className="bg-muted rounded-t-lg">
           {article.images.length != 0 ? (

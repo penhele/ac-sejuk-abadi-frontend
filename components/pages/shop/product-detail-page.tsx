@@ -30,13 +30,13 @@ export default function ProductDetailPage() {
           <Suspense
             fallback={
               <div className="grid grid-cols-3 gap-between-card">
-                {[...Array(3)].map((_, index) => (
+                {[...Array(4)].map((_, index) => (
                   <ProductCardSkeleton key={index} />
                 ))}
               </div>
             }
           >
-            <ProductGrid className="grid-cols-4!" />
+            <ProductGrid className="grid-cols-4!" limit={4} />
           </Suspense>
         </ErrorBoundary>
       </div>

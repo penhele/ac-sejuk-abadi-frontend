@@ -1,7 +1,6 @@
 import { Product } from "@/types/product";
 import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
-import WishlistButton from "../buttons/wishlist-button";
 import { AspectRatio } from "../ui/aspect-ratio";
 import { Button } from "../ui/button";
 import DiscountBadge from "../util/discount-badge";
@@ -24,11 +23,6 @@ export default function ProductCard({ product }: { product: Product }) {
           <AspectRatio ratio={1 / 1} className="bg-muted rounded-t-md" />
 
           <DiscountBadge discount={discountPercentage.toString()} />
-
-          <WishlistButton
-            productId={product.id}
-            className="absolute top-3 right-3"
-          />
         </div>
 
         <div className="p-4 flex flex-col gap-2">

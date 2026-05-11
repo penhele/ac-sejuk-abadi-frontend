@@ -1,7 +1,6 @@
 import Image from "next/image";
-import NavAction from "./nav-action";
-import NavItem from "./nav-item";
 import Link from "next/link";
+import NavItem from "./nav-item";
 
 export default function Navbar() {
   return (
@@ -22,8 +21,6 @@ export default function Navbar() {
               <NavItem />
             </div>
           </div>
-
-          <NavAction />
         </div>
       </div>
     </div>

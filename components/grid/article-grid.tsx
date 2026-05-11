@@ -2,7 +2,7 @@
 
 import { useSuspenseQuery } from "@tanstack/react-query";
 import ArticleCard from "../cards/article-card";
-import getArticlesQueryOptions from "@/hooks/queries/artcile-queries";
+import getArticlesQueryOptions from "@/hooks/queries/article-queries";
 
 export default function ArticleGrid() {
   const { data: articles } = useSuspenseQuery(getArticlesQueryOptions());
