@@ -18,14 +18,9 @@ import ErrorFallback from "../../fallback/error-fallback";
 import { getProductsInfiniteQueryOptions } from "@/hooks/queries/product-queries";
 import getBrandsQueryOptions from "@/hooks/queries/brand-queries";
 import { Skeleton } from "@/components/ui/skeleton";
+import ShopBanner from "@/components/banners/shop-banner";
 
 export default async function ShopPage() {
-  const banner = [
-    { src: "/images/banners/1.png", name: "Banner" },
-    { src: "/images/banners/2.png", name: "Banner" },
-    { src: "/images/banners/3.png", name: "Banner" },
-  ];
-
   const queryClient = new QueryClient();
 
   await queryClient.prefetchInfiniteQuery(getProductsInfiniteQueryOptions());
@@ -34,7 +29,7 @@ export default async function ShopPage() {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <div className="space-y-between-section">
-        <CarouselBanner banner={banner} />
+        <ShopBanner />
 
         <BreadcrumbComponent />
 

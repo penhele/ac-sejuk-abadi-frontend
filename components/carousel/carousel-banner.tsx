@@ -6,13 +6,10 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
+import { Banner } from "@/types/banner";
 import Autoplay from "embla-carousel-autoplay";
 
-export default function CarouselBanner({
-  banner,
-}: {
-  banner: { src: string; name: string }[];
-}) {
+export default function CarouselBanner({ banners }: { banners: Banner[] }) {
   return (
     <Carousel
       opts={{
@@ -27,12 +24,12 @@ export default function CarouselBanner({
       ]}
     >
       <CarouselContent className="flex items-center gap-4">
-        {banner.map((item, index) => (
+        {banners.map((banner, index) => (
           <CarouselItem key={index}>
-            <AspectRatio ratio={3 / 1} className="overflow-hidden rounded-lg">
+            <AspectRatio ratio={3 / 1} className="overflow-hidden rounded-lg relative">
               <img
-                src={item.src}
-                alt={item.name}
+                src={banner.image_url}
+                alt={banner.name}
                 className="object-cover w-full h-full"
               />
             </AspectRatio>

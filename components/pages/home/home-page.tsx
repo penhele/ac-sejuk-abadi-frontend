@@ -1,4 +1,4 @@
-import CarouselBanner from "@/components/carousel/carousel-banner";
+import ShopBanner from "@/components/banners/shop-banner";
 import CarouselBrand from "@/components/carousel/carousel-brand";
 import CarouselTestimoni from "@/components/carousel/carousel-testimoni";
 import ErrorFallback from "@/components/fallback/error-fallback";
@@ -19,17 +19,9 @@ import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 export default function HomePage() {
-  const banner = [
-    { src: "/images/banners/1.png", name: "Banner" },
-    { src: "/images/banners/2.png", name: "Banner" },
-    { src: "/images/banners/3.png", name: "Banner" },
-  ];
-
   return (
     <main className="space-y-16">
-      <div className="">
-        <CarouselBanner banner={banner} />
-      </div>
+      <ShopBanner />
 
       <div className="space-y-4 flex flex-col items-center">
         <h1 className="text-xl font-bold">
