@@ -1,4 +1,9 @@
 import BrandDetailPage from "@/components/pages/brand/brand-detail-page";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Brand",
+};
 
 export default function page() {
   return (

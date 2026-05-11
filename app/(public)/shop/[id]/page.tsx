@@ -1,4 +1,9 @@
 import ProductDetailPage from "@/components/pages/shop/product-detail-page";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Shop",
+};
 
 export default function page() {
   return (
