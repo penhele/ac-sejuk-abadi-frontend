@@ -32,8 +32,6 @@ export default async function ShopPage() {
     console.error("Prefetch failed:", error);
   }
 
-  await queryClient.prefetchQuery(getBrandsQueryOptions());
-
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <div className="space-y-between-section">
@@ -42,7 +40,9 @@ export default async function ShopPage() {
         <BreadcrumbComponent />
 
         <div className="flex flex-row gap-8 items-start">
-          <ShopFilter />
+          <Suspense fallback={<Skeleton className="h-[400px] w-3xs" />}>
+            <ShopFilter />
+          </Suspense>
 
           <div className="flex-1 space-y-8">
             <div className="flex justify-between items-center">
@@ -51,9 +51,13 @@ export default async function ShopPage() {
               </Suspense>
 
               <div className="flex gap-4">
-                <SearchFilter />
+                <Suspense fallback={<Skeleton className="h-10 w-40" />}>
+                  <SearchFilter />
+                </Suspense>
 
-                <SortByPriceFilter />
+                <Suspense fallback={<Skeleton className="h-10 w-40" />}>
+                  <SortByPriceFilter />
+                </Suspense>
               </div>
             </div>
 
@@ -73,7 +77,9 @@ export default async function ShopPage() {
               </ErrorBoundary>
             </div>
 
-            <LoadMoreButton />
+            <Suspense fallback={<Skeleton className="h-10 w-full" />}>
+              <LoadMoreButton />
+            </Suspense>
           </div>
         </div>
       </div>
