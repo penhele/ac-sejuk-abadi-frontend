@@ -22,9 +22,16 @@ import ErrorFallback from "../../fallback/error-fallback";
 export default async function ShopPage() {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchInfiniteQuery(
-    getProductsInfiniteQueryOptions({ page: 1, limit: 6 }),
-  );
+  try {
+    await queryClient.prefetchInfiniteQuery(
+      getProductsInfiniteQueryOptions({ page: 1, limit: 6 }),
+    );
+
+    await queryClient.prefetchQuery(getBrandsQueryOptions());
+  } catch (error) {
+    console.error("Prefetch failed:", error);
+  }
+
   await queryClient.prefetchQuery(getBrandsQueryOptions());
 
   return (
