@@ -5,10 +5,10 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { SearchX } from "lucide-react";
 import ProjectList from "../lists/project-list";
 
-export default function ProjectGrid() {
-  const { data: response } = useSuspenseQuery(getProjectsQueryOptions());
+export default function ProjectGrid({ limit }: { limit?: number }) {
+  const { data: projects } = useSuspenseQuery(getProjectsQueryOptions());
 
-  const projects = response;
+  const displayedProjects = limit ? projects.slice(0, limit) : projects;
 
   if (projects.length === 0)
     return (
@@ -18,5 +18,5 @@ export default function ProjectGrid() {
       </div>
     );
 
-  return <ProjectList projects={projects} />;
+  return <ProjectList projects={displayedProjects} />;
 }

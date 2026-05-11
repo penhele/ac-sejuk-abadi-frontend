@@ -53,7 +53,7 @@ export default function HomePage() {
               </div>
             }
           >
-            <ProductGrid />
+            <ProductGrid limit={4} />
           </Suspense>
         </ErrorBoundary>
       </div>
@@ -103,7 +103,7 @@ export default function HomePage() {
               </div>
             }
           >
-            <ProjectGrid />
+            <ProjectGrid limit={3} />
           </Suspense>
         </ErrorBoundary>
       </div>

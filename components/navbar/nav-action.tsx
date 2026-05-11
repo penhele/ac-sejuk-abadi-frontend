@@ -20,10 +20,10 @@ export default function NavAction() {
   return (
     <div className="flex flex-row gap-2 items-center">
       <div className="flex flex-row gap-4 items-center">
-        <Button variant={"outline"} className="space-x-1 flex items-center">
+        {/* <Button variant={"outline"} className="space-x-1 flex items-center">
           <Languages size={16} />
           <span>EN</span>
-        </Button>
+        </Button> */}
 
         <ButtonGroup className="xs:flex hidden">
           <Input placeholder="Search..." />

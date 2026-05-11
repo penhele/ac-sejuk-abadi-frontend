@@ -7,7 +7,13 @@ import ProductList from "../lists/product-list";
 import useProductFilters from "@/hooks/use-product-filters";
 import EmptyState from "../empty-state/empty-state";
 
-export default function ProductGrid({ className }: { className?: string }) {
+export default function ProductGrid({
+  className,
+  limit,
+}: {
+  className?: string;
+  limit?: number;
+}) {
   const { search, sortBy, sortOrder, id_brand, min_price, max_price } =
     useProductFilters();
 
@@ -19,6 +25,7 @@ export default function ProductGrid({ className }: { className?: string }) {
       id_brand,
       min_price,
       max_price,
+      limit,
     }),
   );
 

@@ -1,6 +1,14 @@
-import { Button } from "@/components/ui/button";
-import { ROUTES } from "@/contants/routes";
 import { LucideIcon } from "lucide-react";
+import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "../ui/empty";
+import { ROUTES } from "@/contants/routes";
+import { Button } from "../ui/button";
 import Link from "next/link";
 
 export default function EmptyState({
@@ -15,17 +23,24 @@ export default function EmptyState({
   buttonLabel?: string;
 }) {
   return (
-    <div className="space-y-2 flex flex-col items-center">
-      <Icon size={64} className="text-gray-600" />
+    <Empty>
+      <EmptyHeader>
+        <EmptyMedia variant="icon">
+          <Icon />
+        </EmptyMedia>
 
-      <div className="space-y-1 flex flex-col items-center">
-        <span className="text-lg text-gray-600 font-semibold">{label}</span>
-        <span className="text-sm text-gray-400">{description}</span>
-      </div>
+        <EmptyTitle>{label}</EmptyTitle>
 
-      <Link href={ROUTES.SHOP}>
-        <Button>{buttonLabel ?? "Browse Products"} </Button>
-      </Link>
-    </div>
+        <EmptyDescription>{description}</EmptyDescription>
+      </EmptyHeader>
+
+      <EmptyContent>
+        <Link href={ROUTES.SHOP}>
+          <Button variant={"outline"}>
+            {buttonLabel ?? "Browse Products"}
+          </Button>
+        </Link>
+      </EmptyContent>
+    </Empty>
   );
 }
