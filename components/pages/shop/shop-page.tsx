@@ -1,12 +1,15 @@
+import ShopBanner from "@/components/banners/shop-banner";
 import BreadcrumbComponent from "@/components/breadcrumb-component";
 import LoadMoreButton from "@/components/buttons/load-more-button";
-import CarouselBanner from "@/components/carousel/carousel-banner";
 import SearchFilter from "@/components/filters/search-filter";
 import ShopFilter from "@/components/filters/shop-filter";
 import SortByPriceFilter from "@/components/filters/sort-filter";
 import ProductGrid from "@/components/grid/product-grid";
 import ProductCardSkeleton from "@/components/skeletons/product-card-skeleton";
 import TotalItems from "@/components/total-items";
+import { Skeleton } from "@/components/ui/skeleton";
+import getBrandsQueryOptions from "@/hooks/queries/brand-queries";
+import { getProductsInfiniteQueryOptions } from "@/hooks/queries/product-queries";
 import {
   dehydrate,
   HydrationBoundary,
@@ -15,15 +18,13 @@ import {
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "../../fallback/error-fallback";
-import { getProductsInfiniteQueryOptions } from "@/hooks/queries/product-queries";
-import getBrandsQueryOptions from "@/hooks/queries/brand-queries";
-import { Skeleton } from "@/components/ui/skeleton";
-import ShopBanner from "@/components/banners/shop-banner";
 
 export default async function ShopPage() {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchInfiniteQuery(getProductsInfiniteQueryOptions());
+  await queryClient.prefetchInfiniteQuery(
+    getProductsInfiniteQueryOptions({ page: 1, limit: 6 }),
+  );
   await queryClient.prefetchQuery(getBrandsQueryOptions());
 
   return (
