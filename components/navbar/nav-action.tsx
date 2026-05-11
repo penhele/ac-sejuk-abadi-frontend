@@ -25,12 +25,12 @@ export default function NavAction() {
           <span>EN</span>
         </Button> */}
 
-        <ButtonGroup className="xs:flex hidden">
+        {/* <ButtonGroup className="xs:flex hidden">
           <Input placeholder="Search..." />
           <Button variant="outline" aria-label="Search">
             <SearchIcon />
           </Button>
-        </ButtonGroup>
+        </ButtonGroup> */}
 
         <SearchIcon size={16} className="block xs:hidden" />
 
