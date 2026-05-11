@@ -2,6 +2,8 @@ import ProjectPage from "@/components/pages/portofolio/project-page";
 import HeroSection from "@/components/sections/hero-section";
 import { Metadata } from "next";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Portofolio",
 };
