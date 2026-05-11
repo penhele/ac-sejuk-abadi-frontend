@@ -15,7 +15,7 @@ export interface Product {
   updated_at: string;
   brand: Brand;
   categories: ProductCategory[];
-  images: any[];
+  images: ProductImage[];
   discounts: Discounts[];
   reviews: any[];
   featuredProducts: any[];
@@ -35,6 +35,12 @@ export interface ProductResponse {
 
 export type SortOrder = "asc" | "desc";
 export type SortBy = "price" | "date";
+
+export interface ProductImage {
+  id: number;
+  id_product: string;
+  image_url: string;
+}
 
 export interface GetProductOptions {
   search?: string;

@@ -1,11 +1,12 @@
 import { Product } from "@/types/product";
-import { ShoppingCart } from "lucide-react";
+import { ImageOff, ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import { AspectRatio } from "../ui/aspect-ratio";
 import { Button } from "../ui/button";
 import DiscountBadge from "../util/discount-badge";
 import { formatRupiah } from "@/lib/format/currency";
 import { ROUTES } from "@/contants/routes";
+import Image from "next/image";
 
 export default function ProductCard({ product }: { product: Product }) {
   const hasDiscount = product.discounts && product.discounts.length > 0;
@@ -20,7 +21,21 @@ export default function ProductCard({ product }: { product: Product }) {
     <Link href={ROUTES.PRODUCT_DETAIL(product.id)}>
       <div className="group block overflow-hidden rounded-xl bg-white shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border">
         <div className="relative">
-          <AspectRatio ratio={1 / 1} className="bg-muted rounded-t-md" />
+          <AspectRatio ratio={1 / 1} className="bg-muted rounded-t-md relative">
+            {product.images && product.images.length > 0 ? (
+              <Image
+                src={product.images[0].image_url}
+                alt={`${product.name}-image`}
+                fill
+                className="object-cover"
+              />
+            ) : (
+              <div className="flex flex-col space-y-2 items-center justify-center h-full ">
+                <ImageOff />
+                <span className="text-sm">No Image</span>
+              </div>
+            )}
+          </AspectRatio>
 
           <DiscountBadge discount={discountPercentage.toString()} />
         </div>

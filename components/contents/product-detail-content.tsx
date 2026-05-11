@@ -32,7 +32,7 @@ export default function ProductDetailContent({ id }: { id: string }) {
       <BreadcrumbComponent />
 
       <div className="grid grid-cols-2 gap-4">
-        <ProductImages jumlah={8} product={product} />
+        <ProductImages jumlah={product.images.length} product={product} />
 
         <div className="flex flex-col gap-4">
           <ProductInfo product={product} />
