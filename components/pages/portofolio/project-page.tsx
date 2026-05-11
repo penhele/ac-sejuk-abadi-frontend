@@ -11,7 +11,11 @@ import { ErrorBoundary } from "react-error-boundary";
 export default async function ProjectPage() {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery(getProjectsQueryOptions());
+  try {
+    await queryClient.prefetchQuery(getProjectsQueryOptions());
+  } catch (error) {
+    console.error("Prefetch failed:", error);
+  }
 
   return (
     <div className="space-y-between-section">

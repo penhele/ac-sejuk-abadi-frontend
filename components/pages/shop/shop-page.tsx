@@ -19,6 +19,8 @@ import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "../../fallback/error-fallback";
 
+export const dynamic = "force-dynamic";
+
 export default async function ShopPage() {
   const queryClient = new QueryClient();
 
@@ -40,7 +42,7 @@ export default async function ShopPage() {
         <BreadcrumbComponent />
 
         <div className="flex flex-row gap-8 items-start">
-          <Suspense fallback={<Skeleton className="h-[400px] w-3xs" />}>
+          <Suspense fallback={<Skeleton className="h-100 w-3xs" />}>
             <ShopFilter />
           </Suspense>
 
