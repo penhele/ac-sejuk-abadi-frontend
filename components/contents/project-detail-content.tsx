@@ -48,7 +48,7 @@ export default function ProjectDetailContent({ id }: { id: string }) {
           {project.images?.[0] ? (
             <div className="md:col-span-8 relative rounded-lg overflow-hidden shadow-2xl">
               <Image
-                src={project.images?.[0]}
+                src={project.images?.[0].image_url}
                 alt="Main Project Image"
                 fill
                 className="object-cover"

@@ -1,9 +1,10 @@
 import { ROUTES } from "@/contants/routes";
 import { Project } from "@/types/project";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ImageOff } from "lucide-react";
 import Link from "next/link";
 import { AspectRatio } from "../ui/aspect-ratio";
 import { DescriptionCard, TitleCard } from "../util/card-content";
+import Image from "next/image";
 
 export default function ProjectCard({ project }: { project: Project }) {
   return (
@@ -12,13 +13,20 @@ export default function ProjectCard({ project }: { project: Project }) {
       className="group block overflow-hidden rounded-xl bg-white shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border"
     >
       <div className="relative">
-        <AspectRatio ratio={16 / 9} className="bg-muted">
-          {/* <Image
-            src={project.image!}
-            alt={project.title}
-            fill
-            className="object-cover"
-          /> */}
+        <AspectRatio ratio={16 / 9} className="bg-muted relative">
+          {project.images && project.images.length > 0 ? (
+            <Image
+              src={project.images[0].image_url}
+              alt={`${project.name}-image`}
+              fill
+              className="object-cover"
+            />
+          ) : (
+            <div className="flex flex-col space-y-2 items-center justify-center h-full ">
+              <ImageOff />
+              <span className="text-sm">No Image</span>
+            </div>
+          )}
         </AspectRatio>
 
         <div className="absolute top-4 left-4">

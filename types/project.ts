@@ -1,3 +1,4 @@
+import { Images } from "./image";
 import { Product } from "./product";
 
 export interface Project {
@@ -8,6 +9,6 @@ export interface Project {
   date: string;
   location: string;
   category: string;
-  images: string[];
+  images: Images[];
   product: Product;
 }

@@ -1,6 +1,7 @@
 import { Brand } from "./brand";
 import { ProductCategory } from "./category";
 import { Discounts } from "./discount";
+import { Images } from "./image";
 
 export interface Product {
   id: string;
@@ -15,7 +16,7 @@ export interface Product {
   updated_at: string;
   brand: Brand;
   categories: ProductCategory[];
-  images: ProductImage[];
+  images: Images[];
   discounts: Discounts[];
   reviews: any[];
   featuredProducts: any[];
@@ -35,12 +36,6 @@ export interface ProductResponse {
 
 export type SortOrder = "asc" | "desc";
 export type SortBy = "price" | "date";
-
-export interface ProductImage {
-  id: number;
-  id_product: string;
-  image_url: string;
-}
 
 export interface GetProductOptions {
   search?: string;
