@@ -8,7 +8,7 @@ export default function ArticleGrid() {
   const { data: articles } = useSuspenseQuery(getArticlesQueryOptions());
 
   return (
-    <div className="grid grid-cols-3 gap-between-card">
+    <div className="grid grid-cols-2 lg:grid-cols-3 gap-between-card">
       {articles.map((article) => (
         <ArticleCard key={article.id} article={article} />
       ))}

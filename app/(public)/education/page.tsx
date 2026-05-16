@@ -14,7 +14,7 @@ export default function page() {
         description="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, accusamus."
       />
 
-      <div className="max-w-7xl mx-auto py-4">
+      <div className="max-w-7xl mx-auto py-4 px-page-inline xl:px-0">
         <EducationPage />
       </div>
     </main>

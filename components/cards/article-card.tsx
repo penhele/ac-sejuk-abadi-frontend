@@ -14,7 +14,7 @@ export default function ArticleCard({ article }: { article: Article }) {
               src={article.images[0].image_url}
               alt={`${article.name}-image`}
               fill
-              className="object-cover"
+              className="object-cover rounded-t-lg"
             />
           ) : (
             <div className="flex flex-col space-y-2 items-center justify-center h-full ">
