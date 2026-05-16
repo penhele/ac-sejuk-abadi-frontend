@@ -13,11 +13,10 @@ import {
 export default function SearchFilter() {
   const { search, setFilters } = useProductFilters();
 
-  const [localSearch, setLocalSearch] =
-    useState<GetProductOptions["search"]>(search);
+  const [localSearch, setLocalSearch] = useState<string>(search ?? "");
 
   const handleSearch = () => {
-    setFilters({ search: localSearch });
+    setFilters({ search: localSearch.trim() || undefined });
   };
 
   const clearSearch = () => {

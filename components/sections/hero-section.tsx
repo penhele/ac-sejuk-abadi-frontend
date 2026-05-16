@@ -13,10 +13,10 @@ export default function HeroSection({
 
       <div className="max-w-7xl absolute">
         <div className="flex flex-col space-y-2 items-center text-center">
-          <span className="text-4xl font-bold text-white bg-black/20 px-2 py-1 backdrop-blur-md rounded-sm">
+          <span className="text-4xl font-bold text-white bg-black/10 px-2 py-1 backdrop-blur-md rounded-sm">
             {title}
           </span>
-          <span className="text-sm text-white  bg-black/20 px-2 py-1 backdrop-blur-md rounded-sm">
+          <span className="text-sm text-white  bg-black/10 px-2 py-1 backdrop-blur-md rounded-sm">
             {description}
           </span>
         </div>

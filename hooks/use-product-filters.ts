@@ -7,8 +7,6 @@ export default function useProductFilters() {
   const router = useRouter();
   const pathname = usePathname();
 
-  const [isPending, startTransition] = useTransition();
-
   const search =
     (searchParams.get("search") as GetProductOptions["search"]) ?? undefined;
   const sortBy =
@@ -45,9 +43,7 @@ export default function useProductFilters() {
       if ("min_price" in filters) applyFilter("min_price", filters.min_price);
       if ("max_price" in filters) applyFilter("max_price", filters.max_price);
 
-      startTransition(() => {
-        router.push(`${pathname}?${params.toString()}`, { scroll: false });
-      });
+      router.push(`${pathname}?${params.toString()}`, { scroll: false });
     },
     [pathname, router],
   );
@@ -60,6 +56,5 @@ export default function useProductFilters() {
     min_price,
     max_price,
     setFilters,
-    isPending,
   };
 }

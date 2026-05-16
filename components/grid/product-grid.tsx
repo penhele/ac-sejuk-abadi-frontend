@@ -1,11 +1,11 @@
 "use client";
 
 import { getProductsInfiniteQueryOptions } from "@/hooks/queries/product-queries";
+import useProductFilters from "@/hooks/use-product-filters";
 import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
 import { SearchX } from "lucide-react";
-import ProductList from "../lists/product-list";
-import useProductFilters from "@/hooks/use-product-filters";
 import EmptyState from "../empty-state/empty-state";
+import ProductList from "../lists/product-list";
 
 export default function ProductGrid({
   className,
@@ -14,17 +14,10 @@ export default function ProductGrid({
   className?: string;
   limit?: number;
 }) {
-  const {
-    search,
-    sortBy,
-    sortOrder,
-    id_brand,
-    min_price,
-    max_price,
-    isPending,
-  } = useProductFilters();
+  const { search, sortBy, sortOrder, id_brand, min_price, max_price } =
+    useProductFilters();
 
-  const { data } = useSuspenseInfiniteQuery(
+  const { data, isFetching } = useSuspenseInfiniteQuery(
     getProductsInfiniteQueryOptions({
       search,
       sortBy,
@@ -39,7 +32,7 @@ export default function ProductGrid({
   const products = data?.pages.flatMap((page) => page.data);
 
   return (
-    <div className={isPending ? "cursor-progress" : ""}>
+    <div className="">
       {products.length != 0 ? (
         <ProductList products={products} className={className} />
       ) : (

@@ -42,7 +42,7 @@ export default async function ShopPage() {
         <BreadcrumbComponent />
 
         <div className="flex flex-row gap-8 items-start">
-          <Suspense fallback={<Skeleton className="h-100 w-3xs" />}>
+          <Suspense>
             <ShopFilter />
           </Suspense>
 

@@ -13,7 +13,7 @@ import { Checkbox } from "../ui/checkbox";
 import { Field, FieldGroup, FieldLabel } from "../ui/field";
 
 export default function BrandFilter() {
-  const { id_brand, setFilters, isPending } = useProductFilters();
+  const { id_brand, setFilters } = useProductFilters();
 
   const { data: brands } = useQuery(getBrandsQueryOptions());
 
@@ -46,7 +46,6 @@ export default function BrandFilter() {
                         <Checkbox
                           id={`brand-${brand.id}`}
                           checked={isChecked}
-                          disabled={isPending}
                           onCheckedChange={(checked) =>
                             handleBrandChange(
                               brand.id.toString(),
