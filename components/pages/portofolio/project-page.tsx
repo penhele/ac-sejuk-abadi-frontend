@@ -3,19 +3,10 @@ import ErrorFallback from "@/components/fallback/error-fallback";
 import ProjectGrid from "@/components/grid/project-grid";
 import ProjectCardSkeleton from "@/components/skeletons/project-card-skeleton";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import getProjectsQueryOptions from "@/hooks/queries/project-queries";
-import { QueryClient } from "@tanstack/react-query";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 export default async function ProjectPage() {
-  const queryClient = new QueryClient();
-
-  try {
-    await queryClient.prefetchQuery(getProjectsQueryOptions());
-  } catch (error) {
-    console.error("Prefetch failed:", error);
-  }
 
   return (
     <div className="space-y-between-section">
