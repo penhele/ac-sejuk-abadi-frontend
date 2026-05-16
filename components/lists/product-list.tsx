@@ -12,7 +12,7 @@ export default function ProductList({
   return (
     <div
       className={cn(
-        "grid grid-cols-2 lg:grid-cols-4 gap-between-card",
+        "grid grid-cols-2 sm:grid-cols-3 gap-between-card",
         className,
       )}
     >

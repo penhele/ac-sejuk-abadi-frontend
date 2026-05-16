@@ -43,16 +43,16 @@ export default async function ShopPage() {
 
         <div className="flex flex-row gap-8 items-start">
           <Suspense>
-            <ShopFilter />
+            <ShopFilter className="hidden lg:block" />
           </Suspense>
 
           <div className="flex-1 space-y-8">
-            <div className="flex justify-between items-center">
+            <div className="flex flex-col-reverse gap-4 sm:flex-row w-full justify-between items-center">
               <Suspense fallback={<Skeleton className="h-4 w-16" />}>
-                <TotalItems />
+                <TotalItems className="w-full" />
               </Suspense>
 
-              <div className="flex gap-4">
+              <div className="flex gap-4 w-full">
                 <Suspense fallback={<Skeleton className="h-10 w-40" />}>
                   <SearchFilter />
                 </Suspense>
@@ -74,7 +74,7 @@ export default async function ShopPage() {
                     </div>
                   }
                 >
-                  <ProductGrid className="grid-cols-3!" />
+                  <ProductGrid />
                 </Suspense>
               </ErrorBoundary>
             </div>
