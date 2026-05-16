@@ -14,8 +14,15 @@ export default function ProductGrid({
   className?: string;
   limit?: number;
 }) {
-  const { search, sortBy, sortOrder, id_brand, min_price, max_price } =
-    useProductFilters();
+  const {
+    search,
+    sortBy,
+    sortOrder,
+    id_brand,
+    min_price,
+    max_price,
+    isPending,
+  } = useProductFilters();
 
   const { data } = useSuspenseInfiniteQuery(
     getProductsInfiniteQueryOptions({
@@ -32,7 +39,7 @@ export default function ProductGrid({
   const products = data?.pages.flatMap((page) => page.data);
 
   return (
-    <div className="">
+    <div className={isPending ? "cursor-progress" : ""}>
       {products.length != 0 ? (
         <ProductList products={products} className={className} />
       ) : (

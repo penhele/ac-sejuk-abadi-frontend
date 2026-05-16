@@ -37,5 +37,6 @@ export function getProductsInfiniteQueryOptions(params?: GetProductOptions) {
 
       return hasMore ? lastPage.meta.page + 1 : undefined;
     },
+    throwOnError: false,
   });
 }
