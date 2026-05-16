@@ -11,6 +11,8 @@
   --spacing-between-card: 1rem;
   --spacing-inside-card: 1rem;
 
+  --spacing-page-inline: 1rem;
+
   /* breakpoint */
   --breakpoint-2xs: 24rem;
   --breakpoint-xs: 32rem;

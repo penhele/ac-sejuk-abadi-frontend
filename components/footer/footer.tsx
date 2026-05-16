@@ -51,10 +51,10 @@ export default async function Footer() {
 
   return (
     <footer className="border-t mt-12">
-      <div className="max-w-7xl mx-auto py-8">
+      <div className="max-w-7xl mx-auto py-8 px-page-inline xl:px-0">
         <div className="space-y-16">
-          <div className="grid grid-cols-4 gap-4">
-            <div className="space-y-2">
+          <div className="grid grid-cols-4 gap-4 space-y-4">
+            <div className="space-y-2 col-span-4 xl:col-span-1">
               <div className="relative h-16 w-32">
                 <Image
                   src={"/logo.png"}
@@ -81,15 +81,17 @@ export default async function Footer() {
               </div>
             </div>
 
-            <SponsoredBrandList
-              title="Top Brand"
-              sponsoredBrand={sponsoredBrands}
-            />
-            <FooterList title="Category" list={categoryList} />
-            <FooterList title="Informasi" list={quickLinks} />
+            <div className="col-span-4 xl:col-span-3 grid grid-cols-3">
+              <SponsoredBrandList
+                title="Top Brand"
+                sponsoredBrand={sponsoredBrands}
+              />
+              <FooterList title="Category" list={categoryList} />
+              <FooterList title="Informasi" list={quickLinks} />
+            </div>
           </div>
 
-          <div className="flex gap-8">
+          <div className="flex flex-col lg:flex-row gap-8">
             <div className="space-y-4 flex-1">
               <h1 className="font-semibold text-xs tracking-widest uppercase">
                 Lokasi kami
@@ -103,7 +105,7 @@ export default async function Footer() {
                 Hubungi kami
               </h1>
 
-              <div className="space-y-2">
+              <div className="flex flex-col sm:flex-row lg:flex-col space-y-2 space-x-8">
                 {contactList.map((item, index) => (
                   <div className="flex gap-4 items-center" key={index}>
                     <div className="border w-8 h-8 items-center flex justify-center rounded-lg">
