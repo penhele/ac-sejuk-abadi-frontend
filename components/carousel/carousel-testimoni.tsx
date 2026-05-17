@@ -51,10 +51,11 @@ export default function CarouselTestimoni() {
 
   return (
     <Carousel
+      className="w-full"
       opts={{
         loop: true,
         align: "center",
-        duration: 100,
+        duration: 25,
       }}
       plugins={[
         Autoplay({
@@ -64,20 +65,24 @@ export default function CarouselTestimoni() {
         }),
       ]}
     >
-      <CarouselContent className="py-8">
+      <CarouselContent className="py-8 px-4 -ml-4">
         {testimoniList.map((item, index) => (
           <CarouselItem
             key={index}
-            className="basis-auto w-lg hover:cursor-pointer"
+            className="pl-4 basis-full sm:basis-5/6 md:basis-1/2 lg:basis-1/3 max-w-full md:max-w-md hover:cursor-pointer select-none"
           >
-            <div className="border rounded-lg shadow-lg p-4 space-y-4 transition hover:shadow-xl hover:scale-102">
-              <p className="text-sm text-gray-600 line-clamp-5 h-28">
-                {item.review}
+            <div className="h-full border rounded-lg shadow-md md:shadow-lg p-5 md:p-6 bg-background space-y-4 transition-all duration-300 hover:shadow-xl hover:scale-[1.02] flex flex-col justify-between">
+              <p className="text-sm md:text-base text-muted-foreground leading-relaxed line-clamp-5 min-h-25 md:min-h-30">
+                "{item.review}"
               </p>
 
-              <div className="flex flex-col">
-                <span className="font-bold">{item.name}</span>
-                <span className="text-xs text-gray-400">5 April 2026</span>
+              <div className="flex flex-col pt-2 border-t border-border">
+                <span className="font-semibold text-sm md:text-base">
+                  {item.name}
+                </span>
+                <span className="text-xs text-muted-foreground/80">
+                  5 April 2026
+                </span>
               </div>
             </div>
           </CarouselItem>

@@ -97,7 +97,7 @@ export default async function Footer() {
                 Lokasi kami
               </h1>
 
-              <Maps className="w-full rounded-lg h-56" />
+              <Maps className="w-full rounded-lg h-20 sm:h-56" />
             </div>
 
             <div className="space-y-4 min-w-3xs">
@@ -126,10 +126,10 @@ export default async function Footer() {
           <div className="space-y-4">
             <Separator />
 
-            <div className="text-xs flex justify-between font-medium">
+            <div className="text-xs flex flex-col md:flex-row justify-between font-medium space-y-2">
               <p>© 2026 PT. Alfa Cakrawala Sejuk Abadi. All rights reserved.</p>
 
-              <div className="flex gap-8">
+              <div className="flex w-full justify-start md:justify-end gap-8">
                 <Link href="/privacy" className="hover: transition-colors">
                   Privacy Policy
                 </Link>

@@ -32,9 +32,10 @@ export default function CarouselBrand() {
 
   return (
     <Carousel
+      className="w-full"
       opts={{
         loop: true,
-        align: "center",
+        align: "start",
       }}
       plugins={[
         Autoplay({
@@ -46,7 +47,7 @@ export default function CarouselBrand() {
       <CarouselContent>
         {brandLogo.map((item, index) => (
           <CarouselItem key={index} className="basis-auto">
-            <div className="relative h-6 w-fit mx-4 flex items-center justify-center">
+            <div className="relative h-4 xs:h-5 md:h-6 w-fit mx-2 xs:mx-4 flex items-center justify-center">
               <img
                 src={item.src}
                 alt={item.name}

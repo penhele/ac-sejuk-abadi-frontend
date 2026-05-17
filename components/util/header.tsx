@@ -11,11 +11,11 @@ export function HeaderSection({
   return (
     <div className="space-y-2 mb-4">
       <div className="flex justify-between items-end">
-        <h1 className="header-h2">{title}</h1>
+        <h1 className="text-lg font-bold xs:text-2xl">{title}</h1>
 
         {href && (
           <Link href={href}>
-            <span className="text-sm italic text-gray-600 hover:text-primary">
+            <span className="text-xs xs:text-sm italic text-gray-600 hover:text-primary">
               Lihat selengkapnya &gt;&gt;&gt;
             </span>
           </Link>

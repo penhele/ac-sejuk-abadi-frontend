@@ -50,30 +50,44 @@ export default function HomePage() {
         </ErrorBoundary>
       </div>
 
-      <div className="grid grid-cols-3 gap-8">
-        <div className="col-span-2 grid grid-cols-2 gap-between-card">
-          <div className="space-y-2 flex flex-col items-center bg-muted p-4 border rounded-lg transition-colors hover:border-gray-600">
-            <ShieldCheck size={56} />
-            <span className="text-lg">Kualitas Tinggi</span>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+        <div className="order-2 lg:order-1 lg:col-span-2 grid grid-cols-2 gap-2 lg:gap-4">
+          <div className="space-y-2 flex flex-col items-center justify-center bg-muted p-6 border rounded-lg transition-colors hover:border-gray-600">
+            <ShieldCheck className="w-10 h-10 md:w-14 md:h-14 text-primary" />
+            <span className="text-base md:text-lg text-center font-medium">
+              Kualitas Tinggi
+            </span>
           </div>
-          <div className="space-y-2 flex flex-col items-center bg-muted p-4 border rounded-lg transition-colors hover:border-gray-600">
-            <Handshake size={56} />
-            <span className="text-lg">Kepuasan Pelanggan</span>
+
+          <div className="space-y-2 flex flex-col items-center justify-center bg-muted p-6 border rounded-lg transition-colors hover:border-gray-600">
+            <Handshake className="w-10 h-10 md:w-14 md:h-14 text-primary" />
+            <span className="text-base md:text-lg text-center font-medium">
+              Kepuasan Pelanggan
+            </span>
           </div>
-          <div className="space-y-2 flex flex-col items-center bg-muted p-4 border rounded-lg transition-colors hover:border-gray-600">
-            <Users size={56} />
-            <span className="text-lg">Staff Profesional</span>
+
+          <div className="space-y-2 flex flex-col items-center justify-center bg-muted p-6 border rounded-lg transition-colors hover:border-gray-600">
+            <Users className="w-10 h-10 md:w-14 md:h-14 text-primary" />
+            <span className="text-base md:text-lg text-center font-medium">
+              Staff Profesional
+            </span>
           </div>
-          <div className="space-y-2 flex flex-col items-center bg-muted p-4 border rounded-lg transition-colors hover:border-gray-600">
-            <ChartNoAxesCombined size={56} />
-            <span className="text-lg">Skala Proyek</span>
+
+          <div className="space-y-2 flex flex-col items-center justify-center bg-muted p-6 border rounded-lg transition-colors hover:border-gray-600">
+            <ChartNoAxesCombined className="w-10 h-10 md:w-14 md:h-14 text-primary" />
+            <span className="text-base md:text-lg text-center font-medium">
+              Skala Proyek
+            </span>
           </div>
         </div>
 
-        <div className="space-y-4">
-          <h1 className="text-3xl font-bold">Kenapa harus kami?</h1>
+        {/* Bagian Teks (Kanan saat desktop, Utama/Atas saat mobile menggunakan order-1) */}
+        <div className="order-1 lg:order-2 space-y-4 text-center lg:text-left">
+          <h2 className="text-2xl md:text-3xl font-bold tracking-tight">
+            Kenapa harus kami?
+          </h2>
 
-          <p className="">
+          <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
             Dengan pengalaman bertahun-tahun di industri ini, kami menawarkan
             solusi HVAC yang dirancang khusus untuk memenuhi kebutuhan Anda.
             Teknisi kami yang terlatih secara profesional siap memberikan
