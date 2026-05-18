@@ -31,13 +31,13 @@ export default function ProductDetailContent({ id }: { id: string }) {
     <div className="space-y-between-section">
       <BreadcrumbComponent />
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 xs:grid-cols-2 xs:relative gap-4 space-y-8">
         <ProductImages jumlah={product.images.length} product={product} />
 
         <div className="flex flex-col gap-4">
           <ProductInfo product={product} />
 
-          <ProductPriceAction product={product} />
+          <ProductPriceAction product={product} className="" />
         </div>
       </div>
 

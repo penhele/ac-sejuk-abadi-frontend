@@ -36,7 +36,7 @@ export default function ProductDetailPage() {
               </div>
             }
           >
-            <ProductGrid className="grid-cols-4!" limit={4} />
+            <ProductGrid limit={2} />
           </Suspense>
         </ErrorBoundary>
       </div>

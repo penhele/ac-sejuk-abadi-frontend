@@ -7,8 +7,15 @@ import { useState } from "react";
 import { FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
+import { cn } from "@/lib/utils";
 
-export default function ProductPriceAction({ product }: { product: Product }) {
+export default function ProductPriceAction({
+  product,
+  className,
+}: {
+  product: Product;
+  className?: string;
+}) {
   const [quantity, setQuantity] = useState(1);
 
   const increaseQty = () => {
@@ -30,7 +37,7 @@ export default function ProductPriceAction({ product }: { product: Product }) {
   const discountPercentage = (discountPrice / originalPrice) * 100;
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className={cn("flex flex-col gap-4", className)}>
       <div className="flex flex-col">
         <span className="line-through text-xs">
           {discountPrice != 0 && (
