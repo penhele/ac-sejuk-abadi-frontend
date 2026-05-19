@@ -72,7 +72,19 @@ export default function ProductPriceAction({ product }: { product: Product }) {
         <span>{formatRupiah(totalPrice)}</span>
       </div>
 
-      <Button variant={"outline"}>Tanyakan ke WhatsApp</Button>
+      <Button
+        variant={"outline"}
+        onClick={() => {
+          const productUrl = `https://acsa-frontend.vercel.app/shop/${product.id}`;
+          const message = `Halo, saya ingin bertanya tentang produk ini:\n${product.name}\n${productUrl}`;
+
+          const whatsappUrl = `https://wa.me/6281574391992/?text=${encodeURIComponent(message)}`;
+
+          window.open(whatsappUrl, "_blank");
+        }}
+      >
+        Tanyakan ke WhatsApp
+      </Button>
 
       <Separator />
 
