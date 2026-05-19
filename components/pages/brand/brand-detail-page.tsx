@@ -10,7 +10,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { HeaderSection } from "@/components/util/header";
-import { ROUTES } from "@/contants/routes";
+import { ROUTES } from "@/constants/routes";
 import Image from "next/image";
 import Link from "next/link";
 

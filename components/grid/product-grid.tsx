@@ -29,11 +29,13 @@ export default function ProductGrid({
     }),
   );
 
-  const products = data?.pages.flatMap((page) => page.data);
+  // SOLUSI: Berikan fallback || [] agar tidak pernah undefined
+  const products = data?.pages?.flatMap((page) => page?.data ?? []) ?? [];
 
   return (
     <div className="">
-      {products.length != 0 ? (
+      {/* SOLUSI: Gunakan ?.length untuk keamanan ekstra */}
+      {products && products.length > 0 ? (
         <ProductList products={products} className={className} />
       ) : (
         <EmptyState Icon={SearchX} label="No products found" />

@@ -5,30 +5,12 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
+import { getBrandsQueryOptions } from "@/hooks/queries/brand-queries";
+import { useQuery } from "@tanstack/react-query";
 import Autoplay from "embla-carousel-autoplay";
 
 export default function CarouselBrand() {
-  const brandLogo = [
-    { src: "/daikin.png", name: "Daikin" },
-    { src: "/aqua.png", name: "Aqua" },
-    { src: "/changhong.png", name: "Changhong" },
-    { src: "/gree.png", name: "Gree" },
-    { src: "/lg.png", name: "LG" },
-    { src: "/midea.png", name: "Midea" },
-    { src: "/panasonic.png", name: "Panasonic" },
-    { src: "/polytron.png", name: "Polytron" },
-    { src: "/samsung.png", name: "Samsung" },
-    { src: "/panasonic.png", name: "Panasonic" },
-    { src: "/daikin.png", name: "Daikin" },
-    { src: "/aqua.png", name: "Aqua" },
-    { src: "/changhong.png", name: "Changhong" },
-    { src: "/gree.png", name: "Gree" },
-    { src: "/lg.png", name: "LG" },
-    { src: "/midea.png", name: "Midea" },
-    { src: "/panasonic.png", name: "Panasonic" },
-    { src: "/polytron.png", name: "Polytron" },
-    { src: "/samsung.png", name: "Samsung" },
-  ];
+  const { data: brands } = useQuery(getBrandsQueryOptions);
 
   return (
     <Carousel
@@ -45,14 +27,16 @@ export default function CarouselBrand() {
       ]}
     >
       <CarouselContent>
-        {brandLogo.map((item, index) => (
+        {brands?.map((brand, index) => (
           <CarouselItem key={index} className="basis-auto">
             <div className="relative h-4 xs:h-5 md:h-6 w-fit mx-2 xs:mx-4 flex items-center justify-center">
-              <img
-                src={item.src}
-                alt={item.name}
-                className="h-full w-auto object-contain"
-              />
+              {brand.image_url != null && (
+                <img
+                  src={brand.image_url}
+                  alt={brand.name}
+                  className="h-full w-auto object-contain"
+                />
+              )}
             </div>
           </CarouselItem>
         ))}

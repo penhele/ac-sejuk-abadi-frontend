@@ -10,10 +10,11 @@ export default function PublicLayout({
   return (
     <div className="">
       <Navbar />
-      <main className="">
-        <QueryProvider>{children}</QueryProvider>
-      </main>
-      <Footer />
+      <main className="">{children}</main>
+
+      <footer>
+        <Footer />
+      </footer>
     </div>
   );
 }

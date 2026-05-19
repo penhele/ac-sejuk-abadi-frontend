@@ -5,7 +5,7 @@ import { AspectRatio } from "../ui/aspect-ratio";
 import { Button } from "../ui/button";
 import DiscountBadge from "../util/discount-badge";
 import { formatRupiah } from "@/lib/format/currency";
-import { ROUTES } from "@/contants/routes";
+import { ROUTES } from "@/constants/routes";
 import Image from "next/image";
 
 export default function ProductCard({ product }: { product: Product }) {

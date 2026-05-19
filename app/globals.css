@@ -7,9 +7,14 @@
 @theme inline {
   /* spacing */
   --spacing-default-page: 1rem;
-  --spacing-between-section: 2rem;
   --spacing-between-card: 1rem;
   --spacing-inside-card: 1rem;
+
+  --spacing-between-section: 2rem;
+  --spacing-between-items: 1rem;
+  --spacing-between-items-xs: 0.5rem;
+  --spacing-between-items-sm: 1rem;
+  --spacing-between-items-lg: 2rem;
 
   --spacing-page-inline: 1rem;
 
@@ -262,6 +267,10 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+
+  footer {
+    @apply max-w-7xl mx-auto xl:px-0;
   }
 }
 

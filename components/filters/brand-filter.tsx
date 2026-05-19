@@ -1,6 +1,6 @@
 "use client";
 
-import getBrandsQueryOptions from "@/hooks/queries/brand-queries";
+import { getBrandsQueryOptions } from "@/hooks/queries/brand-queries";
 import useProductFilters from "@/hooks/use-product-filters";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -15,7 +15,7 @@ import { Field, FieldGroup, FieldLabel } from "../ui/field";
 export default function BrandFilter() {
   const { id_brand, setFilters } = useProductFilters();
 
-  const { data: brands } = useQuery(getBrandsQueryOptions());
+  const { data: brands } = useQuery(getBrandsQueryOptions);
 
   const handleBrandChange = (brandId: string, checked: boolean) => {
     if (checked) {

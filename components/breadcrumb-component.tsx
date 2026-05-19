@@ -10,7 +10,7 @@ import {
   BreadcrumbSeparator,
 } from "./ui/breadcrumb";
 import { Fragment } from "react/jsx-runtime";
-import { ROUTES } from "@/contants/routes";
+import { ROUTES } from "@/constants/routes";
 
 export default function BreadcrumbComponent() {
   const pathname = usePathname();

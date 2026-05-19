@@ -8,7 +8,7 @@ import StatsSection from "@/components/sections/stats-section";
 import ProductCardSkeleton from "@/components/skeletons/product-card-skeleton";
 import ProjectCardSkeleton from "@/components/skeletons/project-card-skeleton";
 import { HeaderSection } from "@/components/util/header";
-import { ROUTES } from "@/contants/routes";
+import { ROUTES } from "@/constants/routes";
 import {
   ChartNoAxesCombined,
   Handshake,

@@ -1,4 +1,4 @@
-import { ROUTES } from "@/contants/routes";
+import { ROUTES } from "@/constants/routes";
 import { Project } from "@/types/project";
 import { ArrowRight, ImageOff } from "lucide-react";
 import Link from "next/link";

@@ -4,6 +4,7 @@ import React from "react";
 import { Geist } from "next/font/google";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "sonner";
+import QueryProvider from "@/components/providers/query-provider";
 const geist = Geist({
   subsets: ["latin"],
 });
@@ -15,7 +16,7 @@ export default function RootLayout({
     <html className={geist.className}>
       <body>
         <TooltipProvider>
-          <main>{children}</main>
+          <QueryProvider>{children}</QueryProvider>
           <Toaster />
         </TooltipProvider>
       </body>

@@ -8,7 +8,7 @@ export const getBrands = async (): Promise<Brand[]> => {
 };
 
 export const getSponsoredBrands = async (): Promise<SponsoredBrand[]> => {
-  const response = await api.get<SponsoredBrand[]>("sponsored-brands");
+  const response = await api.get<SponsoredBrand[]>("/sponsored-brands");
 
   return response.data;
 };

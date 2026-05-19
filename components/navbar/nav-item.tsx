@@ -5,7 +5,7 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { ROUTES } from "@/contants/routes";
+import { ROUTES } from "@/constants/routes";
 import Link from "next/link";
 
 export default function NavItem() {

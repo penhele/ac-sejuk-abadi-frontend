@@ -8,7 +8,7 @@ import ProductGrid from "@/components/grid/product-grid";
 import ProductCardSkeleton from "@/components/skeletons/product-card-skeleton";
 import TotalItems from "@/components/total-items";
 import { Skeleton } from "@/components/ui/skeleton";
-import getBrandsQueryOptions from "@/hooks/queries/brand-queries";
+import { getBrandsQueryOptions } from "@/hooks/queries/brand-queries";
 import { getProductsInfiniteQueryOptions } from "@/hooks/queries/product-queries";
 import {
   dehydrate,
@@ -29,7 +29,7 @@ export default async function ShopPage() {
       getProductsInfiniteQueryOptions({ page: 1, limit: 6 }),
     );
 
-    await queryClient.prefetchQuery(getBrandsQueryOptions());
+    await queryClient.prefetchQuery(getBrandsQueryOptions);
   } catch (error) {
     console.error("Prefetch failed:", error);
   }

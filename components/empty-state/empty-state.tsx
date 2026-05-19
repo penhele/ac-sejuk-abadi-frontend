@@ -7,7 +7,7 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "../ui/empty";
-import { ROUTES } from "@/contants/routes";
+import { ROUTES } from "@/constants/routes";
 import { Button } from "../ui/button";
 import Link from "next/link";
 

@@ -9,7 +9,7 @@ import { useParams } from "next/navigation";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import ProductDetailSkeleton from "@/components/skeletons/product-detail-skeleton";
-import { ROUTES } from "@/contants/routes";
+import { ROUTES } from "@/constants/routes";
 
 export default function ProductDetailPage() {
   const params = useParams();
