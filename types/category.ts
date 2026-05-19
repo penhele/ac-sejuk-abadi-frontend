@@ -8,3 +8,14 @@ export interface ProductCategory {
   id_category: number;
   category: CategoryDetail;
 }
+
+export interface Category {
+  id: number;
+  name: string;
+  is_deleted: boolean;
+  _count: CategoryCount;
+}
+
+export interface CategoryCount {
+  products: number;
+}

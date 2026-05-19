@@ -9,8 +9,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "../ui/accordion";
-import { Checkbox } from "../ui/checkbox";
 import { Field, FieldGroup, FieldLabel } from "../ui/field";
+import { Checkbox } from "../ui/checkbox";
 
 export default function BrandFilter() {
   const { id_brand, setFilters } = useProductFilters();
@@ -28,9 +28,9 @@ export default function BrandFilter() {
   return (
     <div>
       {brands?.length != 0 ? (
-        <Accordion type="single" collapsible defaultValue="brands">
-          <AccordionItem value="brands">
-            <AccordionTrigger>Brands</AccordionTrigger>
+        <Accordion type="single" collapsible defaultValue="brand">
+          <AccordionItem value="brand">
+            <AccordionTrigger>Brand</AccordionTrigger>
             <AccordionContent>
               <FieldGroup className="gap-2">
                 {brands?.map((brand) => {

@@ -4,8 +4,11 @@ import { GetProductOptions, Product, ProductResponse } from "@/types/product";
 export const getProducts = async (
   options?: GetProductOptions,
 ): Promise<ProductResponse> => {
-  const response = await api.get<ProductResponse>("/products", {
+  const response = await api.get("/products", {
     params: options,
+    validateStatus: function (status) {
+      return status >= 200 && status < 300;
+    },
   });
 
   return response.data;

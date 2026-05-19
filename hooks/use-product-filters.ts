@@ -15,7 +15,13 @@ export default function useProductFilters() {
     (searchParams.get("sortOrder") as GetProductOptions["sortOrder"]) ??
     undefined;
   const id_brand =
-    (searchParams.get("id_brand") as GetProductOptions["id_category"]) ??
+    (searchParams.get("id_brand") as GetProductOptions["id_brand"]) ??
+    undefined;
+  const id_ac_type =
+    (searchParams.get("id_ac_type") as GetProductOptions["id_ac_type"]) ??
+    undefined;
+  const id_category =
+    (searchParams.get("id_category") as GetProductOptions["id_category"]) ??
     undefined;
   const min_price =
     (searchParams.get("min_price") as GetProductOptions["min_price"]) ??
@@ -40,6 +46,10 @@ export default function useProductFilters() {
       if ("sortBy" in filters) applyFilter("sortBy", filters.sortBy);
       if ("sortOrder" in filters) applyFilter("sortOrder", filters.sortOrder);
       if ("id_brand" in filters) applyFilter("id_brand", filters.id_brand);
+      if ("id_ac_type" in filters)
+        applyFilter("id_ac_type", filters.id_ac_type);
+      if ("id_category" in filters)
+        applyFilter("id_category", filters.id_category);
       if ("min_price" in filters) applyFilter("min_price", filters.min_price);
       if ("max_price" in filters) applyFilter("max_price", filters.max_price);
 
@@ -53,6 +63,8 @@ export default function useProductFilters() {
     sortBy,
     sortOrder,
     id_brand,
+    id_ac_type,
+    id_category,
     min_price,
     max_price,
     setFilters,

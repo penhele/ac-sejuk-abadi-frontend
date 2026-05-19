@@ -6,7 +6,7 @@ import {
   UseQueryOptions,
 } from "@tanstack/react-query";
 
-export function getProductsQueryOptions<
+export const getProductsQueryOptions = <
   TData = ProductResponse,
   TError = Error,
 >(
@@ -15,16 +15,16 @@ export function getProductsQueryOptions<
     UseQueryOptions<ProductResponse, TError, TData>,
     "queryKey" | "queryFn"
   >,
-) {
+) => {
   return queryOptions({
     ...options,
     queryKey: ["products", params],
     queryFn: () => getProducts(params),
     staleTime: 1000 * 60 * 5,
   });
-}
+};
 
-export function getProductsInfiniteQueryOptions(params?: GetProductOptions) {
+export const getProductsInfiniteQueryOptions = (params?: GetProductOptions) => {
   return infiniteQueryOptions({
     queryKey: ["products", "infinite", params],
     queryFn: ({ pageParam }) =>
@@ -39,4 +39,4 @@ export function getProductsInfiniteQueryOptions(params?: GetProductOptions) {
     },
     throwOnError: false,
   });
-}
+};

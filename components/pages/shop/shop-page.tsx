@@ -18,29 +18,26 @@ import {
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "../../fallback/error-fallback";
+import { getAcTypesQueryOptions } from "@/hooks/queries/ac-type-queries";
+import { getCategoriesQueryOptions } from "@/hooks/queries/category-queries";
 
 export const dynamic = "force-dynamic";
 
 export default async function ShopPage() {
   const queryClient = new QueryClient();
 
-  try {
-    await queryClient.prefetchInfiniteQuery(
-      getProductsInfiniteQueryOptions({ page: 1, limit: 6 }),
-    );
-
-    await queryClient.prefetchQuery(getBrandsQueryOptions);
-  } catch (error) {
-    console.error("Prefetch failed:", error);
-  }
+  await queryClient.prefetchInfiniteQuery(
+    getProductsInfiniteQueryOptions({ page: 1, limit: 6 }),
+  );
+  await queryClient.prefetchQuery(getBrandsQueryOptions);
+  await queryClient.prefetchQuery(getAcTypesQueryOptions);
+  await queryClient.prefetchQuery(getCategoriesQueryOptions);
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <div className="space-y-between-section">
         <ShopBanner />
-
         <BreadcrumbComponent />
-
         <div className="flex flex-row gap-8 items-start">
           <Suspense>
             <ShopFilter className="hidden lg:block" />
