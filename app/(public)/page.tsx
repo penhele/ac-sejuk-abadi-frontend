@@ -6,9 +6,5 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  return (
-    <div className="max-w-7xl mx-auto py-default-page px-page-inline xl:px-0">
-      <HomePage />
-    </div>
-  );
+  return <HomePage />;
 }

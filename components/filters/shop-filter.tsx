@@ -6,7 +6,7 @@ import CategoryFilter from "./category-filter";
 
 export default function ShopFilter({ className }: { className?: string }) {
   return (
-    <aside className={cn("w-3xs sticky md:top-20 space-y-4", className)}>
+    <aside className={cn("w-3xs sticky md:top-8 space-y-4", className)}>
       <h1 className="text-lg font-bold">Filter Produk</h1>
 
       <div className="flex flex-col space-y-2 border rounded-lg p-4">

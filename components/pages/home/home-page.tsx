@@ -20,7 +20,7 @@ import { ErrorBoundary } from "react-error-boundary";
 
 export default function HomePage() {
   return (
-    <main className="space-y-16">
+    <div className="space-y-between-section">
       <CarouselBanner />
 
       <div className="space-y-4 flex flex-col items-center">
@@ -108,6 +108,6 @@ export default function HomePage() {
           molestiae!
         </p>
       </div>
-    </main>
+    </div>
   );
 }

@@ -14,7 +14,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html className={geist.className}>
-      <body>
+      <body className="overflow-x-hidden">
         <TooltipProvider>
           <QueryProvider>{children}</QueryProvider>
           <Toaster />

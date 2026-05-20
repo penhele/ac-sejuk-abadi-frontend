@@ -6,11 +6,5 @@ export const metadata: Metadata = {
 };
 
 export default function page() {
-  return (
-    <div className="max-w-7xl mx-auto">
-      <div className="py-4">
-        <PortofolioDetailPage />
-      </div>
-    </div>
-  );
+  return <PortofolioDetailPage />;
 }

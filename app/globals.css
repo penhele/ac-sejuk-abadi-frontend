@@ -10,7 +10,7 @@
   --spacing-between-card: 1rem;
   --spacing-inside-card: 1rem;
 
-  --spacing-between-section: 2rem;
+  --spacing-between-section: 3rem;
   --spacing-between-items: 1rem;
   --spacing-between-items-xs: 0.5rem;
   --spacing-between-items-sm: 1rem;
@@ -268,7 +268,9 @@
   body {
     @apply bg-background text-foreground;
   }
-
+  main {
+    @apply max-w-7xl mx-auto py-default-page px-page-inline xl:px-0;
+  }
   footer {
     @apply max-w-7xl mx-auto xl:px-0;
   }

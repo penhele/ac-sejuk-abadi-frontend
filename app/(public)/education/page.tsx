@@ -8,15 +8,13 @@ export const metadata: Metadata = {
 
 export default function page() {
   return (
-    <main>
+    <div className="space-y-between-section">
       <HeroSection
         title="Articles"
         description="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, accusamus."
       />
 
-      <div className="max-w-7xl mx-auto py-4 px-page-inline xl:px-0">
-        <EducationPage />
-      </div>
-    </main>
+      <EducationPage />
+    </div>
   );
 }

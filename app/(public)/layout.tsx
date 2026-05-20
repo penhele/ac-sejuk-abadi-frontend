@@ -1,20 +1,25 @@
 import React from "react";
 
-import Navbar from "@/components/navbar/navbar";
 import Footer from "@/components/footer/footer";
-import QueryProvider from "@/components/providers/query-provider";
+import Navbar from "@/components/navbar/navbar";
+import { Separator } from "@/components/ui/separator";
 
 export default function PublicLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <div className="">
-      <Navbar />
-      <main className="">{children}</main>
+    <>
+      <nav>
+        <Navbar />
+      </nav>
+
+      <main>{children}</main>
+
+      <Separator />
 
       <footer>
         <Footer />
       </footer>
-    </div>
+    </>
   );
 }

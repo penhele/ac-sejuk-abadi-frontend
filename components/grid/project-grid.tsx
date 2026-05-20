@@ -9,7 +9,7 @@ import EmptyState from "../empty-state/empty-state";
 export default function ProjectGrid() {
   const { data: projects } = useSuspenseQuery(getProjectsQueryOptions());
 
-  if (projects.length === 0) {
+  if (!projects.length) {
     return <EmptyState Icon={SearchX} label="No projects found" />;
   }
 

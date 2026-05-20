@@ -33,9 +33,5 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default function page() {
-  return (
-    <div className="max-w-7xl mx-auto py-default-page">
-      <ProductDetailPage />
-    </div>
-  );
+  return <ProductDetailPage />;
 }

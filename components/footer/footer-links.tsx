@@ -2,21 +2,14 @@
 
 import { ROUTES } from "@/constants/routes";
 import { getSponsoredBrandsQueryOptions } from "@/hooks/queries/brand-queries";
+import { getCategoriesQueryOptions } from "@/hooks/queries/category-queries";
 import { cn } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 
 export default function FooterLinks({ className }: { className?: string }) {
   const { data: sposoredBrands } = useQuery(getSponsoredBrandsQueryOptions());
-
-  const categoryList = [
-    { name: "AC Split Wall", href: "/shop?category=split" },
-    { name: "AC Cassette", href: "/shop?category=cassette" },
-    { name: "AC Floor Standing", href: "/shop?category=floor" },
-    { name: "AC Split Duct", href: "/shop?category=duct" },
-    { name: "AC Inverter", href: "/shop?category=inverter" },
-    { name: "AC Portable", href: "/shop?category=portable" },
-  ];
+  const { data: categories } = useQuery(getCategoriesQueryOptions());
 
   const quickLinks = [
     { name: "Tentang Kami", href: "" },
@@ -51,10 +44,10 @@ export default function FooterLinks({ className }: { className?: string }) {
         </h1>
 
         <ul className="space-y-between-items-xs">
-          {categoryList.map((item, index) => (
-            <li key={index}>
-              <Link href={item.href} className="block text-sm leading-relaxed">
-                {item.name}
+          {categories?.map((category) => (
+            <li key={category.id}>
+              <Link href="" className="block text-sm leading-relaxed">
+                {category.name}
               </Link>
             </li>
           ))}
