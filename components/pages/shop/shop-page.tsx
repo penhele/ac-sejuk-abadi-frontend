@@ -25,9 +25,7 @@ import CarouselBanner from "@/components/carousel/carousel-banner";
 export default async function ShopPage() {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchInfiniteQuery(
-    getProductsInfiniteQueryOptions({ page: 1, limit: 6 }),
-  );
+  await queryClient.prefetchInfiniteQuery(getProductsInfiniteQueryOptions());
   await queryClient.prefetchQuery(getBrandsQueryOptions());
   await queryClient.prefetchQuery(getAcTypesQueryOptions());
   await queryClient.prefetchQuery(getCategoriesQueryOptions());
