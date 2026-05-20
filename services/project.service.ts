@@ -7,7 +7,7 @@ export const getProjects = async (): Promise<Project[]> => {
 
     return response.data;
   } catch (error) {
-    console.error("Failed to fetch projects:", error);
+    // console.error("Failed to fetch projects:", error);
 
     return [];
   }
