@@ -5,4 +5,9 @@ export const ROUTES = {
   EDUCATION: "/education",
   PRODUCT_DETAIL: (id: string | number) => `/shop/${id}`,
   PROJECT_DETAIL: (id: string | number) => `/portofolio/${id}`,
-};
+
+  DASHBOARD: "/dashboard",
+  PRODUCTS: "/dashboard/products",
+  CREATE_PRODUCTS: "/dashboard/products/create",
+  EDIT_PRODUCTS: (id: string | number) => `/dashboard/products/edit/${id}`,
+} as const;

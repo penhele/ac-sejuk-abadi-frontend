@@ -9,13 +9,12 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { ROUTES } from "@/constants/routes";
 import { Package } from "lucide-react";
 import Link from "next/link";
 
 export function AppSidebar() {
-  const navItem = [
-    { Icon: Package, label: "Product", href: "/dashboard/product" },
-  ];
+  const navItem = [{ Icon: Package, label: "Product", href: ROUTES.PRODUCTS }];
 
   return (
     <Sidebar variant="floating">

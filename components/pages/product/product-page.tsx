@@ -8,9 +8,11 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { ROUTES } from "@/constants/routes";
 import { getProductsQueryOptions } from "@/hooks/queries/product-queries";
 import { useQuery } from "@tanstack/react-query";
 import { Info, Plus } from "lucide-react";
+import Link from "next/link";
 
 export default function ProductPage() {
   const { data: response } = useQuery(getProductsQueryOptions());
@@ -22,9 +24,11 @@ export default function ProductPage() {
       <div className="flex justify-between items-center">
         <h1 className="text-xl font-bold text-gray-800">Products</h1>
 
-        <Button>
-          <Plus /> Add New Product
-        </Button>
+        <Link href={ROUTES.CREATE_PRODUCTS}>
+          <Button>
+            <Plus /> Add New Product
+          </Button>
+        </Link>
       </div>
 
       <div className="grid grid-cols-4">
