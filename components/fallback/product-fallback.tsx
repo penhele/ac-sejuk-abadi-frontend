@@ -1,11 +1,11 @@
 import { cn } from "@/lib/utils";
 import { Skeleton } from "../ui/skeleton";
 
-export default function ProductFallback({ length }: { length: number }) {
+export default function ProductFallback({ length = 3 }: { length?: number }) {
   return (
     <div
       className={cn(
-        "grid gap-between-card",
+        "grid grid-cols-3 gap-between-card",
         length === 3 && "grid-cols-3",
         length === 4 && "grid-cols-4",
       )}

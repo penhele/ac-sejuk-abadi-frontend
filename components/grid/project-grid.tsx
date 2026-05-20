@@ -1,6 +1,6 @@
 "use client";
 
-import getProjectsQueryOptions from "@/hooks/queries/project-queries";
+import { getProjectsQueryOptions } from "@/hooks/queries/project-queries";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { SearchX } from "lucide-react";
 import ProjectCard from "../cards/project-card";

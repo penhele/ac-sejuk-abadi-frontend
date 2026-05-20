@@ -15,7 +15,7 @@ import { Checkbox } from "../ui/checkbox";
 export default function BrandFilter() {
   const { id_brand, setFilters } = useProductFilters();
 
-  const { data: brands } = useQuery(getBrandsQueryOptions);
+  const { data: brands } = useQuery(getBrandsQueryOptions());
 
   const handleBrandChange = (brandId: string, checked: boolean) => {
     if (checked) {

@@ -28,9 +28,9 @@ export default async function ShopPage() {
   await queryClient.prefetchInfiniteQuery(
     getProductsInfiniteQueryOptions({ page: 1, limit: 6 }),
   );
-  await queryClient.prefetchQuery(getBrandsQueryOptions);
-  await queryClient.prefetchQuery(getAcTypesQueryOptions);
-  await queryClient.prefetchQuery(getCategoriesQueryOptions);
+  await queryClient.prefetchQuery(getBrandsQueryOptions());
+  await queryClient.prefetchQuery(getAcTypesQueryOptions());
+  await queryClient.prefetchQuery(getCategoriesQueryOptions());
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
@@ -63,7 +63,7 @@ export default async function ShopPage() {
             <div className="">
               <ErrorBoundary fallback={<ErrorFallback />}>
                 <Suspense fallback={<ProductFallback length={3} />}>
-                  <ProductGrid length={3} />
+                  <ProductGrid />
                 </Suspense>
               </ErrorBoundary>
             </div>

@@ -2,7 +2,13 @@ import { api } from "@/lib/api/axios";
 import { Article } from "@/types/article";
 
 export const getArticle = async (): Promise<Article[]> => {
-  const response = await api.get("/articles");
+  try {
+    const response = await api.get("/articles");
 
-  return response.data;
+    return response.data;
+  } catch (error) {
+    console.error("Failed to fetch articles:", error);
+
+    return [];
+  }
 };

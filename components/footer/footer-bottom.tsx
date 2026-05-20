@@ -12,13 +12,13 @@ export default function FooterBottom() {
         </p>
 
         <div className="flex w-full justify-start md:justify-end gap-8">
-          <Link href="/privacy" className="hover: transition-colors">
+          <Link href="" className="hover: transition-colors">
             Privacy Policy
           </Link>
-          <Link href="/terms" className="hover: transition-colors">
+          <Link href="" className="hover: transition-colors">
             Terms of Service
           </Link>
-          <Link href="/cookie-policy" className="hover: transition-colors">
+          <Link href="" className="hover: transition-colors">
             Cookie Policy
           </Link>
         </div>

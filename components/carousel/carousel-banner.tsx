@@ -13,7 +13,7 @@ import Autoplay from "embla-carousel-autoplay";
 import BannerFallback from "../fallback/banner-fallback";
 
 export default function CarouselBanner() {
-  const { data: banners, isFetching } = useQuery(getBannersQueryOptions);
+  const { data: banners, isFetching } = useQuery(getBannersQueryOptions());
 
   if (banners?.length === 0 || isFetching) {
     return <BannerFallback />;

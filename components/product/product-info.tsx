@@ -14,7 +14,7 @@ export default function ProductInfo({ product }: { product: Product }) {
             {product.pk} PK
           </div>
           <div className="text-xs bg-green-800 text-white py-1 px-2 rounded-sm">
-            {product.type}
+            {product.ac_type.name}
           </div>
         </div>
       </header>

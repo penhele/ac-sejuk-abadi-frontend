@@ -10,7 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import Autoplay from "embla-carousel-autoplay";
 
 export default function CarouselBrand() {
-  const { data: brands } = useQuery(getBrandsQueryOptions);
+  const { data: brands } = useQuery(getBrandsQueryOptions());
 
   return (
     <Carousel

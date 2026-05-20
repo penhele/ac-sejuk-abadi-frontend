@@ -1,8 +1,8 @@
 import BreadcrumbComponent from "@/components/breadcrumb-component";
+import ArticleFallback from "@/components/fallback/article-fallback";
 import ErrorFallback from "@/components/fallback/error-fallback";
 import ArticleGrid from "@/components/grid/article-grid";
-import ArticleCardSkeleton from "@/components/skeletons/article-card-skeleton";
-import getArticlesQueryOptions from "@/hooks/queries/article-queries";
+import { getArticlesQueryOptions } from "@/hooks/queries/article-queries";
 import {
   dehydrate,
   HydrationBoundary,
@@ -22,15 +22,7 @@ export default async function EducationPage() {
         <BreadcrumbComponent />
 
         <ErrorBoundary fallback={<ErrorFallback />}>
-          <Suspense
-            fallback={
-              <div className="grid grid-cols-3 gap-between-card">
-                {[...Array(6)].map((_, index) => (
-                  <ArticleCardSkeleton key={index} />
-                ))}
-              </div>
-            }
-          >
+          <Suspense fallback={<ArticleFallback />}>
             <ArticleGrid />
           </Suspense>
         </ErrorBoundary>

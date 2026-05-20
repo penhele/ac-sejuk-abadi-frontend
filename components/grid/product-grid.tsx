@@ -27,7 +27,7 @@ export default function ProductGrid({
     max_price,
   } = useProductFilters();
 
-  const { data, isFetching } = useInfiniteQuery(
+  const { data, isPending, isError } = useInfiniteQuery(
     getProductsInfiniteQueryOptions({
       search,
       sortBy,
@@ -43,24 +43,28 @@ export default function ProductGrid({
 
   const products = data?.pages?.flatMap((page) => page?.data ?? []) ?? [];
 
-  if (isFetching) {
+  if (isPending) {
     return <ProductFallback length={length ?? 6} />;
   }
 
-  if (products.length <= 0) {
+  if (!products.length) {
     return <EmptyState Icon={SearchX} label="No products found" />;
+  }
+
+  if (isError) {
+    return <EmptyState Icon={SearchX} label="Failed to load products" />;
   }
 
   return (
     <div
       className={cn(
-        "grid gap-between-card",
+        "grid grid-cols-3 gap-between-card",
         length === 3 && "grid-cols-3",
         length === 4 && "grid-cols-4",
       )}
     >
       {products.map((product) => (
-        <ProductCard product={product} />
+        <ProductCard key={product.id} product={product} />
       ))}
     </div>
   );

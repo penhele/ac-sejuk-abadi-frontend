@@ -1,3 +1,4 @@
+import { AcType } from "./ac-type";
 import { Brand } from "./brand";
 import { ProductCategory } from "./category";
 import { Discounts } from "./discount";
@@ -6,20 +7,25 @@ import { ProductImages } from "./image";
 export interface Product {
   id: string;
   id_brand: number;
+  id_category: number;
+  id_ac_type: number;
+
   name: string;
   description: string;
-  type: string;
   price: string;
   quantity: number;
   pk: string;
+
   created_at: string;
   updated_at: string;
+  is_deleted: boolean;
+
   brand: Brand;
-  categories: ProductCategory[];
+  category: ProductCategory;
+  ac_type: AcType;
+
   images: ProductImages[];
   discounts: Discounts[];
-  reviews: any[];
-  featuredProducts: any[];
 }
 
 export interface ProductResponse {

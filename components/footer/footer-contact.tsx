@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Mail, MapPin, Phone } from "lucide-react";
 
 export default function FooterContact({ className }: { className?: string }) {
-  const { data: company } = useQuery(getCompanyQueryOptions);
+  const { data: company } = useQuery(getCompanyQueryOptions());
 
   const contactList = [
     {
