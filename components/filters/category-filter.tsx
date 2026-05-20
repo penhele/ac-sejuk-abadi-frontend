@@ -13,7 +13,7 @@ import { getCategoriesQueryOptions } from "@/hooks/queries/category-queries";
 import useProductFilters from "@/hooks/use-product-filters";
 
 export default function CategoryFilter() {
-  const { data: categories } = useQuery(getCategoriesQueryOptions);
+  const { data: categories } = useQuery(getCategoriesQueryOptions());
 
   const { id_category, setFilters } = useProductFilters();
 
