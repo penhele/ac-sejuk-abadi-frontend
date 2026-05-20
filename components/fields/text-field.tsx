@@ -1,38 +1,40 @@
 import { useFieldContext } from "@/hooks/use-app-form";
 import { FieldInfo } from "../field-info";
-import { Field, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupText,
+  InputGroupInput,
+} from "../ui/input-group";
 
 export default function TextField({
   label,
-  isDisable = false,
   type = "text",
-  isEditing,
+  placeholder,
+  isPrice,
 }: {
   label: string;
-  isDisable?: boolean;
   type?: "text" | "number" | "password" | "email";
-  isEditing?: boolean;
+  placeholder?: string;
+  isPrice?: boolean;
 }) {
   const field = useFieldContext<string>();
 
   return (
-    <Field className="flex flex-row justify-between">
-      <FieldLabel className="text-gray-400 w-fit ">{label}</FieldLabel>
-      {!isEditing ? (
-        <span className="h-9 flex items-center justify-end text-foreground text-base md:text-sm text-end font-medium px-2.5 whitespace-nowrap">
-          {field.state.value}
-        </span>
-      ) : (
-        <Input
-          value={field.state.value}
-          onChange={(e) => field.handleChange(e.target.value)}
-          disabled={isDisable}
-          type={type}
-          className="disabled:text-gray-800 disabled:opacity-100 font-medium text-end"
-        />
-      )}
+    <div className="space-y-between-items-xs">
+      <Label>{label}</Label>
+      <InputGroup>
+        {isPrice && (
+          <InputGroupAddon>
+            <InputGroupText>IDR</InputGroupText>
+          </InputGroupAddon>
+        )}
+
+        <InputGroupInput placeholder={placeholder} type={type} />
+      </InputGroup>
       <FieldInfo field={field} />
-    </Field>
+    </div>
   );
 }

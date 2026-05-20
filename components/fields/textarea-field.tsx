@@ -1,27 +1,26 @@
 import { useFieldContext } from "@/hooks/use-app-form";
 import { FieldInfo } from "../field-info";
-import { Field, FieldLabel } from "../ui/field";
+import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 
-export default function TextareaField({
+export default function TextField({
   label,
-  isDisable = false,
+  placeholder,
 }: {
   label: string;
-  isDisable?: boolean;
+  placeholder?: string;
 }) {
   const field = useFieldContext<string>();
 
   return (
-    <Field className="flex flex-row justify-between">
-      <FieldLabel className="text-gray-400">{label}</FieldLabel>
+    <div className="space-y-between-items-xs">
+      <Label>{label}</Label>
       <Textarea
         value={field.state.value}
         onChange={(e) => field.handleChange(e.target.value)}
-        disabled={isDisable}
-        className="disabled:text-gray-800 disabled:opacity-100 font-medium text-end "
+        placeholder={placeholder}
       />
       <FieldInfo field={field} />
-    </Field>
+    </div>
   );
 }
