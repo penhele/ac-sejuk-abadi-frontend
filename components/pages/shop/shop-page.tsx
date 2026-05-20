@@ -1,4 +1,3 @@
-import ShopBanner from "@/components/banners/shop-banner";
 import BreadcrumbComponent from "@/components/breadcrumb-component";
 import LoadMoreButton from "@/components/buttons/load-more-button";
 import SearchFilter from "@/components/filters/search-filter";
@@ -21,6 +20,7 @@ import ErrorFallback from "../../fallback/error-fallback";
 import { getAcTypesQueryOptions } from "@/hooks/queries/ac-type-queries";
 import { getCategoriesQueryOptions } from "@/hooks/queries/category-queries";
 import ProductFallback from "@/components/fallback/product-fallback";
+import CarouselBanner from "@/components/carousel/carousel-banner";
 
 export default async function ShopPage() {
   const queryClient = new QueryClient();
@@ -35,7 +35,8 @@ export default async function ShopPage() {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <div className="space-y-between-section">
-        <ShopBanner />
+        <CarouselBanner />
+
         <BreadcrumbComponent />
         <div className="flex flex-row gap-8 items-start">
           <Suspense>

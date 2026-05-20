@@ -16,14 +16,16 @@ export default function EmptyState({
   label,
   description,
   buttonLabel,
+  className,
 }: {
   Icon: LucideIcon;
   label: string;
   description?: string;
   buttonLabel?: string;
+  className?: string;
 }) {
   return (
-    <Empty>
+    <Empty className={className}>
       <EmptyHeader>
         <EmptyMedia variant="icon">
           <Icon />

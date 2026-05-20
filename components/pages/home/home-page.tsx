@@ -1,4 +1,4 @@
-import ShopBanner from "@/components/banners/shop-banner";
+import CarouselBanner from "@/components/carousel/carousel-banner";
 import CarouselBrand from "@/components/carousel/carousel-brand";
 import CarouselTestimoni from "@/components/carousel/carousel-testimoni";
 import ErrorFallback from "@/components/fallback/error-fallback";
@@ -21,7 +21,7 @@ import { ErrorBoundary } from "react-error-boundary";
 export default function HomePage() {
   return (
     <main className="space-y-16">
-      <ShopBanner />
+      <CarouselBanner />
 
       <div className="space-y-4 flex flex-col items-center">
         <h1 className="text-xl font-bold">

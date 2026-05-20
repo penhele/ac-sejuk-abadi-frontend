@@ -2,9 +2,15 @@ import { api } from "@/lib/api/axios";
 import { Project } from "@/types/project";
 
 export const getProjects = async (): Promise<Project[]> => {
-  const response = await api.get<Project[]>("/projects");
+  try {
+    const response = await api.get<Project[]>("/projects");
 
-  return response.data;
+    return response.data;
+  } catch (error) {
+    console.error("Failed to fetch projects:", error);
+
+    return [];
+  }
 };
 
 export const getProjectById = async (id: string): Promise<Project> => {

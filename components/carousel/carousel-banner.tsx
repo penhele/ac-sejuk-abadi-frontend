@@ -6,10 +6,19 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
+import { getBannersQueryOptions } from "@/hooks/queries/banner-queries";
 import { Banner } from "@/types/banner";
+import { useQuery } from "@tanstack/react-query";
 import Autoplay from "embla-carousel-autoplay";
+import BannerFallback from "../fallback/banner-fallback";
 
-export default function CarouselBanner({ banners }: { banners: Banner[] }) {
+export default function CarouselBanner() {
+  const { data: banners, isFetching } = useQuery(getBannersQueryOptions);
+
+  if (banners?.length === 0 || isFetching) {
+    return <BannerFallback />;
+  }
+
   return (
     <Carousel
       opts={{
@@ -24,7 +33,7 @@ export default function CarouselBanner({ banners }: { banners: Banner[] }) {
       ]}
     >
       <CarouselContent className="flex items-center gap-4">
-        {banners.map((banner, index) => (
+        {banners?.map((banner, index) => (
           <CarouselItem key={index}>
             <AspectRatio
               ratio={3 / 1}
