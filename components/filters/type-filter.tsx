@@ -15,7 +15,7 @@ import useProductFilters from "@/hooks/use-product-filters";
 export default function TypeFilter() {
   const { id_ac_type, setFilters } = useProductFilters();
 
-  const { data: AcTypes } = useQuery(getAcTypesQueryOptions);
+  const { data: AcTypes } = useQuery(getAcTypesQueryOptions());
 
   const handleAcTypeChange = (acTypeId: string, checked: boolean) => {
     if (checked) {
