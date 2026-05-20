@@ -1,8 +1,7 @@
 import BreadcrumbComponent from "@/components/breadcrumb-component";
 import ErrorFallback from "@/components/fallback/error-fallback";
+import ProjectFallback from "@/components/fallback/project-fallback";
 import ProjectGrid from "@/components/grid/project-grid";
-import ProjectCardSkeleton from "@/components/skeletons/project-card-skeleton";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
@@ -31,15 +30,7 @@ export default async function ProjectPage() {
       </div>
 
       <ErrorBoundary fallback={<ErrorFallback />}>
-        <Suspense
-          fallback={
-            <div className="grid grid-cols-3 gap-between-card">
-              {[...Array(3)].map((_, index) => (
-                <ProjectCardSkeleton key={index} />
-              ))}
-            </div>
-          }
-        >
+        <Suspense fallback={<ProjectFallback />}>
           <ProjectGrid />
         </Suspense>
       </ErrorBoundary>

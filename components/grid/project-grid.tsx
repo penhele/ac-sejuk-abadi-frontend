@@ -3,11 +3,10 @@
 import getProjectsQueryOptions from "@/hooks/queries/project-queries";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { SearchX } from "lucide-react";
-import ProjectList from "../lists/project-list";
 import ProjectCard from "../cards/project-card";
 import EmptyState from "../empty-state/empty-state";
 
-export default function ProjectGrid({ limit }: { limit?: number }) {
+export default function ProjectGrid() {
   const { data: projects } = useSuspenseQuery(getProjectsQueryOptions());
 
   if (projects.length === 0) {

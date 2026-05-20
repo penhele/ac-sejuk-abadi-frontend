@@ -4,6 +4,7 @@ import BreadcrumbComponent from "@/components/breadcrumb-component";
 import ProjectDetailContent from "@/components/contents/project-detail-content";
 import ErrorFallback from "@/components/fallback/error-fallback";
 import ProductFallback from "@/components/fallback/product-fallback";
+import ProjectFallback from "@/components/fallback/project-fallback";
 import ProductGrid from "@/components/grid/product-grid";
 import ProjectGrid from "@/components/grid/project-grid";
 import ProductCardSkeleton from "@/components/skeletons/product-card-skeleton";
@@ -41,15 +42,7 @@ export default function ProjectDetailPage() {
         <HeaderSection title="Lihat Proyek Lainnya" />
 
         <ErrorBoundary fallback={<ErrorFallback />}>
-          <Suspense
-            fallback={
-              <div className="grid grid-cols-3 gap-between-card">
-                {[...Array(3)].map((_, index) => (
-                  <ProjectCardSkeleton key={index} />
-                ))}
-              </div>
-            }
-          >
+          <Suspense fallback={<ProjectFallback />}>
             <ProjectGrid />
           </Suspense>
         </ErrorBoundary>
