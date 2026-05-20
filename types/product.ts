@@ -1,6 +1,6 @@
 import { AcType } from "./ac-type";
 import { Brand } from "./brand";
-import { ProductCategory } from "./category";
+import { Category } from "./category";
 import { Discounts } from "./discount";
 import { ProductImages } from "./image";
 
@@ -21,7 +21,7 @@ export interface Product {
   is_deleted: boolean;
 
   brand: Brand;
-  category: ProductCategory;
+  category: Category;
   ac_type: AcType;
 
   images: ProductImages[];

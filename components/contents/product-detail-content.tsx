@@ -3,7 +3,10 @@ import { ProductDataTable } from "@/components/tables/product-data-table";
 import ProductImages from "@/components/product/product-images";
 import ProductInfo from "@/components/product/product-info";
 import ProductPriceAction from "@/components/product/product-price-action";
-import { AcSpecification, columns } from "@/components/tables/product-columns";
+import {
+  AcSpecification,
+  columns,
+} from "@/components/tables/spesification-columns";
 import { DescriptionSection, HeaderSection } from "@/components/util/header";
 import { getProductById } from "@/services/product.service";
 import { useSuspenseQuery } from "@tanstack/react-query";

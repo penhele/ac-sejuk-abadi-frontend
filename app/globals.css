@@ -37,7 +37,7 @@
   --text-header-h3: 1.25rem;
   --text-header-4: 1rem;
 
-  --text-title: var(--text-lg);
+  --text-2xs: var --text-title: var(--text-lg);
   --text-description: var(--text-sm);
 
   --color-background: var(--background);
