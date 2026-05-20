@@ -34,13 +34,13 @@ export default function EmptyState({
         <EmptyDescription>{description}</EmptyDescription>
       </EmptyHeader>
 
-      <EmptyContent>
-        <Link href={ROUTES.SHOP}>
-          <Button variant={"outline"}>
-            {buttonLabel ?? "Browse Products"}
-          </Button>
-        </Link>
-      </EmptyContent>
+      {buttonLabel && (
+        <EmptyContent>
+          <Link href={ROUTES.SHOP}>
+            <Button variant={"outline"}>{buttonLabel}</Button>
+          </Link>
+        </EmptyContent>
+      )}
     </Empty>
   );
 }

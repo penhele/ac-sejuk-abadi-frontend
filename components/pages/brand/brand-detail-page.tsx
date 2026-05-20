@@ -103,7 +103,7 @@ export default function BrandDetailPage() {
       <div className="">
         <HeaderSection title="Produk Daikin" href={ROUTES.SHOP} />
 
-        <ProductGrid />
+        <ProductGrid length={4} />
       </div>
 
       <div className="">

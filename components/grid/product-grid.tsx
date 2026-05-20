@@ -1,25 +1,20 @@
 "use client";
 
-import {
-  getProductsInfiniteQueryOptions,
-  getProductsQueryOptions,
-} from "@/hooks/queries/product-queries";
+import { getProductsInfiniteQueryOptions } from "@/hooks/queries/product-queries";
 import useProductFilters from "@/hooks/use-product-filters";
-import {
-  useInfiniteQuery,
-  useQuery,
-  useSuspenseInfiniteQuery,
-} from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { SearchX } from "lucide-react";
+import ProductCard from "../cards/product-card";
 import EmptyState from "../empty-state/empty-state";
-import ProductList from "../lists/product-list";
+import ProductFallback from "../fallback/product-fallback";
+import { cn } from "@/lib/utils";
 
 export default function ProductGrid({
   className,
-  limit,
+  length,
 }: {
   className?: string;
-  limit?: number;
+  length?: number;
 }) {
   const {
     search,
@@ -42,23 +37,31 @@ export default function ProductGrid({
       id_category,
       min_price,
       max_price,
-      limit,
+      limit: length,
     }),
   );
 
-  // SOLUSI: Berikan fallback || [] agar tidak pernah undefined
   const products = data?.pages?.flatMap((page) => page?.data ?? []) ?? [];
 
-  console.log(isFetching);
+  if (isFetching) {
+    return <ProductFallback length={length ?? 6} />;
+  }
+
+  if (products.length <= 0) {
+    return <EmptyState Icon={SearchX} label="No products found" />;
+  }
 
   return (
-    <div className="">
-      {/* SOLUSI: Gunakan ?.length untuk keamanan ekstra */}
-      {products && products?.length > 0 ? (
-        <ProductList products={products} className={className} />
-      ) : (
-        <EmptyState Icon={SearchX} label="No products found" />
+    <div
+      className={cn(
+        "grid gap-between-card",
+        length === 3 && "grid-cols-3",
+        length === 4 && "grid-cols-4",
       )}
+    >
+      {products.map((product) => (
+        <ProductCard product={product} />
+      ))}
     </div>
   );
 }

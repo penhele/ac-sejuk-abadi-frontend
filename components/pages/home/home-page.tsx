@@ -2,6 +2,7 @@ import ShopBanner from "@/components/banners/shop-banner";
 import CarouselBrand from "@/components/carousel/carousel-brand";
 import CarouselTestimoni from "@/components/carousel/carousel-testimoni";
 import ErrorFallback from "@/components/fallback/error-fallback";
+import ProductFallback from "@/components/fallback/product-fallback";
 import ProductGrid from "@/components/grid/product-grid";
 import ProjectGrid from "@/components/grid/project-grid";
 import StatsSection from "@/components/sections/stats-section";
@@ -36,16 +37,8 @@ export default function HomePage() {
         <HeaderSection title="Produk" href={ROUTES.SHOP} />
 
         <ErrorBoundary fallback={<ErrorFallback />}>
-          <Suspense
-            fallback={
-              <div className="grid grid-cols-4 gap-between-card">
-                {[...Array(4)].map((_, index) => (
-                  <ProductCardSkeleton key={index} />
-                ))}
-              </div>
-            }
-          >
-            <ProductGrid limit={4} />
+          <Suspense fallback={<ProductFallback length={4} />}>
+            <ProductGrid length={4} />
           </Suspense>
         </ErrorBoundary>
       </div>

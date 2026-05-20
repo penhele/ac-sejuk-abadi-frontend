@@ -20,8 +20,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "../../fallback/error-fallback";
 import { getAcTypesQueryOptions } from "@/hooks/queries/ac-type-queries";
 import { getCategoriesQueryOptions } from "@/hooks/queries/category-queries";
-
-export const dynamic = "force-dynamic";
+import ProductFallback from "@/components/fallback/product-fallback";
 
 export default async function ShopPage() {
   const queryClient = new QueryClient();
@@ -62,16 +61,8 @@ export default async function ShopPage() {
 
             <div className="">
               <ErrorBoundary fallback={<ErrorFallback />}>
-                <Suspense
-                  fallback={
-                    <div className="grid grid-cols-3 gap-between-card">
-                      {[...Array(3)].map((_, index) => (
-                        <ProductCardSkeleton key={index} />
-                      ))}
-                    </div>
-                  }
-                >
-                  <ProductGrid />
+                <Suspense fallback={<ProductFallback length={3} />}>
+                  <ProductGrid length={3} />
                 </Suspense>
               </ErrorBoundary>
             </div>

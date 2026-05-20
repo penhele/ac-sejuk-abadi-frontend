@@ -10,6 +10,7 @@ import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import ProductDetailSkeleton from "@/components/skeletons/product-detail-skeleton";
 import { ROUTES } from "@/constants/routes";
+import ProductFallback from "@/components/fallback/product-fallback";
 
 export default function ProductDetailPage() {
   const params = useParams();
@@ -27,16 +28,8 @@ export default function ProductDetailPage() {
         <HeaderSection title="Produk Serupa" href={ROUTES.SHOP} />
 
         <ErrorBoundary fallback={<ErrorFallback />}>
-          <Suspense
-            fallback={
-              <div className="grid grid-cols-3 gap-between-card">
-                {[...Array(4)].map((_, index) => (
-                  <ProductCardSkeleton key={index} />
-                ))}
-              </div>
-            }
-          >
-            <ProductGrid className="grid-cols-4!" limit={4} />
+          <Suspense fallback={<ProductFallback length={4} />}>
+            <ProductGrid className="grid-cols-4!" length={4} />
           </Suspense>
         </ErrorBoundary>
       </div>
