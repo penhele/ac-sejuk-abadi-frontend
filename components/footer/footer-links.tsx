@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 
 export default function FooterLinks({ className }: { className?: string }) {
-  const { data: sposoredBrands } = useQuery(getSponsoredBrandsQueryOptions);
+  const { data: sposoredBrands } = useQuery(getSponsoredBrandsQueryOptions());
 
   const categoryList = [
     { name: "AC Split Wall", href: "/shop?category=split" },
@@ -19,12 +19,12 @@ export default function FooterLinks({ className }: { className?: string }) {
   ];
 
   const quickLinks = [
-    { name: "Tentang Kami", href: "/about-us" },
-    { name: "Layanan Kami", href: "/services" },
+    { name: "Tentang Kami", href: "" },
+    { name: "Layanan Kami", href: "" },
     { name: "Proyek / Portofolio", href: ROUTES.PORTOFOLIO },
     { name: "Katalog Produk", href: ROUTES.SHOP },
-    { name: "Hubungi Kami", href: "/contact" },
-    { name: "FAQ", href: "/faq" },
+    { name: "Hubungi Kami", href: "" },
+    { name: "FAQ", href: "" },
   ];
 
   return (
