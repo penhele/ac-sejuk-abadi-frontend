@@ -12,19 +12,18 @@ export default function TextField({
 }) {
   const field = useFieldContext<string>();
 
-  console.log(field.state.meta.isTouched);
-  console.log(field.state.meta.isValid);
-
   return (
     <div className="space-y-between-items-xs">
-      <Label>{label}</Label>
+      <div className="flex justify-between items-center">
+        <Label>{label}</Label>
+
+        <FieldInfo field={field} />
+      </div>
       <Textarea
         value={field.state.value}
         onChange={(e) => field.handleChange(e.target.value)}
         placeholder={placeholder}
       />
-
-      {/* <FieldInfo field={field} /> */}
     </div>
   );
 }

@@ -1,13 +1,13 @@
 import { useFieldContext } from "@/hooks/use-app-form";
+import { formatNumber } from "@/lib/format/currency";
 import { FieldInfo } from "../field-info";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
 import {
   InputGroup,
   InputGroupAddon,
-  InputGroupText,
   InputGroupInput,
+  InputGroupText,
 } from "../ui/input-group";
+import { Label } from "../ui/label";
 
 export default function TextField({
   label,
@@ -24,7 +24,12 @@ export default function TextField({
 
   return (
     <div className="space-y-between-items-xs">
-      <Label>{label}</Label>
+      <div className="flex justify-between items-center">
+        <Label>{label}</Label>
+
+        <FieldInfo field={field} />
+      </div>
+
       <InputGroup>
         {isPrice && (
           <InputGroupAddon>
@@ -33,13 +38,21 @@ export default function TextField({
         )}
 
         <InputGroupInput
-          value={field.state.value}
-          onChange={(e) => field.handleChange(e.target.value)}
+          value={isPrice ? formatNumber(field.state.value) : field.state.value}
+          onChange={(e) => {
+            if (isPrice) {
+              const rawValue = e.target.value.replace(/\D/g, "");
+
+              field.handleChange(rawValue);
+            } else {
+              field.handleChange(e.target.value);
+            }
+          }}
+          onBlur={field.handleBlur}
           placeholder={placeholder}
-          type={type}
+          type={isPrice ? "text" : type}
         />
       </InputGroup>
-      <FieldInfo field={field} />
     </div>
   );
 }

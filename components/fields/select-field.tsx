@@ -24,11 +24,20 @@ export default function SelectField({
 
   return (
     <div className="space-y-between-items-xs">
-      <Label htmlFor={field.name}>{label}</Label>
+      <div className="flex justify-between items-center">
+        <Label htmlFor={field.name}>{label}</Label>
+
+        <FieldInfo field={field} />
+      </div>
 
       <Select
         value={field.state.value}
         onValueChange={field.handleChange}
+        onOpenChange={(open) => {
+          if (!open) {
+            field.handleBlur();
+          }
+        }}
         disabled={disabled}
       >
         <SelectTrigger id={field.name} className="w-full">
@@ -43,8 +52,6 @@ export default function SelectField({
           ))}
         </SelectContent>
       </Select>
-
-      <FieldInfo field={field} />
     </div>
   );
 }

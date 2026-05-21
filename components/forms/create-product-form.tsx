@@ -1,15 +1,16 @@
 "use client";
 
-import { useAppForm } from "@/hooks/use-app-form";
-import SelectInput from "../inputs/select-input";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { addProduct } from "@/services/product.service";
-import { getProductsQueryOptions } from "@/hooks/queries/product-queries";
-import { toast } from "sonner";
-import { Spinner } from "../ui/spinner";
-import { getCategoriesQueryOptions } from "@/hooks/queries/category-queries";
-import { getBrandsQueryOptions } from "@/hooks/queries/brand-queries";
 import { getAcTypesQueryOptions } from "@/hooks/queries/ac-type-queries";
+import { getBrandsQueryOptions } from "@/hooks/queries/brand-queries";
+import { getCategoriesQueryOptions } from "@/hooks/queries/category-queries";
+import { getProductsQueryOptions } from "@/hooks/queries/product-queries";
+import { useAppForm } from "@/hooks/use-app-form";
+import { formatNumber } from "@/lib/format/currency";
+import { createProductSchema } from "@/schemas/product.schema";
+import { addProduct } from "@/services/product.service";
+import { revalidateLogic } from "@tanstack/react-form";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 export default function CreateProductForm() {
   const queryClient = useQueryClient();
@@ -40,6 +41,13 @@ export default function CreateProductForm() {
       price: "",
       quantity: "",
     },
+    validators: {
+      onChange: createProductSchema,
+    },
+    validationLogic: revalidateLogic({
+      mode: "submit",
+      modeAfterSubmission: "blur",
+    }),
     onSubmit: async ({ value }) => {
       mutate({
         name: value.name,
@@ -173,7 +181,7 @@ export default function CreateProductForm() {
                     label="Harga (Rp)"
                     type="number"
                     isPrice
-                    placeholder="2000000"
+                    placeholder={formatNumber("2000000")}
                   />
                 )}
               />
@@ -192,8 +200,6 @@ export default function CreateProductForm() {
         </div>
 
         <div className="space-x-between-items">
-          {/* <Button variant={"outline"}>Batal</Button> */}
-
           <form.SubmitButton label="Submit" />
         </div>
       </form>

@@ -7,3 +7,14 @@ export function formatRupiah(value: number): string {
     .format(value)
     .replace("Rp", "IDR ");
 }
+
+export function formatNumber(value: string | number): string {
+  if (value === "" || value === null || value === undefined) {
+    return "";
+  }
+
+  const number =
+    typeof value === "string" ? Number(value.replace(/\D/g, "")) : value;
+
+  return new Intl.NumberFormat("id-ID").format(number);
+}
