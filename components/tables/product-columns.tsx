@@ -12,6 +12,9 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import DeleteButton from "../buttons/delete-button";
+import Link from "next/link";
+import EditButton from "../buttons/edit-button";
 
 export const productColumns: ColumnDef<Product>[] = [
   {
@@ -53,7 +56,7 @@ export const productColumns: ColumnDef<Product>[] = [
   },
   {
     header: "Action",
-    cell: () => (
+    cell: ({ row }) => (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button size={"icon-xs"} variant={"ghost"}>
@@ -63,18 +66,8 @@ export const productColumns: ColumnDef<Product>[] = [
 
         <DropdownMenuContent>
           <DropdownMenuGroup>
-            <DropdownMenuItem>
-              Edit
-              <DropdownMenuShortcut>
-                <Pencil size={12} />
-              </DropdownMenuShortcut>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              Delete
-              <DropdownMenuShortcut>
-                <Trash size={12} />
-              </DropdownMenuShortcut>
-            </DropdownMenuItem>
+            <EditButton id={row.original.id} />
+            <DeleteButton id={row.original.id} />
           </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>
