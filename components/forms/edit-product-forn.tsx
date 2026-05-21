@@ -4,24 +4,37 @@ import {
   getProductByIdQueryOptions,
   getProductsQueryOptions,
 } from "@/hooks/queries/product-queries";
-import { addProduct } from "@/services/product.service";
+import { updateProduct } from "@/services/product.service";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import ProductForm from "./product-form";
+import { useRouter } from "next/navigation";
+import { ROUTES } from "@/constants/routes";
 
 export default function EditProductForm({ id }: { id: string }) {
   const queryClient = useQueryClient();
+  const router = useRouter();
 
   const { data: products } = useQuery(getProductByIdQueryOptions(id));
 
   const { mutate } = useMutation({
-    mutationFn: addProduct,
+    mutationFn: (payload: {
+      name: string;
+      description: string;
+      pk: string;
+      id_brand: number;
+      id_category: number;
+      id_ac_type: number;
+      price: number;
+      quantity: number;
+    }) => updateProduct(id, payload),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: getProductsQueryOptions().queryKey,
       });
 
       toast.success("Produk berhasil diedit.");
+      router.push(ROUTES.PRODUCTS);
     },
     onError: () => {
       toast.error("Gagal edit produk.");

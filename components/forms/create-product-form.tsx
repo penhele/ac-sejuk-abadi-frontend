@@ -5,9 +5,12 @@ import { addProduct } from "@/services/product.service";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import ProductForm from "./product-form";
+import { useRouter } from "next/router";
+import { ROUTES } from "@/constants/routes";
 
 export default function CreateProductForm() {
   const queryClient = useQueryClient();
+  const router = useRouter();
 
   const { mutate } = useMutation({
     mutationFn: addProduct,
@@ -17,6 +20,7 @@ export default function CreateProductForm() {
       });
 
       toast.success("Produk berhasil ditambahkan.");
+      router.push(ROUTES.PRODUCTS);
     },
     onError: () => {
       toast.error("Gagal menambahkan produk.");
