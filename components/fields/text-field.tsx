@@ -32,7 +32,12 @@ export default function TextField({
           </InputGroupAddon>
         )}
 
-        <InputGroupInput placeholder={placeholder} type={type} />
+        <InputGroupInput
+          value={field.state.value}
+          onChange={(e) => field.handleChange(e.target.value)}
+          placeholder={placeholder}
+          type={type}
+        />
       </InputGroup>
       <FieldInfo field={field} />
     </div>

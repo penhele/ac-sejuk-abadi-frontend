@@ -44,17 +44,9 @@ export default function ProductDetailContent({ id }: { id: string }) {
         </div>
       </div>
 
-      <div className="flex flex-col gap-8">
-        <div className="flex flex-col ">
-          <HeaderSection title="Detail" />
-
-          <DescriptionSection description="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo laborum blanditiis unde sint ut esse nulla magnam rem nihil. Iste id, voluptate dolor nisi architecto voluptates sint debitis commodi accusamus velit consequatur minima voluptatum exercitationem maiores illo dignissimos et ex pariatur nobis ipsum natus ab. Eum esse nesciunt asperiores earum expedita totam eaque sit itaque quis qui voluptates beatae in tenetur similique voluptatibus praesentium reiciendis distinctio nostrum, aperiam laborum nobis ea voluptatum repudiandae quibusdam! Dolorum et illum quos qui quam laboriosam a vero, blanditiis, accusamus consequuntur inventore sed, necessitatibus debitis soluta neque aspernatur porro praesentium eveniet libero itaque magni quae." />
-        </div>
-
-        <div className="flex flex-col gap-2">
-          <HeaderSection title="Spesifikasi" />
-          <ProductDataTable columns={columns} data={data} />
-        </div>
+      <div className="flex flex-col gap-2">
+        <HeaderSection title="Spesifikasi" />
+        <ProductDataTable columns={columns} data={data} />
       </div>
     </div>
   );

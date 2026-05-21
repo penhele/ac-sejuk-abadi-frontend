@@ -12,6 +12,9 @@ export default function TextField({
 }) {
   const field = useFieldContext<string>();
 
+  console.log(field.state.meta.isTouched);
+  console.log(field.state.meta.isValid);
+
   return (
     <div className="space-y-between-items-xs">
       <Label>{label}</Label>
@@ -20,7 +23,8 @@ export default function TextField({
         onChange={(e) => field.handleChange(e.target.value)}
         placeholder={placeholder}
       />
-      <FieldInfo field={field} />
+
+      {/* <FieldInfo field={field} /> */}
     </div>
   );
 }

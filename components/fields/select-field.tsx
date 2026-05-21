@@ -1,4 +1,5 @@
 import { useFieldContext } from "@/hooks/use-app-form";
+import { FieldInfo } from "../field-info";
 import { Label } from "../ui/label";
 import {
   Select,
@@ -7,29 +8,39 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { FieldInfo } from "../field-info";
 
 export default function SelectField({
   label,
   placeholder,
+  options,
+  disabled,
 }: {
   label: string;
   placeholder?: string;
+  options: { label: string; value: string }[];
+  disabled?: boolean;
 }) {
   const field = useFieldContext<string>();
 
   return (
     <div className="space-y-between-items-xs">
-      <Label>{label}</Label>
-      <Select>
-        <SelectTrigger className="w-full">
+      <Label htmlFor={field.name}>{label}</Label>
+
+      <Select
+        value={field.state.value}
+        onValueChange={field.handleChange}
+        disabled={disabled}
+      >
+        <SelectTrigger id={field.name} className="w-full">
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
 
         <SelectContent>
-          <SelectItem value="11">Inverter</SelectItem>
-          <SelectItem value="12">Standard</SelectItem>
-          <SelectItem value="13">Low Watt</SelectItem>
+          {options.map((option) => (
+            <SelectItem key={option.value} value={option.value}>
+              {option.label}
+            </SelectItem>
+          ))}
         </SelectContent>
       </Select>
 

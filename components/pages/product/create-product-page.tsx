@@ -19,11 +19,7 @@ export default function CreateProductPage() {
         </CardContent>
       </Card>
 
-      <div className="space-x-between-items">
-        <Button variant={"outline"}>Batal</Button>
-
-        <Button>Simpan</Button>
-      </div>
+      
     </div>
   );
 }
