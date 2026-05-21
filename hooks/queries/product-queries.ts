@@ -1,4 +1,4 @@
-import { getProducts } from "@/services/product.service";
+import { getProductById, getProducts } from "@/services/product.service";
 import { GetProductOptions, ProductResponse } from "@/types/product";
 import {
   infiniteQueryOptions,
@@ -20,6 +20,14 @@ export const getProductsQueryOptions = <
     ...options,
     queryKey: ["products", params],
     queryFn: () => getProducts(params),
+    staleTime: 1000 * 60 * 5,
+  });
+};
+
+export const getProductByIdQueryOptions = (id: string) => {
+  return queryOptions({
+    queryKey: ["products", id],
+    queryFn: () => getProductById(id),
     staleTime: 1000 * 60 * 5,
   });
 };

@@ -1,12 +1,17 @@
-import CreateProductForm from "@/components/forms/create-product-form";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+"use client";
 
-export default function CreateProductPage() {
+import EditProductForm from "@/components/forms/edit-product-forn";
+import { Card, CardContent } from "@/components/ui/card";
+import { useParams } from "next/navigation";
+
+export default function EditProductPage() {
+  const params = useParams();
+  const id = params.id as string;
+
   return (
     <div className="space-y-between-items">
       <div>
-        <h1 className="text-2xl font-semibold">Tambah Produk Baru</h1>
+        <h1 className="text-2xl font-semibold">Edit Produk</h1>
         <span className="text-sm text-gray-600">
           Masukkan detail informasi produk AC, spesifikasi, dan gambar untuk
           ditambahkan ke katalog.
@@ -15,7 +20,7 @@ export default function CreateProductPage() {
 
       <Card>
         <CardContent>
-          <CreateProductForm />
+          <EditProductForm id={id} />
         </CardContent>
       </Card>
     </div>

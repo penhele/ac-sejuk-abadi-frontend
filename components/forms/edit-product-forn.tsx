@@ -1,13 +1,18 @@
 "use client";
 
-import { getProductsQueryOptions } from "@/hooks/queries/product-queries";
+import {
+  getProductByIdQueryOptions,
+  getProductsQueryOptions,
+} from "@/hooks/queries/product-queries";
 import { addProduct } from "@/services/product.service";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import ProductForm from "./product-form";
 
-export default function CreateProductForm() {
+export default function EditProductForm({ id }: { id: string }) {
   const queryClient = useQueryClient();
+
+  const { data: products } = useQuery(getProductByIdQueryOptions(id));
 
   const { mutate } = useMutation({
     mutationFn: addProduct,
@@ -16,24 +21,24 @@ export default function CreateProductForm() {
         queryKey: getProductsQueryOptions().queryKey,
       });
 
-      toast.success("Produk berhasil ditambahkan.");
+      toast.success("Produk berhasil diedit.");
     },
     onError: () => {
-      toast.error("Gagal menambahkan produk.");
+      toast.error("Gagal edit produk.");
     },
   });
 
   return (
     <ProductForm
       defaultValues={{
-        name: "",
-        description: "",
-        id_brand: "",
-        id_category: "",
-        id_ac_type: "",
-        pk: "",
-        price: "",
-        quantity: "",
+        name: products?.name ?? "",
+        description: products?.description ?? "",
+        id_brand: String(products?.id_brand ?? ""),
+        id_category: String(products?.id_category ?? ""),
+        id_ac_type: String(products?.id_ac_type ?? ""),
+        pk: products?.pk ?? "",
+        price: products?.price ?? "",
+        quantity: String(products?.quantity ?? ""),
       }}
       onSubmit={(value) => {
         mutate({

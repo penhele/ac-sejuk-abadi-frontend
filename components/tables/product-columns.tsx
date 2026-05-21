@@ -1,20 +1,17 @@
 import { Product } from "@/types/product";
 import { ColumnDef } from "@tanstack/react-table";
-import { EllipsisIcon, Pencil, Trash } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
-import { id } from "date-fns/locale";
+import { EllipsisIcon, FormInputIcon } from "lucide-react";
+import DeleteButton from "../buttons/delete-button";
+import EditButton from "../buttons/edit-button";
 import { Button } from "../ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import DeleteButton from "../buttons/delete-button";
-import Link from "next/link";
-import EditButton from "../buttons/edit-button";
+import { formatNumber } from "@/lib/format/currency";
 
 export const productColumns: ColumnDef<Product>[] = [
   {
@@ -40,17 +37,18 @@ export const productColumns: ColumnDef<Product>[] = [
   {
     accessorKey: "price",
     header: "Price",
+    cell: ({ row }) => <span>{formatNumber(row.original.price)}</span>,
   },
   {
     accessorKey: "updated_at",
     header: "Last Updated",
     cell: ({ row }) => {
       return (
-        <div>
+        <span>
           {formatDistanceToNow(new Date(row.original.updated_at), {
             addSuffix: true,
           })}
-        </div>
+        </span>
       );
     },
   },

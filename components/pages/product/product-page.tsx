@@ -32,7 +32,7 @@ export default function ProductPage() {
       </div>
 
       <div className="grid grid-cols-4">
-        <div className="p-inside-card border rounded-lg space-y-between-items bg-muted/50">
+        <div className="p-inside-card border rounded-lg space-y-between-items bg-muted/25">
           <div className="flex flex-row justify-between items-center">
             <span className="text-sm font-medium">Products</span>
 

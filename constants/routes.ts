@@ -9,5 +9,5 @@ export const ROUTES = {
   DASHBOARD: "/dashboard",
   PRODUCTS: "/dashboard/products",
   CREATE_PRODUCTS: "/dashboard/products/create",
-  EDIT_PRODUCTS: (id: string | number) => `/dashboard/products/edit/${id}`,
+  EDIT_PRODUCTS: (id: string | number) => `/dashboard/products/${id}/edit`,
 } as const;

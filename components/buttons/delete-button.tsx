@@ -10,18 +10,23 @@ export default function DeleteButton({ id }: { id: string | number }) {
 
   const { mutate } = useMutation({
     mutationFn: deleteProduct,
-    onSuccess() {
+    onMutate() {
+      const toastId = toast.loading("Loading...");
+      return { toastId };
+    },
+    onSuccess(_, __, context) {
       queryClient.invalidateQueries({
         queryKey: getProductsQueryOptions().queryKey,
       });
 
-      toast.success("Berhasil menghapus produk.");
+      toast.success("Berhasil menghapus produk.", {
+        id: context?.toastId,
+      });
     },
-    onError() {
-      toast.error("Gagal menghapus produk.");
-    },
-    onMutate() {
-      toast.loading("Loading...");
+    onError(_, __, context) {
+      toast.error("Gagal menghapus produk.", {
+        id: context?.toastId,
+      });
     },
   });
 
