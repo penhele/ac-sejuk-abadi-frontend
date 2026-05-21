@@ -5,26 +5,40 @@ import { Trash } from "lucide-react";
 import { toast } from "sonner";
 import { DropdownMenuItem, DropdownMenuShortcut } from "../ui/dropdown-menu";
 
-export default function DeleteButton({ id }: { id: string | number }) {
+export default function DeleteButton<TId = string | number>({
+  id,
+  label = "Delete",
+  mutationFn,
+  queryKey,
+  successMessage = "Berhasil menghapus data.",
+  errorMessage = "Gagal menghapus data.",
+}: {
+  id: TId;
+  label?: string;
+  mutationFn: (id: TId) => Promise<unknown>;
+  queryKey: readonly unknown[];
+  successMessage?: string;
+  errorMessage?: string;
+}) {
   const queryClient = useQueryClient();
 
   const { mutate } = useMutation({
-    mutationFn: deleteProduct,
+    mutationFn,
     onMutate() {
       const toastId = toast.loading("Loading...");
       return { toastId };
     },
     onSuccess(_, __, context) {
       queryClient.invalidateQueries({
-        queryKey: getProductsQueryOptions().queryKey,
+        queryKey,
       });
 
-      toast.success("Berhasil menghapus produk.", {
+      toast.success(successMessage, {
         id: context?.toastId,
       });
     },
     onError(_, __, context) {
-      toast.error("Gagal menghapus produk.", {
+      toast.error(errorMessage, {
         id: context?.toastId,
       });
     },

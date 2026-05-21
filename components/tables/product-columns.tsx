@@ -12,6 +12,8 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { formatNumber } from "@/lib/format/currency";
+import { deleteProduct } from "@/services/product.service";
+import { getProductsQueryOptions } from "@/hooks/queries/product-queries";
 
 export const productColumns: ColumnDef<Product>[] = [
   {
@@ -65,7 +67,11 @@ export const productColumns: ColumnDef<Product>[] = [
         <DropdownMenuContent>
           <DropdownMenuGroup>
             <EditButton id={row.original.id} />
-            <DeleteButton id={row.original.id} />
+            <DeleteButton
+              mutationFn={deleteProduct}
+              queryKey={getProductsQueryOptions().queryKey}
+              id={row.original.id}
+            />
           </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>

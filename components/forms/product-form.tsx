@@ -11,6 +11,9 @@ import {
 } from "@/schemas/product.schema";
 import { revalidateLogic } from "@tanstack/react-form";
 import { useQuery } from "@tanstack/react-query";
+import { Button } from "../ui/button";
+import Link from "next/link";
+import { ROUTES } from "@/constants/routes";
 
 export default function ProductForm({
   defaultValues,
@@ -171,6 +174,10 @@ export default function ProductForm({
         </div>
 
         <div className="space-x-between-items">
+          <Link href={ROUTES.PRODUCTS}>
+            <Button variant={"outline"}>Cancel</Button>
+          </Link>
+
           <form.SubmitButton label={submitLabel} />
         </div>
       </form>

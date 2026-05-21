@@ -5,7 +5,7 @@ import { addProduct } from "@/services/product.service";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import ProductForm from "./product-form";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { ROUTES } from "@/constants/routes";
 
 export default function CreateProductForm() {

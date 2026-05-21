@@ -17,3 +17,7 @@ export interface SponsoredBrand {
   end_date: string;
   brand: Brand;
 }
+
+export interface CreateBrandPayload {
+  name: string;
+}
