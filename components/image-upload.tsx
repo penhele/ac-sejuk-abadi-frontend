@@ -18,9 +18,11 @@ import { cn } from "@/lib/utils";
 export default function ImageUploadZone({
   label = "Upload Gambar",
   maxSizeMB = 1,
+  onChange,
 }: {
   label?: string;
   maxSizeMB?: number;
+  onChange: (file: File | null) => void;
 }) {
   const inputId = useId();
 
@@ -49,6 +51,8 @@ export default function ImageUploadZone({
     const url = URL.createObjectURL(file);
 
     setPreviewUrl(url);
+
+    onChange(file);
   };
 
   const handleDrag = (e: DragEvent<HTMLDivElement>) => {
