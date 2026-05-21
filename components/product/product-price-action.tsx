@@ -78,7 +78,7 @@ export default function ProductPriceAction({ product }: { product: Product }) {
           const productUrl = `https://acsa-frontend.vercel.app/shop/${product.id}`;
           const message = `Halo, saya ingin bertanya tentang produk ini:\n${product.name}\n${productUrl}`;
 
-          const whatsappUrl = `https://wa.me/6281574391992/?text=${encodeURIComponent(message)}`;
+          const whatsappUrl = `https://wa.me/6285697994801/?text=${encodeURIComponent(message)}`;
 
           window.open(whatsappUrl, "_blank");
         }}
