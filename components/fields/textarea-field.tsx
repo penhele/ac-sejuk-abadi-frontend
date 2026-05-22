@@ -6,9 +6,11 @@ import { Textarea } from "../ui/textarea";
 export default function TextField({
   label,
   placeholder,
+  isDisabled,
 }: {
   label: string;
   placeholder?: string;
+  isDisabled?: boolean;
 }) {
   const field = useFieldContext<string>();
 
@@ -23,6 +25,7 @@ export default function TextField({
         value={field.state.value}
         onChange={(e) => field.handleChange(e.target.value)}
         placeholder={placeholder}
+        disabled={isDisabled}
       />
     </div>
   );

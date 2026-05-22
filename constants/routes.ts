@@ -15,4 +15,6 @@ export const ROUTES = {
   BRANDS: "/dashboard/brands",
   CREATE_BRANDS: "/dashboard/brands/create",
   EDIT_BRANDS: (id: string | number) => `/dashboard/brands/${id}/edit`,
+
+  COMPANY: "/dashboard/company",
 } as const;

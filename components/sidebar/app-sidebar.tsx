@@ -13,7 +13,7 @@ import {
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
 import { ROUTES } from "@/constants/routes";
-import { ChevronRight, Package } from "lucide-react";
+import { Building2, ChevronRight, Package } from "lucide-react";
 import Link from "next/link";
 import {
   Collapsible,
@@ -46,17 +46,19 @@ export function AppSidebar() {
     },
   ];
 
+  const navCompany = { Icon: Building2, label: "Company", href: ROUTES.COMPANY };
+
   return (
     <Sidebar variant="floating">
       <SidebarHeader />
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Products</SidebarGroupLabel>
+          <SidebarGroupLabel>Shop</SidebarGroupLabel>
 
           <SidebarMenu>
             {navMain.map((item, index) => (
               <Collapsible
-                key={item.title}
+                key={index}
                 asChild
                 defaultOpen={item.isActive}
                 className="group/collapsible"
@@ -88,6 +90,19 @@ export function AppSidebar() {
                 </SidebarMenuItem>
               </Collapsible>
             ))}
+          </SidebarMenu>
+        </SidebarGroup>
+
+        <SidebarGroup>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild>
+                <Link href={navCompany.href}>
+                  <navCompany.Icon />
+                  {navCompany.label}
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>

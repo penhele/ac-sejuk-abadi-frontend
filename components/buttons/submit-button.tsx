@@ -3,8 +3,15 @@
 import { useFormContext } from "@/hooks/use-app-form";
 import { Button } from "../ui/button";
 import { Spinner } from "../ui/spinner";
+import { cn } from "@/lib/utils";
 
-export default function SubmitButton({ label }: { label: string }) {
+export default function SubmitButton({
+  label,
+  className,
+}: {
+  label: string;
+  className?: string;
+}) {
   const form = useFormContext();
 
   return (
@@ -18,7 +25,7 @@ export default function SubmitButton({ label }: { label: string }) {
         <Button
           type="submit"
           disabled={!canSubmit || isSubmitting}
-          className=""
+          className={cn(className)}
         >
           {isSubmitting ? <Spinner /> : label}
         </Button>

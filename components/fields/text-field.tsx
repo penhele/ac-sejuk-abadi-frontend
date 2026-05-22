@@ -8,22 +8,27 @@ import {
   InputGroupText,
 } from "../ui/input-group";
 import { Label } from "../ui/label";
+import { cn } from "@/lib/utils";
 
 export default function TextField({
   label,
   type = "text",
   placeholder,
   isPrice,
+  className,
+  isDisabled,
 }: {
   label: string;
   type?: "text" | "number" | "password" | "email";
   placeholder?: string;
   isPrice?: boolean;
+  className?: string;
+  isDisabled?: boolean;
 }) {
   const field = useFieldContext<string>();
 
   return (
-    <div className="space-y-between-items-xs">
+    <div className={cn("space-y-between-items-xs", className)}>
       <div className="flex justify-between items-center">
         <Label>{label}</Label>
 
@@ -51,6 +56,7 @@ export default function TextField({
           onBlur={field.handleBlur}
           placeholder={placeholder}
           type={isPrice ? "text" : type}
+          disabled={isDisabled}
         />
       </InputGroup>
     </div>
