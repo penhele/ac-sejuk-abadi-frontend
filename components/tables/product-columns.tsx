@@ -1,7 +1,10 @@
+import { getProductsQueryOptions } from "@/hooks/queries/product-queries";
+import { formatNumber } from "@/lib/format/currency";
+import { deleteProduct } from "@/services/product.service";
 import { Product } from "@/types/product";
 import { ColumnDef } from "@tanstack/react-table";
 import { formatDistanceToNow } from "date-fns";
-import { ArrowUpDown, EllipsisIcon, FormInputIcon } from "lucide-react";
+import { ArrowUpDown, EllipsisIcon } from "lucide-react";
 import DeleteButton from "../buttons/delete-button";
 import EditButton from "../buttons/edit-button";
 import { Button } from "../ui/button";
@@ -11,14 +14,18 @@ import {
   DropdownMenuGroup,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { formatNumber } from "@/lib/format/currency";
-import { deleteProduct } from "@/services/product.service";
-import { getProductsQueryOptions } from "@/hooks/queries/product-queries";
 
 export const productColumns: ColumnDef<Product>[] = [
   {
     accessorKey: "id",
     header: "ID Product",
+  },
+  {
+    accessorKey: "id_brand",
+    header: "Brand",
+    cell: ({ row }) => {
+      return <span>{row.original.brand.name}</span>;
+    },
   },
   {
     accessorKey: "name",

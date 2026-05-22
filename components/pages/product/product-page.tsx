@@ -9,6 +9,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { ROUTES } from "@/constants/routes";
+import { getBrandsQueryOptions } from "@/hooks/queries/brand-queries";
 import { getProductsQueryOptions } from "@/hooks/queries/product-queries";
 import { useQuery } from "@tanstack/react-query";
 import { Info, Plus } from "lucide-react";
@@ -16,6 +17,7 @@ import Link from "next/link";
 
 export default function ProductPage() {
   const { data: response, isFetching } = useQuery(getProductsQueryOptions());
+  const { data: brands } = useQuery(getBrandsQueryOptions());
 
   const products = response?.data ?? [];
 
@@ -31,7 +33,7 @@ export default function ProductPage() {
         </Link>
       </div>
 
-      <div className="grid grid-cols-4">
+      <div className="grid grid-cols-4 gap-between-card">
         <div className="p-inside-card border rounded-lg space-y-between-items bg-muted/25">
           <div className="flex flex-row justify-between items-center">
             <span className="text-sm font-medium">Products</span>
@@ -58,9 +60,33 @@ export default function ProductPage() {
             </div>
           </div>
         </div>
+
+        <div className="p-inside-card border rounded-lg space-y-between-items bg-muted/25">
+          <div className="flex flex-row justify-between items-center">
+            <span className="text-sm font-medium">Brands</span>
+
+            <Tooltip>
+              <TooltipTrigger>
+                <Info size={12} className="text-gray-600" />
+              </TooltipTrigger>
+
+              <TooltipContent>
+                <span>Total Brands</span>
+              </TooltipContent>
+            </Tooltip>
+          </div>
+
+          <div className="flex flex-row justify-between items-end">
+            <span className="text-4xl">{brands?.length}</span>
+          </div>
+        </div>
       </div>
 
-      <DataTable isFetching={isFetching} columns={productColumns} data={products} />
+      <DataTable
+        isFetching={isFetching}
+        columns={productColumns}
+        data={products}
+      />
     </div>
   );
 }
