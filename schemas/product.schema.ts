@@ -1,9 +1,7 @@
 import { object, string, infer as zodInfer } from "zod";
 
 export const createProductSchema = object({
-  name: string()
-    .min(1, "Nama produk wajib diisi")
-    .regex(/^[a-zA-Z\s]+$/, "Nama hanya boleh huruf"),
+  name: string().min(1, "Nama produk wajib diisi"),
   description: string().min(1, "Deskripsi wajib diisi"),
   id_brand: string().min(1, "Brand wajib dipilih"),
   id_category: string().min(1, "Kategori wajib dipilih"),
