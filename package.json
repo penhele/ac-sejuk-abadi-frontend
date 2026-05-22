@@ -19,7 +19,7 @@
     "date-fns": "^4.2.1",
     "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
-    "js-cookie": "^3.0.5",
+    "js-cookie": "^3.0.7",
     "leaflet": "^1.9.4",
     "leaflet-draw": "^1.0.4",
     "leaflet.fullscreen": "^5.3.1",

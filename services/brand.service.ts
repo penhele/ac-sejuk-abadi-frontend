@@ -12,23 +12,13 @@ export const getBrands = async (): Promise<Brand[]> => {
 };
 
 export const addBrand = async (data: CreateBrandPayload) => {
-  const response = await api.post("/brands", data, {
-    headers: {
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzMDQ1ODMzZi05YTAwLTRiNGUtODYzNy0xN2IxMmY3ZDA3YTciLCJlbWFpbCI6ImFkbWluQHh5ei5jb20iLCJpYXQiOjE3NzkyOTg3NTMsImV4cCI6MTc3OTkwMzU1M30.Ellv66P3CIs-0rcXFE0xiK-QC4Vq9OLbE10WKbnEKv8",
-    },
-  });
+  const response = await api.post("/brands", data);
 
   return response.data;
 };
 
 export const deleteBrand = async (id: string | number) => {
-  const response = await api.delete(`/brands/${id}`, {
-    headers: {
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzMDQ1ODMzZi05YTAwLTRiNGUtODYzNy0xN2IxMmY3ZDA3YTciLCJlbWFpbCI6ImFkbWluQHh5ei5jb20iLCJpYXQiOjE3NzkyOTg3NTMsImV4cCI6MTc3OTkwMzU1M30.Ellv66P3CIs-0rcXFE0xiK-QC4Vq9OLbE10WKbnEKv8",
-    },
-  });
+  const response = await api.delete(`/brands/${id}`);
 
   return response.data;
 };

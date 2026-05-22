@@ -3,7 +3,7 @@
 import { ROUTES } from "@/constants/routes";
 import {
   getProductByIdQueryOptions,
-  getProductsInfiniteQueryOptions
+  getProductsInfiniteQueryOptions,
 } from "@/hooks/queries/product-queries";
 import { updateProduct } from "@/services/product.service";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";

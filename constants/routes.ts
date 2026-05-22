@@ -7,7 +7,7 @@ export const ROUTES = {
   PROJECT_DETAIL: (id: string | number) => `/portofolio/${id}`,
 
   DASHBOARD: "/dashboard",
-  
+
   PRODUCTS: "/dashboard/products",
   CREATE_PRODUCTS: "/dashboard/products/create",
   EDIT_PRODUCTS: (id: string | number) => `/dashboard/products/${id}/edit`,

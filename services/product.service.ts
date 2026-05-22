@@ -40,23 +40,13 @@ export const getProductById = async (id: string | number): Promise<Product> => {
 };
 
 export const addProduct = async (data: CreateProductPayload) => {
-  const response = await api.post("/products", data, {
-    headers: {
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzMDQ1ODMzZi05YTAwLTRiNGUtODYzNy0xN2IxMmY3ZDA3YTciLCJlbWFpbCI6ImFkbWluQHh5ei5jb20iLCJpYXQiOjE3NzkyOTg3NTMsImV4cCI6MTc3OTkwMzU1M30.Ellv66P3CIs-0rcXFE0xiK-QC4Vq9OLbE10WKbnEKv8",
-    },
-  });
+  const response = await api.post("/products", data);
 
   return response.data;
 };
 
 export const deleteProduct = async (id: string | number) => {
-  const response = await api.delete(`/products/${id}`, {
-    headers: {
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzMDQ1ODMzZi05YTAwLTRiNGUtODYzNy0xN2IxMmY3ZDA3YTciLCJlbWFpbCI6ImFkbWluQHh5ei5jb20iLCJpYXQiOjE3NzkyOTg3NTMsImV4cCI6MTc3OTkwMzU1M30.Ellv66P3CIs-0rcXFE0xiK-QC4Vq9OLbE10WKbnEKv8",
-    },
-  });
+  const response = await api.delete(`/products/${id}`);
 
   return response.data;
 };
@@ -65,12 +55,7 @@ export const updateProduct = async (
   id: string | number,
   data: UpdateProductPayload,
 ) => {
-  const response = await api.put(`/products/${id}`, data, {
-    headers: {
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzMDQ1ODMzZi05YTAwLTRiNGUtODYzNy0xN2IxMmY3ZDA3YTciLCJlbWFpbCI6ImFkbWluQHh5ei5jb20iLCJpYXQiOjE3NzkyOTg3NTMsImV4cCI6MTc3OTkwMzU1M30.Ellv66P3CIs-0rcXFE0xiK-QC4Vq9OLbE10WKbnEKv8",
-    },
-  });
+  const response = await api.put(`/products/${id}`, data);
 
   return response.data;
 };

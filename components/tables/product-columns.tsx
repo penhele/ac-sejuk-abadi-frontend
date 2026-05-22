@@ -1,6 +1,4 @@
-import {
-  getProductsInfiniteQueryOptions
-} from "@/hooks/queries/product-queries";
+import { getProductsInfiniteQueryOptions } from "@/hooks/queries/product-queries";
 import { formatNumber } from "@/lib/format/currency";
 import { deleteProduct } from "@/services/product.service";
 import { Product } from "@/types/product";
