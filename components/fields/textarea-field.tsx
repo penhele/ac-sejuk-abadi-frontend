@@ -2,15 +2,18 @@ import { useFieldContext } from "@/hooks/use-app-form";
 import { FieldInfo } from "../field-info";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
+import { cn } from "@/lib/utils";
 
 export default function TextField({
   label,
   placeholder,
   isDisabled,
+  keepStyleWhenDisabled,
 }: {
   label: string;
   placeholder?: string;
   isDisabled?: boolean;
+  keepStyleWhenDisabled?: boolean;
 }) {
   const field = useFieldContext<string>();
 
@@ -26,6 +29,7 @@ export default function TextField({
         onChange={(e) => field.handleChange(e.target.value)}
         placeholder={placeholder}
         disabled={isDisabled}
+        className={cn(keepStyleWhenDisabled && "disabled:opacity-100")}
       />
     </div>
   );

@@ -46,7 +46,11 @@ export function AppSidebar() {
     },
   ];
 
-  const navCompany = { Icon: Building2, label: "Company", href: ROUTES.COMPANY };
+  const navCompany = {
+    Icon: Building2,
+    label: "Company",
+    href: ROUTES.COMPANY,
+  };
 
   return (
     <Sidebar variant="floating">

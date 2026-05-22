@@ -17,6 +17,7 @@ export default function TextField({
   isPrice,
   className,
   isDisabled,
+  keepStyleWhenDisabled,
 }: {
   label: string;
   type?: "text" | "number" | "password" | "email";
@@ -24,6 +25,7 @@ export default function TextField({
   isPrice?: boolean;
   className?: string;
   isDisabled?: boolean;
+  keepStyleWhenDisabled?: boolean;
 }) {
   const field = useFieldContext<string>();
 
@@ -57,6 +59,7 @@ export default function TextField({
           placeholder={placeholder}
           type={isPrice ? "text" : type}
           disabled={isDisabled}
+          className={cn(keepStyleWhenDisabled && "disabled:opacity-100")}
         />
       </InputGroup>
     </div>
