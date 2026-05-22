@@ -15,7 +15,7 @@ import { Info, Plus } from "lucide-react";
 import Link from "next/link";
 
 export default function ProductPage() {
-  const { data: response } = useQuery(getProductsQueryOptions());
+  const { data: response, isFetching } = useQuery(getProductsQueryOptions());
 
   const products = response?.data ?? [];
 
@@ -60,7 +60,7 @@ export default function ProductPage() {
         </div>
       </div>
 
-      <DataTable columns={productColumns} data={products} />
+      <DataTable isFetching={isFetching} columns={productColumns} data={products} />
     </div>
   );
 }

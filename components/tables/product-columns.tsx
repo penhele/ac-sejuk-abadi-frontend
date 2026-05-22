@@ -1,7 +1,7 @@
 import { Product } from "@/types/product";
 import { ColumnDef } from "@tanstack/react-table";
 import { formatDistanceToNow } from "date-fns";
-import { EllipsisIcon, FormInputIcon } from "lucide-react";
+import { ArrowUpDown, EllipsisIcon, FormInputIcon } from "lucide-react";
 import DeleteButton from "../buttons/delete-button";
 import EditButton from "../buttons/edit-button";
 import { Button } from "../ui/button";
@@ -22,7 +22,17 @@ export const productColumns: ColumnDef<Product>[] = [
   },
   {
     accessorKey: "name",
-    header: "Name",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant={"ghost"}
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Name
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "pk",
