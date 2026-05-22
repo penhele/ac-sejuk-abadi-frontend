@@ -166,7 +166,7 @@ export function DataTable<TData, TValue>({
           <div className="text-sm text-muted-foreground">
             {table.getPageCount() > 0 ? (
               <>
-                {table.getState().pagination.pageIndex + 1} dari
+                {table.getState().pagination.pageIndex + 1} dari {' '}
                 {table.getPageCount()} halaman
               </>
             ) : (

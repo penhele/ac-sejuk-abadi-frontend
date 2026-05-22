@@ -1,4 +1,6 @@
-import { getProductsQueryOptions } from "@/hooks/queries/product-queries";
+import {
+  getProductsInfiniteQueryOptions
+} from "@/hooks/queries/product-queries";
 import { formatNumber } from "@/lib/format/currency";
 import { deleteProduct } from "@/services/product.service";
 import { Product } from "@/types/product";
@@ -86,7 +88,7 @@ export const productColumns: ColumnDef<Product>[] = [
             <EditButton id={row.original.id} />
             <DeleteButton
               mutationFn={deleteProduct}
-              queryKey={getProductsQueryOptions().queryKey}
+              queryKey={getProductsInfiniteQueryOptions().queryKey}
               id={row.original.id}
             />
           </DropdownMenuGroup>

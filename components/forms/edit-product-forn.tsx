@@ -1,16 +1,15 @@
 "use client";
 
+import { ROUTES } from "@/constants/routes";
 import {
   getProductByIdQueryOptions,
-  getProductsInfiniteQueryOptions,
-  getProductsQueryOptions,
+  getProductsInfiniteQueryOptions
 } from "@/hooks/queries/product-queries";
 import { updateProduct } from "@/services/product.service";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import ProductForm from "./product-form";
-import { useRouter } from "next/navigation";
-import { ROUTES } from "@/constants/routes";
 
 export default function EditProductForm({ id }: { id: string }) {
   const queryClient = useQueryClient();

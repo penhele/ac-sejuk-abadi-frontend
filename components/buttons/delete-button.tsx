@@ -1,5 +1,3 @@
-import { getProductsQueryOptions } from "@/hooks/queries/product-queries";
-import { deleteProduct } from "@/services/product.service";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Trash } from "lucide-react";
 import { toast } from "sonner";
