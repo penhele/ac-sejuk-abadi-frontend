@@ -43,11 +43,6 @@ export default function ProductDetailContent({ id }: { id: string }) {
           <ProductPriceAction product={product} />
         </div>
       </div>
-
-      <div className="flex flex-col gap-2">
-        <HeaderSection title="Spesifikasi" />
-        <ProductDataTable columns={columns} data={data} />
-      </div>
     </div>
   );
 }

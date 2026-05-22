@@ -7,6 +7,10 @@ import DiscountBadge from "../util/discount-badge";
 import { formatRupiah } from "@/lib/format/currency";
 import { ROUTES } from "@/constants/routes";
 import Image from "next/image";
+import CategoryBadge from "../badges/category-badge";
+import AcProductTypeBadge from "../badges/ac-type-badge";
+import PkBadge from "../badges/pk-badge";
+import ProductBadge from "../badges/product-badge";
 
 export default function ProductCard({ product }: { product: Product }) {
   const hasDiscount = product.discounts && product.discounts.length > 0;
@@ -44,14 +48,7 @@ export default function ProductCard({ product }: { product: Product }) {
           <span className="text-xs text-gray-400">{product.brand?.name}</span>
           <h1 className="text-sm h-16 line-clamp-3">{product.name}</h1>
 
-          <div className="flex gap-2">
-            <div className="text-xs bg-gray-800 text-white py-1 px-2 rounded-sm">
-              {product.pk} PK
-            </div>
-            <div className="text-xs bg-green-800 text-white py-1 px-2 rounded-sm">
-              {product.ac_type.name}
-            </div>
-          </div>
+          <ProductBadge product={product} />
 
           <div className="flex flex-row justify-between">
             <div className="flex flex-col min-h-8 justify-end">

@@ -14,6 +14,7 @@ import {
   DropdownMenuGroup,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import CategoryBadge from "../badges/category-badge";
 
 export const productColumns: ColumnDef<Product>[] = [
   {
@@ -50,13 +51,26 @@ export const productColumns: ColumnDef<Product>[] = [
     accessorFn: (row) => row.ac_type.name,
   },
   {
-    header: "Category",
+    id: "category",
     accessorFn: (row) => row.category.name,
+    header: ({ column }) => {
+      return (
+        <Button
+          variant={"ghost"}
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Category
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+
+    cell: ({ row }) => <CategoryBadge category={row.original.category.name} />,
   },
   {
     accessorKey: "price",
     header: "Price",
-    cell: ({ row }) => <span>{formatNumber(row.original.price)}</span>,
+    cell: ({ row }) => <span>IDR {formatNumber(row.original.price)}</span>,
   },
   {
     accessorKey: "updated_at",
