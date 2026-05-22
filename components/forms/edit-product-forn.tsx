@@ -2,6 +2,7 @@
 
 import {
   getProductByIdQueryOptions,
+  getProductsInfiniteQueryOptions,
   getProductsQueryOptions,
 } from "@/hooks/queries/product-queries";
 import { updateProduct } from "@/services/product.service";
@@ -30,7 +31,7 @@ export default function EditProductForm({ id }: { id: string }) {
     }) => updateProduct(id, payload),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: getProductsQueryOptions().queryKey,
+        queryKey: getProductsInfiniteQueryOptions().queryKey,
       });
 
       toast.success("Produk berhasil diedit.");
