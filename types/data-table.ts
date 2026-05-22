@@ -5,4 +5,7 @@ export interface DataTableProps<TData, TValue> {
   data: TData[];
   className?: string;
   isFetching?: boolean;
+  pageSize?: number;
+  isPagination?: boolean;
+  isFilter?: boolean;
 }

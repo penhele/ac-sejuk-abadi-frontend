@@ -10,16 +10,18 @@ import {
 } from "@/components/ui/tooltip";
 import { ROUTES } from "@/constants/routes";
 import { getBrandsQueryOptions } from "@/hooks/queries/brand-queries";
-import { getProductsQueryOptions } from "@/hooks/queries/product-queries";
-import { useQuery } from "@tanstack/react-query";
+import { getProductsInfiniteQueryOptions } from "@/hooks/queries/product-queries";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { Info, Plus } from "lucide-react";
 import Link from "next/link";
 
 export default function ProductPage() {
-  const { data: response, isFetching } = useQuery(getProductsQueryOptions());
+  const { data: response, isFetching } = useInfiniteQuery(
+    getProductsInfiniteQueryOptions({ limit: 10 }),
+  );
   const { data: brands } = useQuery(getBrandsQueryOptions());
 
-  const products = response?.data ?? [];
+  const products = response?.pages?.flatMap((page) => page?.data ?? []) ?? [];
 
   return (
     <div className="space-y-between-items">
@@ -86,6 +88,9 @@ export default function ProductPage() {
         isFetching={isFetching}
         columns={productColumns}
         data={products}
+        pageSize={10}
+        isFilter
+        isPagination
       />
     </div>
   );

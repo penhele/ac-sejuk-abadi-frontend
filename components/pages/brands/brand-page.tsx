@@ -13,19 +13,29 @@ export default function BrandPage() {
   const brands = response || [];
 
   return (
-    <div className="grid grid-cols-3 gap-between-items">
-      <DataTable data={brands} columns={brandColumns} className="col-span-2" />
+    <div className="space-y-between-items">
+      <div className="flex justify-between items-center">
+        <h1 className="text-3xl font-bold text-gray-800">Brands</h1>
+      </div>
 
-      <div className="flex flex-col gap-between-items">
-        <Card className="">
-          <CardHeader>
-            <CardTitle>Tambah Brand</CardTitle>
-          </CardHeader>
+      <div className="grid grid-cols-3 gap-between-items">
+        <DataTable
+          data={brands}
+          columns={brandColumns}
+          className="col-span-2"
+        />
 
-          <CardContent>
-            <CreateBrandForm />
-          </CardContent>
-        </Card>
+        <div className="flex flex-col gap-between-items">
+          <Card className="">
+            <CardHeader>
+              <CardTitle>Tambah Brand</CardTitle>
+            </CardHeader>
+
+            <CardContent>
+              <CreateBrandForm />
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );

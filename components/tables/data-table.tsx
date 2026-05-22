@@ -36,9 +36,17 @@ export function DataTable<TData, TValue>({
   data,
   className,
   isFetching,
+  pageSize,
+  isPagination,
+  isFilter,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+
+  const [pagination, setPagination] = useState({
+    pageIndex: 0, // Halaman pertama (indeks dimulai dari 0)
+    pageSize: pageSize ?? 10, // Sesuai dengan limit data yang Anda inginkan
+  });
 
   const table = useReactTable({
     data,
@@ -49,30 +57,36 @@ export function DataTable<TData, TValue>({
     getSortedRowModel: getSortedRowModel(),
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
+    onPaginationChange: setPagination,
     state: {
       sorting,
       columnFilters,
+      pagination,
     },
   });
 
   return (
     <div className={cn(className)}>
-      <div className="flex items-center py-4">
-        <InputGroup className="max-w-xs">
-          <InputGroupAddon>
-            <Search />
-          </InputGroupAddon>
+      {isFilter && (
+        <div className="flex items-center py-4">
+          <InputGroup className="max-w-xs">
+            <InputGroupAddon>
+              <Search />
+            </InputGroupAddon>
 
-          <InputGroupInput
-            placeholder="Filter name..."
-            value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
-            onChange={(event) =>
-              table.getColumn("name")?.setFilterValue(event.target.value)
-            }
-            disabled={isFetching}
-          />
-        </InputGroup>
-      </div>
+            <InputGroupInput
+              placeholder="Filter name..."
+              value={
+                (table.getColumn("name")?.getFilterValue() as string) ?? ""
+              }
+              onChange={(event) =>
+                table.getColumn("name")?.setFilterValue(event.target.value)
+              }
+              disabled={isFetching}
+            />
+          </InputGroup>
+        </div>
+      )}
 
       <div className="overflow-hidden rounded-md border">
         <Table>
@@ -131,7 +145,7 @@ export function DataTable<TData, TValue>({
                 </TableRow>
               )
             ) : (
-              Array(10)
+              Array(pageSize)
                 .fill(null)
                 .map((_, rowIndex) => (
                   <TableRow key={`skeleton-row-${rowIndex}`}>
@@ -147,24 +161,39 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
 
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage() || isFetching}
-        >
-          Previous
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage() || isFetching}
-        >
-          Next
-        </Button>
-      </div>
+      {isPagination && (
+        <div className="flex flex-row justify-between items-center">
+          <div className="text-sm text-muted-foreground">
+            {table.getPageCount() > 0 ? (
+              <>
+                {table.getState().pagination.pageIndex + 1} dari
+                {table.getPageCount()} halaman
+              </>
+            ) : (
+              "0 halaman"
+            )}
+          </div>
+
+          <div className="flex items-center justify-end space-x-2 py-4">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => table.previousPage()}
+              disabled={!table.getCanPreviousPage() || isFetching}
+            >
+              Previous
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => table.nextPage()}
+              disabled={!table.getCanNextPage() || isFetching}
+            >
+              Next
+            </Button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
