@@ -17,7 +17,7 @@ import Link from "next/link";
 
 export default function ProductPage() {
   const { data: response, isFetching } = useInfiniteQuery(
-    getProductsInfiniteQueryOptions({ limit: 10 }),
+    getProductsInfiniteQueryOptions(),
   );
   const { data: brands } = useQuery(getBrandsQueryOptions());
 

@@ -37,7 +37,7 @@ export default function ProductGrid({
       id_category,
       min_price,
       max_price,
-      limit: length,
+      limit: 4,
     }),
   );
 
@@ -58,9 +58,10 @@ export default function ProductGrid({
   return (
     <div
       className={cn(
-        "grid grid-cols-2 sm:grid-cols-3 gap-between-card",
-        length === 3 && "grid-cols-3",
-        length === 4 && "grid-cols-4",
+        "grid grid-cols-2 gap-between-card",
+        length === 3 && "xs:grid-cols-3 md:grid-cols-3",
+        length === 4 && "xs:grid-cols-3 md:grid-cols-4",
+        !length && "xs:grid-cols-3",
       )}
     >
       {products.map((product) => (

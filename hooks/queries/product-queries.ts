@@ -36,7 +36,7 @@ export const getProductsInfiniteQueryOptions = (params?: GetProductOptions) => {
   return infiniteQueryOptions({
     queryKey: ["products", "infinite", params],
     queryFn: ({ pageParam }) =>
-      getProducts({ ...params, page: pageParam, limit: 10 }),
+      getProducts({ page: pageParam, limit: params?.limit ?? 10, ...params }),
     staleTime: 1000 * 60 * 5,
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {

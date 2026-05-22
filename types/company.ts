@@ -1,4 +1,4 @@
-export type Company = {
+export interface Company {
   id: number;
   logo_url: string;
   name: string;
@@ -7,7 +7,7 @@ export type Company = {
   phone: string;
   location: string;
   location_url: string;
-};
+}
 
 export interface UpdateCompanyPayload {
   name?: string;

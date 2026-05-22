@@ -8,16 +8,21 @@ import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 
 export default function FooterLinks({ className }: { className?: string }) {
-  const { data: sposoredBrands } = useQuery(getSponsoredBrandsQueryOptions());
-  const { data: categories } = useQuery(getCategoriesQueryOptions());
+  const { data: responseSponsoredBrands } = useQuery(
+    getSponsoredBrandsQueryOptions(),
+  );
+
+  const sposoredBrands = responseSponsoredBrands || [];
+
+  const { data: responseCategories } = useQuery(getCategoriesQueryOptions());
+
+  const categories = responseCategories || [];
 
   const quickLinks = [
-    { name: "Tentang Kami", href: "" },
-    { name: "Layanan Kami", href: "" },
-    { name: "Proyek / Portofolio", href: ROUTES.PORTOFOLIO },
-    { name: "Katalog Produk", href: ROUTES.SHOP },
-    { name: "Hubungi Kami", href: "" },
-    { name: "FAQ", href: "" },
+    { name: "Home", href: ROUTES.HOME },
+    { name: "Shop", href: ROUTES.SHOP },
+    { name: "Portofolio", href: ROUTES.PORTOFOLIO },
+    { name: "Edukasi", href: ROUTES.EDUCATION },
   ];
 
   return (
@@ -30,7 +35,7 @@ export default function FooterLinks({ className }: { className?: string }) {
         <ul className="space-y-between-items-xs">
           {sposoredBrands?.map((brand) => (
             <li key={brand.id}>
-              <Link href={""} className="block text-sm leading-relaxed">
+              <Link href={"#"} className="block text-sm leading-relaxed">
                 {brand.brand.name}
               </Link>
             </li>
