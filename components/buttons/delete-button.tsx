@@ -2,6 +2,17 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Trash } from "lucide-react";
 import { toast } from "sonner";
 import { DropdownMenuItem, DropdownMenuShortcut } from "../ui/dropdown-menu";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "../ui/alert-dialog";
 
 export default function DeleteButton<TId = string | number>({
   id,
@@ -43,11 +54,32 @@ export default function DeleteButton<TId = string | number>({
   });
 
   return (
-    <DropdownMenuItem onClick={() => mutate(id)}>
-      Delete
-      <DropdownMenuShortcut>
-        <Trash size={12} />
-      </DropdownMenuShortcut>
+    <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+      <AlertDialog>
+        <AlertDialogTrigger className="w-full flex items-center justify-between">
+          Delete
+          <DropdownMenuShortcut>
+            <Trash size={12} />
+          </DropdownMenuShortcut>
+        </AlertDialogTrigger>
+
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently delete your
+              account from our servers.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={() => mutate(id)}>
+              Continue
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </DropdownMenuItem>
   );
 }
