@@ -35,7 +35,11 @@ export default function ProductDetailContent({ id }: { id: string }) {
       <BreadcrumbComponent />
 
       <div className="grid grid-cols-2 gap-4">
-        <ProductImages jumlah={product.images.length} product={product} />
+        <ProductImages
+          jumlah={product.images.length}
+          product={product}
+          className="col-span-2 xs:col-span-1"
+        />
 
         <div className="flex flex-col gap-4">
           <ProductInfo product={product} />

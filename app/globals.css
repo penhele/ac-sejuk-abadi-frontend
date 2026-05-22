@@ -272,7 +272,7 @@
     @apply max-w-7xl mx-auto py-default-page px-page-inline xl:px-0;
   }
   footer {
-    @apply max-w-7xl mx-auto xl:px-0;
+    @apply max-w-7xl mx-auto px-page-inline xl:px-0;
   }
 }
 

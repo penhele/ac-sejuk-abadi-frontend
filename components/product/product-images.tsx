@@ -2,16 +2,19 @@ import { Product } from "@/types/product";
 import { AspectRatio } from "../ui/aspect-ratio";
 import Image from "next/image";
 import { ImageOff } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export default function ProductImages({
   product,
   jumlah,
+  className,
 }: {
   product: Product;
   jumlah: number;
+  className?: string;
 }) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className={cn("flex flex-col gap-2", className)}>
       <div className="relative">
         <AspectRatio ratio={1 / 1} className="bg-muted rounded-md">
           {product.images && product.images.length > 0 ? (

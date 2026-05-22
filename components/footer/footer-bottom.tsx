@@ -11,7 +11,7 @@ export default function FooterBottom() {
           © 2026 PT. Alfa Cakrawala Sejuk Abadi. All rights reserved.
         </p>
 
-        <div className="flex w-full justify-start md:justify-end gap-8">
+        <div className="flex w-full justify-evenly md:justify-end gap-8">
           <Link href="" className="hover: transition-colors">
             Privacy Policy
           </Link>

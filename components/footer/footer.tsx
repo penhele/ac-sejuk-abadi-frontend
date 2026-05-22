@@ -8,10 +8,10 @@ import FooterProfile from "./footer-profile";
 export default async function Footer() {
   return (
     <div className="space-y-between-items-lg py-4">
-      <div className="grid grid-cols-4 space-x-between-items-sm">
-        <FooterProfile />
+      <div className="grid grid-cols-4 gap-between-items space-x-between-items-sm">
+        <FooterProfile className="col-span-4 sm:col-span-1" />
 
-        <FooterLinks className="col-span-3" />
+        <FooterLinks className="col-span-4 sm:col-span-3" />
       </div>
 
       <div className="flex flex-col lg:flex-row gap-between-items-lg">
