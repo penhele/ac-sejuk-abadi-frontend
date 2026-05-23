@@ -10,17 +10,25 @@ import {
 } from "@/components/ui/tooltip";
 import { ROUTES } from "@/constants/routes";
 import { getBrandsQueryOptions } from "@/hooks/queries/brand-queries";
-import {
-  getProductsQueryOptions
-} from "@/hooks/queries/product-queries";
+import { getProductsQueryOptions } from "@/hooks/queries/product-queries";
 import { useQuery } from "@tanstack/react-query";
 import { Info, Plus } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function ProductPage() {
+  const [pagination, setPagination] = useState({
+    pageIndex: 0,
+    pageSize: 20,
+  });
+
   const { data: response, isFetching } = useQuery(
-    getProductsQueryOptions({ page: 1 }),
+    getProductsQueryOptions({
+      page: pagination.pageIndex + 1,
+      limit: pagination.pageSize,
+    }),
   );
+
   const { data: brands } = useQuery(getBrandsQueryOptions());
 
   const products = response?.data || [];
@@ -91,8 +99,10 @@ export default function ProductPage() {
         isFetching={isFetching}
         columns={productColumns}
         data={products}
-        pageSize={10}
-        pageIndex={1}
+        pagination={pagination}
+        onPaginationChange={setPagination}
+        pageCount={response?.meta?.total_pages ?? 0}
+        rowCount={totalProducts}
         isFilter
         isPagination
       />

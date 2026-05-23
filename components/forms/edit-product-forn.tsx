@@ -3,7 +3,7 @@
 import { ROUTES } from "@/constants/routes";
 import {
   getProductByIdQueryOptions,
-  getProductsInfiniteQueryOptions,
+  getProductsQueryOptions,
 } from "@/hooks/queries/product-queries";
 import { updateProduct } from "@/services/product.service";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -30,7 +30,7 @@ export default function EditProductForm({ id }: { id: string }) {
     }) => updateProduct(id, payload),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: getProductsInfiniteQueryOptions().queryKey,
+        queryKey: getProductsQueryOptions().queryKey,
       });
 
       toast.success("Produk berhasil diedit.");

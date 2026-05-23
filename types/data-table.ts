@@ -1,4 +1,4 @@
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef, OnChangeFn, PaginationState } from "@tanstack/react-table";
 
 export interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -9,4 +9,8 @@ export interface DataTableProps<TData, TValue> {
   pageIndex?: number;
   isPagination?: boolean;
   isFilter?: boolean;
+  pagination: PaginationState;
+  onPaginationChange: OnChangeFn<PaginationState>;
+  pageCount?: number;
+  rowCount?: number;
 }

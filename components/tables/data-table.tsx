@@ -37,28 +37,29 @@ export function DataTable<TData, TValue>({
   className,
   isFetching,
   pageSize,
-  pageIndex,
   isPagination,
   isFilter,
+  pagination,
+  onPaginationChange,
+  pageCount,
+  rowCount,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
-  const [pagination, setPagination] = useState({
-    pageIndex: pageIndex ?? 0, // Halaman pertama (indeks dimulai dari 0)
-    pageSize: pageSize ?? 10, // Sesuai dengan limit data yang Anda inginkan
-  });
-
   const table = useReactTable({
     data,
     columns,
+    onPaginationChange,
+    manualPagination: true,
+    pageCount,
+    rowCount,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
-    onPaginationChange: setPagination,
     state: {
       sorting,
       columnFilters,

@@ -1,7 +1,7 @@
 "use client";
 
 import { ROUTES } from "@/constants/routes";
-import { getProductsInfiniteQueryOptions } from "@/hooks/queries/product-queries";
+import { getProductsQueryOptions } from "@/hooks/queries/product-queries";
 import { addProduct } from "@/services/product.service";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
@@ -16,7 +16,7 @@ export default function CreateProductForm() {
     mutationFn: addProduct,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: getProductsInfiniteQueryOptions().queryKey,
+        queryKey: getProductsQueryOptions().queryKey,
       });
 
       toast.success("Produk berhasil ditambahkan.");
