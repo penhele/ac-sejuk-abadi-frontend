@@ -22,13 +22,13 @@ export default function LoadMoreButton() {
     }),
   );
 
-  if (!hasNextPage && !isFetchingNextPage) return null;
+  if (!hasNextPage) return null;
 
   return (
     <div>
       <Button
         className={cn("w-full")}
-        onClick={() => hasNextPage && fetchNextPage()}
+        onClick={() => fetchNextPage()}
         disabled={isFetchingNextPage}
       >
         {isFetchingNextPage ? <Spinner /> : "Muat lebih banyak"}

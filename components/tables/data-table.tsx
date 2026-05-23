@@ -37,6 +37,7 @@ export function DataTable<TData, TValue>({
   className,
   isFetching,
   pageSize,
+  pageIndex,
   isPagination,
   isFilter,
 }: DataTableProps<TData, TValue>) {
@@ -44,7 +45,7 @@ export function DataTable<TData, TValue>({
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
   const [pagination, setPagination] = useState({
-    pageIndex: 0, // Halaman pertama (indeks dimulai dari 0)
+    pageIndex: pageIndex ?? 0, // Halaman pertama (indeks dimulai dari 0)
     pageSize: pageSize ?? 10, // Sesuai dengan limit data yang Anda inginkan
   });
 

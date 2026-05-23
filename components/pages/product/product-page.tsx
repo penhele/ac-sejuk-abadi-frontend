@@ -16,12 +16,13 @@ import { Info, Plus } from "lucide-react";
 import Link from "next/link";
 
 export default function ProductPage() {
-  const { data: response, isFetching } = useInfiniteQuery(
+  const { data: response, isFetching,  } = useInfiniteQuery(
     getProductsInfiniteQueryOptions(),
   );
   const { data: brands } = useQuery(getBrandsQueryOptions());
 
   const products = response?.pages?.flatMap((page) => page?.data ?? []) ?? [];
+  const totalProducts = response?.pages?.[0]?.meta?.total ?? 0;
 
   return (
     <div className="space-y-between-items">
@@ -52,7 +53,7 @@ export default function ProductPage() {
           </div>
 
           <div className="flex flex-row justify-between items-end">
-            <span className="text-4xl">{products.length}</span>
+            <span className="text-4xl">{totalProducts}</span>
 
             <div className="flex flex-col text-xs items-end">
               <span className="bg-green-200 text-green-600 py-0.5 px-1.5 rounded-lg">
@@ -89,6 +90,7 @@ export default function ProductPage() {
         columns={productColumns}
         data={products}
         pageSize={10}
+        pageIndex={1}
         isFilter
         isPagination
       />

@@ -37,7 +37,7 @@ export default function ProductGrid({
       id_category,
       min_price,
       max_price,
-      limit: 4,
+      limit: length,
     }),
   );
 

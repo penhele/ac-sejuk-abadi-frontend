@@ -6,6 +6,7 @@ export interface DataTableProps<TData, TValue> {
   className?: string;
   isFetching?: boolean;
   pageSize?: number;
+  pageIndex?: number;
   isPagination?: boolean;
   isFilter?: boolean;
 }

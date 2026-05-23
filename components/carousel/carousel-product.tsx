@@ -3,19 +3,16 @@
 import { useCallback, useEffect, useState } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { EmblaCarouselType } from "embla-carousel";
-
 import { getProductsInfiniteQueryOptions } from "@/hooks/queries/product-queries";
-
 import ProductCard from "../cards/product-card";
-
 import {
   Carousel,
   CarouselApi,
   CarouselContent,
   CarouselItem,
 } from "../ui/carousel";
-
 import { Slider } from "../ui/slider";
+import WheelGesturesPlugin from "embla-carousel-wheel-gestures";
 
 export default function CarouselProduct({ limit }: { limit: number }) {
   const { data } = useInfiniteQuery(
@@ -70,6 +67,11 @@ export default function CarouselProduct({ limit }: { limit: number }) {
       <Carousel
         setApi={setApi}
         className="w-full"
+        plugins={[
+          WheelGesturesPlugin({
+            forceWheelAxis: "x",
+          }),
+        ]}
         opts={{
           align: "start",
         }}
