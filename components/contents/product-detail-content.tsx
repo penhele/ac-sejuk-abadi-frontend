@@ -29,10 +29,10 @@ export default function ProductDetailContent({ id }: { id: string }) {
       <ProductImages
         jumlah={product.images.length}
         product={product}
-        className="col-span-2 xs:col-span-1"
+        className="col-span-2 md:col-span-1"
       />
 
-      <div className="flex flex-col gap-4 col-span-2 xs:col-span-1">
+      <div className="flex flex-col gap-4 col-span-2 md:col-span-1">
         <ProductInfo product={product} />
 
         <ProductPriceAction product={product} />
