@@ -271,6 +271,9 @@
   main {
     @apply max-w-7xl mx-auto py-default-page px-page-inline xl:px-0;
   }
+  nav {
+    @apply max-w-7xl mx-auto px-page-inline xl:px-0;
+  }
   footer {
     @apply max-w-7xl mx-auto px-page-inline xl:px-0;
   }

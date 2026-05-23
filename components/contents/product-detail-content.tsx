@@ -1,13 +1,7 @@
-import BreadcrumbComponent from "@/components/breadcrumb-component";
-import { ProductDataTable } from "@/components/tables/product-data-table";
 import ProductImages from "@/components/product/product-images";
 import ProductInfo from "@/components/product/product-info";
 import ProductPriceAction from "@/components/product/product-price-action";
-import {
-  AcSpecification,
-  columns,
-} from "@/components/tables/spesification-columns";
-import { DescriptionSection, HeaderSection } from "@/components/util/header";
+import { AcSpecification } from "@/components/tables/spesification-columns";
 import { getProductById } from "@/services/product.service";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
@@ -31,21 +25,17 @@ export default function ProductDetailContent({ id }: { id: string }) {
   ];
 
   return (
-    <div className="space-y-between-section">
-      <BreadcrumbComponent />
+    <div className="grid grid-cols-2 gap-4">
+      <ProductImages
+        jumlah={product.images.length}
+        product={product}
+        className="col-span-2 xs:col-span-1"
+      />
 
-      <div className="grid grid-cols-2 gap-4">
-        <ProductImages
-          jumlah={product.images.length}
-          product={product}
-          className="col-span-2 xs:col-span-1"
-        />
+      <div className="flex flex-col gap-4 col-span-2 xs:col-span-1">
+        <ProductInfo product={product} />
 
-        <div className="flex flex-col gap-4">
-          <ProductInfo product={product} />
-
-          <ProductPriceAction product={product} />
-        </div>
+        <ProductPriceAction product={product} />
       </div>
     </div>
   );

@@ -15,7 +15,7 @@ export default function ProductInfo({ product }: { product: Product }) {
 
       <div className="flex flex-col gap-1">
         <h1 className="text-header-h4 font-medium">Deskripsi</h1>
-        <p className="text-body min-h-80">{product.description}</p>
+        <p className="text-body min-h-20 xs:min-h-80">{product.description}</p>
       </div>
     </div>
   );
