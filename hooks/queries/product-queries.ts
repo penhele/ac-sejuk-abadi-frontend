@@ -39,11 +39,19 @@ export const getProductsInfiniteQueryOptions = (params?: GetProductOptions) => {
     staleTime: 1000 * 60 * 5,
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
-      if (!lastPage?.meta) return undefined;
-      const hasMore = lastPage.meta.total_pages > lastPage.meta.page;
+      const { page, total_pages } = lastPage.meta;
+      if (page >= total_pages) return undefined;
 
-      return hasMore ? lastPage.meta.page + 1 : undefined;
+      return page + 1;
     },
+
+    getPreviousPageParam: (firstPage) => {
+      const { page } = firstPage.meta;
+      if (page <= 1) return undefined;
+
+      return page - 1;
+    },
+
     throwOnError: false,
   });
 };
