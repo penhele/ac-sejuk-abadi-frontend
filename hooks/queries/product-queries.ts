@@ -18,7 +18,7 @@ export const getProductsQueryOptions = <
 ) => {
   return queryOptions({
     ...options,
-    queryKey: ["products", params],
+    queryKey: ["products"],
     queryFn: () => getProducts(params),
     staleTime: 1000 * 60 * 5,
   });

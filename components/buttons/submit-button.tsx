@@ -25,7 +25,7 @@ export default function SubmitButton({
         <Button
           type="submit"
           disabled={!canSubmit || isSubmitting}
-          className={cn(className)}
+          className={cn('min-w-24', className)}
         >
           {isSubmitting ? <Spinner /> : label}
         </Button>

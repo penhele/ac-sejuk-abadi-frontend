@@ -34,7 +34,7 @@ export default function ProductForm({
       modeAfterSubmission: "blur",
     }),
     onSubmit: async ({ value }) => {
-      onSubmit(value);
+      await onSubmit(value);
     },
   });
 
@@ -179,7 +179,7 @@ export default function ProductForm({
 
         <div className="space-x-between-items">
           <Link href={ROUTES.PRODUCTS}>
-            <Button variant={"outline"}>Cancel</Button>
+            <Button variant={"outline"} className="min-w-24">Cancel</Button>
           </Link>
 
           <form.SubmitButton label={submitLabel} />

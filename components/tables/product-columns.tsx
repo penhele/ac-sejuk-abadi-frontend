@@ -15,6 +15,8 @@ import {
   DropdownMenuGroup,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import AcProductTypeBadge from "../badges/ac-type-badge";
+import PkBadge from "../badges/pk-badge";
 
 export const productColumns: ColumnDef<Product>[] = [
   {
@@ -45,10 +47,12 @@ export const productColumns: ColumnDef<Product>[] = [
   {
     accessorKey: "pk",
     header: "PK",
+    cell: ({row})=> <PkBadge pk={row.original.pk}/>
   },
   {
     header: "Type",
     accessorFn: (row) => row.ac_type.name,
+    cell: ({ row }) => <AcProductTypeBadge acType={row.original.ac_type.name} />,
   },
   {
     id: "category",

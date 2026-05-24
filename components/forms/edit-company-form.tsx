@@ -1,23 +1,23 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { getCompanyQueryOptions } from "@/hooks/queries/company-queries";
 import { useAppForm } from "@/hooks/use-app-form";
 import { updateCompany } from "@/services/company.service";
 import { UpdateCompanyPayload } from "@/types/company";
 
+import { cn } from "@/lib/utils";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { Button } from "../ui/button";
-import { cn } from "@/lib/utils";
 
 export default function EditCompanyForm({ className }: { className?: string }) {
   const [isEditing, setIsEditing] = useState(false);
 
   const { data: company } = useQuery(getCompanyQueryOptions());
 
-  const { mutate, isPending } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationFn: (data: UpdateCompanyPayload) => updateCompany(data),
 
     onSuccess() {
@@ -40,8 +40,8 @@ export default function EditCompanyForm({ className }: { className?: string }) {
       location_url: company?.location_url ?? "",
     },
 
-    onSubmit: ({ value }) => {
-      mutate(value);
+    onSubmit: async ({ value }) => {
+      await mutateAsync(value);
     },
   });
 
@@ -149,14 +149,12 @@ export default function EditCompanyForm({ className }: { className?: string }) {
               onClick={() => {
                 setIsEditing(false);
               }}
+              disabled={isPending}
             >
               Cancel
             </Button>
 
-            <form.SubmitButton
-              label={isPending ? "Updating..." : "Update"}
-              className="w-full"
-            />
+            <form.SubmitButton label={"Update"} className="w-full" />
           </div>
         ) : (
           <Button

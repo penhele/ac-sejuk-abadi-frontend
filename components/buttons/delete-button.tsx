@@ -57,7 +57,7 @@ export default function DeleteButton<TId = string | number>({
     <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
       <AlertDialog>
         <AlertDialogTrigger className="w-full flex items-center justify-between">
-          Delete
+          {label}
           <DropdownMenuShortcut>
             <Trash size={12} />
           </DropdownMenuShortcut>

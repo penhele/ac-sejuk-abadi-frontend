@@ -90,7 +90,7 @@ export default function ProductPage() {
           </div>
 
           <div className="flex flex-row justify-between items-end">
-            <span className="text-4xl">{brands?.length}</span>
+            <span className="text-4xl">{brands?.length ?? 0}</span>
           </div>
         </div>
       </div>

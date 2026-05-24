@@ -17,7 +17,7 @@ export default function EditProductForm({ id }: { id: string }) {
 
   const { data: products } = useQuery(getProductByIdQueryOptions(id));
 
-  const { mutate } = useMutation({
+  const { mutateAsync } = useMutation({
     mutationFn: (payload: {
       name: string;
       description: string;
@@ -53,8 +53,8 @@ export default function EditProductForm({ id }: { id: string }) {
         price: products?.price ?? "",
         quantity: String(products?.quantity ?? ""),
       }}
-      onSubmit={(value) => {
-        mutate({
+      onSubmit={async(value) => {
+        await mutateAsync({
           name: value.name,
           description: value.description,
           pk: value.pk,

@@ -12,7 +12,7 @@ export default function CreateProductForm() {
   const queryClient = useQueryClient();
   const router = useRouter();
 
-  const { mutate } = useMutation({
+  const { mutateAsync } = useMutation({
     mutationFn: addProduct,
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -39,8 +39,8 @@ export default function CreateProductForm() {
         price: "",
         quantity: "",
       }}
-      onSubmit={(value) => {
-        mutate({
+      onSubmit={async(value) => {
+        await mutateAsync({
           name: value.name,
           description: value.description,
           pk: value.pk,
