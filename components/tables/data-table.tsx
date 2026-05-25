@@ -36,7 +36,6 @@ export function DataTable<TData, TValue>({
   data,
   className,
   isFetching,
-  pageSize,
   isPagination,
   isFilter,
   pagination,
@@ -147,7 +146,7 @@ export function DataTable<TData, TValue>({
                 </TableRow>
               )
             ) : (
-              Array(pageSize)
+              Array(10)
                 .fill(null)
                 .map((_, rowIndex) => (
                   <TableRow key={`skeleton-row-${rowIndex}`}>

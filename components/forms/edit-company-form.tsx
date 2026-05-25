@@ -1,12 +1,10 @@
 "use client";
 
 import { useState } from "react";
-
 import { getCompanyQueryOptions } from "@/hooks/queries/company-queries";
 import { useAppForm } from "@/hooks/use-app-form";
 import { updateCompany } from "@/services/company.service";
 import { UpdateCompanyPayload } from "@/types/company";
-
 import { cn } from "@/lib/utils";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";

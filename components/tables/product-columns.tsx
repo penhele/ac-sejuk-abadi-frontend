@@ -47,12 +47,14 @@ export const productColumns: ColumnDef<Product>[] = [
   {
     accessorKey: "pk",
     header: "PK",
-    cell: ({row})=> <PkBadge pk={row.original.pk}/>
+    cell: ({ row }) => <PkBadge pk={row.original.pk} />,
   },
   {
-    header: "Type",
     accessorFn: (row) => row.ac_type.name,
-    cell: ({ row }) => <AcProductTypeBadge acType={row.original.ac_type.name} />,
+    header: "Type",
+    cell: ({ row }) => (
+      <AcProductTypeBadge acType={row.original.ac_type.name} />
+    ),
   },
   {
     id: "category",

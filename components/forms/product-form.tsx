@@ -19,10 +19,12 @@ export default function ProductForm({
   defaultValues,
   onSubmit,
   submitLabel = "Submit",
+  isFetching,
 }: {
   defaultValues: ProductFormValues;
   onSubmit: (values: ProductFormValues) => void;
   submitLabel?: string;
+  isFetching?: boolean;
 }) {
   const form = useAppForm({
     defaultValues,
@@ -90,6 +92,7 @@ export default function ProductForm({
               name="name"
               children={(field) => (
                 <field.TextField
+                  isDisabled={isFetching}
                   label="Nama Produk"
                   placeholder="Daikin Zeta 2 PK"
                 />
@@ -99,6 +102,7 @@ export default function ProductForm({
               name="description"
               children={(field) => (
                 <field.TextareaField
+                  isDisabled={isFetching}
                   label="Deskripsi"
                   placeholder="Opsi kendali via WiFi melalui aplikasi yang tersedia bagi perangkat berbasis Android dan iOS..."
                 />
@@ -115,7 +119,7 @@ export default function ProductForm({
                     label="Brand"
                     placeholder="Pilih Brand"
                     options={brandOptions}
-                    disabled={isPendingBrand}
+                    disabled={isPendingBrand || isFetching}
                   />
                 )}
               />
@@ -126,7 +130,7 @@ export default function ProductForm({
                     label="Kategori"
                     placeholder="Pilih Kategori"
                     options={categoryOptions}
-                    disabled={isPendingCategory}
+                    disabled={isPendingCategory || isFetching}
                   />
                 )}
               />
@@ -137,7 +141,7 @@ export default function ProductForm({
                     label="Type AC"
                     placeholder="Pilih Tipe AC"
                     options={acTypeOptions}
-                    disabled={isPendingAcType}
+                    disabled={isPendingAcType || isFetching}
                   />
                 )}
               />
@@ -156,6 +160,7 @@ export default function ProductForm({
                 name="price"
                 children={(field) => (
                   <field.TextField
+                    isDisabled={isFetching}
                     label="Harga (Rp)"
                     type="number"
                     isPrice
@@ -167,6 +172,7 @@ export default function ProductForm({
                 name="quantity"
                 children={(field) => (
                   <field.TextField
+                    isDisabled={isFetching}
                     label="Stok"
                     type="number"
                     placeholder="10"
@@ -179,7 +185,9 @@ export default function ProductForm({
 
         <div className="space-x-between-items">
           <Link href={ROUTES.PRODUCTS}>
-            <Button variant={"outline"} className="min-w-24">Cancel</Button>
+            <Button variant={"outline"} className="min-w-24">
+              Cancel
+            </Button>
           </Link>
 
           <form.SubmitButton label={submitLabel} />

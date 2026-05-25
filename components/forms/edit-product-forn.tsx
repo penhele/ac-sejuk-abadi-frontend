@@ -15,7 +15,9 @@ export default function EditProductForm({ id }: { id: string }) {
   const queryClient = useQueryClient();
   const router = useRouter();
 
-  const { data: products } = useQuery(getProductByIdQueryOptions(id));
+  const { data: products, isFetching } = useQuery(
+    getProductByIdQueryOptions(id),
+  );
 
   const { mutateAsync } = useMutation({
     mutationFn: (payload: {
@@ -43,6 +45,7 @@ export default function EditProductForm({ id }: { id: string }) {
 
   return (
     <ProductForm
+      isFetching={isFetching}
       defaultValues={{
         name: products?.name ?? "",
         description: products?.description ?? "",
@@ -53,7 +56,7 @@ export default function EditProductForm({ id }: { id: string }) {
         price: products?.price ?? "",
         quantity: String(products?.quantity ?? ""),
       }}
-      onSubmit={async(value) => {
+      onSubmit={async (value) => {
         await mutateAsync({
           name: value.name,
           description: value.description,
