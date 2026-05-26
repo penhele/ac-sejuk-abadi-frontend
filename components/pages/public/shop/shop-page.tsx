@@ -16,7 +16,7 @@ import {
 } from "@tanstack/react-query";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import ErrorFallback from "../../fallback/error-fallback";
+import ErrorFallback from "../../../fallback/error-fallback";
 import { getAcTypesQueryOptions } from "@/hooks/queries/ac-type-queries";
 import { getCategoriesQueryOptions } from "@/hooks/queries/category-queries";
 import ProductFallback from "@/components/fallback/product-fallback";

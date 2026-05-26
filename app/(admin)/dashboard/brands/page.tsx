@@ -1,4 +1,4 @@
-import BrandPage from "@/components/pages/brands/brand-page";
+import BrandPage from "@/components/pages/dashboard/brands/brand-page";
 
 export default function Page() {
   return <BrandPage />;

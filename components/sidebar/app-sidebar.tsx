@@ -13,7 +13,7 @@ import {
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
 import { ROUTES } from "@/constants/routes";
-import { Building2, ChevronRight, Package } from "lucide-react";
+import { AirVent, Building2, ChevronRight, Package } from "lucide-react";
 import Link from "next/link";
 import {
   Collapsible,
@@ -42,11 +42,23 @@ export function AppSidebar() {
     },
   ];
 
-  const navCompany = {
-    Icon: Building2,
-    label: "Company",
-    href: ROUTES.COMPANY,
-  };
+  const navCompany = [
+    {
+      title: "Company",
+      items: [
+        {
+          Icon: Building2,
+          label: "Company",
+          href: ROUTES.COMPANY,
+        },
+        {
+          Icon: AirVent,
+          label: "Portofolio",
+          href: ROUTES.COMPANY,
+        },
+      ],
+    },
+  ];
 
   return (
     <Sidebar variant="floating">
@@ -93,18 +105,24 @@ export function AppSidebar() {
           </SidebarMenu>
         </SidebarGroup>
 
-        <SidebarGroup>
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild>
-                <Link href={navCompany.href}>
-                  <navCompany.Icon />
-                  {navCompany.label}
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </SidebarGroup>
+        {navCompany.map((item, index) => (
+          <SidebarGroup key={index}>
+            <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
+
+            <SidebarMenu>
+              {item.items.map((subItem, index) => (
+                <SidebarMenuItem key={index}>
+                  <SidebarMenuButton asChild>
+                    <Link href={subItem.href}>
+                      <subItem.Icon />
+                      {subItem.label}
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroup>
+        ))}
       </SidebarContent>
       <SidebarFooter />
     </Sidebar>
