@@ -8,22 +8,25 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import { cn } from "@/lib/utils";
 
 export default function SelectField({
   label,
   placeholder,
   options,
   disabled,
+  className,
 }: {
   label: string;
   placeholder?: string;
   options: { label: string; value: string }[];
   disabled?: boolean;
+  className?: string;
 }) {
   const field = useFieldContext<string>();
 
   return (
-    <div className="space-y-between-items-xs">
+    <div className={cn("space-y-between-items-xs", className)}>
       <div className="flex justify-between items-center">
         <Label htmlFor={field.name}>{label}</Label>
 

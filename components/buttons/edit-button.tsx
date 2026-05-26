@@ -3,13 +3,10 @@ import { DropdownMenuItem, DropdownMenuShortcut } from "../ui/dropdown-menu";
 import Link from "next/link";
 import { ROUTES } from "@/constants/routes";
 
-export default function EditButton({ id }: { id: string | number }) {
+export default function EditButton({ href }: { href: string }) {
   return (
     <DropdownMenuItem>
-      <Link
-        href={`${ROUTES.EDIT_PRODUCT(id)}`}
-        className="flex items-center w-full justify-between"
-      >
+      <Link href={href} className="flex items-center w-full justify-between">
         Edit
         <DropdownMenuShortcut>
           <Pencil size={12} />

@@ -20,4 +20,5 @@ export const ROUTES = {
 
   DASHBOARD_COMPANY: "/dashboard/company",
   DASHBOARD_PORTOFOLIO: "/dashboard/portofolio",
+  DASHBOARD_CREATE_PORTOFOLIO: "/dashboard/portofolio/create",
 } as const;

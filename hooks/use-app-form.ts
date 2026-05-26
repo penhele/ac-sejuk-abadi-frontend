@@ -1,6 +1,7 @@
 "use client";
 
 import SubmitButton from "@/components/buttons/submit-button";
+import CalendarField from "@/components/fields/calendar-field";
 import SelectField from "@/components/fields/select-field";
 import TextField from "@/components/fields/text-field";
 import TextareaField from "@/components/fields/textarea-field";
@@ -16,6 +17,7 @@ export const { useAppForm } = createFormHook({
     TextField,
     TextareaField,
     SelectField,
+    CalendarField,
   },
   formComponents: { SubmitButton },
 });

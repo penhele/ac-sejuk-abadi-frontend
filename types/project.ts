@@ -12,3 +12,12 @@ export interface Project {
   images: ProjectImages[];
   product: Product;
 }
+
+export interface CreateProjectPayload {
+  id_product: string;
+  name: string;
+  description: string;
+  date: string;
+  location: string;
+  category: string;
+}

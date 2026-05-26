@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { DataTable } from "@/components/tables/data-table";
 import { projectColumns } from "@/components/tables/project-column";
@@ -17,9 +17,9 @@ export default function PortofolioPage() {
       <div className="flex justify-between items-center">
         <h1 className="text-xl font-bold text-gray-800">Products</h1>
 
-        <Link href={ROUTES.CREATE_PRODUCT}>
+        <Link href={ROUTES.DASHBOARD_CREATE_PORTOFOLIO}>
           <Button>
-            <Plus /> Add New Product
+            <Plus /> Add New Project
           </Button>
         </Link>
       </div>

@@ -9,16 +9,18 @@ export default function TextField({
   placeholder,
   isDisabled,
   keepStyleWhenDisabled,
+  className,
 }: {
   label: string;
   placeholder?: string;
   isDisabled?: boolean;
   keepStyleWhenDisabled?: boolean;
+  className?: string;
 }) {
   const field = useFieldContext<string>();
 
   return (
-    <div className="space-y-between-items-xs">
+    <div className={cn("space-y-between-items-xs", className)}>
       <div className="flex justify-between items-center">
         <Label>{label}</Label>
 

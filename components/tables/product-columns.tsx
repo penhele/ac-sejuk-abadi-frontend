@@ -17,6 +17,7 @@ import {
 } from "../ui/dropdown-menu";
 import AcProductTypeBadge from "../badges/ac-type-badge";
 import PkBadge from "../badges/pk-badge";
+import { ROUTES } from "@/constants/routes";
 
 export const productColumns: ColumnDef<Product>[] = [
   {
@@ -103,7 +104,7 @@ export const productColumns: ColumnDef<Product>[] = [
 
         <DropdownMenuContent>
           <DropdownMenuGroup>
-            <EditButton id={row.original.id} />
+            <EditButton href={ROUTES.EDIT_PRODUCT(row.original.id)} />
             <DeleteButton
               mutationFn={deleteProduct}
               queryKey={getProductsQueryOptions().queryKey}
