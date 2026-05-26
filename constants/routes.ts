@@ -9,12 +9,14 @@ export const ROUTES = {
   DASHBOARD: "/dashboard",
 
   PRODUCTS: "/dashboard/products",
-  CREATE_PRODUCTS: "/dashboard/products/create",
-  EDIT_PRODUCTS: (id: string | number) => `/dashboard/products/${id}/edit`,
+  CREATE_PRODUCT: "/dashboard/products/create",
+  EDIT_PRODUCT: (id: string | number) => `/dashboard/products/${id}/edit`,
 
-  BRANDS: "/dashboard/brands",
-  CREATE_BRANDS: "/dashboard/brands/create",
-  EDIT_BRANDS: (id: string | number) => `/dashboard/brands/${id}/edit`,
+  BRAND: "/dashboard/brands",
+  CREATE_BRAND: "/dashboard/brands/create",
+  EDIT_BRAND: (id: string | number) => `/dashboard/brands/${id}/edit`,
+
+  CATEGORY_TYPE: "/dashboard/category-type",
 
   COMPANY: "/dashboard/company",
 } as const;

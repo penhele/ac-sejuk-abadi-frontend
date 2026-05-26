@@ -39,7 +39,7 @@ export default function ProductPage() {
       <div className="flex justify-between items-center">
         <h1 className="text-xl font-bold text-gray-800">Products</h1>
 
-        <Link href={ROUTES.CREATE_PRODUCTS}>
+        <Link href={ROUTES.CREATE_PRODUCT}>
           <Button>
             <Plus /> Add New Product
           </Button>

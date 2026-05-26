@@ -32,15 +32,11 @@ export function AppSidebar() {
         { label: "Product", href: ROUTES.PRODUCTS },
         {
           label: "Brand",
-          href: ROUTES.BRANDS,
+          href: ROUTES.BRAND,
         },
         {
-          label: "Category",
-          href: "",
-        },
-        {
-          label: "AC Type",
-          href: "",
+          label: "Category & Type",
+          href: ROUTES.CATEGORY_TYPE,
         },
       ],
     },

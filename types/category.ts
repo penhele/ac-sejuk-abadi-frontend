@@ -1,3 +1,5 @@
+import { string } from "zod";
+
 export interface CategoryDetail {
   id: number;
   name: string;
@@ -18,4 +20,8 @@ export interface Category {
 
 export interface CategoryCount {
   products: number;
+}
+
+export interface CreateCategoryPayload {
+  name: string;
 }

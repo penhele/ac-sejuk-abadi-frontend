@@ -7,7 +7,7 @@ export default function EditButton({ id }: { id: string | number }) {
   return (
     <DropdownMenuItem>
       <Link
-        href={`${ROUTES.EDIT_PRODUCTS(id)}`}
+        href={`${ROUTES.EDIT_PRODUCT(id)}`}
         className="flex items-center w-full justify-between"
       >
         Edit

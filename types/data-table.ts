@@ -9,8 +9,8 @@ export interface DataTableProps<TData, TValue> {
   pageIndex?: number;
   isPagination?: boolean;
   isFilter?: boolean;
-  pagination: PaginationState;
-  onPaginationChange: OnChangeFn<PaginationState>;
+  pagination?: PaginationState;
+  onPaginationChange?: OnChangeFn<PaginationState>;
   pageCount?: number;
   rowCount?: number;
 }

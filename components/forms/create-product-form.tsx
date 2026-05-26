@@ -39,7 +39,7 @@ export default function CreateProductForm() {
         price: "",
         quantity: "",
       }}
-      onSubmit={async(value) => {
+      onSubmit={async (value) => {
         await mutateAsync({
           name: value.name,
           description: value.description,

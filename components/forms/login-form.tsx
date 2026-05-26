@@ -14,7 +14,7 @@ import { toast } from "sonner";
 export default function LoginForm({ className }: { className?: string }) {
   const router = useRouter();
 
-  const { mutate } = useMutation({
+  const { mutateAsync } = useMutation({
     mutationFn: (data: LoginPayload) => login(data),
     onSuccess() {
       toast.success("Berhasil login");
@@ -33,8 +33,8 @@ export default function LoginForm({ className }: { className?: string }) {
     validators: {
       onSubmit: loginSchema,
     },
-    onSubmit: ({ value }) => {
-      mutate(value);
+    onSubmit: async ({ value }) => {
+      await mutateAsync(value);
     },
   });
 

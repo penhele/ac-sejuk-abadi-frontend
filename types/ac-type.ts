@@ -7,3 +7,7 @@ export interface AcType {
 export interface AcTypeCount {
   products: number;
 }
+
+export interface CreateAcTypePayload {
+  name: string;
+}
