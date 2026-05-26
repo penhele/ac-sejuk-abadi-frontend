@@ -13,6 +13,7 @@ import {
   DropdownMenuGroup,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import { ROUTES } from "@/constants/routes";
 
 export const projectColumns: ColumnDef<Project>[] = [
   {
@@ -39,6 +40,7 @@ export const projectColumns: ColumnDef<Project>[] = [
   {
     accessorKey: "id_product",
     header: "ID Product",
+    cell: ({ row }) => <span>{row.original.product.name}</span>,
   },
   {
     header: "Action",
@@ -52,7 +54,9 @@ export const projectColumns: ColumnDef<Project>[] = [
 
         <DropdownMenuContent>
           <DropdownMenuGroup>
-            {/* <EditButton id={row.original.id} href={} /> */}
+            <EditButton
+              href={ROUTES.DASHBOARD_EDIT_PORTOFOLIO(row.original.id)}
+            />
             <DeleteButton
               mutationFn={deleteProject}
               queryKey={getProjectsQueryOptions().queryKey}

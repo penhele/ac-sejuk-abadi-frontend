@@ -40,18 +40,7 @@ export default function CreateProductForm() {
         quantity: "",
       }}
       onSubmit={async (value) => {
-        await mutateAsync({
-          name: value.name,
-          description: value.description,
-          pk: value.pk,
-
-          id_brand: Number(value.id_brand),
-          id_category: Number(value.id_category),
-          id_ac_type: Number(value.id_ac_type),
-
-          price: Number(value.price),
-          quantity: Number(value.quantity),
-        });
+        await mutateAsync(value);
       }}
     />
   );

@@ -12,9 +12,11 @@ import { cn } from "@/lib/utils";
 export default function CalendarField({
   label,
   placeholder = "Pick a date",
+  isDisabled,
 }: {
   label: string;
   placeholder?: string;
+  isDisabled?: boolean;
 }) {
   const field = useFieldContext<string>();
 
@@ -31,7 +33,7 @@ export default function CalendarField({
       </div>
 
       <Popover>
-        <PopoverTrigger asChild>
+        <PopoverTrigger asChild disabled={isDisabled}>
           <Button
             className={cn(
               "text-left justify-start w-full flex",

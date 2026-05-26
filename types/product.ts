@@ -59,12 +59,12 @@ export interface GetProductOptions {
 export interface CreateProductPayload {
   name: string;
   description: string;
-  price: number;
-  quantity: number;
+  price: string;
+  quantity: string;
   pk: string;
-  id_brand: number;
-  id_category: number;
-  id_ac_type: number;
+  id_brand: string;
+  id_category: string;
+  id_ac_type: string;
 }
 
 export interface UpdateProductPayload {

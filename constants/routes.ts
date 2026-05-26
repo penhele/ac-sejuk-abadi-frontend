@@ -21,4 +21,6 @@ export const ROUTES = {
   DASHBOARD_COMPANY: "/dashboard/company",
   DASHBOARD_PORTOFOLIO: "/dashboard/portofolio",
   DASHBOARD_CREATE_PORTOFOLIO: "/dashboard/portofolio/create",
+  DASHBOARD_EDIT_PORTOFOLIO: (id: string | number) =>
+    `/dashboard/portofolio/${id}/edit`,
 } as const;

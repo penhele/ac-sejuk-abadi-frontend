@@ -8,9 +8,11 @@ import { cn } from "@/lib/utils";
 export default function SubmitButton({
   label,
   className,
+  isDisabled,
 }: {
   label: string;
   className?: string;
+  isDisabled?: boolean;
 }) {
   const form = useFormContext();
 
@@ -24,7 +26,7 @@ export default function SubmitButton({
       {({ isSubmitting, canSubmit }) => (
         <Button
           type="submit"
-          disabled={!canSubmit || isSubmitting}
+          disabled={!canSubmit || isSubmitting || isDisabled}
           className={cn("min-w-24", className)}
         >
           {isSubmitting ? <Spinner /> : label}

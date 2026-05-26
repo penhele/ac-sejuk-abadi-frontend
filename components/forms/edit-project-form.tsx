@@ -1,20 +1,21 @@
-"use client";
-
-import { useAppForm } from "@/hooks/use-app-form";
-import { addProject } from "@/services/project.service";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import Link from "next/link";
-import { toast } from "sonner";
-import { Button } from "../ui/button";
-import { ROUTES } from "@/constants/routes";
-import { getProductsQueryOptions } from "@/hooks/queries/product-queries";
 import { useRouter } from "next/navigation";
 import ProjectForm from "./project-form";
-import { getProjectsQueryOptions } from "@/hooks/queries/project-queries";
+import { ROUTES } from "@/constants/routes";
+import {
+  getProjectByIdQueryOptions,
+  getProjectsQueryOptions,
+} from "@/hooks/queries/project-queries";
+import { addProject } from "@/services/project.service";
+import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query";
+import { toast } from "sonner";
 
-export default function CreateProjectForm() {
+export default function EditProjectForm({ id }: { id: string }) {
   const router = useRouter();
   const queryClient = useQueryClient();
+
+  const { data: products, isFetching } = useQuery(
+    getProjectByIdQueryOptions(id),
+  );
 
   const { mutateAsync } = useMutation({
     mutationFn: addProject,
@@ -33,13 +34,14 @@ export default function CreateProjectForm() {
 
   return (
     <ProjectForm
+      isFetching={isFetching}
       defaultValues={{
-        id_product: "",
-        name: "",
-        category: "",
-        date: "",
-        description: "",
-        location: "",
+        name: products?.name || "",
+        description: products?.description || "",
+        date: products?.date || "",
+        location: products?.location || "",
+        category: products?.category || "",
+        id_product: products?.id_product || "",
       }}
       onSubmit={async (value) => {
         await mutateAsync(value);

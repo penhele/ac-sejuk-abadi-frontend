@@ -10,6 +10,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import ProductForm from "./product-form";
+import { UpdateProductPayload } from "@/types/product";
 
 export default function EditProductForm({ id }: { id: string }) {
   const queryClient = useQueryClient();
@@ -20,16 +21,7 @@ export default function EditProductForm({ id }: { id: string }) {
   );
 
   const { mutateAsync } = useMutation({
-    mutationFn: (payload: {
-      name: string;
-      description: string;
-      pk: string;
-      id_brand: number;
-      id_category: number;
-      id_ac_type: number;
-      price: number;
-      quantity: number;
-    }) => updateProduct(id, payload),
+    mutationFn: (payload: UpdateProductPayload) => updateProduct(id, payload),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: getProductsQueryOptions().queryKey,

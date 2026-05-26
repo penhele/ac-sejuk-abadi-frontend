@@ -13,7 +13,7 @@ export const getProjects = async (): Promise<Project[]> => {
   }
 };
 
-export const getProjectById = async (id: string): Promise<Project> => {
+export const getProjectById = async (id: string | number): Promise<Project> => {
   const response = await api.get(`/projects/${id}`);
 
   return response.data;
