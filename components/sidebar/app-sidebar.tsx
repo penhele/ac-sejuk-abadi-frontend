@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Sidebar,
   SidebarContent,
@@ -13,13 +15,28 @@ import {
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
 import { ROUTES } from "@/constants/routes";
-import { AirVent, Building2, ChevronRight, Package } from "lucide-react";
+import {
+  AirVent,
+  Building2,
+  ChevronRight,
+  Monitor,
+  Moon,
+  Package,
+  Sun,
+} from "lucide-react";
 import Link from "next/link";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "../ui/collapsible";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
+import { useTheme } from "next-themes";
 
 export function AppSidebar() {
   const navMain = [
@@ -59,6 +76,8 @@ export function AppSidebar() {
       ],
     },
   ];
+
+  const { theme, setTheme, themes } = useTheme();
 
   return (
     <Sidebar variant="floating">
@@ -124,7 +143,37 @@ export function AppSidebar() {
           </SidebarGroup>
         ))}
       </SidebarContent>
-      <SidebarFooter />
+      <SidebarFooter>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <SidebarMenuButton>
+                    {theme === themes[0] && <Sun />}
+                    {theme === themes[1] && <Moon />}
+                    {theme === themes[2] && <Monitor />}
+
+                    {theme}
+                  </SidebarMenuButton>
+                </DropdownMenuTrigger>
+
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={() => setTheme("light")}>
+                    Light
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setTheme("dark")}>
+                    Dark
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setTheme("system")}>
+                    System
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarFooter>
     </Sidebar>
   );
 }
