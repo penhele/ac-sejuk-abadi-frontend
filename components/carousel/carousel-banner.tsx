@@ -37,7 +37,7 @@ export default function CarouselBanner() {
           <CarouselItem key={index}>
             <AspectRatio
               ratio={3 / 1}
-              className="overflow-hidden rounded-lg relative"
+              className="overflow-hidden rounded-sm relative"
             >
               <img
                 src={banner.image_url}

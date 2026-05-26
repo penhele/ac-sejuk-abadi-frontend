@@ -32,7 +32,7 @@ export default function HomePage() {
         <CarouselBrand />
       </div>
 
-      <StatsSection />
+      {/* <StatsSection /> */}
 
       <div className="">
         <HeaderSection title="Produk" href={ROUTES.SHOP} />
