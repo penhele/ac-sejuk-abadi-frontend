@@ -18,5 +18,6 @@ export const ROUTES = {
 
   CATEGORY_TYPE: "/dashboard/category-type",
 
-  COMPANY: "/dashboard/company",
+  DASHBOARD_COMPANY: "/dashboard/company",
+  DASHBOARD_PORTOFOLIO: "/dashboard/portofolio",
 } as const;

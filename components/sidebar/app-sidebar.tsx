@@ -49,12 +49,12 @@ export function AppSidebar() {
         {
           Icon: Building2,
           label: "Company",
-          href: ROUTES.COMPANY,
+          href: ROUTES.DASHBOARD_COMPANY,
         },
         {
           Icon: AirVent,
           label: "Portofolio",
-          href: ROUTES.COMPANY,
+          href: ROUTES.DASHBOARD_PORTOFOLIO,
         },
       ],
     },
