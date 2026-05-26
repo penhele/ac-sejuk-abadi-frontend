@@ -1,7 +1,7 @@
 "use client";
 
-import CreateProjectForm from "@/components/forms/create-project-form";
-import EditProjectForm from "@/components/forms/edit-project-form";
+import CreateProjectForm from "@/components/forms/project/create-project-form";
+import EditProjectForm from "@/components/forms/project/edit-project-form";
 import { Card, CardContent } from "@/components/ui/card";
 import { useParams } from "next/navigation";
 

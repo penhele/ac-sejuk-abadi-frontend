@@ -11,7 +11,7 @@ import {
 } from "@/schemas/product.schema";
 import { revalidateLogic } from "@tanstack/react-form";
 import { useQuery } from "@tanstack/react-query";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import Link from "next/link";
 import { ROUTES } from "@/constants/routes";
 

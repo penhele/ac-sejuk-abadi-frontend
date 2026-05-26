@@ -1,6 +1,6 @@
 "use client";
 
-import EditProductForm from "@/components/forms/edit-product-forn";
+import EditProductForm from "@/components/forms/product/edit-product-form";
 import { Card, CardContent } from "@/components/ui/card";
 import { useParams } from "next/navigation";
 

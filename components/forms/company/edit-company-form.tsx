@@ -8,7 +8,7 @@ import { UpdateCompanyPayload } from "@/types/company";
 import { cn } from "@/lib/utils";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 
 export default function EditCompanyForm({ className }: { className?: string }) {
   const [isEditing, setIsEditing] = useState(false);

@@ -1,6 +1,6 @@
 import { ROUTES } from "@/constants/routes";
 import Link from "next/link";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import {
   createProjectSchema,
   ProjectFormValues,

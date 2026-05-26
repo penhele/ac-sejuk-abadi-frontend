@@ -1,4 +1,4 @@
-import CreateProductForm from "@/components/forms/create-product-form";
+import CreateProductForm from "@/components/forms/product/create-product-form";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 

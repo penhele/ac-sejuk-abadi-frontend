@@ -1,4 +1,4 @@
-import CreateProjectForm from "@/components/forms/create-project-form";
+import CreateProjectForm from "@/components/forms/project/create-project-form";
 import { Card, CardContent } from "@/components/ui/card";
 
 export default function CreatePortofolioPage() {

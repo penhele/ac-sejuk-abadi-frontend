@@ -1,5 +1,4 @@
 import { useRouter } from "next/navigation";
-import ProjectForm from "./project-form";
 import { ROUTES } from "@/constants/routes";
 import {
   getProjectByIdQueryOptions,
@@ -8,6 +7,7 @@ import {
 import { addProject } from "@/services/project.service";
 import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
+import ProjectForm from "./project-form";
 
 export default function EditProjectForm({ id }: { id: string }) {
   const router = useRouter();
