@@ -1,16 +1,12 @@
 "use client";
 
-import { useAppForm } from "@/hooks/use-app-form";
-import { addProject } from "@/services/project.service";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import Link from "next/link";
-import { toast } from "sonner";
-import { Button } from "../ui/button";
 import { ROUTES } from "@/constants/routes";
-import { getProductsQueryOptions } from "@/hooks/queries/product-queries";
-import { useRouter } from "next/navigation";
-import ProjectForm from "./project-form";
 import { getProjectsQueryOptions } from "@/hooks/queries/project-queries";
+import { addProject } from "@/services/project.service";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import ProjectForm from "./project-form";
 
 export default function CreateProjectForm() {
   const router = useRouter();
@@ -18,16 +14,19 @@ export default function CreateProjectForm() {
 
   const { mutateAsync } = useMutation({
     mutationFn: addProject,
-    onSuccess(data, variables, onMutateResult, context) {
-      toast.success("Berhasil menambahkan project");
+    onMutate() {
+      const toastId = toast.loading("Creating...");
+      return { toastId };
+    },
+    onSuccess(_, __, context) {
+      toast.success("Berhasil menambahkan project", { id: context?.toastId });
       router.push(ROUTES.DASHBOARD_PORTOFOLIO);
       queryClient.invalidateQueries({
         queryKey: getProjectsQueryOptions().queryKey,
       });
     },
-    onError(error, variables, onMutateResult, context) {
-      toast.error("Gagal menambahkan project");
-      console.log(error.message);
+    onError(_, __, context) {
+      toast.error("Gagal menambahkan project", { id: context?.toastId });
     },
   });
 

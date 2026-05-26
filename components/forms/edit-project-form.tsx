@@ -19,16 +19,21 @@ export default function EditProjectForm({ id }: { id: string }) {
 
   const { mutateAsync } = useMutation({
     mutationFn: addProject,
-    onSuccess(data, variables, onMutateResult, context) {
-      toast.success("Berhasil menambahkan project");
+    onMutate() {
+      const toastId = toast.loading("Updating...");
+      return { toastId };
+    },
+    onSuccess(_, __, context) {
+      toast.success("Berhasil menambahkan project", { id: context.toastId });
       router.push(ROUTES.DASHBOARD_PORTOFOLIO);
       queryClient.invalidateQueries({
         queryKey: getProjectsQueryOptions().queryKey,
       });
     },
-    onError(error, variables, onMutateResult, context) {
-      toast.error("Gagal menambahkan project");
-      console.log(error.message);
+    onError(_, __, context) {
+      toast.error("Gagal menambahkan project", {
+        id: context?.toastId,
+      });
     },
   });
 
