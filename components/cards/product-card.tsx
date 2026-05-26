@@ -1,16 +1,13 @@
+import { ROUTES } from "@/constants/routes";
+import { formatRupiah } from "@/lib/format/currency";
 import { Product } from "@/types/product";
 import { ImageOff, ShoppingCart } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
+import ProductBadge from "../badges/product-badge";
 import { AspectRatio } from "../ui/aspect-ratio";
 import { Button } from "../ui/button";
 import DiscountBadge from "../util/discount-badge";
-import { formatRupiah } from "@/lib/format/currency";
-import { ROUTES } from "@/constants/routes";
-import Image from "next/image";
-import CategoryBadge from "../badges/category-badge";
-import AcProductTypeBadge from "../badges/ac-type-badge";
-import PkBadge from "../badges/pk-badge";
-import ProductBadge from "../badges/product-badge";
 
 export default function ProductCard({ product }: { product: Product }) {
   const hasDiscount = product.discounts && product.discounts.length > 0;
@@ -23,9 +20,9 @@ export default function ProductCard({ product }: { product: Product }) {
 
   return (
     <Link href={ROUTES.PRODUCT_DETAIL(product.id)}>
-      <div className="group block overflow-hidden rounded-xl bg-white shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border">
+      <div className="group block overflow-hidden rounded-sm bg-white shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5 border">
         <div className="relative">
-          <AspectRatio ratio={1 / 1} className="bg-muted rounded-t-md relative">
+          <AspectRatio ratio={1 / 1} className="bg-muted rounded-t-sm relative">
             {product.images && product.images.length > 0 ? (
               <Image
                 src={product.images[0].image_url}

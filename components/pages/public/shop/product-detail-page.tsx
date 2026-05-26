@@ -25,16 +25,6 @@ export default function ProductDetailPage() {
           <ProductDetailContent id={id} />
         </Suspense>
       </ErrorBoundary>
-
-      <div className="">
-        <HeaderSection title="Produk Serupa" href={ROUTES.SHOP} />
-
-        <ErrorBoundary fallback={<ErrorFallback />}>
-          <Suspense fallback={<ProductFallback length={4} />}>
-            <CarouselProduct limit={6} />
-          </Suspense>
-        </ErrorBoundary>
-      </div>
     </div>
   );
 }

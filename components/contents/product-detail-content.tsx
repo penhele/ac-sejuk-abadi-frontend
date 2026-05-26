@@ -1,9 +1,15 @@
 import ProductImages from "@/components/product/product-images";
 import ProductInfo from "@/components/product/product-info";
 import ProductPriceAction from "@/components/product/product-price-action";
-import { AcSpecification } from "@/components/tables/spesification-columns";
+import { ROUTES } from "@/constants/routes";
 import { getProductById } from "@/services/product.service";
 import { useSuspenseQuery } from "@tanstack/react-query";
+import { Suspense } from "react";
+import { ErrorBoundary } from "react-error-boundary";
+import CarouselProduct from "../carousel/carousel-product";
+import ErrorFallback from "../fallback/error-fallback";
+import ProductFallback from "../fallback/product-fallback";
+import { HeaderSection } from "../util/header";
 
 export default function ProductDetailContent({ id }: { id: string }) {
   const { data: product } = useSuspenseQuery({
@@ -11,31 +17,38 @@ export default function ProductDetailContent({ id }: { id: string }) {
     queryFn: () => getProductById(id),
   });
 
-  const data: AcSpecification[] = [
-    { property: "Brand", value: "Daikin" },
-    { property: "Kapasitas", value: "1/2 PK" },
-    { property: "Tipe", value: "Split Wall" },
-    { property: "Kapasitas Pendinginan", value: "5.000 BTU/h" },
-    { property: "Daya Listrik (Watt)", value: "350 Watt" },
-    { property: "Arus Kerja (Ampere)", value: "1.6 A" },
-    { property: "EER", value: "12.5 BTU/h/W" },
-    { property: "Dimensi Indoor", value: "700 x 190 x 265 mm" },
-    { property: "Dimensi Outdoor", value: "681 x 285 x 434 mm" },
-    { property: "Tipe Refrigrant", value: "R32" },
-  ];
-
   return (
-    <div className="grid grid-cols-2 gap-4">
-      <ProductImages
-        jumlah={product.images.length}
-        product={product}
-        className="col-span-2 md:col-span-1"
-      />
+    <div className="space-y-between-section">
+      <div className="grid grid-cols-2 gap-4">
+        <ProductImages
+          jumlah={product.images.length}
+          product={product}
+          className="col-span-2 md:col-span-1"
+        />
 
-      <div className="flex flex-col gap-4 col-span-2 md:col-span-1">
-        <ProductInfo product={product} />
+        <div className="flex flex-col gap-4 col-span-2 md:col-span-1">
+          <ProductInfo product={product} />
 
-        <ProductPriceAction product={product} />
+          <ProductPriceAction product={product} />
+        </div>
+      </div>
+      <div className="">
+        <HeaderSection
+          title="Produk Serupa"
+          href={`${ROUTES.SHOP}?id_category=${product.id_category}&id_ac_type=${product.id_ac_type}`}
+        />
+
+        <ErrorBoundary fallback={<ErrorFallback />}>
+          <Suspense fallback={<ProductFallback length={4} />}>
+            <CarouselProduct
+              limit={6}
+              params={{
+                id_ac_type: product.id_ac_type,
+                id_category: product.id_category,
+              }}
+            />
+          </Suspense>
+        </ErrorBoundary>
       </div>
     </div>
   );

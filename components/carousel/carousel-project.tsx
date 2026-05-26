@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { EmblaCarouselType } from "embla-carousel";
 import { getProductsInfiniteQueryOptions } from "@/hooks/queries/product-queries";
 import ProductCard from "../cards/product-card";
@@ -13,23 +13,13 @@ import {
 } from "../ui/carousel";
 import { Slider } from "../ui/slider";
 import WheelGesturesPlugin from "embla-carousel-wheel-gestures";
-import { GetProductOptions } from "@/types/product";
+import { getProjectsQueryOptions } from "@/hooks/queries/project-queries";
+import ProjectCard from "../cards/project-card";
 
-export default function CarouselProduct({
-  limit,
-  params,
-}: {
-  limit: number;
-  params?: GetProductOptions;
-}) {
-  const { data } = useInfiniteQuery(
-    getProductsInfiniteQueryOptions({
-      limit,
-      ...params,
-    }),
-  );
+export default function CarouselProject() {
+  const { data } = useQuery(getProjectsQueryOptions());
 
-  const products = data?.pages?.flatMap((page) => page?.data ?? []) ?? [];
+  const projects = data || [];
 
   const [api, setApi] = useState<CarouselApi>();
   const [progress, setProgress] = useState(0);
@@ -39,17 +29,22 @@ export default function CarouselProduct({
       if (!api) return;
 
       const emblaApi = api as EmblaCarouselType;
+
       const { animation, limit, target, scrollProgress, scrollBody, scrollTo } =
         emblaApi.internalEngine();
 
       animation.stop();
 
       const currentProgress = scrollProgress.get(target.get());
+
       const allowedProgress = Math.min(Math.max(value, 0), 1);
+
       const progressToTarget = allowedProgress - currentProgress;
+
       const distance = progressToTarget * limit.length * -1;
 
       scrollBody.useDuration(0);
+
       scrollTo.distance(distance, false);
     },
     [api],
@@ -80,12 +75,12 @@ export default function CarouselProduct({
         }}
       >
         <CarouselContent>
-          {products.map((product) => (
+          {projects.map((project) => (
             <CarouselItem
-              key={product.id}
-              className="basis-1/2 sm:basis-1/3 md:basis-1/4"
+              key={project.id}
+              className="basis-1/2 sm:basis-1/2 md:basis-1/3"
             >
-              <ProductCard product={product} />
+              <ProjectCard project={project} />
             </CarouselItem>
           ))}
         </CarouselContent>

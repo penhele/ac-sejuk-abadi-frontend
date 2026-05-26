@@ -1,6 +1,7 @@
 import CarouselBanner from "@/components/carousel/carousel-banner";
 import CarouselBrand from "@/components/carousel/carousel-brand";
 import CarouselProduct from "@/components/carousel/carousel-product";
+import CarouselProject from "@/components/carousel/carousel-project";
 import CarouselTestimoni from "@/components/carousel/carousel-testimoni";
 import ErrorFallback from "@/components/fallback/error-fallback";
 import ProductFallback from "@/components/fallback/product-fallback";
@@ -94,7 +95,7 @@ export default function HomePage() {
         <HeaderSection title="Portofolio" href={ROUTES.PORTOFOLIO} />
         <ErrorBoundary fallback={<ErrorFallback />}>
           <Suspense fallback={<ProjectFallback />}>
-            <ProjectGrid />
+            <CarouselProject />
           </Suspense>
         </ErrorBoundary>
       </div>
