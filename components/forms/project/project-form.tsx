@@ -31,6 +31,7 @@ export default function ProjectForm({
       modeAfterSubmission: "blur",
     }),
     onSubmit: async ({ value }) => {
+      console.log(value);
       await onSubmit(value);
     },
   });
@@ -38,8 +39,8 @@ export default function ProjectForm({
   const { data: products } = useQuery(getProductsQueryOptions());
   const productOptions =
     products?.data?.map((product) => ({
-      label: product.name,
-      value: product.id.toString(),
+      name: product.name,
+      id: product.id.toString(),
     })) ?? [];
 
   return (
@@ -97,18 +98,6 @@ export default function ProjectForm({
             )}
           </form.AppField>
 
-          <form.AppField name="products">
-            {(field) => (
-              <field.SelectField
-                disabled={isFetching}
-                options={productOptions}
-                className="col-span-2"
-                label="Product"
-                placeholder="Choose the product used"
-              />
-            )}
-          </form.AppField>
-
           <form.AppField name="description">
             {(field) => (
               <field.TextareaField
@@ -116,6 +105,24 @@ export default function ProjectForm({
                 className="col-span-2"
                 label="Description"
                 placeholder="Describe the project detail, scope of work, or installation notes..."
+              />
+            )}
+          </form.AppField>
+
+          <form.AppField name="id_products">
+            {(field) => (
+              // <field.SelectField
+              //   disabled={isFetching}
+              //   options={productOptions}
+              //   className="col-span-2"
+              //   label="Product"
+              //   placeholder="Choose the product used"
+              // />
+
+              <field.ComboboxField
+                label="Products"
+                className="col-span-2"
+                items={productOptions}
               />
             )}
           </form.AppField>

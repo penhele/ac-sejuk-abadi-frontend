@@ -38,7 +38,7 @@ export default function CreateProjectForm() {
         date: "",
         description: "",
         location: "",
-        products: [],
+        id_products: [],
       }}
       onSubmit={async (value) => {
         await mutateAsync(value);

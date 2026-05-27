@@ -18,5 +18,5 @@ export interface CreateProjectPayload {
   date: string;
   location: string;
   category: string;
-  products: string[];
+  id_products: string[];
 }

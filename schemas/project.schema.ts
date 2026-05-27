@@ -6,7 +6,7 @@ export const createProjectSchema = object({
   date: string().min(1, "Date wajib diisi"),
   location: string().min(1, "Location wajib diisi"),
   category: string().min(1, "Category wajib diisi"),
-  products: array(string()).min(1, "Product wajib dipilih"),
+  id_products: array(string()).min(1, "Product wajib dipilih"),
 });
 
 export type ProjectFormValues = zodInfer<typeof createProjectSchema>;
