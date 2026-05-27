@@ -11,9 +11,11 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
+  DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { ROUTES } from "@/constants/routes";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
 export const projectColumns: ColumnDef<Project>[] = [
   {
@@ -28,20 +30,54 @@ export const projectColumns: ColumnDef<Project>[] = [
     accessorKey: "location",
     header: "Location",
   },
+
+  {
+    accessorKey: "category",
+    header: "Category",
+  },
+  {
+    header: "Total Products",
+    cell: ({ row }) => {
+      const products = row.original.products ?? [];
+
+      return (
+        <DropdownMenu>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <DropdownMenuTrigger className="w-full">
+                <Button
+                  size={"xs"}
+                  className="w-full flex justify-start"
+                  variant={"ghost"}
+                >
+                  {products.length}
+                </Button>
+              </DropdownMenuTrigger>
+            </TooltipTrigger>
+            <TooltipContent>View products</TooltipContent>
+          </Tooltip>
+
+          <DropdownMenuContent align="start" className="w-full">
+            <DropdownMenuGroup>
+              {products.map((item) => (
+                <DropdownMenuItem
+                  key={item.product.id || item.product.name}
+                  className="cursor-pointer"
+                >
+                  {item.product.name}
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      );
+    },
+  },
   {
     accessorKey: "date",
     header: "Date",
     cell: ({ row }) => <span>{formatDate(row.original.date)}</span>,
   },
-  {
-    accessorKey: "category",
-    header: "Category",
-  },
-  // {
-  //   accessorKey: "id_product",
-  //   header: "ID Product",
-  //   cell: ({ row }) => <span>{row.original.product.}</span>,
-  // },
   {
     header: "Action",
     cell: ({ row }) => (
