@@ -1,10 +1,15 @@
 import { useFieldContext } from "@/hooks/use-app-form";
 import {
   Combobox,
+  ComboboxChip,
+  ComboboxChips,
+  ComboboxChipsInput,
   ComboboxContent,
+  ComboboxEmpty,
   ComboboxInput,
   ComboboxItem,
   ComboboxList,
+  ComboboxValue,
 } from "../ui/combobox";
 import { cn } from "@/lib/utils";
 import { Label } from "../ui/label";
@@ -17,6 +22,7 @@ import {
   InputGroupButton,
   InputGroupInput,
 } from "../ui/input-group";
+import React from "react";
 
 export default function ComboboxField({
   label,
@@ -38,20 +44,27 @@ export default function ComboboxField({
       </div>
 
       <Combobox
-        multiple
         items={items}
+        multiple
         value={field.state.value}
         onValueChange={field.handleChange}
       >
-        <ComboboxInput placeholder="Select products" />
-
+        <ComboboxInput
+          placeholder="Select products"
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+            }
+          }}
+        />{" "}
         <ComboboxContent>
+          <ComboboxEmpty>No items found.</ComboboxEmpty>
           <ComboboxList>
-            {items.map((item) => (
+            {(item) => (
               <ComboboxItem key={item.id} value={item.id}>
                 {item.name}
               </ComboboxItem>
-            ))}
+            )}
           </ComboboxList>
         </ComboboxContent>
       </Combobox>
@@ -83,20 +96,6 @@ export default function ComboboxField({
           );
         })}
       </div>
-
-      {/* <div className="flex flex-col mt-2 gap-1">
-        {field.state.value?.map((id, index) => {
-          // Cari item di dalam array 'items' yang id-nya cocok
-          const selectedItem = items.find((i) => i.id === id);
-
-          // Tampilkan name jika ketemu, kalau tidak ketemu fallback ke id
-          return (
-            <span key={id || index} className="text-sm text-muted-foreground">
-              {selectedItem ? selectedItem.name : id}
-            </span>
-          );
-        })}
-      </div> */}
     </div>
   );
 }

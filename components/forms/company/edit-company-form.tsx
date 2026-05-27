@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { Button } from "../../ui/button";
+import CancelButton from "@/components/buttons/cancel-button";
 
 export default function EditCompanyForm({ className }: { className?: string }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -58,8 +59,8 @@ export default function EditCompanyForm({ className }: { className?: string }) {
             return (
               <field.TextField
                 label="Company"
-                isDisabled={!isEditing || isPending}
-                keepStyleWhenDisabled
+                isDisabled={isPending}
+                readOnly={!isEditing}
               />
             );
           }}
@@ -71,8 +72,8 @@ export default function EditCompanyForm({ className }: { className?: string }) {
             return (
               <field.TextareaField
                 label="Description"
-                isDisabled={!isEditing || isPending}
-                keepStyleWhenDisabled
+                isDisabled={isPending}
+                readOnly={!isEditing}
               />
             );
           }}
@@ -87,8 +88,8 @@ export default function EditCompanyForm({ className }: { className?: string }) {
                   <field.TextField
                     label="Email"
                     type="email"
-                    isDisabled={!isEditing || isPending}
-                    keepStyleWhenDisabled
+                    isDisabled={isPending}
+                    readOnly={!isEditing}
                   />
                 );
               }}
@@ -104,8 +105,8 @@ export default function EditCompanyForm({ className }: { className?: string }) {
                     label="Phone"
                     type="number"
                     placeholder="62818355788"
-                    isDisabled={!isEditing || isPending}
-                    keepStyleWhenDisabled
+                    isDisabled={isPending}
+                    readOnly={!isEditing}
                   />
                 );
               }}
@@ -119,8 +120,8 @@ export default function EditCompanyForm({ className }: { className?: string }) {
             return (
               <field.TextField
                 label="Location"
-                isDisabled={!isEditing || isPending}
-                keepStyleWhenDisabled
+                isDisabled={isPending}
+                readOnly={!isEditing}
               />
             );
           }}
@@ -132,8 +133,8 @@ export default function EditCompanyForm({ className }: { className?: string }) {
             return (
               <field.TextField
                 label="Location URL"
-                isDisabled={!isEditing || isPending}
-                keepStyleWhenDisabled
+                isDisabled={isPending}
+                readOnly={!isEditing}
               />
             );
           }}
@@ -141,16 +142,11 @@ export default function EditCompanyForm({ className }: { className?: string }) {
 
         {isEditing ? (
           <div className="grid grid-cols-2 gap-between-items">
-            <Button
-              type="button"
-              variant={"outline"}
-              onClick={() => {
-                setIsEditing(false);
-              }}
-              disabled={isPending}
-            >
-              Cancel
-            </Button>
+            <CancelButton
+              isDisabled={isPending}
+              onCancel={() => form.reset()}
+              onCloseEdit={() => setIsEditing(false)}
+            />
 
             <form.SubmitButton label={"Update"} className="w-full" />
           </div>

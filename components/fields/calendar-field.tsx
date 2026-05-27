@@ -36,7 +36,7 @@ export default function CalendarField({
         <PopoverTrigger asChild disabled={isDisabled}>
           <Button
             className={cn(
-              "text-left justify-start w-full flex",
+              "text-left justify-start w-full flex font-normal",
               !currentValue &&
                 "text-muted-foreground hover:text-muted-foreground",
             )}

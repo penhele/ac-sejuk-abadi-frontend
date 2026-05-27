@@ -14,6 +14,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Button } from "../../ui/button";
 import Link from "next/link";
 import { ROUTES } from "@/constants/routes";
+import CancelButton from "@/components/buttons/cancel-button";
 
 export default function ProductForm({
   defaultValues,
@@ -184,11 +185,13 @@ export default function ProductForm({
         </div>
 
         <div className="space-x-between-items">
-          <Link href={ROUTES.PRODUCTS}>
-            <Button variant={"outline"} className="min-w-24">
-              Cancel
-            </Button>
-          </Link>
+          <CancelButton
+            isDisabled={isFetching || false}
+            onCancel={() => form.reset()}
+            onCloseEdit={() => ({})}
+            className="max-w-24"
+            href={ROUTES.PRODUCTS}
+          />
 
           <form.SubmitButton label={submitLabel} />
         </div>

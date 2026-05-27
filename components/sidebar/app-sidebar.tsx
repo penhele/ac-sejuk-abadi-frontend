@@ -37,6 +37,7 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 export function AppSidebar() {
   const navMain = [
@@ -78,6 +79,13 @@ export function AppSidebar() {
   ];
 
   const { theme, setTheme, themes } = useTheme();
+
+  const [mounted, setMounted] = useState(false);
+
+  // 2. Set mounted to true after the component mounts on the client
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <Sidebar variant="floating">
@@ -149,11 +157,13 @@ export function AppSidebar() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <SidebarMenuButton>
-                  {theme === themes[0] && <Sun />}
-                  {theme === themes[1] && <Moon />}
-                  {theme === themes[2] && <Monitor />}
+                  {/* 3. Wrap theme checking with the mounted condition */}
+                  {mounted && theme === themes[0] && <Sun />}
+                  {mounted && theme === themes[1] && <Moon />}
+                  {mounted && theme === themes[2] && <Monitor />}
 
-                  {theme}
+                  {/* Optional: Render placeholder text or nothing until mounted */}
+                  {mounted ? theme : "Loading theme..."}
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
 

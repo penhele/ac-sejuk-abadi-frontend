@@ -3,18 +3,19 @@ import { FieldInfo } from "../field-info";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 import { cn } from "@/lib/utils";
+import { readonly } from "zod";
 
 export default function TextField({
   label,
   placeholder,
   isDisabled,
-  keepStyleWhenDisabled,
+  readOnly,
   className,
 }: {
   label: string;
   placeholder?: string;
   isDisabled?: boolean;
-  keepStyleWhenDisabled?: boolean;
+  readOnly?: boolean;
   className?: string;
 }) {
   const field = useFieldContext<string>();
@@ -31,7 +32,7 @@ export default function TextField({
         onChange={(e) => field.handleChange(e.target.value)}
         placeholder={placeholder}
         disabled={isDisabled}
-        className={cn(keepStyleWhenDisabled && "disabled:opacity-100")}
+        readOnly={readOnly}
       />
     </div>
   );

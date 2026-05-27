@@ -14,7 +14,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html className={geist.className}>
+    <html className={geist.className} suppressHydrationWarning>
       <body className="overflow-x-hidden" suppressHydrationWarning>
         <ThemeProvider
           attribute="class"

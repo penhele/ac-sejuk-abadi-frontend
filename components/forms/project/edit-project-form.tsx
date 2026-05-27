@@ -13,7 +13,7 @@ export default function EditProjectForm({ id }: { id: string }) {
   const router = useRouter();
   const queryClient = useQueryClient();
 
-  const { data: products, isFetching } = useQuery(
+  const { data: projects, isFetching } = useQuery(
     getProjectByIdQueryOptions(id),
   );
 
@@ -41,12 +41,12 @@ export default function EditProjectForm({ id }: { id: string }) {
     <ProjectForm
       isFetching={isFetching}
       defaultValues={{
-        name: products?.name || "",
-        description: products?.description || "",
-        date: products?.date || "",
-        location: products?.location || "",
-        category: products?.category || "",
-        id_products: [],
+        name: projects?.name || "",
+        description: projects?.description || "",
+        date: projects?.date || "",
+        location: projects?.location || "",
+        category: projects?.category || "",
+        id_products: projects?.products.map((item) => item.product.id) || [],
       }}
       onSubmit={async (value) => {
         await mutateAsync(value);

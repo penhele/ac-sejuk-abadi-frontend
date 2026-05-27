@@ -9,6 +9,13 @@ export interface Project {
   location: string;
   category: string;
   images: ProjectImages[];
+  products: ProjectProduct[];
+}
+
+export interface ProjectProduct {
+  id: number;
+  id_project: number;
+  id_product: string;
   product: Product;
 }
 

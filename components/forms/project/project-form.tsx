@@ -31,7 +31,6 @@ export default function ProjectForm({
       modeAfterSubmission: "blur",
     }),
     onSubmit: async ({ value }) => {
-      console.log(value);
       await onSubmit(value);
     },
   });
