@@ -1,10 +1,16 @@
 import CreateProjectForm from "@/components/forms/project/create-project-form";
 import { Card, CardContent } from "@/components/ui/card";
 
-export default function CreatePortofolioPage() {
+export default function CreateProjectPage() {
   return (
-    <div className="grid grid-cols-3">
-      <div className=""></div>
+    <div className="space-y-between-items">
+      <div>
+        <h1 className="text-2xl font-semibold">Tambah Project Baru</h1>
+        <span className="text-sm text-gray-600">
+          Masukkan project untuk ditambahkan di halaman portofolio
+        </span>
+      </div>
+
       <div className="col-span-2">
         <Card>
           <CardContent>

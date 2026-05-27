@@ -20,7 +20,7 @@ export default function CreateProjectForm() {
     },
     onSuccess(_, __, context) {
       toast.success("Berhasil menambahkan project", { id: context?.toastId });
-      router.push(ROUTES.DASHBOARD_PORTOFOLIO);
+      router.push(ROUTES.DASHBOARD_PROJECT);
       queryClient.invalidateQueries({
         queryKey: getProjectsQueryOptions().queryKey,
       });

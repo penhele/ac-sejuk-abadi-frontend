@@ -9,15 +9,15 @@ import { useQuery } from "@tanstack/react-query";
 import { Plus } from "lucide-react";
 import Link from "next/link";
 
-export default function PortofolioPage() {
+export default function ProjectPage() {
   const { data: projects } = useQuery(getProjectsQueryOptions());
 
   return (
     <div className="space-y-between-items">
       <div className="flex justify-between items-center">
-        <h1 className="text-xl font-bold text-gray-800">Products</h1>
+        <h1 className="text-xl font-bold text-gray-800">Projects</h1>
 
-        <Link href={ROUTES.DASHBOARD_CREATE_PORTOFOLIO}>
+        <Link href={ROUTES.DASHBOARD_CREATE_PROJECT}>
           <Button>
             <Plus /> Add New Project
           </Button>

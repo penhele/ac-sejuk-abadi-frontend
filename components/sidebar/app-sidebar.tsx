@@ -71,7 +71,7 @@ export function AppSidebar() {
         {
           Icon: AirVent,
           label: "Portofolio",
-          href: ROUTES.DASHBOARD_PORTOFOLIO,
+          href: ROUTES.DASHBOARD_PROJECT,
         },
       ],
     },

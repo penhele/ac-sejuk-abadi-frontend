@@ -25,7 +25,7 @@ export default function EditProjectForm({ id }: { id: string }) {
     },
     onSuccess(_, __, context) {
       toast.success("Berhasil menambahkan project", { id: context.toastId });
-      router.push(ROUTES.DASHBOARD_PORTOFOLIO);
+      router.push(ROUTES.DASHBOARD_PROJECT);
       queryClient.invalidateQueries({
         queryKey: getProjectsQueryOptions().queryKey,
       });
@@ -46,7 +46,7 @@ export default function EditProjectForm({ id }: { id: string }) {
         date: products?.date || "",
         location: products?.location || "",
         category: products?.category || "",
-        id_product: products?.id_product || "",
+        id_products: [],
       }}
       onSubmit={async (value) => {
         await mutateAsync(value);

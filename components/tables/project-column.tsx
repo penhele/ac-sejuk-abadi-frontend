@@ -54,9 +54,7 @@ export const projectColumns: ColumnDef<Project>[] = [
 
         <DropdownMenuContent>
           <DropdownMenuGroup>
-            <EditButton
-              href={ROUTES.DASHBOARD_EDIT_PORTOFOLIO(row.original.id)}
-            />
+            <EditButton href={ROUTES.DASHBOARD_EDIT_PROJECT(row.original.id)} />
             <DeleteButton
               mutationFn={deleteProject}
               queryKey={getProjectsQueryOptions().queryKey}

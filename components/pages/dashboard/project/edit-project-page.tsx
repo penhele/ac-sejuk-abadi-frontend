@@ -5,7 +5,7 @@ import EditProjectForm from "@/components/forms/project/edit-project-form";
 import { Card, CardContent } from "@/components/ui/card";
 import { useParams } from "next/navigation";
 
-export default function EditPortofolioPage() {
+export default function EditProjectPage() {
   const params = useParams();
   const id = params.id as string;
 

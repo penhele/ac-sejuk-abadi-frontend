@@ -19,8 +19,8 @@ export const ROUTES = {
   CATEGORY_TYPE: "/dashboard/category-type",
 
   DASHBOARD_COMPANY: "/dashboard/company",
-  DASHBOARD_PORTOFOLIO: "/dashboard/portofolio",
-  DASHBOARD_CREATE_PORTOFOLIO: "/dashboard/portofolio/create",
-  DASHBOARD_EDIT_PORTOFOLIO: (id: string | number) =>
-    `/dashboard/portofolio/${id}/edit`,
+  DASHBOARD_PROJECT: "/dashboard/projects",
+  DASHBOARD_CREATE_PROJECT: "/dashboard/projects/create",
+  DASHBOARD_EDIT_PROJECT: (id: string | number) =>
+    `/dashboard/projects/${id}/edit`,
 } as const;

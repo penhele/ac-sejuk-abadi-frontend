@@ -129,7 +129,7 @@ export default function ProjectForm({
         </div>
 
         <div className="flex flex-row gap-between-items">
-          <Link href={ROUTES.DASHBOARD_PORTOFOLIO}>
+          <Link href={ROUTES.DASHBOARD_PROJECT}>
             <Button variant={"outline"} disabled={isFetching}>
               Cancel
             </Button>
