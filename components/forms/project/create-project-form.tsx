@@ -33,12 +33,12 @@ export default function CreateProjectForm() {
   return (
     <ProjectForm
       defaultValues={{
-        id_product: "",
         name: "",
         category: "",
         date: "",
         description: "",
         location: "",
+        products: [],
       }}
       onSubmit={async (value) => {
         await mutateAsync(value);

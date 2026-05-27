@@ -97,7 +97,7 @@ export default function ProjectForm({
             )}
           </form.AppField>
 
-          <form.AppField name="id_product">
+          <form.AppField name="products">
             {(field) => (
               <field.SelectField
                 disabled={isFetching}
@@ -127,7 +127,7 @@ export default function ProjectForm({
               Cancel
             </Button>
           </Link>
-          <form.SubmitButton label="Submit" isDisabled={isFetching} />
+          <form.SubmitButton label={submitLabel} isDisabled={isFetching} />
         </div>
       </form>
     </form.AppForm>

@@ -37,11 +37,11 @@ export const projectColumns: ColumnDef<Project>[] = [
     accessorKey: "category",
     header: "Category",
   },
-  {
-    accessorKey: "id_product",
-    header: "ID Product",
-    cell: ({ row }) => <span>{row.original.product.name}</span>,
-  },
+  // {
+  //   accessorKey: "id_product",
+  //   header: "ID Product",
+  //   cell: ({ row }) => <span>{row.original.product.}</span>,
+  // },
   {
     header: "Action",
     cell: ({ row }) => (

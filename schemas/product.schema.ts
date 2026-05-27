@@ -1,4 +1,4 @@
-import { object, string, infer as zodInfer } from "zod";
+import { number, object, string, infer as zodInfer } from "zod";
 
 export const createProductSchema = object({
   name: string().min(1, "Nama produk wajib diisi"),

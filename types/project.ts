@@ -3,7 +3,6 @@ import { Product } from "./product";
 
 export interface Project {
   id: number;
-  id_product: string;
   name: string;
   description: string;
   date: string;
@@ -14,10 +13,10 @@ export interface Project {
 }
 
 export interface CreateProjectPayload {
-  id_product: string;
   name: string;
   description: string;
   date: string;
   location: string;
   category: string;
+  products: string[];
 }
