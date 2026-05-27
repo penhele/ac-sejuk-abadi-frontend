@@ -44,7 +44,7 @@ export const projectColumns: ColumnDef<Project>[] = [
         <DropdownMenu>
           <Tooltip>
             <TooltipTrigger asChild>
-              <DropdownMenuTrigger className="w-full">
+              <DropdownMenuTrigger className="w-full" asChild>
                 <Button
                   size={"xs"}
                   className="w-full flex justify-start"
@@ -61,7 +61,7 @@ export const projectColumns: ColumnDef<Project>[] = [
             <DropdownMenuGroup>
               {products.map((item) => (
                 <DropdownMenuItem
-                  key={item.product.id || item.product.name}
+                  key={item.product.id}
                   className="cursor-pointer"
                 >
                   {item.product.name}

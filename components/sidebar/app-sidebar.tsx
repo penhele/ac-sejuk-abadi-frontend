@@ -5,6 +5,7 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
+  SidebarGroupContent,
   SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
@@ -19,6 +20,8 @@ import {
   AirVent,
   Building2,
   ChevronRight,
+  Cuboid,
+  Layers2,
   Monitor,
   Moon,
   Package,
@@ -38,29 +41,27 @@ import {
 } from "../ui/dropdown-menu";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import { Button } from "../ui/button";
 
 export function AppSidebar() {
-  const navMain = [
+  const navProduct = [
     {
       title: "Products",
-      href: "#",
-      Icon: Package,
-      isActive: true,
       items: [
-        { label: "Product", href: ROUTES.PRODUCTS },
         {
-          label: "Brand",
-          href: ROUTES.BRAND,
+          Icon: Package,
+          label: "Product",
+          href: ROUTES.PRODUCTS,
+          isActive: false,
+          items: [
+            { label: "Product", href: ROUTES.PRODUCTS },
+            { label: "Image", href: "#" },
+          ],
         },
-        {
-          label: "Category & Type",
-          href: ROUTES.CATEGORY_TYPE,
-        },
+        { Icon: Cuboid, label: "Brand", href: ROUTES.BRAND },
+        { Icon: Layers2, label: "Category & Type", href: ROUTES.CATEGORY_TYPE },
       ],
     },
-  ];
-
-  const navCompany = [
     {
       title: "Company",
       items: [
@@ -82,7 +83,6 @@ export function AppSidebar() {
 
   const [mounted, setMounted] = useState(false);
 
-  // 2. Set mounted to true after the component mounts on the client
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -91,62 +91,64 @@ export function AppSidebar() {
     <Sidebar variant="floating">
       <SidebarHeader />
       <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel>Shop</SidebarGroupLabel>
+        {navProduct.map((group, groupIdx) => (
+          <SidebarGroup key={groupIdx}>
+            <SidebarGroupLabel>{group.title}</SidebarGroupLabel>
+            <SidebarMenu>
+              {group.items.map((subItem, subIdx) => {
+                const hasChildren =
+                  "items" in subItem &&
+                  Array.isArray(subItem.items) &&
+                  subItem.items.length > 0;
 
-          <SidebarMenu>
-            {navMain.map((item, index) => (
-              <Collapsible
-                key={index}
-                asChild
-                defaultOpen={item.isActive}
-                className="group/collapsible"
-              >
-                <SidebarMenuItem>
-                  <CollapsibleTrigger asChild>
-                    <SidebarMenuButton asChild>
-                      <Link href={item.href}>
-                        <item.Icon />
-                        {item.title}
-                        <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                // JIKA MEMILIKI SUB-MENU (Menggunakan Collapsible)
+                if (hasChildren) {
+                  return (
+                    <Collapsible
+                      key={subIdx}
+                      asChild
+                      defaultOpen={subItem.isActive}
+                      className="group/collapsible"
+                    >
+                      <SidebarMenuItem>
+                        <CollapsibleTrigger asChild>
+                          <SidebarMenuButton tooltip={subItem.label}>
+                            <subItem.Icon />
+                            <span>{subItem.label}</span>
+                            <ChevronRight className="ml-auto h-4 w-4 transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                          </SidebarMenuButton>
+                        </CollapsibleTrigger>
+
+                        <CollapsibleContent>
+                          <SidebarMenuSub>
+                            {subItem.items?.map((subSubItem, childIdx) => (
+                              <SidebarMenuSubItem key={childIdx}>
+                                <SidebarMenuSubButton asChild>
+                                  <Link href={subSubItem.href}>
+                                    <span>{subSubItem.label}</span>
+                                  </Link>
+                                </SidebarMenuSubButton>
+                              </SidebarMenuSubItem>
+                            ))}
+                          </SidebarMenuSub>
+                        </CollapsibleContent>
+                      </SidebarMenuItem>
+                    </Collapsible>
+                  );
+                }
+
+                // JIKA MENU BIASA (Tanpa Sub-menu)
+                return (
+                  <SidebarMenuItem key={subIdx}>
+                    <SidebarMenuButton asChild tooltip={subItem.label}>
+                      <Link href={subItem.href}>
+                        <subItem.Icon />
+                        <span>{subItem.label}</span>
                       </Link>
                     </SidebarMenuButton>
-                  </CollapsibleTrigger>
-
-                  <CollapsibleContent>
-                    <SidebarMenuSub>
-                      {item.items?.map((subItem) => (
-                        <SidebarMenuSubItem key={subItem.label}>
-                          <SidebarMenuSubButton asChild>
-                            <Link href={subItem.href}>
-                              <span>{subItem.label}</span>
-                            </Link>
-                          </SidebarMenuSubButton>
-                        </SidebarMenuSubItem>
-                      ))}
-                    </SidebarMenuSub>
-                  </CollapsibleContent>
-                </SidebarMenuItem>
-              </Collapsible>
-            ))}
-          </SidebarMenu>
-        </SidebarGroup>
-
-        {navCompany.map((item, index) => (
-          <SidebarGroup key={index}>
-            <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
-
-            <SidebarMenu>
-              {item.items.map((subItem, index) => (
-                <SidebarMenuItem key={index}>
-                  <SidebarMenuButton asChild>
-                    <Link href={subItem.href}>
-                      <subItem.Icon />
-                      {subItem.label}
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
+                  </SidebarMenuItem>
+                );
+              })}
             </SidebarMenu>
           </SidebarGroup>
         ))}
