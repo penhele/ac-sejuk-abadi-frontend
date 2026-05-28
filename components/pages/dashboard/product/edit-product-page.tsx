@@ -1,10 +1,12 @@
 "use client";
 
 import EditProductForm from "@/components/forms/product/edit-product-form";
+import UploadProductImageForm from "@/components/forms/product/upload-product-image-form";
 import ImageGrid from "@/components/grid/image-grid";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ROUTES } from "@/constants/routes";
+import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 
@@ -23,13 +25,27 @@ export default function EditProductPage() {
       </div>
 
       <div className="grid grid-cols-3 space-x-between-items">
-        <ImageGrid id={id} />
+        {/* <ImageGrid id={id} /> */}
 
-        <Card className="col-span-2 h-fit">
-          <CardContent>
-            <EditProductForm id={id} />
-          </CardContent>
-        </Card>
+        <UploadProductImageForm id={id} />
+
+        <div className="col-span-2 flex flex-col gap-between-items">
+          <Card className="">
+            <CardContent>
+              <EditProductForm id={id} />
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Foto Produk</CardTitle>
+            </CardHeader>
+
+            <CardContent>
+              <ImageGrid id={id} />
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );

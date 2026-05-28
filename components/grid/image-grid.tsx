@@ -11,17 +11,7 @@ export default function ImageGrid({ id }: { id: string }) {
   const { data: products } = useQuery(getProductByIdQueryOptions(id));
 
   return (
-    <div className="grid grid-cols-2 gap-between-card">
-      <Link
-        href={ROUTES.DASHBOARD_UPLOAD_PRODUCT_IMAGES(id)}
-        className="border border-dashed rounded-sm aspect-square flex flex-col gap-1 items-center justify-center bg-muted/25 transition hover:bg-muted/50"
-      >
-        <Button variant={"outline"} size={"xs"}>
-          <ExternalLink />
-        </Button>
-        <p className="text-xs">Add new images</p>
-      </Link>
-
+    <div className="grid grid-cols-4 gap-between-card">
       {products?.images.map((image) => (
         <div
           key={image.id}

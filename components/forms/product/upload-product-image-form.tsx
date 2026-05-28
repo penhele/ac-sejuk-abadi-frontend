@@ -1,20 +1,23 @@
 "use client";
 
 import CancelButton from "@/components/buttons/cancel-button";
-import { ROUTES } from "@/constants/routes";
+import { getProductByIdQueryOptions } from "@/hooks/queries/product-queries";
 import { useAppForm } from "@/hooks/use-app-form";
 import { uploadProductImageSchema } from "@/schemas/product.schema";
 import { uploadImages } from "@/services/product.service";
 import { UploadImagePayload } from "@/types/product";
 import { revalidateLogic } from "@tanstack/react-form";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 export default function UploadProductImageForm({ id }: { id: string }) {
+  const queryClient = useQueryClient();
+
   const { mutateAsync } = useMutation({
     mutationFn: (data: UploadImagePayload) => uploadImages(id, data),
     onSuccess(data, variables, onMutateResult, context) {
       toast.success("Berhasil menambahkan gambar");
+      queryClient.invalidateQueries(getProductByIdQueryOptions(id));
     },
     onError(error, variables, onMutateResult, context) {
       toast.error("Gagal menambahkan gambar");
@@ -44,21 +47,20 @@ export default function UploadProductImageForm({ id }: { id: string }) {
           e.preventDefault();
           form.handleSubmit();
         }}
-        className="flex flex-col gap-6"
+        className="flex flex-col space-y-between-items"
       >
-        <form.AppField name="files">
-          {(field) => <field.ImageField />}
-        </form.AppField>
-
-        <div className="flex flex-row space-x-between-items-xs">
+        <div className="flex flex-row justify-between space-x-between-items-xs">
           <CancelButton
             onCancel={form.reset}
             onCloseEdit={() => ({})}
-            className="min-w-24"
-            href={ROUTES.PRODUCTS}
+            className="flex-1"
           />
-          <form.SubmitButton label="Submit" className="min-w-24" />
+          <form.SubmitButton label="Submit" className="flex-1" />
         </div>
+
+        <form.AppField name="files">
+          {(field) => <field.ImageField />}
+        </form.AppField>
       </form>
     </form.AppForm>
   );

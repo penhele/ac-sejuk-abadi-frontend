@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import ProductImageGallery from "@/components/gallery/product-image-gallery";
 import { useParams } from "next/navigation";

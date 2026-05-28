@@ -34,7 +34,7 @@ export const productColumns: ColumnDef<Product>[] = [
   {
     header: "Images",
     cell: ({ row }) => {
-      return <span >{row.original.images.length}</span>;
+      return <span>{row.original.images.length}</span>;
     },
   },
   {

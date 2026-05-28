@@ -3,8 +3,7 @@ import ProductImagePage from "../pages/dashboard/product/product-image-page";
 import { getProductById } from "@/services/product.service";
 import { getProductByIdQueryOptions } from "@/hooks/queries/product-queries";
 
-export default function ProductImageGallery({id}: {id: string}) {
-  
+export default function ProductImageGallery({ id }: { id: string }) {
   const {} = useQuery(getProductByIdQueryOptions(id));
 
   return (

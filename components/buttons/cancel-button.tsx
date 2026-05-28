@@ -17,7 +17,7 @@ export default function CancelButton({
   href?: string;
 }) {
   return (
-    <Link href={href || ""}>
+    <Link href={href || ""} className={cn("w-full", className)}>
       <Button
         type="button"
         variant={"outline"}
@@ -28,7 +28,7 @@ export default function CancelButton({
           toast.info("Batal diperbarui", { position: "top-center" });
         }}
         disabled={isDisabled}
-        className={cn("w-full", className)}
+        className="w-full"
       >
         Cancel
       </Button>

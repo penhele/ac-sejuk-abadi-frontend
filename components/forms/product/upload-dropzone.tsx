@@ -3,8 +3,15 @@ import { CloudUpload } from "lucide-react";
 
 export default function ImageUploadDropzone() {
   return (
-    <div className="aspect-square border rounded-sm border-dashed bg-muted/50 flex flex-col space-y-between-items-xs items-center justify-center">
-      <Button variant={"outline"} size={"sm"} className="min-w-24">
+    <div className="aspect-video border rounded-sm border-dashed bg-muted/50 flex flex-col space-y-between-items-xs items-center justify-center">
+      <Button
+        variant={"outline"}
+        size={"sm"}
+        className="min-w-24"
+        onClick={(e) => {
+          e.preventDefault();
+        }}
+      >
         <CloudUpload />
         Upload Images
       </Button>

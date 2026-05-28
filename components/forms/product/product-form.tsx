@@ -182,7 +182,7 @@ export default function ProductForm({
           </div>
         </div>
 
-        <div className="space-x-between-items">
+        <div className="space-x-between-items flex flex-row">
           <CancelButton
             isDisabled={isFetching || false}
             onCancel={() => form.reset()}

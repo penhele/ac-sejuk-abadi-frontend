@@ -21,7 +21,7 @@ export const { useAppForm } = createFormHook({
     SelectField,
     CalendarField,
     ComboboxField,
-    ImageField
+    ImageField,
   },
   formComponents: { SubmitButton },
 });
