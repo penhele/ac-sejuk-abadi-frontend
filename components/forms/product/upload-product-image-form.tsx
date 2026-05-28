@@ -15,12 +15,19 @@ export default function UploadProductImageForm({ id }: { id: string }) {
 
   const { mutateAsync } = useMutation({
     mutationFn: (data: UploadImagePayload) => uploadImages(id, data),
+    onMutate(variables, context) {
+      const toastId = toast.loading("Loading...");
+      return { toastId };
+    },
     onSuccess(data, variables, onMutateResult, context) {
-      toast.success("Berhasil menambahkan gambar");
+      toast.success("Berhasil menambahkan gambar", {
+        id: onMutateResult.toastId,
+      });
+      form.reset();
       queryClient.invalidateQueries(getProductByIdQueryOptions(id));
     },
     onError(error, variables, onMutateResult, context) {
-      toast.error("Gagal menambahkan gambar");
+      toast.error("Gagal menambahkan gambar", { id: onMutateResult?.toastId });
     },
   });
 
