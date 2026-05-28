@@ -1,23 +1,18 @@
+import { formatDate } from "@/lib/format/date";
 import { getProjectById } from "@/services/project.service";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import {
-  Building2,
-  Calendar,
-  CheckCircle2,
-  ImageOff,
-  MapPin,
-  Settings,
-} from "lucide-react";
+import { Building2, Calendar, ImageOff, MapPin } from "lucide-react";
 import Image from "next/image";
 import { DescriptionSection, HeaderSection } from "../util/header";
-import { Separator } from "../ui/separator";
-import { formatDate } from "@/lib/format/date";
+import ProductCard from "../cards/product-card";
 
 export default function ProjectDetailContent({ id }: { id: string }) {
   const { data: project } = useSuspenseQuery({
     queryKey: ["projects", id],
     queryFn: () => getProjectById(id),
   });
+
+  const products = project.products.map((product) => product.product);
 
   return (
     <div className="space-y-between-section">
@@ -73,55 +68,16 @@ export default function ProjectDetailContent({ id }: { id: string }) {
         </div>
       </section>
 
-      <section className="grid grid-cols-1 lg:grid-cols-3 gap-16">
-        <div className="lg:col-span-2 space-y-6">
-          <HeaderSection title="Deskripsi Proyek" />
-          <div className="space-y-4">
-            <DescriptionSection description={project.description} />
-          </div>
+      <div className="">
+        <HeaderSection title="Deskripsi Proyek" />
+        <DescriptionSection description={project.description} />
+      </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 pt-6">
-            <div className="p-4 rounded-2xl bg-slate-50 border space-y-2">
-              <CheckCircle2 className="w-5 h-5 text-primary" />
-              <span className="block text-xs font-semibold text-gray-500 uppercase">
-                Efisiensi Energi
-              </span>
-              <span className="text-sm font-bold">Inverter Technology</span>
-            </div>
-            <div className="p-4 rounded-2xl bg-slate-50 border space-y-2">
-              <Settings className="w-5 h-5 text-primary" />
-              <span className="block text-xs font-semibold text-gray-500 uppercase">
-                Kontrol
-              </span>
-              <span className="text-sm font-bold">Smart Home Sync</span>
-            </div>
-            <div className="p-4 rounded-2xl bg-slate-50 border space-y-2">
-              <Building2 className="w-5 h-5 text-primary" />
-              <span className="block text-xs font-semibold text-gray-500 uppercase">
-                Kapasitas
-              </span>
-              <span className="text-sm font-bold">3 HP Total</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="space-y-8">
-          <div className="bg-gray-900 text-white rounded-lg p-8 space-y-6 shadow-xl">
-            <h3 className="text-xl font-bold">Produk Digunakan</h3>
-            <Separator className="bg-gray-700" />
-
-            <div className="space-y-4">
-              <div className="flex justify-between items-center text-sm">
-                <span className="text-gray-400">Unit Outdoor</span>
-                <span className="font-medium">{project.product.name}</span>
-              </div>
-            </div>
-            <button className="w-full py-4 bg-primary text-white rounded-xl font-bold hover:bg-primary/90 transition-colors">
-              Pesan Layanan Serupa
-            </button>
-          </div>
-        </div>
-      </section>
+      {/* <div className="grid grid-cols-4">
+        {products.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div> */}
     </div>
   );
 }

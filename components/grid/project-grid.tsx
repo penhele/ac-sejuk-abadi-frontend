@@ -16,7 +16,7 @@ export default function ProjectGrid() {
   return (
     <div className="grid grid-cols-3 gap-between-card">
       {projects.map((project) => (
-        <ProjectCard project={project} />
+        <ProjectCard key={project.id} project={project} />
       ))}
     </div>
   );

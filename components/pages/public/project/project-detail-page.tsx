@@ -7,8 +7,6 @@ import ProductFallback from "@/components/fallback/product-fallback";
 import ProjectFallback from "@/components/fallback/project-fallback";
 import ProductGrid from "@/components/grid/product-grid";
 import ProjectGrid from "@/components/grid/project-grid";
-import ProductCardSkeleton from "@/components/skeletons/product-card-skeleton";
-import ProjectCardSkeleton from "@/components/skeletons/project-card-skeleton";
 import { HeaderSection } from "@/components/util/header";
 import { useParams } from "next/navigation";
 import { Suspense } from "react";
