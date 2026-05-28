@@ -61,7 +61,6 @@ export const brandColumns: ColumnDef<Brand>[] = [
 
         <DropdownMenuContent>
           <DropdownMenuGroup>
-            <EditButton id={row.original.id} />
             <DeleteButton
               mutationFn={deleteBrand}
               queryKey={getBrandsQueryOptions().queryKey}

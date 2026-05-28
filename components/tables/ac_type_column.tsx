@@ -48,7 +48,6 @@ export const acTypeColumns: ColumnDef<AcType>[] = [
 
         <DropdownMenuContent>
           <DropdownMenuGroup>
-            <EditButton id={row.original.id} />
             <DeleteButton
               mutationFn={deleteAcType}
               queryKey={getAcTypesQueryOptions().queryKey}

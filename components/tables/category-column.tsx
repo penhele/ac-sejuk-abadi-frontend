@@ -47,7 +47,6 @@ export const categoryColumns: ColumnDef<Category>[] = [
 
         <DropdownMenuContent>
           <DropdownMenuGroup>
-            <EditButton id={row.original.id} />
             <DeleteButton
               mutationFn={deleteCategory}
               queryKey={getCategoriesQueryOptions().queryKey}
