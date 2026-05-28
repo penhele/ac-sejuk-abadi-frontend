@@ -1,7 +1,10 @@
 "use client";
 
 import EditProductForm from "@/components/forms/product/edit-product-form";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { ROUTES } from "@/constants/routes";
+import Link from "next/link";
 import { useParams } from "next/navigation";
 
 export default function EditProductPage() {
@@ -18,11 +21,28 @@ export default function EditProductPage() {
         </span>
       </div>
 
-      <Card>
-        <CardContent>
-          <EditProductForm id={id} />
-        </CardContent>
-      </Card>
+      <div className="grid grid-cols-3 space-x-between-items">
+        <div className="space-y-between-items">
+          <div className="">
+            <Link href={ROUTES.DASHBOARD_UPLOAD_PRODUCT_IMAGES(id)}>
+              <Button className="w-full">Add images</Button>
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-2 gap-between-card ">
+            <div className="bg-muted aspect-square"></div>
+            <div className="bg-muted aspect-square"></div>
+            <div className="bg-muted aspect-square"></div>
+            <div className="bg-muted aspect-square"></div>
+          </div>
+        </div>
+
+        <Card className="col-span-2 h-fit">
+          <CardContent>
+            <EditProductForm id={id} />
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }

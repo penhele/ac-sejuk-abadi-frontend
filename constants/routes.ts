@@ -12,6 +12,9 @@ export const ROUTES = {
   CREATE_PRODUCT: "/dashboard/products/create",
   EDIT_PRODUCT: (id: string | number) => `/dashboard/products/${id}/edit`,
 
+  DASHBOARD_PRODUCT_IMAGES: (id: string |number) => `/dashboard/products/${id}/images`,
+  DASHBOARD_UPLOAD_PRODUCT_IMAGES: (id: string |number) => `/dashboard/products/${id}/images/upload`,
+
   BRAND: "/dashboard/brands",
   CREATE_BRAND: "/dashboard/brands/create",
   EDIT_BRAND: (id: string | number) => `/dashboard/brands/${id}/edit`,
