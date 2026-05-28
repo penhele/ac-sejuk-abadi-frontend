@@ -1,15 +1,19 @@
+"use client";
+
 import UploadProductImageForm from "@/components/forms/product/upload-product-image-form";
-import { Button } from "@/components/ui/button";
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle
 } from "@/components/ui/card";
+import { useParams } from "next/navigation";
 
 export default function UploadProductImagePage() {
+  const params = useParams();
+  const id = params.id as string;
+
   return (
     <div className="grid grid-cols-3">
       <Card className="col-span-1">
@@ -19,15 +23,8 @@ export default function UploadProductImagePage() {
         </CardHeader>
 
         <CardContent>
-          <UploadProductImageForm />
+          <UploadProductImageForm id={id} />
         </CardContent>
-
-        <CardFooter>
-          <div className="space-x-between-items">
-            <Button variant={"outline"}>Cancel</Button>
-            <Button>Submit</Button>
-          </div>
-        </CardFooter>
       </Card>
     </div>
   );

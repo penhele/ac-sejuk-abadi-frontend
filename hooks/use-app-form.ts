@@ -3,6 +3,7 @@
 import SubmitButton from "@/components/buttons/submit-button";
 import CalendarField from "@/components/fields/calendar-field";
 import ComboboxField from "@/components/fields/combobox-field";
+import ImageField from "@/components/fields/image-field";
 import SelectField from "@/components/fields/select-field";
 import TextField from "@/components/fields/text-field";
 import TextareaField from "@/components/fields/textarea-field";
@@ -20,6 +21,7 @@ export const { useAppForm } = createFormHook({
     SelectField,
     CalendarField,
     ComboboxField,
+    ImageField
   },
   formComponents: { SubmitButton },
 });

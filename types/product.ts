@@ -77,3 +77,7 @@ export interface UpdateProductPayload {
   id_category?: number;
   id_ac_type?: number;
 }
+
+export interface UploadImagePayload {
+  files: File[];
+}

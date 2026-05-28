@@ -1,34 +1,65 @@
-import { Button } from "@/components/ui/button";
-import { useAppForm } from "@/hooks/use-app-form";
-import { useMutation } from "@tanstack/react-query";
-import { CloudUpload } from "lucide-react";
+"use client";
 
-export default function UploadProductImageForm() {
-//     const {}=useMutation({
-//         mutationFn: 
-//     })
-    
-//   const form = useAppForm({
-//     defaultValues: {
-//       files: "",
-//     },
-//     onSubmit
-//   });
+import CancelButton from "@/components/buttons/cancel-button";
+import { ROUTES } from "@/constants/routes";
+import { useAppForm } from "@/hooks/use-app-form";
+import { uploadProductImageSchema } from "@/schemas/product.schema";
+import { uploadImages } from "@/services/product.service";
+import { UploadImagePayload } from "@/types/product";
+import { revalidateLogic } from "@tanstack/react-form";
+import { useMutation } from "@tanstack/react-query";
+import { toast } from "sonner";
+
+export default function UploadProductImageForm({ id }: { id: string }) {
+  const { mutateAsync } = useMutation({
+    mutationFn: (data: UploadImagePayload) => uploadImages(id, data),
+    onSuccess(data, variables, onMutateResult, context) {
+      toast.success("Berhasil menambahkan gambar");
+    },
+    onError(error, variables, onMutateResult, context) {
+      toast.error("Gagal menambahkan gambar");
+    },
+  });
+
+  const form = useAppForm({
+    defaultValues: {
+      files: [] as File[],
+    },
+    validators: {
+      onSubmit: uploadProductImageSchema,
+    },
+    validationLogic: revalidateLogic({
+      mode: "submit",
+      modeAfterSubmission: "blur",
+    }),
+    onSubmit: async ({ value }) => {
+      await mutateAsync(value);
+    },
+  });
 
   return (
-    <div className="aspect-square border rounded-sm border-dashed bg-muted/50 flex flex-col space-y-between-items-xs items-center justify-center">
-      <Button variant={"outline"} size={"sm"} className="min-w-24">
-        <CloudUpload />
-        Upload Images
-      </Button>
-      <div className="flex flex-col items-center">
-        <span className="text-gray-800">
-          Choose a image or drag & drop it here.
-        </span>
-        <span className="text-xs text-gray-600">
-          JPG, JPEG, PNG, and WEBP. Max 1 MB.
-        </span>
-      </div>
-    </div>
+    <form.AppForm>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          form.handleSubmit();
+        }}
+        className="flex flex-col gap-6"
+      >
+        <form.AppField name="files">
+          {(field) => <field.ImageField />}
+        </form.AppField>
+
+        <div className="flex flex-row space-x-between-items-xs">
+          <CancelButton
+            onCancel={form.reset}
+            onCloseEdit={() => ({})}
+            className="min-w-24"
+            href={ROUTES.PRODUCTS}
+          />
+          <form.SubmitButton label="Submit" className="min-w-24" />
+        </div>
+      </form>
+    </form.AppForm>
   );
 }

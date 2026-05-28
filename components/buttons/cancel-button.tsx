@@ -13,7 +13,7 @@ export default function CancelButton({
   onCancel: () => void;
   onCloseEdit: () => void;
   className?: string;
-  isDisabled: boolean;
+  isDisabled?: boolean;
   href?: string;
 }) {
   return (

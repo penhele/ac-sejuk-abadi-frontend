@@ -5,6 +5,7 @@ import {
   Product,
   ProductResponse,
   UpdateProductPayload,
+  UploadImagePayload,
 } from "@/types/product";
 
 export const getProducts = async (
@@ -54,6 +55,25 @@ export const updateProduct = async (
   data: UpdateProductPayload,
 ) => {
   const response = await api.put(`/products/${id}`, data);
+
+  return response.data;
+};
+
+export const uploadImages = async (
+  id: string | number,
+  data: UploadImagePayload,
+) => {
+  const formData = new FormData();
+
+  data.files.forEach((file) => {
+    formData.append("files", file);
+  });
+
+  const response = await api.post(`/products/${id}/images`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
 
   return response.data;
 };

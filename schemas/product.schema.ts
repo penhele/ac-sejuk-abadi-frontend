@@ -1,4 +1,4 @@
-import { number, object, string, infer as zodInfer } from "zod";
+import z, { number, object, string, infer as zodInfer } from "zod";
 
 export const createProductSchema = object({
   name: string().min(1, "Nama produk wajib diisi"),
@@ -12,3 +12,11 @@ export const createProductSchema = object({
 });
 
 export type ProductFormValues = zodInfer<typeof createProductSchema>;
+
+export const uploadProductImageSchema = object({
+  files: z.array(
+    z
+      .instanceof(File)
+      .refine((file) => file.size <= 1024 * 1024, "Ukuran file maksimal 1MB"),
+  ),
+});
