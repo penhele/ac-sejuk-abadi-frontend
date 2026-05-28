@@ -77,3 +77,12 @@ export const uploadImages = async (
 
   return response.data;
 };
+
+export const deleteImage = async (
+  idProduct: string | number,
+  idImage: string | number,
+) => {
+  const response = await api.delete(`/products/${idProduct}/images/${idImage}`);
+
+  return response.data;
+};
