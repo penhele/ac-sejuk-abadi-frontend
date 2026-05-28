@@ -1,13 +1,16 @@
 import BreadcrumbComponent from "@/components/breadcrumb-component";
 import LoadMoreButton from "@/components/buttons/load-more-button";
+import CarouselBanner from "@/components/carousel/carousel-banner";
+import ProductFallback from "@/components/fallback/product-fallback";
 import SearchFilter from "@/components/filters/search-filter";
 import ShopFilter from "@/components/filters/shop-filter";
 import SortByPriceFilter from "@/components/filters/sort-filter";
 import ProductGrid from "@/components/grid/product-grid";
-import ProductCardSkeleton from "@/components/skeletons/product-card-skeleton";
 import TotalItems from "@/components/total-items";
 import { Skeleton } from "@/components/ui/skeleton";
+import { getAcTypesQueryOptions } from "@/hooks/queries/ac-type-queries";
 import { getBrandsQueryOptions } from "@/hooks/queries/brand-queries";
+import { getCategoriesQueryOptions } from "@/hooks/queries/category-queries";
 import { getProductsInfiniteQueryOptions } from "@/hooks/queries/product-queries";
 import {
   dehydrate,
@@ -17,10 +20,6 @@ import {
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "../../../fallback/error-fallback";
-import { getAcTypesQueryOptions } from "@/hooks/queries/ac-type-queries";
-import { getCategoriesQueryOptions } from "@/hooks/queries/category-queries";
-import ProductFallback from "@/components/fallback/product-fallback";
-import CarouselBanner from "@/components/carousel/carousel-banner";
 
 export default async function ShopPage() {
   const queryClient = new QueryClient();

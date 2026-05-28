@@ -1,65 +1,137 @@
-import { Product } from "@/types/product";
-import { AspectRatio } from "../ui/aspect-ratio";
-import Image from "next/image";
-import { ImageOff } from "lucide-react";
-import { cn } from "@/lib/utils";
+"use main";
 
-export default function ProductImages({
-  product,
-  jumlah,
-  className,
-}: {
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  type CarouselApi,
+} from "@/components/ui/carousel";
+import { cn } from "@/lib/utils";
+import { Product } from "@/types/product";
+import { ImageOff } from "lucide-react";
+import Image from "next/image";
+import { useCallback, useEffect, useState } from "react";
+
+type ProductImageGalleryProps = {
   product: Product;
-  jumlah: number;
   className?: string;
-}) {
-  return (
-    <div className={cn("flex flex-col gap-2", className)}>
-      <div className="relative">
-        <AspectRatio ratio={1 / 1} className="bg-muted rounded-md">
-          {product.images && product.images.length > 0 ? (
-            <Image
-              src={product.images[0].image_url}
-              alt={`${product.name}-image`}
-              fill
-              className="object-cover"
-            />
-          ) : (
-            <div className="flex flex-col space-y-2 items-center justify-center h-full ">
-              <ImageOff />
-              <span className="text-sm">No Image</span>
-            </div>
-          )}
+};
+
+export default function ProductImageGallery({
+  product,
+  className,
+}: ProductImageGalleryProps) {
+  const images = product.images ?? [];
+  const totalImages = images.length;
+
+  const [mainApi, setMainApi] = useState<CarouselApi>();
+  const [thumbApi, setThumbApi] = useState<CarouselApi>();
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const onThumbClick = useCallback(
+    (index: number) => {
+      if (!mainApi || !thumbApi) return;
+      mainApi.scrollTo(index);
+    },
+    [mainApi, thumbApi],
+  );
+
+  const onSelect = useCallback(() => {
+    if (!mainApi || !thumbApi) return;
+    const activeIndex = mainApi.selectedScrollSnap();
+    setSelectedIndex(activeIndex);
+    thumbApi.scrollTo(activeIndex);
+  }, [mainApi, thumbApi]);
+
+  useEffect(() => {
+    if (!mainApi) return;
+    onSelect();
+
+    mainApi.on("select", onSelect).on("reInit", onSelect);
+  }, [mainApi, onSelect]);
+
+  if (totalImages === 0) {
+    return (
+      <div className={cn("w-full", className)}>
+        <AspectRatio
+          ratio={1 / 1}
+          className="bg-muted rounded-md flex flex-col space-y-2 items-center justify-center h-full"
+        >
+          <ImageOff className="h-10 w-10 text-muted-foreground" />
+          <span className="text-sm text-muted-foreground">No Image</span>
         </AspectRatio>
       </div>
+    );
+  }
 
-      {jumlah > 1 && (
-        <div className="grid grid-cols-5 gap-2">
-          {Array.from({ length: jumlah - 1 }).map((_, index) => {
-            if (index >= 5) return null;
-
-            return (
+  return (
+    <div className={cn("flex flex-col gap-3 w-full", className)}>
+      {/* 1. MAIN CAROUSEL */}
+      <Carousel setApi={setMainApi} className="w-full relative">
+        <CarouselContent className="ml-0">
+          {images.map((img, index) => (
+            <CarouselItem key={img.id ?? index} className="pl-0">
               <AspectRatio
-                key={index}
                 ratio={1 / 1}
-                className="bg-muted rounded-md relative overflow-hidden"
+                className="bg-muted rounded-md overflow-hidden relative"
               >
                 <Image
-                  src={product.images[index].image_url}
+                  src={img.image_url}
                   alt={`${product.name}-image-${index}`}
                   fill
+                  priority={index === 0}
+                  className="object-cover"
                 />
-                {index === 4 && jumlah > 6 && (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-gray-700 font-bold text-lg">
-                      + {jumlah - 5}
-                    </span>
-                  </div>
-                )}
               </AspectRatio>
-            );
-          })}
-        </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+      </Carousel>
+
+      {/* 2. THUMBNAILS CAROUSEL (Hanya muncul jika gambar lebih dari 1) */}
+      {totalImages > 1 && (
+        <Carousel
+          setApi={setThumbApi}
+          opts={{
+            containScroll: "keepSnaps",
+            dragFree: true,
+          }}
+          className="w-full"
+        >
+          <CarouselContent className="-ml-2 flex flex-row">
+            {images.map((img, index) => (
+              <CarouselItem
+                key={`thumb-${img.id ?? index}`}
+                className="pl-2 basis-1/5 select-none"
+              >
+                <button
+                  type="button"
+                  onClick={() => onThumbClick(index)}
+                  className="w-full block text-left focus:outline-none"
+                >
+                  <AspectRatio
+                    ratio={1 / 1}
+                    className={cn(
+                      "bg-muted rounded-md relative overflow-hidden transition-all duration-200 border-2",
+                      index === selectedIndex
+                        ? "border-primary opacity-100 ring-2 ring-primary/20"
+                        : "border-transparent opacity-60 hover:opacity-100",
+                    )}
+                  >
+                    <Image
+                      src={img.image_url}
+                      alt={`${product.name}-thumb-${index}`}
+                      fill
+                      sizes="10vw"
+                      className="object-cover"
+                    />
+                  </AspectRatio>
+                </button>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
       )}
     </div>
   );
