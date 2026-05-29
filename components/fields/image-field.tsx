@@ -8,9 +8,30 @@ import { FieldInfo } from "../field-info";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import { X } from "lucide-react";
+import { useState } from "react";
+import { compressImages } from "@/lib/image";
 
 export default function ImageField({ className }: { className?: string }) {
   const field = useFieldContext<File[]>();
+
+  const [isCompressing, setIsCompressing] = useState(false);
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files ?? []);
+    if (files.length === 0) return;
+
+    setIsCompressing(true);
+    try {
+      // Jalankan fungsi kompresi otomatis untuk file > 1MB
+      const processedFiles = await compressImages(files);
+
+      // Gabungkan dengan file yang sudah ada sebelumnya
+      field.handleChange([...field.state.value, ...processedFiles]);
+    } finally {
+      setIsCompressing(false);
+      field.handleBlur();
+    }
+  };
 
   return (
     <div className="flex flex-col gap-between-items">
@@ -21,48 +42,50 @@ export default function ImageField({ className }: { className?: string }) {
           accept="image/*"
           className={cn(className)}
           hidden
-          onChange={(e) => {
-            const files = Array.from(e.target.files ?? []);
-
-            field.handleChange([...field.state.value, ...files]);
-          }}
+          onChange={handleFileChange}
+          disabled={isCompressing}
         />
 
         <ImageUploadDropzone />
-
-        <FieldInfo field={field} />
       </label>
 
+      <FieldInfo field={field} />
+
       <div className="grid grid-cols-2 gap-between-card">
-        {field.state.value.map((item, index) => (
-          <div
-            key={index}
-            className="group relative aspect-square border border-dashed bg-muted/50 rounded-sm"
-          >
-            <Image
-              src={URL.createObjectURL(item)}
-              alt={item.name}
-              fill
-              className="object-contain"
-            />
+        {field.state.value.map((item, index) => {
+          const imageUrl = URL.createObjectURL(item);
 
-            <Button
-              className="absolute top-3 right-3 rounded-full opacity-0 group-hover:opacity-100"
-              variant={"outline"}
-              size={"icon-xs"}
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-
-                field.handleChange(
-                  field.state.value.filter((_, i) => i !== index),
-                );
-              }}
+          return (
+            <div
+              key={`${item.name}-${index}`}
+              className="group relative aspect-square border border-dashed bg-muted/50 rounded-sm"
             >
-              <X />
-            </Button>
-          </div>
-        ))}
+              <Image
+                src={imageUrl}
+                alt={item.name}
+                fill
+                className="object-contain"
+                onLoadingComplete={() => URL.revokeObjectURL(imageUrl)}
+              />
+
+              <Button
+                className="absolute top-3 right-3 rounded-full opacity-0 group-hover:opacity-100"
+                variant={"outline"}
+                size={"icon-xs"}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+
+                  field.handleChange(
+                    field.state.value.filter((_, i) => i !== index),
+                  );
+                }}
+              >
+                <X />
+              </Button>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

@@ -13,10 +13,12 @@ export const createProductSchema = object({
 
 export type ProductFormValues = zodInfer<typeof createProductSchema>;
 
-export const uploadProductImageSchema = object({
-  files: z.array(
-    z
-      .instanceof(File)
-      .refine((file) => file.size <= 1024 * 1024, "Ukuran file maksimal 1MB"),
-  ),
+const MAX_FILE_SIZE = 1024 * 1024; // 1MB dalam bytes
+
+export const uploadProductImageSchema = z.object({
+  files: z
+    .array(z.instanceof(File))
+    .refine((files) => files.every((file) => file.size < MAX_FILE_SIZE), {
+      message: "Ukuran setiap gambar harus kurang dari 1MB",
+    }),
 });
