@@ -84,6 +84,7 @@ export default function ProductForm({
           e.preventDefault();
           form.handleSubmit();
         }}
+        className="space-y-between-items"
       >
         <div className="grid grid-cols-5 gap-between-items-lg">
           <div className="col-span-3 space-y-between-items-lg">
