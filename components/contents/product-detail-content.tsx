@@ -19,7 +19,7 @@ export default function ProductDetailContent({ id }: { id: string }) {
 
   return (
     <div className="space-y-between-section">
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-between-items-lg">
         <ProductImages product={product} className="col-span-2 md:col-span-1" />
 
         <div className="flex flex-col gap-4 col-span-2 md:col-span-1">

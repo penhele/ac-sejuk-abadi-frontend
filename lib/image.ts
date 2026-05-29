@@ -2,7 +2,7 @@
 import imageCompression from "browser-image-compression";
 
 const COMPRESSION_OPTIONS = {
-  maxSizeMB: 0.9, // Target ukuran di bawah 1MB
+  maxSizeMB: 0.4, // Target ukuran di bawah 1MB
   maxWidthOrHeight: 1920, // Resolusi maksimal agar gambar tetap tajam
   useWebWorker: true, // Menggunakan background thread agar UI tidak lag
 };
@@ -16,7 +16,7 @@ export async function compressImages(files: File[]): Promise<File[]> {
     return await Promise.all(
       files.map(async (file) => {
         // Jika ukuran file sudah di bawah 1MB (1024 * 1024 bytes), langsung return
-        if (file.size < 1024 * 1024) {
+        if (file.size < 512 * 512) {
           return file;
         }
 
