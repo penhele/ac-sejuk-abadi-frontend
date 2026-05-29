@@ -6,9 +6,6 @@ import CarouselTestimoni from "@/components/carousel/carousel-testimoni";
 import ErrorFallback from "@/components/fallback/error-fallback";
 import ProductFallback from "@/components/fallback/product-fallback";
 import ProjectFallback from "@/components/fallback/project-fallback";
-import ProductGrid from "@/components/grid/product-grid";
-import ProjectGrid from "@/components/grid/project-grid";
-import StatsSection from "@/components/sections/stats-section";
 import { HeaderSection } from "@/components/util/header";
 import { ROUTES } from "@/constants/routes";
 import {

@@ -6,7 +6,7 @@ import { SearchX } from "lucide-react";
 import ProjectCard from "../cards/project-card";
 import EmptyState from "../empty-state/empty-state";
 
-export default function ProjectGrid() {
+export default function ProjectGrid({ limit }: { limit?: number }) {
   const { data: projects } = useSuspenseQuery(getProjectsQueryOptions());
 
   if (!projects.length) {

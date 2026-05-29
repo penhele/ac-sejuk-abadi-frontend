@@ -41,7 +41,7 @@ export default function ProjectDetailPage() {
 
         <ErrorBoundary fallback={<ErrorFallback />}>
           <Suspense fallback={<ProjectFallback />}>
-            <ProjectGrid />
+            <ProjectGrid limit={4} />
           </Suspense>
         </ErrorBoundary>
       </section>

@@ -35,7 +35,7 @@ export const getProductByIdQueryOptions = (id: string) => {
 export const getProductsInfiniteQueryOptions = (params?: GetProductOptions) => {
   return infiniteQueryOptions({
     queryKey: ["products", "infinite", params],
-    queryFn: ({ pageParam }) => getProducts({ ...params, page: pageParam }),
+    queryFn: ({ pageParam }) => getProducts({ ...params, page: pageParam, limit: 24 }),
     staleTime: 1000 * 60 * 5,
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {

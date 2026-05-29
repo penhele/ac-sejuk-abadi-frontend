@@ -1,10 +1,10 @@
-import { getProductsQueryOptions } from "@/hooks/queries/product-queries";
-import { deleteProduct } from "@/services/product.service";
+import { getCategoriesQueryOptions } from "@/hooks/queries/category-queries";
+import { deleteCategory } from "@/services/category.service";
 import { Category } from "@/types/category";
 import { ColumnDef } from "@tanstack/react-table";
 import { EllipsisIcon } from "lucide-react";
+import CategoryBadge from "../badges/category-badge";
 import DeleteButton from "../buttons/delete-button";
-import EditButton from "../buttons/edit-button";
 import { Button } from "../ui/button";
 import {
   DropdownMenu,
@@ -12,9 +12,6 @@ import {
   DropdownMenuGroup,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { getCategoriesQueryOptions } from "@/hooks/queries/category-queries";
-import { deleteCategory } from "@/services/category.service";
-import CategoryBadge from "../badges/category-badge";
 
 export const categoryColumns: ColumnDef<Category>[] = [
   {
