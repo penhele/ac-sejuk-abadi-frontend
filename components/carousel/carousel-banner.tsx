@@ -42,7 +42,7 @@ export default function CarouselBanner() {
               <img
                 src={banner.image_url}
                 alt={banner.name}
-                className="object-cover w-full h-full"
+                className="object-contain w-full h-full bg-muted"
               />
             </AspectRatio>
           </CarouselItem>
