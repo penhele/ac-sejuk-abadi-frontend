@@ -21,6 +21,7 @@ export default function ProductCard({ product }: { product: Product }) {
       <Link
         href={ROUTES.PRODUCT_DETAIL(product.id)}
         className="absolute inset-0 z-10"
+        prefetch={false}
       />
 
       <CarouselProductBasic images={product.images} className="z-20" />
