@@ -80,6 +80,7 @@ export default function ProductImageGallery({
                   src={img.image_url}
                   alt={`${product.name}-image-${index}`}
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
                   priority={index === 0}
                   className="object-cover"
                 />

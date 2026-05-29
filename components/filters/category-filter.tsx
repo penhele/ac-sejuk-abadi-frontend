@@ -11,11 +11,17 @@ import { Checkbox } from "../ui/checkbox";
 import { Field, FieldGroup, FieldLabel } from "../ui/field";
 import { getCategoriesQueryOptions } from "@/hooks/queries/category-queries";
 import useProductFilters from "@/hooks/use-product-filters";
+import { useEffect, useState } from "react";
 
 export default function CategoryFilter() {
+  const [isMounted, setIsMounted] = useState(false); // 2. Buat state mounted
   const { data: categories } = useQuery(getCategoriesQueryOptions());
 
   const { id_category, setFilters } = useProductFilters();
+
+  useEffect(() => {
+    setIsMounted(true); // 3. Set true setelah di-mount di client
+  }, []);
 
   const handleCategoryChange = (categoryId: string, checked: boolean) => {
     if (checked) {
@@ -24,6 +30,10 @@ export default function CategoryFilter() {
       setFilters({ id_category: undefined });
     }
   };
+
+  if (!isMounted) {
+    return <div className="animate-pulse h-10 bg-gray-100 rounded" />;
+  }
 
   return (
     <Accordion type="single" collapsible defaultValue="category">
@@ -42,7 +52,7 @@ export default function CategoryFilter() {
                 >
                   <div className="flex gap-2">
                     <Checkbox
-                      id={`brand-${category.id}`}
+                      id={`category-${category.id}`}
                       checked={isChecked}
                       onCheckedChange={(checked) =>
                         handleCategoryChange(
@@ -52,7 +62,7 @@ export default function CategoryFilter() {
                       }
                     />
                     <FieldLabel
-                      htmlFor={`brand-${category.id}`}
+                      htmlFor={`category-${category.id}`}
                       className="font-normal text-xs "
                     >
                       {category.name}

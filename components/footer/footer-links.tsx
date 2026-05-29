@@ -6,11 +6,18 @@ import { getCategoriesQueryOptions } from "@/hooks/queries/category-queries";
 import { cn } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
+import { useState, useEffect } from "react";
 
 export default function FooterLinks({ className }: { className?: string }) {
   const { data: responseSponsoredBrands } = useQuery(
     getSponsoredBrandsQueryOptions(),
   );
+
+  const [isMounted, setIsMounted] = useState(false); // 2. Track mount status
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const sposoredBrands = responseSponsoredBrands || [];
 
@@ -24,6 +31,10 @@ export default function FooterLinks({ className }: { className?: string }) {
     { name: "Portofolio", href: ROUTES.PORTOFOLIO },
     { name: "Edukasi", href: ROUTES.EDUCATION },
   ];
+
+  if (!isMounted) {
+    return <div className={cn("grid grid-cols-3", className)}>Loading...</div>;
+  }
 
   return (
     <div className={cn("grid grid-cols-3", className)}>
