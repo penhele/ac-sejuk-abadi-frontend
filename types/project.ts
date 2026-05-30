@@ -1,5 +1,4 @@
-import { ProjectImages } from "./image";
-import { Product } from "./product";
+import { ProductImages, ProjectImages } from "./image";
 
 export interface Project {
   id: number;
@@ -16,7 +15,7 @@ export interface ProjectProduct {
   id: number;
   id_project: number;
   id_product: string;
-  product: Product;
+  product: ProjectProductData;
 }
 
 export interface CreateProjectPayload {
@@ -26,4 +25,20 @@ export interface CreateProjectPayload {
   location: string;
   category: string;
   id_products: string[];
+}
+
+export interface ProjectProductData {
+  id: string;
+  id_brand: number;
+  id_category: number;
+  id_ac_type: number;
+  name: string;
+  description: string;
+  price: string;
+  quantity: number;
+  pk: string;
+  created_at: string;
+  updated_at: string;
+  is_deleted: boolean;
+  images: ProductImages[];
 }

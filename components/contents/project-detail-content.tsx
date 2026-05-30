@@ -4,15 +4,12 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { Building2, Calendar, ImageOff, MapPin } from "lucide-react";
 import Image from "next/image";
 import { DescriptionSection, HeaderSection } from "../util/header";
-import ProductCard from "../cards/product-card";
 
 export default function ProjectDetailContent({ id }: { id: string }) {
   const { data: project } = useSuspenseQuery({
     queryKey: ["projects", id],
     queryFn: () => getProjectById(id),
   });
-
-  const products = project.products.map((product) => product.product);
 
   return (
     <div className="space-y-between-section">

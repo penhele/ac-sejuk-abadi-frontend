@@ -1,4 +1,4 @@
-"use";
+"use client";
 
 import { ProductImages } from "@/types/image";
 import Image from "next/image";
@@ -6,13 +6,24 @@ import { Carousel, CarouselContent, CarouselItem } from "../ui/carousel";
 
 export default function CarouselProductBasic({
   images,
-  className
+  className,
 }: {
   images: ProductImages[];
-  className?:string
+  className?: string;
 }) {
+  const stopPropagation = (
+    e: React.MouseEvent | React.TouchEvent | React.PointerEvent,
+  ) => {
+    e.stopPropagation();
+  };
+
   return (
-    <Carousel className={className}>
+    <Carousel
+      className={className}
+      onPointerDown={stopPropagation}
+      onMouseDown={stopPropagation}
+      onTouchStart={stopPropagation}
+    >
       <CarouselContent>
         {images.map((image) => (
           <CarouselItem key={image.id}>
