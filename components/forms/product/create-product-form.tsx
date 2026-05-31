@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import ProductForm from "./product-form";
 import { addProduct } from "@/features/product/api/add-product";
-import { productKeys } from "@/features/product/queries";
+import { productKeys } from "@/features/product";
 
 export default function CreateProductForm() {
   const queryClient = useQueryClient();
