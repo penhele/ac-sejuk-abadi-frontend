@@ -1,5 +1,10 @@
 import { ROUTES } from "@/constants/routes";
-import { addProject, projectKeys, useProject } from "@/features/project";
+import {
+  projectKeys,
+  UpdateProjectPayload,
+  useProject,
+} from "@/features/project";
+import { updateProject } from "@/features/project/api/update-project";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -12,22 +17,24 @@ export default function EditProjectForm({ id }: { id: string }) {
   const { data: projects, isFetching } = useProject(id);
 
   const { mutateAsync } = useMutation({
-    mutationFn: addProject,
+    mutationFn: (data: UpdateProjectPayload) => updateProject(id, data),
     onMutate() {
       const toastId = toast.loading("Updating...");
       return { toastId };
     },
     onSuccess(_, __, context) {
-      toast.success("Berhasil menambahkan project", { id: context.toastId });
+      toast.success("Berhasil update project", { id: context.toastId });
       router.push(ROUTES.DASHBOARD_PROJECT);
       queryClient.invalidateQueries({
         queryKey: projectKeys.all,
       });
     },
-    onError(_, __, context) {
-      toast.error("Gagal menambahkan project", {
+
+    onError(error, __, context) {
+      toast.error("Gagal update project", {
         id: context?.toastId,
       });
+      console.log(error.message);
     },
   });
 
@@ -40,7 +47,7 @@ export default function EditProjectForm({ id }: { id: string }) {
         date: projects?.date || "",
         location: projects?.location || "",
         category: projects?.category || "",
-        id_products: projects?.products.map((item) => item.product.id) || [],
+        id_products: projects?.products.map((item) => item.product.name) || [],
       }}
       onSubmit={async (value) => {
         await mutateAsync(value);
