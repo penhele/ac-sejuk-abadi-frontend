@@ -1,7 +1,6 @@
 "use client";
 
-import { getProjectsQueryOptions } from "@/hooks/queries/project-queries";
-import { useQuery } from "@tanstack/react-query";
+import { useProjects } from "@/features/project";
 import { EmblaCarouselType } from "embla-carousel";
 import WheelGesturesPlugin from "embla-carousel-wheel-gestures";
 import { useCallback, useEffect, useState } from "react";
@@ -15,7 +14,7 @@ import {
 import { Slider } from "../ui/slider";
 
 export default function CarouselProject() {
-  const { data } = useQuery(getProjectsQueryOptions());
+  const { data } = useProjects();
 
   const projects = data || [];
 

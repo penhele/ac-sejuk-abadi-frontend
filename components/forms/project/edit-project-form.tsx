@@ -1,11 +1,7 @@
-import { useRouter } from "next/navigation";
 import { ROUTES } from "@/constants/routes";
-import {
-  getProjectByIdQueryOptions,
-  getProjectsQueryOptions,
-} from "@/hooks/queries/project-queries";
-import { addProject } from "@/services/project.service";
-import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query";
+import { addProject, projectKeys, useProject } from "@/features/project";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import ProjectForm from "./project-form";
 
@@ -13,9 +9,7 @@ export default function EditProjectForm({ id }: { id: string }) {
   const router = useRouter();
   const queryClient = useQueryClient();
 
-  const { data: projects, isFetching } = useQuery(
-    getProjectByIdQueryOptions(id),
-  );
+  const { data: projects, isFetching } = useProject(id);
 
   const { mutateAsync } = useMutation({
     mutationFn: addProject,
@@ -27,7 +21,7 @@ export default function EditProjectForm({ id }: { id: string }) {
       toast.success("Berhasil menambahkan project", { id: context.toastId });
       router.push(ROUTES.DASHBOARD_PROJECT);
       queryClient.invalidateQueries({
-        queryKey: getProjectsQueryOptions().queryKey,
+        queryKey: projectKeys.all,
       });
     },
     onError(_, __, context) {

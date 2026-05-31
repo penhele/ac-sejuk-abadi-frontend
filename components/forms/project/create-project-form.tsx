@@ -1,8 +1,7 @@
 "use client";
 
 import { ROUTES } from "@/constants/routes";
-import { getProjectsQueryOptions } from "@/hooks/queries/project-queries";
-import { addProject } from "@/services/project.service";
+import { addProject, projectKeys } from "@/features/project";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -22,7 +21,7 @@ export default function CreateProjectForm() {
       toast.success("Berhasil menambahkan project", { id: context?.toastId });
       router.push(ROUTES.DASHBOARD_PROJECT);
       queryClient.invalidateQueries({
-        queryKey: getProjectsQueryOptions().queryKey,
+        queryKey: projectKeys.all,
       });
     },
     onError(_, __, context) {

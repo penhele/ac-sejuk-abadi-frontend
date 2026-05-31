@@ -4,14 +4,12 @@ import { DataTable } from "@/components/tables/data-table";
 import { projectColumns } from "@/components/tables/project-column";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/constants/routes";
-import { getProjectsQueryOptions } from "@/hooks/queries/project-queries";
-import { useQuery } from "@tanstack/react-query";
+import { useProjects } from "@/features/project";
 import { Plus } from "lucide-react";
 import Link from "next/link";
 
 export default function ProjectPage() {
-  const { data: projects } = useQuery(getProjectsQueryOptions());
-
+  const { data: projects } = useProjects();
   return (
     <div className="space-y-between-items">
       <div className="flex justify-between items-center">

@@ -1,10 +1,10 @@
 import { ROUTES } from "@/constants/routes";
-import { Project } from "@/types/project";
 import { ArrowRight, ImageOff } from "lucide-react";
 import Link from "next/link";
 import { AspectRatio } from "../ui/aspect-ratio";
 import { DescriptionCard, TitleCard } from "../util/card-content";
 import Image from "next/image";
+import { Project } from "@/features/project";
 
 export default function ProjectCard({ project }: { project: Project }) {
   return (

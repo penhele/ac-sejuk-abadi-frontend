@@ -1,6 +1,7 @@
-import { getProjectsQueryOptions } from "@/hooks/queries/project-queries";
+import { ROUTES } from "@/constants/routes";
+import { projectKeys } from "@/features/project";
+import { deleteProject } from "@/features/project";
 import { formatDate } from "@/lib/format/date";
-import { deleteProject } from "@/services/project.service";
 import { Project } from "@/types/project";
 import { ColumnDef } from "@tanstack/react-table";
 import { EllipsisIcon } from "lucide-react";
@@ -14,7 +15,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { ROUTES } from "@/constants/routes";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
 export const projectColumns: ColumnDef<Project>[] = [
@@ -93,7 +93,7 @@ export const projectColumns: ColumnDef<Project>[] = [
             <EditButton href={ROUTES.DASHBOARD_EDIT_PROJECT(row.original.id)} />
             <DeleteButton
               mutationFn={deleteProject}
-              queryKey={getProjectsQueryOptions().queryKey}
+              queryKey={projectKeys.all}
               id={row.original.id}
             />
           </DropdownMenuGroup>

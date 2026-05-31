@@ -1,16 +1,22 @@
+import { useProject } from "@/features/project";
 import { formatDate } from "@/lib/format/date";
-import { getProjectById } from "@/services/project.service";
-import { useSuspenseQuery } from "@tanstack/react-query";
 import { Building2, Calendar, ImageOff, MapPin } from "lucide-react";
 import Image from "next/image";
+import ErrorFallback from "../fallback/error-fallback";
+import ProjectFallback from "../fallback/project-fallback";
 import { DescriptionSection, HeaderSection } from "../util/header";
 import ProductCard from "../cards/product-card";
 
 export default function ProjectDetailContent({ id }: { id: string }) {
-  const { data: project } = useSuspenseQuery({
-    queryKey: ["projects", id],
-    queryFn: () => getProjectById(id),
-  });
+  const { data: project, isLoading } = useProject(id);
+
+  if (isLoading) {
+    return <ProjectFallback />;
+  }
+
+  if (!project) {
+    return <ErrorFallback />;
+  }
 
   const products = project.products.map((product) => product.product);
 
@@ -73,11 +79,11 @@ export default function ProjectDetailContent({ id }: { id: string }) {
         <DescriptionSection description={project.description} />
       </div>
 
-      {/* <div className="grid grid-cols-4">
+      <div className="grid grid-cols-4">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
-      </div> */}
+      </div>
     </div>
   );
 }

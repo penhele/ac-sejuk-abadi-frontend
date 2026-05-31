@@ -1,13 +1,13 @@
 "use client";
 
-import { getProjectsQueryOptions } from "@/hooks/queries/project-queries";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useProjects } from "@/features/project";
 import { SearchX } from "lucide-react";
 import ProjectCard from "../cards/project-card";
 import EmptyState from "../empty-state/empty-state";
 
 export default function ProjectGrid({ limit }: { limit?: number }) {
-  const { data: projects } = useSuspenseQuery(getProjectsQueryOptions());
+  const { data } = useProjects();
+  const projects = data || [];
 
   if (!projects.length) {
     return <EmptyState Icon={SearchX} label="No projects found" />;
