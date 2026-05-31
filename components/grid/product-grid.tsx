@@ -1,13 +1,12 @@
 "use client";
 
-import { getProductsInfiniteQueryOptions } from "@/hooks/queries/product-queries";
+import getProductsInfinite from "@/features/product/hooks/use-products-infinite";
 import useProductFilters from "@/hooks/use-product-filters";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { cn } from "@/lib/utils";
 import { SearchX } from "lucide-react";
 import ProductCard from "../cards/product-card";
 import EmptyState from "../empty-state/empty-state";
 import ProductFallback from "../fallback/product-fallback";
-import { cn } from "@/lib/utils";
 
 export default function ProductGrid({
   className,
@@ -27,19 +26,17 @@ export default function ProductGrid({
     max_price,
   } = useProductFilters();
 
-  const { data, isPending, isError } = useInfiniteQuery(
-    getProductsInfiniteQueryOptions({
-      search,
-      sortBy,
-      sortOrder,
-      id_brand,
-      id_ac_type,
-      id_category,
-      min_price,
-      max_price,
-      limit: length,
-    }),
-  );
+  const { data, isPending, isError } = getProductsInfinite({
+    search,
+    sortBy,
+    sortOrder,
+    id_brand,
+    id_category,
+    id_ac_type,
+    min_price,
+    max_price,
+    limit: length,
+  });
 
   const products = data?.pages?.flatMap((page) => page?.data ?? []) ?? [];
 

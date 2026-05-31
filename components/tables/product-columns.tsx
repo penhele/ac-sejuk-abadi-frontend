@@ -1,11 +1,13 @@
-import { getProductsQueryOptions } from "@/hooks/queries/product-queries";
+import { ROUTES } from "@/constants/routes";
+import { productKeys } from "@/features/queries/product-keys";
 import { formatNumber } from "@/lib/format/currency";
-import { deleteProduct } from "@/services/product.service";
 import { Product } from "@/types/product";
 import { ColumnDef } from "@tanstack/react-table";
 import { formatDistanceToNow } from "date-fns";
 import { ArrowUpDown, EllipsisIcon } from "lucide-react";
+import AcProductTypeBadge from "../badges/ac-type-badge";
 import CategoryBadge from "../badges/category-badge";
+import PkBadge from "../badges/pk-badge";
 import DeleteButton from "../buttons/delete-button";
 import EditButton from "../buttons/edit-button";
 import { Button } from "../ui/button";
@@ -15,9 +17,7 @@ import {
   DropdownMenuGroup,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import AcProductTypeBadge from "../badges/ac-type-badge";
-import PkBadge from "../badges/pk-badge";
-import { ROUTES } from "@/constants/routes";
+import { deleteProduct } from "@/features/product/api/delete-product";
 
 export const productColumns: ColumnDef<Product>[] = [
   {
@@ -113,7 +113,7 @@ export const productColumns: ColumnDef<Product>[] = [
             <EditButton href={ROUTES.EDIT_PRODUCT(row.original.id)} />
             <DeleteButton
               mutationFn={deleteProduct}
-              queryKey={getProductsQueryOptions().queryKey}
+              queryKey={productKeys.all}
               id={row.original.id}
             />
           </DropdownMenuGroup>

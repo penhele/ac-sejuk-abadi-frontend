@@ -11,7 +11,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { getAcTypesQueryOptions } from "@/hooks/queries/ac-type-queries";
 import { getBrandsQueryOptions } from "@/hooks/queries/brand-queries";
 import { getCategoriesQueryOptions } from "@/hooks/queries/category-queries";
-import { getProductsInfiniteQueryOptions } from "@/hooks/queries/product-queries";
 import {
   dehydrate,
   HydrationBoundary,
@@ -20,6 +19,7 @@ import {
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "../../../fallback/error-fallback";
+import { getProductsInfiniteQueryOptions } from "@/features/queries/product-queries";
 
 export default async function ShopPage() {
   const queryClient = new QueryClient();

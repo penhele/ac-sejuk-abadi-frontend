@@ -1,10 +1,8 @@
-import { X } from "lucide-react";
-import { Button } from "../ui/button";
+import { productKeys } from "@/features/queries/product-keys";
 import { cn } from "@/lib/utils";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteImage } from "@/services/product.service";
+import { X } from "lucide-react";
 import { toast } from "sonner";
-import { getProductByIdQueryOptions } from "@/hooks/queries/product-queries";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -16,7 +14,8 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
-import { id } from "date-fns/locale";
+import { Button } from "../ui/button";
+import { deleteProductImage } from "@/features/product/api/delete-product-image";
 
 export default function DeleteImageButton({
   className,
@@ -30,7 +29,7 @@ export default function DeleteImageButton({
   const queryClient = useQueryClient();
 
   const { mutate } = useMutation({
-    mutationFn: () => deleteImage(idProduct, idImage),
+    mutationFn: () => deleteProductImage(idProduct, idImage),
     onMutate() {
       const toastId = toast.loading("Loading...");
       return { toastId };
@@ -38,9 +37,9 @@ export default function DeleteImageButton({
     onSuccess(_, __, context) {
       toast.success("Berhasil menghapus gambar", { id: context.toastId });
 
-      queryClient.invalidateQueries(
-        getProductByIdQueryOptions(idProduct.toString()),
-      );
+      queryClient.invalidateQueries({
+        queryKey: productKeys.all,
+      });
     },
     onError(_, __, context) {
       toast.error("Gagal menghapus error", { id: context?.toastId });

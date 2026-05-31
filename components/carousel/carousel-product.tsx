@@ -1,9 +1,10 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import useProducts from "@/features/product/hooks/use-products";
+import { GetProductOptions } from "@/types/product";
 import { EmblaCarouselType } from "embla-carousel";
-import { getProductsInfiniteQueryOptions } from "@/hooks/queries/product-queries";
+import WheelGesturesPlugin from "embla-carousel-wheel-gestures";
+import { useCallback, useEffect, useState } from "react";
 import ProductCard from "../cards/product-card";
 import {
   Carousel,
@@ -12,8 +13,6 @@ import {
   CarouselItem,
 } from "../ui/carousel";
 import { Slider } from "../ui/slider";
-import WheelGesturesPlugin from "embla-carousel-wheel-gestures";
-import { GetProductOptions } from "@/types/product";
 
 export default function CarouselProduct({
   limit,
@@ -22,14 +21,8 @@ export default function CarouselProduct({
   limit: number;
   params?: GetProductOptions;
 }) {
-  const { data } = useInfiniteQuery(
-    getProductsInfiniteQueryOptions({
-      limit,
-      ...params,
-    }),
-  );
-
-  const products = data?.pages?.flatMap((page) => page?.data ?? []) ?? [];
+  const { data } = useProducts({ limit, ...params });
+  const products = data?.data || [];
 
   const [api, setApi] = useState<CarouselApi>();
   const [progress, setProgress] = useState(0);

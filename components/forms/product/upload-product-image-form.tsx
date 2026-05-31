@@ -1,10 +1,10 @@
 "use client";
 
 import CancelButton from "@/components/buttons/cancel-button";
-import { getProductByIdQueryOptions } from "@/hooks/queries/product-queries";
+import { uploadProductImages } from "@/features/product/api/upload-product-images";
+import { productKeys } from "@/features/queries/product-keys";
 import { useAppForm } from "@/hooks/use-app-form";
 import { uploadProductImageSchema } from "@/schemas/product.schema";
-import { uploadImages } from "@/services/product.service";
 import { UploadImagePayload } from "@/types/product";
 import { revalidateLogic } from "@tanstack/react-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -14,7 +14,7 @@ export default function UploadProductImageForm({ id }: { id: string }) {
   const queryClient = useQueryClient();
 
   const { mutateAsync } = useMutation({
-    mutationFn: (data: UploadImagePayload) => uploadImages(id, data),
+    mutationFn: (data: UploadImagePayload) => uploadProductImages(id, data),
     onMutate(variables, context) {
       const toastId = toast.loading("Loading...");
       return { toastId };
@@ -24,7 +24,9 @@ export default function UploadProductImageForm({ id }: { id: string }) {
         id: onMutateResult.toastId,
       });
       form.reset();
-      queryClient.invalidateQueries(getProductByIdQueryOptions(id));
+      queryClient.invalidateQueries({
+        queryKey: productKeys.all,
+      });
     },
     onError(error, variables, onMutateResult, context) {
       toast.error("Gagal menambahkan gambar", { id: onMutateResult?.toastId });

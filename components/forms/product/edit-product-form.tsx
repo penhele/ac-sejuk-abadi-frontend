@@ -1,30 +1,26 @@
 "use client";
 
 import { ROUTES } from "@/constants/routes";
-import {
-  getProductByIdQueryOptions,
-  getProductsQueryOptions,
-} from "@/hooks/queries/product-queries";
-import { updateProduct } from "@/services/product.service";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import useProduct from "@/features/product/hooks/use-product";
+import { productKeys } from "@/features/queries/product-keys";
+import { UpdateProductPayload } from "@/types/product";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import ProductForm from "./product-form";
-import { UpdateProductPayload } from "@/types/product";
+import { updateProduct } from "@/features/product/api/update-product";
 
 export default function EditProductForm({ id }: { id: string }) {
   const queryClient = useQueryClient();
   const router = useRouter();
 
-  const { data: products, isFetching } = useQuery(
-    getProductByIdQueryOptions(id),
-  );
+  const { data: products, isFetching } = useProduct(id);
 
   const { mutateAsync } = useMutation({
     mutationFn: (payload: UpdateProductPayload) => updateProduct(id, payload),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: getProductsQueryOptions().queryKey,
+        queryKey: productKeys.all,
       });
 
       toast.success("Produk berhasil diedit.");

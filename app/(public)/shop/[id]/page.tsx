@@ -1,5 +1,5 @@
 import ProductDetailPage from "@/components/pages/public/shop/product-detail-page";
-import { getProductById } from "@/services/product.service";
+import { getProductById } from "@/features/product/api";
 import { Metadata } from "next";
 
 type Props = {

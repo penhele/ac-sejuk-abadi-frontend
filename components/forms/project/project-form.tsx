@@ -1,14 +1,13 @@
 import { ROUTES } from "@/constants/routes";
-import Link from "next/link";
-import { Button } from "../../ui/button";
+import useProducts from "@/features/product/hooks/use-products";
+import { useAppForm } from "@/hooks/use-app-form";
 import {
   createProjectSchema,
   ProjectFormValues,
 } from "@/schemas/project.schema";
-import { useAppForm } from "@/hooks/use-app-form";
 import { revalidateLogic } from "@tanstack/react-form";
-import { getProductsQueryOptions } from "@/hooks/queries/product-queries";
-import { useQuery } from "@tanstack/react-query";
+import Link from "next/link";
+import { Button } from "../../ui/button";
 
 export default function ProjectForm({
   defaultValues,
@@ -35,7 +34,8 @@ export default function ProjectForm({
     },
   });
 
-  const { data: products } = useQuery(getProductsQueryOptions());
+  const { data: products } = useProducts();
+
   const productOptions =
     products?.data?.map((product) => ({
       name: product.name,

@@ -2,8 +2,7 @@ import ProductImages from "@/components/product/product-images";
 import ProductInfo from "@/components/product/product-info";
 import ProductPriceAction from "@/components/product/product-price-action";
 import { ROUTES } from "@/constants/routes";
-import { getProductById } from "@/services/product.service";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import useProduct from "@/features/product/hooks/use-product";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import CarouselProduct from "../carousel/carousel-product";
@@ -12,26 +11,26 @@ import ProductFallback from "../fallback/product-fallback";
 import { HeaderSection } from "../util/header";
 
 export default function ProductDetailContent({ id }: { id: string }) {
-  const { data: product } = useSuspenseQuery({
-    queryKey: ["products", id],
-    queryFn: () => getProductById(id),
-  });
+  const { data: product } = useProduct(id);
 
   return (
     <div className="space-y-between-section">
       <div className="grid grid-cols-2 gap-between-items-lg">
-        <ProductImages product={product} className="col-span-2 md:col-span-1" />
+        <ProductImages
+          product={product!}
+          className="col-span-2 md:col-span-1"
+        />
 
         <div className="flex flex-col gap-4 col-span-2 md:col-span-1">
-          <ProductInfo product={product} />
+          <ProductInfo product={product!} />
 
-          <ProductPriceAction product={product} />
+          <ProductPriceAction product={product!} />
         </div>
       </div>
       <div className="">
         <HeaderSection
           title="Produk Serupa"
-          href={`${ROUTES.SHOP}?id_category=${product.id_category}&id_ac_type=${product.id_ac_type}`}
+          href={`${ROUTES.SHOP}?id_category=${product?.id_category}&id_ac_type=${product?.id_ac_type}`}
         />
 
         <ErrorBoundary fallback={<ErrorFallback />}>
@@ -39,8 +38,8 @@ export default function ProductDetailContent({ id }: { id: string }) {
             <CarouselProduct
               limit={6}
               params={{
-                id_ac_type: product.id_ac_type,
-                id_category: product.id_category,
+                id_ac_type: product?.id_ac_type,
+                id_category: product?.id_category,
               }}
             />
           </Suspense>

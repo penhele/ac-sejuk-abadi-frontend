@@ -1,10 +1,11 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { getProjectsQueryOptions } from "@/hooks/queries/project-queries";
+import { useQuery } from "@tanstack/react-query";
 import { EmblaCarouselType } from "embla-carousel";
-import { getProductsInfiniteQueryOptions } from "@/hooks/queries/product-queries";
-import ProductCard from "../cards/product-card";
+import WheelGesturesPlugin from "embla-carousel-wheel-gestures";
+import { useCallback, useEffect, useState } from "react";
+import ProjectCard from "../cards/project-card";
 import {
   Carousel,
   CarouselApi,
@@ -12,9 +13,6 @@ import {
   CarouselItem,
 } from "../ui/carousel";
 import { Slider } from "../ui/slider";
-import WheelGesturesPlugin from "embla-carousel-wheel-gestures";
-import { getProjectsQueryOptions } from "@/hooks/queries/project-queries";
-import ProjectCard from "../cards/project-card";
 
 export default function CarouselProject() {
   const { data } = useQuery(getProjectsQueryOptions());

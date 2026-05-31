@@ -1,10 +1,9 @@
-import { getProductByIdQueryOptions } from "@/hooks/queries/product-queries";
-import { useQuery } from "@tanstack/react-query";
+import useProduct from "@/features/product/hooks/use-product";
 import Image from "next/image";
 import DeleteImageButton from "../buttons/delete-image-button";
 
 export default function ImageGrid({ id }: { id: string }) {
-  const { data: products } = useQuery(getProductByIdQueryOptions(id));
+  const { data: products } = useProduct(id);
 
   return (
     <div className="grid grid-cols-4 gap-between-card">
