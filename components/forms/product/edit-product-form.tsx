@@ -2,13 +2,13 @@
 
 import { ROUTES } from "@/constants/routes";
 import useProduct from "@/features/product/hooks/use-product";
-import { productKeys } from "@/features/queries/product-keys";
 import { UpdateProductPayload } from "@/types/product";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import ProductForm from "./product-form";
 import { updateProduct } from "@/features/product/api/update-product";
+import { productKeys } from "@/features/product/queries";
 
 export default function EditProductForm({ id }: { id: string }) {
   const queryClient = useQueryClient();

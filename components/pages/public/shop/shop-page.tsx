@@ -19,7 +19,7 @@ import {
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "../../../fallback/error-fallback";
-import { getProductsInfiniteQueryOptions } from "@/features/queries/product-queries";
+import { getProductsInfiniteQueryOptions } from "@/features/product/queries";
 
 export default async function ShopPage() {
   const queryClient = new QueryClient();

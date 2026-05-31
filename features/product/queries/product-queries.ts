@@ -4,10 +4,9 @@ import {
   queryOptions,
   UseQueryOptions,
 } from "@tanstack/react-query";
-import { GetProductOptions } from "../product/types/product-options";
-import { getProducts } from "../product/api/get-products";
-import { productKeys } from "./product-keys";
-import { getProductById } from "../product/api";
+import { getProducts, getProductById } from "../api";
+import { GetProductOptions } from "../types/product-options";
+import { productKeys } from ".";
 
 export const getProductsQueryOptions = <
   TData = ProductResponse,

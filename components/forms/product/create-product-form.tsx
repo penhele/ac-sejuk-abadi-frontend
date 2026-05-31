@@ -1,12 +1,12 @@
 "use client";
 
 import { ROUTES } from "@/constants/routes";
-import { productKeys } from "@/features/queries/product-keys";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import ProductForm from "./product-form";
 import { addProduct } from "@/features/product/api/add-product";
+import { productKeys } from "@/features/product/queries";
 
 export default function CreateProductForm() {
   const queryClient = useQueryClient();

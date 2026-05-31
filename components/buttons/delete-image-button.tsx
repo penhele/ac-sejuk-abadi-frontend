@@ -1,4 +1,3 @@
-import { productKeys } from "@/features/queries/product-keys";
 import { cn } from "@/lib/utils";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { X } from "lucide-react";
@@ -16,6 +15,8 @@ import {
 } from "../ui/alert-dialog";
 import { Button } from "../ui/button";
 import { deleteProductImage } from "@/features/product/api/delete-product-image";
+import { productKeys } from "@/features/product/queries/product-keys";
+
 
 export default function DeleteImageButton({
   className,

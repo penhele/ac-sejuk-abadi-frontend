@@ -1,5 +1,4 @@
 import { ROUTES } from "@/constants/routes";
-import { productKeys } from "@/features/queries/product-keys";
 import { formatNumber } from "@/lib/format/currency";
 import { Product } from "@/types/product";
 import { ColumnDef } from "@tanstack/react-table";
@@ -18,6 +17,7 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { deleteProduct } from "@/features/product/api/delete-product";
+import { productKeys } from "@/features/product/queries";
 
 export const productColumns: ColumnDef<Product>[] = [
   {
