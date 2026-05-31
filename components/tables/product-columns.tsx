@@ -16,7 +16,7 @@ import {
   DropdownMenuGroup,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { deleteProduct } from "@/features/product/api/delete-product";
+import { deleteProduct } from "@/features/product";
 import { productKeys } from "@/features/product";
 
 export const productColumns: ColumnDef<Product>[] = [

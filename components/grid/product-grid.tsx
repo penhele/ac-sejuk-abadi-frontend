@@ -1,6 +1,6 @@
 "use client";
 
-import getProductsInfinite from "@/features/product/hooks/use-products-infinite";
+import { useProductsInfinite } from "@/features/product";
 import useProductFilters from "@/hooks/use-product-filters";
 import { cn } from "@/lib/utils";
 import { SearchX } from "lucide-react";
@@ -26,16 +26,15 @@ export default function ProductGrid({
     max_price,
   } = useProductFilters();
 
-  const { data, isPending, isError } = getProductsInfinite({
+  const { data, isPending, isError } = useProductsInfinite({
     search,
     sortBy,
     sortOrder,
     id_brand,
-    id_category,
     id_ac_type,
+    id_category,
     min_price,
     max_price,
-    limit: length,
   });
 
   const products = data?.pages?.flatMap((page) => page?.data ?? []) ?? [];

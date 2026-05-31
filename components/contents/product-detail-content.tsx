@@ -2,7 +2,7 @@ import ProductImages from "@/components/product/product-images";
 import ProductInfo from "@/components/product/product-info";
 import ProductPriceAction from "@/components/product/product-price-action";
 import { ROUTES } from "@/constants/routes";
-import useProduct from "@/features/product/hooks/use-product";
+import { useProduct } from "@/features/product";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import CarouselProduct from "../carousel/carousel-product";
@@ -11,20 +11,24 @@ import ProductFallback from "../fallback/product-fallback";
 import { HeaderSection } from "../util/header";
 
 export default function ProductDetailContent({ id }: { id: string }) {
-  const { data: product } = useProduct(id);
+  const { data: product, isLoading } = useProduct(id);
 
+  if (isLoading) {
+    return <ProductFallback />;
+  }
+
+  if (!product) {
+    return <ErrorFallback />;
+  }
   return (
     <div className="space-y-between-section">
       <div className="grid grid-cols-2 gap-between-items-lg">
-        <ProductImages
-          product={product!}
-          className="col-span-2 md:col-span-1"
-        />
+        <ProductImages product={product} className="col-span-2 md:col-span-1" />
 
         <div className="flex flex-col gap-4 col-span-2 md:col-span-1">
-          <ProductInfo product={product!} />
+          <ProductInfo product={product} />
 
-          <ProductPriceAction product={product!} />
+          <ProductPriceAction product={product} />
         </div>
       </div>
       <div className="">

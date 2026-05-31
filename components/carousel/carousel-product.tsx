@@ -1,6 +1,6 @@
 "use client";
 
-import useProducts from "@/features/product/hooks/use-products";
+import { useProducts } from "@/features/product";
 import { GetProductOptions } from "@/types/product";
 import { EmblaCarouselType } from "embla-carousel";
 import WheelGesturesPlugin from "embla-carousel-wheel-gestures";

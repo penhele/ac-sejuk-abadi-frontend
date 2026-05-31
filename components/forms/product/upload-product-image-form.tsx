@@ -1,7 +1,7 @@
 "use client";
 
 import CancelButton from "@/components/buttons/cancel-button";
-import { uploadProductImages } from "@/features/product/api/upload-product-images";
+import { uploadProductImages } from "@/features/product";
 import { productKeys } from "@/features/product";
 import { useAppForm } from "@/hooks/use-app-form";
 import { uploadProductImageSchema } from "@/schemas/product.schema";

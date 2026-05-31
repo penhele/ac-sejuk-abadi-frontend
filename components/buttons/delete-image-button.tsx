@@ -14,9 +14,8 @@ import {
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
 import { Button } from "../ui/button";
-import { deleteProductImage } from "@/features/product/api/delete-product-image";
-import { productKeys } from "@/features/product/queries/product-keys";
-
+import { deleteProductImage } from "@/features/product";
+import { productKeys } from "@/features/product";
 
 export default function DeleteImageButton({
   className,

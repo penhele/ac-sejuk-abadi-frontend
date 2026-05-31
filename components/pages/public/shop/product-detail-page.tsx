@@ -1,13 +1,9 @@
 "use client";
 
 import BreadcrumbComponent from "@/components/breadcrumb-component";
-import CarouselProduct from "@/components/carousel/carousel-product";
 import ProductDetailContent from "@/components/contents/product-detail-content";
 import ErrorFallback from "@/components/fallback/error-fallback";
-import ProductFallback from "@/components/fallback/product-fallback";
 import ProductDetailSkeleton from "@/components/skeletons/product-detail-skeleton";
-import { HeaderSection } from "@/components/util/header";
-import { ROUTES } from "@/constants/routes";
 import { useParams } from "next/navigation";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";

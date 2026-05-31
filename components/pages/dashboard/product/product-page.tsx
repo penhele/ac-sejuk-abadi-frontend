@@ -9,7 +9,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { ROUTES } from "@/constants/routes";
-import useProducts from "@/features/product/hooks/use-products";
+import { useProducts } from "@/features/product";
 import { getBrandsQueryOptions } from "@/hooks/queries/brand-queries";
 import { useQuery } from "@tanstack/react-query";
 import { Info, Plus } from "lucide-react";

@@ -1,4 +1,4 @@
-import useProduct from "@/features/product/hooks/use-product";
+import { useProduct } from "@/features/product";
 import Image from "next/image";
 import DeleteImageButton from "../buttons/delete-image-button";
 

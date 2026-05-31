@@ -1,5 +1,5 @@
 import { ROUTES } from "@/constants/routes";
-import useProducts from "@/features/product/hooks/use-products";
+import { useProducts } from "@/features/product";
 import { useAppForm } from "@/hooks/use-app-form";
 import {
   createProjectSchema,
