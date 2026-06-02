@@ -20,7 +20,7 @@ export default function ProductDetailContent({ id }: { id: string }) {
   if (!product) {
     return <ErrorFallback />;
   }
-  
+
   return (
     <div className="space-y-between-section">
       <div className="grid grid-cols-2 gap-between-items-lg">

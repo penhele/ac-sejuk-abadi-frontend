@@ -1,14 +1,17 @@
 import { useFieldContext } from "@/hooks/use-app-form";
 import { formatNumber } from "@/lib/format/currency";
+import { cn } from "@/lib/utils";
+import { Eye, EyeOff } from "lucide-react";
+import { useState } from "react";
 import { FieldInfo } from "../field-info";
+import { Field, FieldLabel } from "../ui/field";
 import {
   InputGroup,
   InputGroupAddon,
+  InputGroupButton,
   InputGroupInput,
   InputGroupText,
 } from "../ui/input-group";
-import { Label } from "../ui/label";
-import { cn } from "@/lib/utils";
 
 export default function TextField({
   label,
@@ -29,10 +32,12 @@ export default function TextField({
 }) {
   const field = useFieldContext<string>();
 
+  const [showPassword, setShowPassword] = useState(false);
+
   return (
-    <div className={cn("space-y-between-items-xs", className)}>
+    <Field className={cn(className)}>
       <div className="flex justify-between items-center">
-        <Label>{label}</Label>
+        <FieldLabel>{label}</FieldLabel>
 
         <FieldInfo field={field} />
       </div>
@@ -57,11 +62,19 @@ export default function TextField({
           }}
           onBlur={field.handleBlur}
           placeholder={placeholder}
-          type={isPrice ? "text" : type}
+          type={showPassword ? "text" : type}
           disabled={isDisabled}
           readOnly={readOnly}
         />
+
+        {type === "password" && (
+          <InputGroupAddon align={"inline-end"}>
+            <InputGroupButton onClick={() => setShowPassword((prev) => !prev)}>
+              {showPassword ? <Eye /> : <EyeOff />}
+            </InputGroupButton>
+          </InputGroupAddon>
+        )}
       </InputGroup>
-    </div>
+    </Field>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import {useProductsInfinite} from "@/features/product";
+import { useProductsInfinite } from "@/features/product";
 import useProductFilters from "@/hooks/use-product-filters";
 import { cn } from "@/lib/utils";
 

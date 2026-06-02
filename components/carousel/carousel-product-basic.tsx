@@ -6,10 +6,10 @@ import { Carousel, CarouselContent, CarouselItem } from "../ui/carousel";
 
 export default function CarouselProductBasic({
   images,
-  className
+  className,
 }: {
   images: ProductImages[];
-  className?:string
+  className?: string;
 }) {
   return (
     <Carousel className={className}>

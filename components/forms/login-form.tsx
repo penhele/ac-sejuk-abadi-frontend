@@ -7,9 +7,9 @@ import { loginSchema } from "@/schemas/auth.schema";
 import { login } from "@/services/auth.service";
 import { LoginPayload } from "@/types/auth";
 import { useMutation } from "@tanstack/react-query";
-import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { FieldGroup } from "../ui/field";
 
 export default function LoginForm({ className }: { className?: string }) {
   const router = useRouter();
@@ -22,6 +22,7 @@ export default function LoginForm({ className }: { className?: string }) {
     },
     onError() {
       toast.error("Gagal login");
+      form.reset();
     },
   });
 
@@ -40,27 +41,29 @@ export default function LoginForm({ className }: { className?: string }) {
 
   return (
     <form.AppForm>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          form.handleSubmit();
-        }}
-        className={cn("space-y-between-items", className)}
-      >
-        <form.AppField
-          name="email"
-          children={(field) => <field.TextField label="Email" />}
-        />
+      <FieldGroup>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            form.handleSubmit();
+          }}
+          className={cn("space-y-between-items", className)}
+        >
+          <form.AppField
+            name="email"
+            children={(field) => <field.TextField label="Email" />}
+          />
 
-        <form.AppField
-          name="password"
-          children={(field) => (
-            <field.TextField type="password" label="Password" />
-          )}
-        />
+          <form.AppField
+            name="password"
+            children={(field) => (
+              <field.TextField type="password" label="Password" />
+            )}
+          />
 
-        <form.SubmitButton label="Submit" />
-      </form>
+          <form.SubmitButton label="Submit" />
+        </form>
+      </FieldGroup>
     </form.AppForm>
   );
 }
