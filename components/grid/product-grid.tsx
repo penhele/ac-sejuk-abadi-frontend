@@ -57,7 +57,7 @@ export default function ProductGrid({
         "grid grid-cols-2 gap-between-card",
         length === 3 && "xs:grid-cols-3 md:grid-cols-3",
         length === 4 && "xs:grid-cols-3 md:grid-cols-4",
-        !length && "xs:grid-cols-3",
+        !length && "xs:grid-cols-4",
       )}
     >
       {products.map((product) => (
