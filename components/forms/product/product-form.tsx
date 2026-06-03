@@ -10,7 +10,7 @@ import { formatNumber } from "@/lib/format/currency";
 import {
   createProductSchema,
   ProductFormValues,
-} from "@/schemas/product.schema";
+} from "@/features/product/schemas/product.schema";
 import { revalidateLogic } from "@tanstack/react-form";
 import { useQuery } from "@tanstack/react-query";
 

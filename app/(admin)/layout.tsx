@@ -1,8 +1,7 @@
 import { AppSidebar } from "@/components/sidebar/app-sidebar";
 import {
-  Sidebar,
   SidebarProvider,
-  SidebarTrigger,
+  SidebarTrigger
 } from "@/components/ui/sidebar";
 
 export default function AdminLayout({

@@ -1,15 +1,15 @@
 "use client";
 
+import { FieldGroup } from "@/components/ui/field";
 import { ROUTES } from "@/constants/routes";
 import { useAppForm } from "@/hooks/use-app-form";
 import { cn } from "@/lib/utils";
-import { loginSchema } from "@/schemas/auth.schema";
-import { login } from "@/services/auth.service";
-import { LoginPayload } from "@/types/auth";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { FieldGroup } from "../ui/field";
+import { login } from "../api/login";
+import { LoginPayload } from "../types/login-payload";
+import { loginSchema } from "../schemas/login.schema";
 
 export default function LoginForm({ className }: { className?: string }) {
   const router = useRouter();
@@ -51,13 +51,19 @@ export default function LoginForm({ className }: { className?: string }) {
         >
           <form.AppField
             name="email"
-            children={(field) => <field.TextField label="Email" />}
+            children={(field) => (
+              <field.TextField label="Email" placeholder="john@doe.com" />
+            )}
           />
 
           <form.AppField
             name="password"
             children={(field) => (
-              <field.TextField type="password" label="Password" />
+              <field.TextField
+                type="password"
+                label="Password"
+                placeholder="********"
+              />
             )}
           />
 

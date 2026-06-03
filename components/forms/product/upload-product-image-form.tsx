@@ -4,7 +4,7 @@ import CancelButton from "@/components/buttons/cancel-button";
 import { uploadProductImages } from "@/features/product";
 import { productKeys } from "@/features/product";
 import { useAppForm } from "@/hooks/use-app-form";
-import { uploadProductImageSchema } from "@/schemas/product.schema";
+import { uploadProductImageSchema } from "@/features/product/schemas/product.schema";
 import { UploadImagePayload } from "@/types/product";
 import { revalidateLogic } from "@tanstack/react-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";

@@ -1,13 +1,13 @@
 import { ROUTES } from "@/constants/routes";
 import { useProducts } from "@/features/product";
 import { useAppForm } from "@/hooks/use-app-form";
-import {
-  createProjectSchema,
-  ProjectFormValues,
-} from "@/schemas/project.schema";
 import { revalidateLogic } from "@tanstack/react-form";
 import Link from "next/link";
 import { Button } from "../../ui/button";
+import {
+  createProjectSchema,
+  ProjectFormValues,
+} from "@/features/project/schemas/project.schema";
 
 export default function ProjectForm({
   defaultValues,
