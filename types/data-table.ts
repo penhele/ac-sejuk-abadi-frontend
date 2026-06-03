@@ -13,4 +13,7 @@ export interface DataTableProps<TData, TValue> {
   onPaginationChange?: OnChangeFn<PaginationState>;
   pageCount?: number;
   rowCount?: number;
+
+  searchValue?: string;
+  onSearchChange?: (value: string) => void;
 }

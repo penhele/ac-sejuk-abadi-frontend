@@ -2,7 +2,7 @@ import { GetProductOptions } from "@/types/product";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 
-export default function useProductFilters() {
+export default function seProductFilters() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();

@@ -5,20 +5,17 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
+  SidebarGroupContent,
   SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem
 } from "@/components/ui/sidebar";
 import { ROUTES } from "@/constants/routes";
 import {
   AirVent,
   Building2,
-  ChevronRight,
   Cuboid,
   Layers2,
   Monitor,
@@ -27,13 +24,8 @@ import {
   Sun,
 } from "lucide-react";
 import { useTheme } from "next-themes";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "../ui/collapsible";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -46,16 +38,7 @@ export function AppSidebar() {
     {
       title: "Products",
       items: [
-        {
-          Icon: Package,
-          label: "Product",
-          href: ROUTES.PRODUCTS,
-          isActive: false,
-          items: [
-            { label: "Product", href: ROUTES.PRODUCTS },
-            { label: "Image", href: "#" },
-          ],
-        },
+        { Icon: Package, label: "Product", href: ROUTES.PRODUCTS },
         { Icon: Cuboid, label: "Brand", href: ROUTES.BRAND },
         { Icon: Layers2, label: "Category & Type", href: ROUTES.CATEGORY_TYPE },
       ],
@@ -85,69 +68,29 @@ export function AppSidebar() {
     setMounted(true);
   }, []);
 
+  const router = useRouter();
+
   return (
     <Sidebar variant="floating">
       <SidebarHeader />
       <SidebarContent>
-        {navProduct.map((group, groupIdx) => (
-          <SidebarGroup key={groupIdx}>
-            <SidebarGroupLabel>{group.title}</SidebarGroupLabel>
-            <SidebarMenu>
-              {group.items.map((subItem, subIdx) => {
-                const hasChildren =
-                  "items" in subItem &&
-                  Array.isArray(subItem.items) &&
-                  subItem.items.length > 0;
-
-                // JIKA MEMILIKI SUB-MENU (Menggunakan Collapsible)
-                if (hasChildren) {
-                  return (
-                    <Collapsible
-                      key={subIdx}
-                      asChild
-                      defaultOpen={subItem.isActive}
-                      className="group/collapsible"
+        {navProduct.map((item, index) => (
+          <SidebarGroup key={index}>
+            <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
+            <SidebarGroupContent>
+              {item.items.map((subItem, index) => (
+                <SidebarMenu key={index}>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton
+                      onClick={() => router.push(subItem.href)}
                     >
-                      <SidebarMenuItem>
-                        <CollapsibleTrigger asChild>
-                          <SidebarMenuButton tooltip={subItem.label}>
-                            <subItem.Icon />
-                            <span>{subItem.label}</span>
-                            <ChevronRight className="ml-auto h-4 w-4 transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
-                          </SidebarMenuButton>
-                        </CollapsibleTrigger>
-
-                        <CollapsibleContent>
-                          <SidebarMenuSub>
-                            {subItem.items?.map((subSubItem, childIdx) => (
-                              <SidebarMenuSubItem key={childIdx}>
-                                <SidebarMenuSubButton asChild>
-                                  <Link href={subSubItem.href}>
-                                    <span>{subSubItem.label}</span>
-                                  </Link>
-                                </SidebarMenuSubButton>
-                              </SidebarMenuSubItem>
-                            ))}
-                          </SidebarMenuSub>
-                        </CollapsibleContent>
-                      </SidebarMenuItem>
-                    </Collapsible>
-                  );
-                }
-
-                // JIKA MENU BIASA (Tanpa Sub-menu)
-                return (
-                  <SidebarMenuItem key={subIdx}>
-                    <SidebarMenuButton asChild tooltip={subItem.label}>
-                      <Link href={subItem.href}>
-                        <subItem.Icon />
-                        <span>{subItem.label}</span>
-                      </Link>
+                      <subItem.Icon />
+                      {subItem.label}
                     </SidebarMenuButton>
                   </SidebarMenuItem>
-                );
-              })}
-            </SidebarMenu>
+                </SidebarMenu>
+              ))}
+            </SidebarGroupContent>
           </SidebarGroup>
         ))}
       </SidebarContent>

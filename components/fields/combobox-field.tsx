@@ -1,39 +1,48 @@
 import { useFieldContext } from "@/hooks/use-app-form";
+import { cn } from "@/lib/utils";
+import { X } from "lucide-react";
+import { FieldInfo } from "../field-info";
 import {
   Combobox,
-  ComboboxChip,
-  ComboboxChips,
-  ComboboxChipsInput,
   ComboboxContent,
   ComboboxEmpty,
   ComboboxInput,
   ComboboxItem,
   ComboboxList,
-  ComboboxValue,
 } from "../ui/combobox";
-import { cn } from "@/lib/utils";
-import { Label } from "../ui/label";
-import { FieldInfo } from "../field-info";
-import { X } from "lucide-react";
-import { Button } from "../ui/button";
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
 } from "../ui/input-group";
-import React from "react";
+import { Label } from "../ui/label";
+import useDebounce from "@/hooks/use-debounce";
+import { useState, useEffect } from "react";
 
 export default function ComboboxField({
   label,
   items,
   className,
+  initialSearchValue = "",
+  onDebouncedSearchChange,
 }: {
   label: string;
   items: { id: string; name: string }[];
   className?: string;
+  initialSearchValue?: string;
+  onDebouncedSearchChange?: (value: string) => void;
 }) {
   const field = useFieldContext<string[]>();
+
+  // 1. Kelola state pengetikan secara mandiri di sini
+  const [localSearch, setLocalSearch] = useState(initialSearchValue);
+  const debouncedSearch = useDebounce(localSearch, 500);
+
+  // 2. Trigger fungsi pencarian ke luar hanya ketika debounce selesai
+  useEffect(() => {
+    onDebouncedSearchChange?.(debouncedSearch);
+  }, [debouncedSearch, onDebouncedSearchChange]);
 
   return (
     <div className={cn("space-y-between-items-xs", className)}>
@@ -56,7 +65,9 @@ export default function ComboboxField({
               e.preventDefault();
             }
           }}
-        />{" "}
+          value={localSearch}
+          onChange={(e) => setLocalSearch(e.target.value)}
+        />
         <ComboboxContent>
           <ComboboxEmpty>No items found.</ComboboxEmpty>
           <ComboboxList>

@@ -42,6 +42,9 @@ export function DataTable<TData, TValue>({
   onPaginationChange,
   pageCount,
   rowCount,
+
+  searchValue,
+  onSearchChange,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -77,12 +80,8 @@ export function DataTable<TData, TValue>({
 
             <InputGroupInput
               placeholder="Filter name..."
-              value={
-                (table.getColumn("name")?.getFilterValue() as string) ?? ""
-              }
-              onChange={(event) =>
-                table.getColumn("name")?.setFilterValue(event.target.value)
-              }
+              value={searchValue}
+              onChange={(e) => onSearchChange?.(e.target.value)}
               disabled={isFetching}
             />
           </InputGroup>

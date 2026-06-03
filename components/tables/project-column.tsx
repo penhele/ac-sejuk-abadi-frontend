@@ -22,6 +22,12 @@ export const projectColumns: ColumnDef<Project>[] = [
     header: "ID Project",
   },
   {
+    header: "Images",
+    cell: ({ row }) => {
+      return <span>{row.original.images.length}</span>;
+    },
+  },
+  {
     accessorKey: "name",
     header: "Name",
   },

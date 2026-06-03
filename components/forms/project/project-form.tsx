@@ -1,3 +1,5 @@
+"use client";
+
 import { ROUTES } from "@/constants/routes";
 import { useProducts } from "@/features/product";
 import { useAppForm } from "@/hooks/use-app-form";
@@ -8,6 +10,9 @@ import {
   createProjectSchema,
   ProjectFormValues,
 } from "@/features/project/schemas/project.schema";
+import useProductFilters from "@/hooks/use-product-filters";
+import useDebounce from "@/hooks/use-debounce";
+import { useState, useEffect } from "react";
 
 export default function ProjectForm({
   defaultValues,
@@ -20,6 +25,8 @@ export default function ProjectForm({
   submitLabel?: string;
   isFetching?: boolean;
 }) {
+  const [productSearch, setProductSearch] = useState("");
+
   const form = useAppForm({
     defaultValues,
     validators: {
@@ -34,7 +41,7 @@ export default function ProjectForm({
     },
   });
 
-  const { data: products } = useProducts();
+  const { data: products } = useProducts({ search: productSearch });
 
   const productOptions =
     products?.data?.map((product) => ({
@@ -110,18 +117,12 @@ export default function ProjectForm({
 
           <form.AppField name="id_products">
             {(field) => (
-              // <field.SelectField
-              //   disabled={isFetching}
-              //   options={productOptions}
-              //   className="col-span-2"
-              //   label="Product"
-              //   placeholder="Choose the product used"
-              // />
-
               <field.ComboboxField
                 label="Products"
                 className="col-span-2"
                 items={productOptions}
+                initialSearchValue={productSearch}
+                onDebouncedSearchChange={(value) => setProductSearch(value)}
               />
             )}
           </form.AppField>

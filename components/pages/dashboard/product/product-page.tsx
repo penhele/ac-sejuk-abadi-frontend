@@ -11,11 +11,19 @@ import {
 import { ROUTES } from "@/constants/routes";
 import { useBrands } from "@/features/brand/hooks/use-brands";
 import { useProducts } from "@/features/product";
+import useDebounce from "@/hooks/use-debounce";
+import useProductFilters from "@/hooks/use-product-filters";
 import { Info, Plus } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function ProductPage() {
+  const { search, setFilters } = useProductFilters();
+
+  const [localSearch, setLocalSearch] = useState(search || "");
+
+  const debouncedSearch = useDebounce(localSearch, 500);
+
   const [pagination, setPagination] = useState({
     pageIndex: 0,
     pageSize: 20,
@@ -24,7 +32,14 @@ export default function ProductPage() {
   const { data: response, isFetching } = useProducts({
     page: pagination.pageIndex + 1,
     limit: pagination.pageSize,
+    search: debouncedSearch,
   });
+
+  useEffect(() => {
+    setFilters({ search: debouncedSearch });
+
+    setPagination((prev) => ({ ...prev, pageIndex: 0 }));
+  }, [debouncedSearch, setFilters]);
 
   const { data: brands } = useBrands();
 
@@ -102,6 +117,10 @@ export default function ProductPage() {
         rowCount={totalProducts}
         isFilter
         isPagination
+        // 5. Berikan state lokal ke DataTable agar input terasa responsif saat diketik
+        searchValue={localSearch}
+        // 6. Ketika diketik, langsung ubah state lokal (tanpa debounce di sini)
+        onSearchChange={(value) => setLocalSearch(value)}
       />
     </div>
   );

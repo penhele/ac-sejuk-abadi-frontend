@@ -6,6 +6,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import ProjectForm from "./project-form";
+import { Suspense } from "react";
 
 export default function CreateProjectForm() {
   const router = useRouter();
