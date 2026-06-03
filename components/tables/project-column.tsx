@@ -1,8 +1,7 @@
 import { ROUTES } from "@/constants/routes";
-import { projectKeys } from "@/features/project";
+import { Project, projectKeys } from "@/features/project";
 import { deleteProject } from "@/features/project";
 import { formatDate } from "@/lib/format/date";
-import { Project } from "@/types/project";
 import { ColumnDef } from "@tanstack/react-table";
 import { EllipsisIcon } from "lucide-react";
 import DeleteButton from "../buttons/delete-button";
