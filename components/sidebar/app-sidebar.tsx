@@ -5,7 +5,6 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
-  SidebarGroupContent,
   SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
@@ -13,7 +12,7 @@ import {
   SidebarMenuItem,
   SidebarMenuSub,
   SidebarMenuSubButton,
-  SidebarMenuSubItem,
+  SidebarMenuSubItem
 } from "@/components/ui/sidebar";
 import { ROUTES } from "@/constants/routes";
 import {
@@ -27,7 +26,9 @@ import {
   Package,
   Sun,
 } from "lucide-react";
+import { useTheme } from "next-themes";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import {
   Collapsible,
   CollapsibleContent,
@@ -39,9 +40,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
-import { Button } from "../ui/button";
 
 export function AppSidebar() {
   const navProduct = [

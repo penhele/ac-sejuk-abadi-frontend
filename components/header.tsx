@@ -9,7 +9,7 @@ export function Header({ title, href }: { title: string; href?: string }) {
 
         {href && (
           <Link href={href}>
-            <span className="text-xs xs:text-sm italic text-gray-600 transition hover:text-primary hover:underline">
+            <span className="text-xs xs:text-sm italic text-gray-600 dark:text-white transition hover:text-primary hover:underline">
               Lihat selengkapnya &gt;&gt;&gt;
             </span>
           </Link>

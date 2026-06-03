@@ -32,7 +32,7 @@ export default function AboutSection() {
           <h1 className="text-3xl font-semibold">
             Solusi Pendingin Ruangan Terpercaya untuk Rumah dan Bisnis Anda
           </h1>
-          <p className="text-gray-600">
+          <p className="text-gray-600 dark:text-white">
             Menyediakan berbagai pilihan AC berkualitas dari merek-merek
             terpercaya dengan harga kompetitif, layanan konsultasi yang ramah,
             serta dukungan instalasi profesional.
@@ -46,7 +46,7 @@ export default function AboutSection() {
             Kunjungi Toko <ArrowUpRight />
           </Button>
         </div>
-        <p className="text-gray-600">
+        <p className="text-gray-600 dark:text-white">
           <strong>Telah dipercaya</strong> oleh ratusan pelanggan, perusahaan,
           sekolah, perkantoran, dan berbagai instansi di berbagai kota.
         </p>

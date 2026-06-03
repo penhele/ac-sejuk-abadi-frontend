@@ -20,7 +20,7 @@ export default function StatsCard({
   return (
     <div
       className={cn(
-        "flex flex-col justify-between border p-8 rounded-2xl transition hover:shadow-lg bg-muted/40",
+        "flex flex-col justify-between border p-8 rounded-2xl transition hover:shadow-lg bg-secondary",
         className,
       )}
     >
@@ -31,7 +31,7 @@ export default function StatsCard({
 
       <div className="space-y-between-items-xs">
         <h1 className="text-3xl font-bold ">{value}+</h1>
-        <span className="font-light text-gray-800 tesm">{description}</span>
+        <span className="font-light text-sm">{description}</span>
       </div>
     </div>
   );
