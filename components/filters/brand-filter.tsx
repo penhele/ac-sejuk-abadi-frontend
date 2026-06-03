@@ -1,21 +1,20 @@
 "use client";
 
-import { getBrandsQueryOptions } from "@/hooks/queries/brand-queries";
+import { useBrands } from "@/features/brand/hooks/use-brands";
 import useProductFilters from "@/hooks/use-product-filters";
-import { useQuery } from "@tanstack/react-query";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "../ui/accordion";
-import { Field, FieldGroup, FieldLabel } from "../ui/field";
 import { Checkbox } from "../ui/checkbox";
+import { Field, FieldGroup, FieldLabel } from "../ui/field";
 
 export default function BrandFilter() {
   const { id_brand, setFilters } = useProductFilters();
 
-  const { data: brands } = useQuery(getBrandsQueryOptions());
+  const { data: brands } = useBrands();
 
   const handleBrandChange = (brandId: string, checked: boolean) => {
     if (checked) {

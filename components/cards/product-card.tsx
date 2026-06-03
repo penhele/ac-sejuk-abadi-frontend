@@ -17,7 +17,7 @@ export default function ProductCard({ product }: { product: Product }) {
   const discountPercentage = (discountPrice / originalPrice) * 100;
 
   return (
-    <div className="group relative overflow-hidden rounded-sm bg-white shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5 border">
+    <div className="group relative overflow-hidden rounded-sm bg-white shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5 border h-full">
       <Link
         href={ROUTES.PRODUCT_DETAIL(product.id)}
         className="absolute inset-0 z-10"
@@ -26,7 +26,7 @@ export default function ProductCard({ product }: { product: Product }) {
 
       <CarouselProductBasic images={product.images} className="z-20" />
 
-      <div className="p-4 flex flex-col gap-2">
+      <div className="p-4 flex flex-col gap-2 ">
         <span className="text-xs text-gray-400">{product.brand?.name}</span>
         <h1 className="text-sm h-16 line-clamp-3">{product.name}</h1>
 

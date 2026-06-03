@@ -3,13 +3,7 @@ import { Skeleton } from "../ui/skeleton";
 
 export default function ProductFallback({ length = 3 }: { length?: number }) {
   return (
-    <div
-      className={cn(
-        "grid grid-cols-3 gap-between-card",
-        length === 3 && "grid-cols-3",
-        length === 4 && "grid-cols-4",
-      )}
-    >
+    <div className={cn("grid grid-cols-5 gap-between-card")}>
       {Array.from({ length }).map((_, index) => (
         <div key={index} className="border-gray-200 border rounded-lg ">
           <Skeleton className="w-full aspect-square" />

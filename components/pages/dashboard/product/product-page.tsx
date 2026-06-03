@@ -9,9 +9,8 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { ROUTES } from "@/constants/routes";
+import { useBrands } from "@/features/brand/hooks/use-brands";
 import { useProducts } from "@/features/product";
-import { getBrandsQueryOptions } from "@/hooks/queries/brand-queries";
-import { useQuery } from "@tanstack/react-query";
 import { Info, Plus } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -27,7 +26,7 @@ export default function ProductPage() {
     limit: pagination.pageSize,
   });
 
-  const { data: brands } = useQuery(getBrandsQueryOptions());
+  const { data: brands } = useBrands();
 
   const products = response?.data || [];
   const totalProducts = response?.meta.total || 0;

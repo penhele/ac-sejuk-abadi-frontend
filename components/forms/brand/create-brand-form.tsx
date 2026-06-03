@@ -1,6 +1,6 @@
 "use client";
 
-import { getBrandsQueryOptions } from "@/hooks/queries/brand-queries";
+import { brandKeys } from "@/features/brand/queries/brand-keys";
 import { addBrand } from "@/services/brand.service";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
@@ -13,7 +13,7 @@ export default function CreateBrandForm() {
     mutationFn: addBrand,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: getBrandsQueryOptions().queryKey,
+        queryKey: brandKeys.all,
       });
 
       toast.success("Brand berhasil ditambahkan.");

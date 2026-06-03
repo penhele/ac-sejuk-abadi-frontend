@@ -4,11 +4,10 @@ import CreateBrandForm from "@/components/forms/brand/create-brand-form";
 import { brandColumns } from "@/components/tables/brand-columns";
 import { DataTable } from "@/components/tables/data-table";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { getBrandsQueryOptions } from "@/hooks/queries/brand-queries";
-import { useQuery } from "@tanstack/react-query";
+import { useBrands } from "@/features/brand/hooks/use-brands";
 
 export default function BrandPage() {
-  const { data: response } = useQuery(getBrandsQueryOptions());
+  const { data: response } = useBrands();
 
   const brands = response || [];
 

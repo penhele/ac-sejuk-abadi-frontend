@@ -1,7 +1,7 @@
 "use client";
 
 import { ROUTES } from "@/constants/routes";
-import { getSponsoredBrandsQueryOptions } from "@/hooks/queries/brand-queries";
+import { useSponsoredBrands } from "@/features/brand/hooks/use-sponsored-brands";
 import { getCategoriesQueryOptions } from "@/hooks/queries/category-queries";
 import { cn } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
@@ -9,9 +9,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 
 export default function FooterLinks({ className }: { className?: string }) {
-  const { data: responseSponsoredBrands } = useQuery(
-    getSponsoredBrandsQueryOptions(),
-  );
+  const { data: responseSponsoredBrands } = useSponsoredBrands();
 
   const [isMounted, setIsMounted] = useState(false); // 2. Track mount status
 

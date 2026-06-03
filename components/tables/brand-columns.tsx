@@ -1,18 +1,17 @@
+import { deleteBrand } from "@/services/brand.service";
 import { Brand } from "@/types/brand";
 import { ColumnDef } from "@tanstack/react-table";
+import { EllipsisIcon } from "lucide-react";
 import Image from "next/image";
+import DeleteButton from "../buttons/delete-button";
+import { Button } from "../ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { EllipsisIcon } from "lucide-react";
-import DeleteButton from "../buttons/delete-button";
-import EditButton from "../buttons/edit-button";
-import { Button } from "../ui/button";
-import { deleteBrand } from "@/services/brand.service";
-import { getBrandsQueryOptions } from "@/hooks/queries/brand-queries";
+import { brandKeys } from "@/features/brand/queries/brand-keys";
 
 export const brandColumns: ColumnDef<Brand>[] = [
   {
@@ -63,7 +62,7 @@ export const brandColumns: ColumnDef<Brand>[] = [
           <DropdownMenuGroup>
             <DeleteButton
               mutationFn={deleteBrand}
-              queryKey={getBrandsQueryOptions().queryKey}
+              queryKey={brandKeys.all}
               id={row.original.id}
             />
           </DropdownMenuGroup>

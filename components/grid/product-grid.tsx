@@ -35,12 +35,13 @@ export default function ProductGrid({
     id_category,
     min_price,
     max_price,
+    limit: length,
   });
 
   const products = data?.pages?.flatMap((page) => page?.data ?? []) ?? [];
 
   if (isPending) {
-    return <ProductFallback length={length ?? 6} />;
+    return <ProductFallback length={length} />;
   }
 
   if (!products.length) {
@@ -52,14 +53,7 @@ export default function ProductGrid({
   }
 
   return (
-    <div
-      className={cn(
-        "grid grid-cols-2 gap-between-card",
-        length === 3 && "xs:grid-cols-3 md:grid-cols-3",
-        length === 4 && "xs:grid-cols-3 md:grid-cols-4",
-        !length && "xs:grid-cols-4",
-      )}
-    >
+    <div className={cn("grid grid-cols-5 gap-between-card")}>
       {products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}

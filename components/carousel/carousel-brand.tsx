@@ -5,12 +5,11 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import { getBrandsQueryOptions } from "@/hooks/queries/brand-queries";
-import { useQuery } from "@tanstack/react-query";
+import { useBrands } from "@/features/brand/hooks/use-brands";
 import Autoplay from "embla-carousel-autoplay";
 
 export default function CarouselBrand() {
-  const { data: brands } = useQuery(getBrandsQueryOptions());
+  const { data: brands } = useBrands();
 
   return (
     <Carousel

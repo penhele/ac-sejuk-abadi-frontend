@@ -2,15 +2,15 @@
 
 import CancelButton from "@/components/buttons/cancel-button";
 import { ROUTES } from "@/constants/routes";
-import { getAcTypesQueryOptions } from "@/hooks/queries/ac-type-queries";
-import { getBrandsQueryOptions } from "@/hooks/queries/brand-queries";
-import { getCategoriesQueryOptions } from "@/hooks/queries/category-queries";
-import { useAppForm } from "@/hooks/use-app-form";
-import { formatNumber } from "@/lib/format/currency";
+import { useBrands } from "@/features/brand/hooks/use-brands";
 import {
   createProductSchema,
   ProductFormValues,
 } from "@/features/product/schemas/product.schema";
+import { getAcTypesQueryOptions } from "@/hooks/queries/ac-type-queries";
+import { getCategoriesQueryOptions } from "@/hooks/queries/category-queries";
+import { useAppForm } from "@/hooks/use-app-form";
+import { formatNumber } from "@/lib/format/currency";
 import { revalidateLogic } from "@tanstack/react-form";
 import { useQuery } from "@tanstack/react-query";
 
@@ -48,9 +48,7 @@ export default function ProductForm({
       value: category.id.toString(),
     })) ?? [];
 
-  const { data: brands, isPending: isPendingBrand } = useQuery(
-    getBrandsQueryOptions(),
-  );
+  const { data: brands, isPending: isPendingBrand } = useBrands();
   const brandOptions =
     brands?.map((brand) => ({
       label: brand.name,

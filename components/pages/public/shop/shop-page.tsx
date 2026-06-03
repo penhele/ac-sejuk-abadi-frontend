@@ -8,8 +8,8 @@ import SortByPriceFilter from "@/components/filters/sort-filter";
 import ProductGrid from "@/components/grid/product-grid";
 import TotalItems from "@/components/total-items";
 import { Skeleton } from "@/components/ui/skeleton";
+import { getProductsInfiniteQueryOptions } from "@/features/product";
 import { getAcTypesQueryOptions } from "@/hooks/queries/ac-type-queries";
-import { getBrandsQueryOptions } from "@/hooks/queries/brand-queries";
 import { getCategoriesQueryOptions } from "@/hooks/queries/category-queries";
 import {
   dehydrate,
@@ -19,13 +19,11 @@ import {
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "../../../fallback/error-fallback";
-import { getProductsInfiniteQueryOptions } from "@/features/product";
 
 export default async function ShopPage() {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchInfiniteQuery(getProductsInfiniteQueryOptions());
-  await queryClient.prefetchQuery(getBrandsQueryOptions());
   await queryClient.prefetchQuery(getAcTypesQueryOptions());
   await queryClient.prefetchQuery(getCategoriesQueryOptions());
 
