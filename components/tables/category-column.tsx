@@ -4,7 +4,7 @@ import { Category } from "@/types/category";
 import { ColumnDef } from "@tanstack/react-table";
 import { EllipsisIcon } from "lucide-react";
 import CategoryBadge from "../badges/category-badge";
-import DeleteButton from "../buttons/delete-button";
+import DeleteButton from "../buttons/delete-button2";
 import { Button } from "../ui/button";
 import {
   DropdownMenu,

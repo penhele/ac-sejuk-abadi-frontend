@@ -18,6 +18,7 @@ import {
   Building2,
   Cuboid,
   Layers2,
+  LayoutDashboard,
   Monitor,
   Moon,
   Package,
@@ -38,6 +39,7 @@ export function AppSidebar() {
     {
       title: "Products",
       items: [
+        { Icon: LayoutDashboard, label: "Dashboard", href: ROUTES.DASHBOARD },
         { Icon: Package, label: "Product", href: ROUTES.PRODUCTS },
         { Icon: Cuboid, label: "Brand", href: ROUTES.BRAND },
         { Icon: Layers2, label: "Category & Type", href: ROUTES.CATEGORY_TYPE },

@@ -7,7 +7,7 @@ import { ArrowUpDown, EllipsisIcon } from "lucide-react";
 import AcProductTypeBadge from "../badges/ac-type-badge";
 import CategoryBadge from "../badges/category-badge";
 import PkBadge from "../badges/pk-badge";
-import DeleteButton from "../buttons/delete-button";
+import DeleteButton from "../buttons/delete-button2";
 import EditButton from "../buttons/edit-button";
 import { Button } from "../ui/button";
 import {

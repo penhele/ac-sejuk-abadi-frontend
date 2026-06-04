@@ -4,7 +4,7 @@ import { deleteProject } from "@/features/project";
 import { formatDate } from "@/lib/format/date";
 import { ColumnDef } from "@tanstack/react-table";
 import { EllipsisIcon } from "lucide-react";
-import DeleteButton from "../buttons/delete-button";
+import DeleteButton from "../buttons/delete-button2";
 import EditButton from "../buttons/edit-button";
 import { Button } from "../ui/button";
 import {

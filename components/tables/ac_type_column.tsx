@@ -4,7 +4,7 @@ import { AcType } from "@/types/ac-type";
 import { ColumnDef } from "@tanstack/react-table";
 import { EllipsisIcon } from "lucide-react";
 import CategoryBadge from "../badges/category-badge";
-import DeleteButton from "../buttons/delete-button";
+import DeleteButton from "../buttons/delete-button2";
 import EditButton from "../buttons/edit-button";
 import { Button } from "../ui/button";
 import {

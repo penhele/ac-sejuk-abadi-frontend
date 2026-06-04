@@ -3,7 +3,7 @@ import { Brand } from "@/types/brand";
 import { ColumnDef } from "@tanstack/react-table";
 import { EllipsisIcon } from "lucide-react";
 import Image from "next/image";
-import DeleteButton from "../buttons/delete-button";
+import DeleteButton from "../buttons/delete-button2";
 import { Button } from "../ui/button";
 import {
   DropdownMenu,
