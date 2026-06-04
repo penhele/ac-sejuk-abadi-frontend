@@ -62,7 +62,7 @@ export default function TextField({
           }}
           onBlur={field.handleBlur}
           placeholder={placeholder}
-          type={showPassword ? "text" : type}
+          type={showPassword ? type : "text"}
           disabled={isDisabled}
           readOnly={readOnly}
         />
