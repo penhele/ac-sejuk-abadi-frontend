@@ -6,6 +6,7 @@ import AcTypePage from "@/features/acType/components/ac-type-page";
 import BrandPage from "@/features/brand/compenents/brand-page";
 import CategoryPage from "@/features/category/components/category-page";
 import StatCard from "./components/stat-card";
+import { DashboardChart } from "./components/dashboard-chart";
 import { useDashboardStats } from "./hooks/use-dashboard-stats";
 
 export default function DashboardPage() {
@@ -58,6 +59,7 @@ export default function DashboardPage() {
           <AcTypePage />
         </TabsContent>
       </Tabs>
+      <DashboardChart />
     </div>
   );
 }

@@ -1,12 +1,19 @@
 "use client";
 
 import { AuroraBackground } from "@/components/ui/aurora-background";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import LoginForm from "./components/login-form";
 import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { ROUTES } from "@/constants/routes";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { ROUTES } from "@/constants/routes";
+import LoginForm from "./login-form";
+import Link from "next/link";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -25,6 +32,15 @@ export default function LoginPage() {
       <Card className="absolute w-md ">
         <CardHeader>
           <CardTitle>Log in</CardTitle>
+          <CardDescription>
+            Don't have an account?{" "}
+            <Link
+              href={ROUTES.REGISTER}
+              className="underline text-primary font-semibold"
+            >
+              Create an account
+            </Link>
+          </CardDescription>
         </CardHeader>
 
         <CardContent>
