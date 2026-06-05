@@ -1,6 +1,6 @@
 "use client";
 
-import CreateBrandForm from "@/components/forms/brand/create-brand-form";
+import CreateBrandForm from "@/features/brand/compenents/create-brand-form";
 import { brandColumns } from "@/components/tables/brand-columns";
 import { DataTable } from "@/components/tables/data-table";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";

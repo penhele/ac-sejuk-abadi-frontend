@@ -3,6 +3,7 @@ import { Brand } from "../types/brand";
 import DeleteButton from "@/components/buttons/delete-button";
 import { deleteBrand } from "../api/delete-brand";
 import { brandKeys } from "../queries/brand-keys";
+import EditButton from "./edit-button";
 
 export const brandColumns: ColumnDef<Brand>[] = [
   {
@@ -22,7 +23,9 @@ export const brandColumns: ColumnDef<Brand>[] = [
   {
     header: "Action",
     cell: ({ row }) => (
-      <div className="">
+      <div className="space-x-1">
+        <EditButton id={row.original.id} />
+
         <DeleteButton
           id={row.original.id}
           mutationFn={deleteBrand}

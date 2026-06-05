@@ -1,15 +1,15 @@
 "use client";
 
 import { brandKeys } from "@/features/brand/queries/brand-keys";
-import { addBrand } from "@/services/brand.service";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import BrandForm from "./brand-form";
+import BrandForm from "../../../components/forms/brand/brand-form";
+import { addBrand } from "@/features/brand/api/add-brand";
 
 export default function CreateBrandForm() {
   const queryClient = useQueryClient();
 
-  const { mutate } = useMutation({
+  const { mutateAsync } = useMutation({
     mutationFn: addBrand,
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -28,8 +28,8 @@ export default function CreateBrandForm() {
       defaultValues={{
         name: "",
       }}
-      onSubmit={(value) => {
-        mutate({
+      onSubmit={async (value) => {
+        await mutateAsync({
           name: value.name,
         });
       }}

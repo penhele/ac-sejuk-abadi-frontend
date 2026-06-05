@@ -1,3 +1,8 @@
+import { Button } from "@/components/ui/button";
+import {
+  SheetClose,
+  SheetFooter
+} from "@/components/ui/sheet";
 import { useAppForm } from "@/hooks/use-app-form";
 import { BranFormValues, createBrandSchema } from "@/schemas/brand.schema";
 import { revalidateLogic } from "@tanstack/react-form";
@@ -5,9 +10,11 @@ import { revalidateLogic } from "@tanstack/react-form";
 export default function BrandForm({
   defaultValues,
   onSubmit,
+  isLoading
 }: {
   defaultValues: BranFormValues;
   onSubmit: (values: BranFormValues) => void;
+  isLoading?: boolean
 }) {
   const form = useAppForm({
     defaultValues,
@@ -19,7 +26,8 @@ export default function BrandForm({
       modeAfterSubmission: "blur",
     }),
     onSubmit: async ({ value }) => {
-      onSubmit(value);
+      console.log("submit", value);
+      await onSubmit(value);
     },
   });
 
@@ -30,14 +38,20 @@ export default function BrandForm({
           e.preventDefault();
           form.handleSubmit();
         }}
-        className="space-y-between-items"
+        className="h-full flex flex-col justify-between"
       >
-        <form.AppField
-          name="name"
-          children={(field) => <field.TextField label="Nama Brand" />}
-        />
+        <div className="px-4">
+          <form.AppField name="name">
+            {(field) => <field.TextField label="Name" isDisabled={isLoading} />}
+          </form.AppField>
+        </div>
 
-        <form.SubmitButton label="Submit" />
+        <SheetFooter>
+          <form.SubmitButton label="Save changes" />
+          <SheetClose asChild>
+            <Button variant="outline">Close</Button>
+          </SheetClose>
+        </SheetFooter>
       </form>
     </form.AppForm>
   );
