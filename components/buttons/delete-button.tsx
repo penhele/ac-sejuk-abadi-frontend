@@ -68,10 +68,10 @@ export default function DeleteButton<TId = string | number>({
 
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+          <AlertDialogTitle>Konfirmasi Hapus</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account from our servers.
+            Apakah Anda yakin ingin menghapus data ini secara permanen? Tindakan
+            ini tidak dapat dibatalkan.
           </AlertDialogDescription>
         </AlertDialogHeader>
 
