@@ -21,7 +21,3 @@ export interface Category {
 export interface CategoryCount {
   products: number;
 }
-
-export interface CreateCategoryPayload {
-  name: string;
-}

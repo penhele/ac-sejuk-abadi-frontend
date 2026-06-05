@@ -1,5 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import BrandPage from "@/features/brand/compenents/brand-page";
+import CategoryPage from "@/features/category/components/category-page";
 
 export default function DashboardPage() {
   return (
@@ -13,6 +14,10 @@ export default function DashboardPage() {
 
         <TabsContent value="brand">
           <BrandPage />
+        </TabsContent>
+
+        <TabsContent value="category">
+          <CategoryPage />
         </TabsContent>
       </Tabs>
     </div>

@@ -9,7 +9,7 @@ import {
 } from "../ui/accordion";
 import { Checkbox } from "../ui/checkbox";
 import { Field, FieldGroup, FieldLabel } from "../ui/field";
-import { getCategoriesQueryOptions } from "@/hooks/queries/category-queries";
+import { getCategoriesQueryOptions } from "@/features/category/queries/category-queries";
 import useProductFilters from "@/hooks/use-product-filters";
 import { useEffect, useState } from "react";
 

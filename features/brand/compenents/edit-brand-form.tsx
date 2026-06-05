@@ -3,7 +3,7 @@
 import { brandKeys } from "@/features/brand/queries/brand-keys";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import BrandForm from "../../../components/forms/brand/brand-form";
+import BrandForm from "./brand-form";
 import { updateBrand } from "../api/update-brand";
 import { useBrand } from "../hooks/use-brand";
 import { UpdateBrandPayload } from "../types/update-brand-payload";
@@ -26,6 +26,7 @@ export default function EditBrandForm({ id }: { id: string | number }) {
   });
 
   const { data: brand, isLoading } = useBrand(id);
+  console.log(brand);
 
   return (
     <BrandForm

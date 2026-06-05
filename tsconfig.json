@@ -29,7 +29,8 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts",
-    "components/buttons/edit-button.tsx"
+    "components/buttons/edit-button.tsx",
+    "features/category/schema"
   ],
   "exclude": ["node_modules"]
 }

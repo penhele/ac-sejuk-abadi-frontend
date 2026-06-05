@@ -7,11 +7,15 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import CreateBrandForm from "./create-brand-form";
 import { Pencil } from "lucide-react";
-import EditBrandForm from "./edit-brand-form";
 
-export default function EditButton({ id }: { id: string | number }) {
+export default function EditButton({
+  children,
+  title,
+}: {
+  children: React.ReactNode;
+  title: string;
+}) {
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -21,13 +25,13 @@ export default function EditButton({ id }: { id: string | number }) {
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
-          <SheetTitle>Update Brand</SheetTitle>
+          <SheetTitle>{title}</SheetTitle>
           <SheetDescription>
             Make changes to your profile here. Click save when you&apos;re done.
           </SheetDescription>
         </SheetHeader>
 
-        <EditBrandForm id={id} />
+        {children}
       </SheetContent>
     </Sheet>
   );

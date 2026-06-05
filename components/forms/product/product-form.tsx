@@ -8,7 +8,7 @@ import {
   ProductFormValues,
 } from "@/features/product/schemas/product.schema";
 import { getAcTypesQueryOptions } from "@/hooks/queries/ac-type-queries";
-import { getCategoriesQueryOptions } from "@/hooks/queries/category-queries";
+import { getCategoriesQueryOptions } from "@/features/category/queries/category-queries";
 import { useAppForm } from "@/hooks/use-app-form";
 import { formatNumber } from "@/lib/format/currency";
 import { revalidateLogic } from "@tanstack/react-form";

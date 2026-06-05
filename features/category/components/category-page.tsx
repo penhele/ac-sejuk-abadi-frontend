@@ -10,37 +10,37 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import CreateBrandForm from "@/features/brand/compenents/create-brand-form";
-import { useBrands } from "../hooks/use-brands";
-import { brandColumns } from "./brand-columns";
+import useCategories from "../hooks/use-categories";
+import { categoryColumns } from "./category-column";
+import CreateCategoryForm from "./create-category-form";
 
-export default function BrandPage() {
-  const { data: brands } = useBrands();
+export default function CategoryPage() {
+  const { data: categories } = useCategories();
 
   return (
     <div className="space-y-between-items">
       <div className="flex flex-row justify-between items-center">
-        <h1 className="font-semibold text-xl">Brands</h1>
+        <h1 className="font-semibold text-xl">Category</h1>
 
         <Sheet>
           <SheetTrigger asChild>
-            <Button variant="outline">Create Brand</Button>
+            <Button variant="outline">Create category</Button>
           </SheetTrigger>
           <SheetContent>
             <SheetHeader>
-              <SheetTitle>Create Brand</SheetTitle>
+              <SheetTitle>Create Category</SheetTitle>
               <SheetDescription>
                 Make changes to your profile here. Click save when you&apos;re
                 done.
               </SheetDescription>
             </SheetHeader>
 
-            <CreateBrandForm />
+            <CreateCategoryForm />
           </SheetContent>
         </Sheet>
       </div>
 
-      <DataTable columns={brandColumns} data={brands || []} />
+      <DataTable columns={categoryColumns} data={categories || []} />
     </div>
   );
 }

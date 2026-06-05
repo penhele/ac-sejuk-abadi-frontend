@@ -1,30 +1,28 @@
-"use client";
-
-import { brandKeys } from "@/features/brand/queries/brand-keys";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import CategoryForm from "./category-form";
+import { addCategory } from "../api/add-category";
+import { categoryKeys } from "../queries/category-keys";
 import { toast } from "sonner";
-import BrandForm from "./brand-form";
-import { addBrand } from "@/features/brand/api/add-brand";
 
-export default function CreateBrandForm() {
+export default function CreateCategoryForm() {
   const queryClient = useQueryClient();
 
   const { mutateAsync } = useMutation({
-    mutationFn: addBrand,
+    mutationFn: addCategory,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: brandKeys.all,
+        queryKey: categoryKeys.all,
       });
 
-      toast.success("Brand berhasil ditambahkan.");
+      toast.success("Category berhasil ditambahkan.");
     },
     onError: () => {
-      toast.error("Gagal menambahkan brand.");
+      toast.error("Gagal menambahkan category.");
     },
   });
 
   return (
-    <BrandForm
+    <CategoryForm
       defaultValues={{
         name: "",
       }}

@@ -1,7 +1,6 @@
-import { addCategory } from "@/services/category.service";
+import { addCategory } from "@/features/category/api/add-category";
+import { getCategoriesQueryOptions } from "@/features/category/queries/category-queries";
 import DialogForm from "./dialog-form";
-import { getCategoriesQueryOptions } from "@/hooks/queries/category-queries";
-import { createCategorySchema } from "@/schemas/category.schema";
 
 export default function CreateCategoryForm() {
   return (

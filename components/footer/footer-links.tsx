@@ -2,7 +2,7 @@
 
 import { ROUTES } from "@/constants/routes";
 import { useSponsoredBrands } from "@/features/brand/hooks/use-sponsored-brands";
-import { getCategoriesQueryOptions } from "@/hooks/queries/category-queries";
+import { getCategoriesQueryOptions } from "@/features/category/queries/category-queries";
 import { cn } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";

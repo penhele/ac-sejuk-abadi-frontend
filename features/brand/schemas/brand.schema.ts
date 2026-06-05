@@ -19,5 +19,5 @@ export const createBrandImageSchema = object({
   }),
 });
 
-export type BranFormValues = zodInfer<typeof createBrandSchema>;
+export type BrandFormValues = zodInfer<typeof createBrandSchema>;
 export type BrandImageFormValues = zodInfer<typeof createBrandImageSchema>;

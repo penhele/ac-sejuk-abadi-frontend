@@ -1,8 +1,8 @@
 import { AcType } from "@/types/ac-type";
-import { Brand } from "@/types/brand";
-import { Category } from "@/types/category";
+import { Category } from "@/features/category/types/category";
 import { Discounts } from "@/types/discount";
 import { ProductImages } from "@/types/image";
+import { Brand } from "@/features/brand/types/brand";
 
 export interface Product {
   id: string;

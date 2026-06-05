@@ -1,4 +1,4 @@
-import { Brand } from "./brand";
+import { Brand } from "@/features/brand/types/brand";
 
 export interface Banner {
   id: number;

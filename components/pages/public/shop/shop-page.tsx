@@ -10,7 +10,7 @@ import TotalItems from "@/components/total-items";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getProductsInfiniteQueryOptions } from "@/features/product";
 import { getAcTypesQueryOptions } from "@/hooks/queries/ac-type-queries";
-import { getCategoriesQueryOptions } from "@/hooks/queries/category-queries";
+import { getCategoriesQueryOptions } from "@/features/category/queries/category-queries";
 import {
   dehydrate,
   HydrationBoundary,

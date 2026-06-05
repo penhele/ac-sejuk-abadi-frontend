@@ -1,25 +1,25 @@
 import { Button } from "@/components/ui/button";
-import {
-  SheetClose,
-  SheetFooter
-} from "@/components/ui/sheet";
+import { SheetClose, SheetFooter } from "@/components/ui/sheet";
 import { useAppForm } from "@/hooks/use-app-form";
-import { BranFormValues, createBrandSchema } from "@/schemas/brand.schema";
 import { revalidateLogic } from "@tanstack/react-form";
+import {
+  CategoryFormValues,
+  createCategorySchema,
+} from "../schemas/category.schema";
 
-export default function BrandForm({
+export default function CategoryForm({
   defaultValues,
   onSubmit,
-  isLoading
+  isLoading,
 }: {
-  defaultValues: BranFormValues;
-  onSubmit: (values: BranFormValues) => void;
-  isLoading?: boolean
+  defaultValues: CategoryFormValues;
+  onSubmit: (values: CategoryFormValues) => void;
+  isLoading?: boolean;
 }) {
   const form = useAppForm({
     defaultValues,
     validators: {
-      onChange: createBrandSchema,
+      onChange: createCategorySchema,
     },
     validationLogic: revalidateLogic({
       mode: "submit",
