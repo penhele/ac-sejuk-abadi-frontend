@@ -8,7 +8,7 @@ import {
 } from "../ui/accordion";
 import { Field, FieldGroup, FieldLabel } from "../ui/field";
 import { useQuery } from "@tanstack/react-query";
-import { getAcTypesQueryOptions } from "@/hooks/queries/ac-type-queries";
+import { getAcTypesQueryOptions } from "@/features/acType/queries/ac-type-queries";
 import { Checkbox } from "../ui/checkbox";
 import useProductFilters from "@/hooks/use-product-filters";
 

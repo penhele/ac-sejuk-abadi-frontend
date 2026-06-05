@@ -1,4 +1,4 @@
-import { AcType } from "./ac-type";
+import { AcType } from "../features/acType/types/ac-type";
 import { Category } from "../features/category/types/category";
 import { Discounts } from "./discount";
 import { ProductImages } from "./image";

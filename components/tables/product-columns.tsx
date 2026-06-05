@@ -4,7 +4,7 @@ import { Product } from "@/types/product";
 import { ColumnDef } from "@tanstack/react-table";
 import { formatDistanceToNow } from "date-fns";
 import { ArrowUpDown, EllipsisIcon } from "lucide-react";
-import AcProductTypeBadge from "../badges/ac-type-badge";
+import AcProductTypeBadge from "../../features/acType/components/ac-type-badge";
 import CategoryBadge from "../badges/category-badge";
 import PkBadge from "../badges/pk-badge";
 import DeleteButton from "../buttons/delete-button2";

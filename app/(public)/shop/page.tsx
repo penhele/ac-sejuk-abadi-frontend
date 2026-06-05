@@ -1,5 +1,5 @@
 import ShopPage from "@/components/pages/public/shop/shop-page";
-import { getAcTypesQueryOptions } from "@/hooks/queries/ac-type-queries";
+import { getAcTypesQueryOptions } from "@/features/acType/queries/ac-type-queries";
 import { getCategoriesQueryOptions } from "@/features/category/queries/category-queries";
 import {
   dehydrate,

@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { Badge } from "../ui/badge";
+import { Badge } from "../../../components/ui/badge";
 
 const acTypeStyles: Record<string, string> = {
   "ac split wall": "bg-red-100 text-red-700 hover:bg-red-100",

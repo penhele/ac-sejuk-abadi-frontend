@@ -1,5 +1,5 @@
 import { Product } from "@/types/product";
-import AcProductTypeBadge from "./ac-type-badge";
+import AcProductTypeBadge from "../../features/acType/components/ac-type-badge";
 import CategoryBadge from "./category-badge";
 import PkBadge from "./pk-badge";
 
