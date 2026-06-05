@@ -16,9 +16,11 @@ export default function LoginForm({ className }: { className?: string }) {
 
   const { mutateAsync } = useMutation({
     mutationFn: (data: LoginPayload) => login(data),
-    onSuccess() {
+    onSuccess(data, variables, onMutateResult, context) {
       toast.success("Berhasil login");
-      router.push(ROUTES.DASHBOARD);
+
+      if (data.user.role === "user") router.push(ROUTES.DASHBOARD);
+      else if (data.user.role === "admin") router.push(ROUTES.DASHBOARD);
     },
     onError() {
       toast.error("Gagal login");
