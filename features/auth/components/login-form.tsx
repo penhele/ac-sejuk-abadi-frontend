@@ -67,7 +67,7 @@ export default function LoginForm({ className }: { className?: string }) {
             )}
           />
 
-          <form.SubmitButton label="Submit" />
+          <form.SubmitButton label="Sign in" className="w-full" />
         </form>
       </FieldGroup>
     </form.AppForm>

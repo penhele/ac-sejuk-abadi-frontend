@@ -1,12 +1,12 @@
 import z from "zod";
 
 export const registerSchema = z.object({
-  first_name: z.string().min(1, "*"),
-  last_name: z.string().min(1, "*"),
+  first_name: z.string().min(1, "Nama depan wajib diisi"),
+  last_name: z.string().min(1, "Nama depan wajib diisi"),
   email: z.email(),
-  password: z.string().min(8, "*"),
-  address: z.string().min(8, "*"),
-  rt: z.string().min(8, "*"),
-  rw: z.string().min(8, "*"),
-  zip_code: z.string().min(8, "*"),
+  password: z.string().min(8, "Password minimal 8 karakter"),
+  address: z.string().min(1, "Alamat wajib diisi"),
+  rt: z.string().min(1, "RT wajib diisi"),
+  rw: z.string().min(1, "RW wajib diisi"),
+  zip_code: z.string().min(1, "Kode Pos wajib diisi"),
 });

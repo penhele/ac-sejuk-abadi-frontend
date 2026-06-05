@@ -135,7 +135,7 @@ export default function RegisterForm({ className }: { className?: string }) {
             )}
           />
 
-          <form.SubmitButton label="Submit" className="col-span-4" />
+          <form.SubmitButton label="Create an account" className="col-span-4" />
         </form>
       </FieldGroup>
     </form.AppForm>
