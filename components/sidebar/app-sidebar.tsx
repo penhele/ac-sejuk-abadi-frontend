@@ -23,6 +23,7 @@ import {
   Moon,
   Package,
   Sun,
+  Users,
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/navigation";
@@ -55,6 +56,11 @@ export function AppSidebar() {
           Icon: AirVent,
           label: "Portofolio",
           href: ROUTES.DASHBOARD_PROJECT,
+        },
+        {
+          Icon: Users,
+          label: "Users",
+          href: ROUTES.USERS,
         },
       ],
     },

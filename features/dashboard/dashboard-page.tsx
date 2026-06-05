@@ -59,7 +59,7 @@ export default function DashboardPage() {
           <AcTypePage />
         </TabsContent>
       </Tabs>
-      
+
       <DashboardChart />
     </div>
   );

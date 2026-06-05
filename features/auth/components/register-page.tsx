@@ -33,7 +33,13 @@ export default function RegisterPage() {
         <CardHeader>
           <CardTitle>Create an account</CardTitle>
           <CardDescription>
-            Already have an account? <Link href={ROUTES.LOGIN} className="underline text-primary font-semibold">Sign In</Link>
+            Already have an account?{" "}
+            <Link
+              href={ROUTES.LOGIN}
+              className="underline text-primary font-semibold"
+            >
+              Sign In
+            </Link>
           </CardDescription>
         </CardHeader>
 

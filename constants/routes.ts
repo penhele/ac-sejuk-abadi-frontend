@@ -11,6 +11,7 @@ export const ROUTES = {
   PROJECT_DETAIL: (id: string | number) => `/portofolio/${id}`,
 
   DASHBOARD: "/dashboard",
+  USERS: "/dashboard/users",
 
   PRODUCTS: "/dashboard/products",
   CREATE_PRODUCT: "/dashboard/products/create",
