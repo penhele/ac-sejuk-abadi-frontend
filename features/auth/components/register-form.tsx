@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import { RegisterPayload } from "../types/register-payload";
 import { register } from "../api/register";
 import { registerSchema } from "../schemas/register.schema";
+import { Lock, Mail } from "lucide-react";
 
 export default function RegisterForm({ className }: { className?: string }) {
   const router = useRouter();
@@ -119,6 +120,7 @@ export default function RegisterForm({ className }: { className?: string }) {
                 label="Email"
                 placeholder="john@doe.com"
                 className="col-span-4"
+                IconAddon={Mail}
               />
             )}
           />
@@ -131,6 +133,7 @@ export default function RegisterForm({ className }: { className?: string }) {
                 label="Password"
                 placeholder="********"
                 className="col-span-4"
+                IconAddon={Lock}
               />
             )}
           />

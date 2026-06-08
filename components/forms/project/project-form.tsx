@@ -2,17 +2,16 @@
 
 import { ROUTES } from "@/constants/routes";
 import { useProducts } from "@/features/product";
-import { useAppForm } from "@/hooks/use-app-form";
-import { revalidateLogic } from "@tanstack/react-form";
-import Link from "next/link";
-import { Button } from "../../ui/button";
 import {
   createProjectSchema,
   ProjectFormValues,
 } from "@/features/project/schemas/project.schema";
-import useProductFilters from "@/hooks/use-product-filters";
-import useDebounce from "@/hooks/use-debounce";
-import { useState, useEffect } from "react";
+import { useAppForm } from "@/hooks/use-app-form";
+import { revalidateLogic } from "@tanstack/react-form";
+import Link from "next/link";
+import { useState } from "react";
+import { Button } from "../../ui/button";
+import { MapPin } from "lucide-react";
 
 export default function ProjectForm({
   defaultValues,
@@ -75,6 +74,7 @@ export default function ProjectForm({
                 isDisabled={isFetching}
                 label="Location"
                 placeholder="Semarang, Indonesia"
+                IconAddon={MapPin}
               />
             )}
           </form.AppField>

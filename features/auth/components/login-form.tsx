@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import { login } from "../api/login";
 import { LoginPayload } from "../types/login-payload";
 import { loginSchema } from "../schemas/login.schema";
+import { Key, Lock, Mail } from "lucide-react";
 
 export default function LoginForm({ className }: { className?: string }) {
   const router = useRouter();
@@ -54,7 +55,11 @@ export default function LoginForm({ className }: { className?: string }) {
           <form.AppField
             name="email"
             children={(field) => (
-              <field.TextField label="Email" placeholder="john@doe.com" />
+              <field.TextField
+                label="Email"
+                placeholder="john@doe.com"
+                IconAddon={Mail}
+              />
             )}
           />
 
@@ -64,7 +69,8 @@ export default function LoginForm({ className }: { className?: string }) {
               <field.TextField
                 type="password"
                 label="Password"
-                placeholder="********"
+                placeholder="••••••••"
+                IconAddon={Lock}
               />
             )}
           />

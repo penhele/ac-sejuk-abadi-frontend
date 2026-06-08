@@ -1,7 +1,7 @@
 import { useFieldContext } from "@/hooks/use-app-form";
 import { formatNumber } from "@/lib/format/currency";
 import { cn } from "@/lib/utils";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, LucideIcon, Mail } from "lucide-react";
 import { useState } from "react";
 import { FieldInfo } from "../field-info";
 import { Field, FieldLabel } from "../ui/field";
@@ -13,6 +13,17 @@ import {
   InputGroupText,
 } from "../ui/input-group";
 
+export type Props = {
+  label: string;
+  type?: "text" | "number" | "password" | "email";
+  placeholder?: string;
+  isPrice?: boolean;
+  className?: string;
+  isDisabled?: boolean;
+  readOnly?: boolean;
+  IconAddon?: LucideIcon;
+};
+
 export default function TextField({
   label,
   type = "text",
@@ -21,15 +32,8 @@ export default function TextField({
   className,
   isDisabled,
   readOnly,
-}: {
-  label: string;
-  type?: "text" | "number" | "password" | "email";
-  placeholder?: string;
-  isPrice?: boolean;
-  className?: string;
-  isDisabled?: boolean;
-  readOnly?: boolean;
-}) {
+  IconAddon,
+}: Props) {
   const field = useFieldContext<string>();
 
   const [showPassword, setShowPassword] = useState(false);
@@ -46,6 +50,12 @@ export default function TextField({
         {isPrice && (
           <InputGroupAddon>
             <InputGroupText>IDR</InputGroupText>
+          </InputGroupAddon>
+        )}
+
+        {IconAddon && (
+          <InputGroupAddon>
+            <IconAddon />
           </InputGroupAddon>
         )}
 
