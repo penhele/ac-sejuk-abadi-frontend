@@ -6,8 +6,8 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import { getBannersQueryOptions } from "@/hooks/queries/banner-queries";
-import { Banner } from "@/types/banner";
+import { getBannersQueryOptions } from "@/features/banner/queries/banner-queries";
+import { Banner } from "@/features/banner/types/banner";
 import { useQuery } from "@tanstack/react-query";
 import Autoplay from "embla-carousel-autoplay";
 import BannerFallback from "../fallback/banner-fallback";

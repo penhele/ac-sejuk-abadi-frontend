@@ -1,9 +1,10 @@
-import { getBanners } from "@/services/banner.service";
 import { queryOptions } from "@tanstack/react-query";
+import { bannerKeys } from "./banner-keys";
+import { getBanners } from "../api/get-banners";
 
 export const getBannersQueryOptions = () =>
   queryOptions({
-    queryKey: ["banners"],
+    queryKey: bannerKeys.all,
     queryFn: getBanners,
     staleTime: 1000 * 60 * 5,
   });

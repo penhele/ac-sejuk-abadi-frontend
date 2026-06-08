@@ -1,5 +1,5 @@
 import { api } from "@/lib/api/axios";
-import { Banner } from "@/types/banner";
+import { Banner } from "@/features/banner/types/banner";
 
 export const getBanners = async (): Promise<Banner[]> => {
   try {
