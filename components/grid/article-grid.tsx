@@ -2,7 +2,7 @@
 
 import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import ArticleCard from "../cards/article-card";
-import { getArticlesQueryOptions } from "@/hooks/queries/article-queries";
+import { getArticlesQueryOptions } from "@/features/article/queries/article-queries";
 import ArticleFallback from "../fallback/article-fallback";
 import EmptyState from "../empty-state/empty-state";
 import { SearchX } from "lucide-react";

@@ -1,8 +1,8 @@
 "use";
 
-import { ProductImages } from "@/types/image";
 import Image from "next/image";
 import { Carousel, CarouselContent, CarouselItem } from "../ui/carousel";
+import { ProductImages } from "@/features/product/types/product-images";
 
 export default function CarouselProductBasic({
   images,

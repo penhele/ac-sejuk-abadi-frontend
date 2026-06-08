@@ -8,7 +8,7 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
-import { Product } from "@/types/product";
+import { Product } from "@/features/product/types/product";
 import { ImageOff } from "lucide-react";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";

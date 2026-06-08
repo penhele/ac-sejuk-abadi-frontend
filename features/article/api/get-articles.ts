@@ -1,7 +1,7 @@
 import { api } from "@/lib/api/axios";
-import { Article } from "@/types/article";
+import { Article } from "@/features/article/types/article";
 
-export const getArticle = async (): Promise<Article[]> => {
+export const getArticles = async (): Promise<Article[]> => {
   try {
     const response = await api.get("/articles");
 

@@ -1,7 +1,6 @@
 "use client";
 
 import useProductFilters from "@/hooks/use-product-filters";
-import { GetProductOptions } from "@/types/product";
 import { Search, X } from "lucide-react";
 import { useState } from "react";
 import {

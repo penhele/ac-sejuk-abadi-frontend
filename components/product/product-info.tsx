@@ -1,4 +1,4 @@
-import { Product } from "@/types/product";
+import { Product } from "@/features/product/types/product";
 import ProductBadge from "../badges/product-badge";
 
 export default function ProductInfo({ product }: { product: Product }) {

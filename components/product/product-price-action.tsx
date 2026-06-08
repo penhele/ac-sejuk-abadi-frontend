@@ -1,7 +1,7 @@
 "use client";
 
 import { formatRupiah } from "@/lib/format/currency";
-import { Product } from "@/types/product";
+import { Product } from "@/features/product/types/product";
 import { MinusIcon, PlusIcon } from "lucide-react";
 import { useState } from "react";
 import { FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa";

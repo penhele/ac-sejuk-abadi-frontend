@@ -1,6 +1,6 @@
 import { ROUTES } from "@/constants/routes";
 import { formatNumber } from "@/lib/format/currency";
-import { Product } from "@/types/product";
+import { Product } from "@/features/product/types/product";
 import { ColumnDef } from "@tanstack/react-table";
 import { formatDistanceToNow } from "date-fns";
 import { ArrowUpDown, EllipsisIcon } from "lucide-react";

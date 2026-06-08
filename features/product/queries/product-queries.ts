@@ -1,4 +1,3 @@
-import { ProductResponse } from "@/types/product";
 import {
   infiniteQueryOptions,
   queryOptions,
@@ -6,6 +5,7 @@ import {
 } from "@tanstack/react-query";
 import { GetProductOptions } from "../types/product-options";
 import { getProductById, getProducts, productKeys } from "..";
+import { ProductResponse } from "../types/product-response";
 
 export const getProductsQueryOptions = <
   TData = ProductResponse,

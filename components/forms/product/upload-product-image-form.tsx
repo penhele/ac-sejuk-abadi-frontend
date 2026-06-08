@@ -5,10 +5,10 @@ import { uploadProductImages } from "@/features/product";
 import { productKeys } from "@/features/product";
 import { useAppForm } from "@/hooks/use-app-form";
 import { uploadProductImageSchema } from "@/features/product/schemas/product.schema";
-import { UploadImagePayload } from "@/types/product";
 import { revalidateLogic } from "@tanstack/react-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+import { UploadImagePayload } from "@/features/product/types/update-image-payload";
 
 export default function UploadProductImageForm({ id }: { id: string }) {
   const queryClient = useQueryClient();

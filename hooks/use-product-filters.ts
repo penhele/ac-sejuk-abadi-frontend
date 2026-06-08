@@ -1,4 +1,4 @@
-import { GetProductOptions } from "@/types/product";
+import { GetProductOptions } from "@/features/product/types/product-options";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 

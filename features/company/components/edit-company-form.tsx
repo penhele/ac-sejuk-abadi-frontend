@@ -3,13 +3,13 @@
 import CancelButton from "@/components/buttons/cancel-button";
 import { useAppForm } from "@/hooks/use-app-form";
 import { cn } from "@/lib/utils";
-import { UpdateCompanyPayload } from "@/types/company";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Button } from "../../../components/ui/button";
 import { updateCompany } from "../api/update-company";
 import { useCompany } from "../hooks/use-company";
+import { UpdateCompanyPayload } from "../types/update-company-payload";
 
 export default function EditCompanyForm({ className }: { className?: string }) {
   const [isEditing, setIsEditing] = useState(false);

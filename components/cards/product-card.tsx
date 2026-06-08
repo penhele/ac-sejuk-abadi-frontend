@@ -1,11 +1,12 @@
 import { ROUTES } from "@/constants/routes";
 import { formatRupiah } from "@/lib/format/currency";
-import { Product } from "@/types/product";
+// import { Product } from "@/features/product/types/product";
 import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import ProductBadge from "../badges/product-badge";
 import CarouselProductBasic from "../carousel/carousel-product-basic";
 import { Button } from "../ui/button";
+import { Product } from "@/features/product/types/product";
 
 export default function ProductCard({ product }: { product: Product }) {
   const hasDiscount = product.discounts && product.discounts.length > 0;

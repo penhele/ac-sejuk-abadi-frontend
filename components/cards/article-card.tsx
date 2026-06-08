@@ -1,4 +1,4 @@
-import { Article } from "@/types/article";
+import { Article } from "@/features/article/types/article";
 import { AspectRatio } from "../ui/aspect-ratio";
 import { formatDate } from "@/lib/format/date";
 import Image from "next/image";

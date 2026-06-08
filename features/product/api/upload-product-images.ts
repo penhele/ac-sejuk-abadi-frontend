@@ -1,5 +1,5 @@
 import { api } from "@/lib/api/axios";
-import { UploadImagePayload } from "@/types/product";
+import { UploadImagePayload } from "../types/update-image-payload";
 
 export const uploadProductImages = async (
   id: string | number,

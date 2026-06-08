@@ -6,14 +6,12 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import { getBannersQueryOptions } from "@/features/banner/queries/banner-queries";
-import { Banner } from "@/features/banner/types/banner";
-import { useQuery } from "@tanstack/react-query";
+import { useBanners } from "@/features/banner/hooks/use-banners";
 import Autoplay from "embla-carousel-autoplay";
 import BannerFallback from "../fallback/banner-fallback";
 
 export default function CarouselBanner() {
-  const { data: banners, isFetching } = useQuery(getBannersQueryOptions());
+  const { data: banners, isFetching } = useBanners();
 
   if (banners?.length === 0 || isFetching) {
     return <BannerFallback />;

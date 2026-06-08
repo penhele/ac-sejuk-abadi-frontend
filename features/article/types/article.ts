@@ -1,4 +1,4 @@
-import { ArticleImages } from "./image";
+import { ArticleImages } from "./article-images";
 
 export interface Article {
   id: number;
