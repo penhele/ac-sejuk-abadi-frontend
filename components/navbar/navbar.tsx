@@ -11,7 +11,7 @@ export default function Navbar() {
   const { theme, setTheme } = useTheme();
 
   return (
-    <div className="sticky top-0 z-50 bg-white h-16">
+    <div className="sticky top-0 z-50 bg-white dark:bg-background h-16">
       <div className="max-w-7xl mx-auto flex flex-row items-center justify-between">
         <div className="flex lg:flex-row flex-col lg:justify-between items-center py-2">
           <div className="flex w-full lg:w-fit xs:justify-between justify-center flex-row gap-16 items-center ">

@@ -1,6 +1,5 @@
 import { ROUTES } from "@/constants/routes";
 import { formatRupiah } from "@/lib/format/currency";
-// import { Product } from "@/features/product/types/product";
 import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import ProductBadge from "../badges/product-badge";

@@ -56,7 +56,7 @@ export default function ProductPriceAction({ product }: { product: Product }) {
         </div>
       </div>
 
-      <div className="flex justify-between items-center">
+      {/* <div className="flex justify-between items-center">
         <div className="flex flex-row gap-4 items-center">
           <Button variant={"outline"} onClick={decreaseQty}>
             <MinusIcon />
@@ -70,7 +70,7 @@ export default function ProductPriceAction({ product }: { product: Product }) {
         </div>
 
         <span>{formatRupiah(totalPrice)}</span>
-      </div>
+      </div> */}
 
       <Button
         variant={"outline"}
