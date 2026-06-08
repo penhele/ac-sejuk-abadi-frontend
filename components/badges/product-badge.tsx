@@ -3,6 +3,8 @@ import AcProductTypeBadge from "../../features/acType/components/ac-type-badge";
 import CategoryBadge from "./category-badge";
 
 export default function ProductBadge({ product }: { product: Product }) {
+  console.log(product)
+
   return (
     <div className="flex gap-2 flex-wrap items-end">
       <AcProductTypeBadge acType={product.ac_type.name} />

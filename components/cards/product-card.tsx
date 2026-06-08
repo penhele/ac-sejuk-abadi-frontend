@@ -17,7 +17,7 @@ export default function ProductCard({ product }: { product: Product }) {
   const discountPercentage = (discountPrice / originalPrice) * 100;
 
   return (
-    <div className="group relative overflow-hidden rounded-sm bg-white shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5 border h-full">
+    <div className="group relative overflow-hidden rounded-sm bg-card shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5 border h-full">
       <Link
         href={ROUTES.PRODUCT_DETAIL(product.id)}
         className="absolute inset-0 z-10"
@@ -30,7 +30,9 @@ export default function ProductCard({ product }: { product: Product }) {
         <span className="text-xs text-gray-400">{product.brand?.name}</span>
         <h1 className="text-sm h-16 line-clamp-3">{product.name}</h1>
 
-        <ProductBadge product={product} />
+        {product.ac_type.name || product.category.name &&
+          <ProductBadge product={product} />
+        }
 
         <div className="flex flex-row justify-between">
           <div className="flex flex-col min-h-8 justify-end">

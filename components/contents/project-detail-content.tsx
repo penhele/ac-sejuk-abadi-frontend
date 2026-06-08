@@ -79,11 +79,15 @@ export default function ProjectDetailContent({ id }: { id: string }) {
         <DescriptionSection description={project.description} />
       </div>
 
-      <div className="grid grid-cols-4">
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
+      {/* <div className="">
+        <HeaderSection title="Produk yang digunakan" />
+
+        <div className="grid grid-cols-5">
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      </div> */}
     </div>
   );
 }

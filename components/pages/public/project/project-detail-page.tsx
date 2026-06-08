@@ -27,16 +27,6 @@ export default function ProjectDetailPage() {
       </ErrorBoundary>
 
       <section className="space-y-8">
-        <HeaderSection title="Produk yang digunakan" />
-
-        <ErrorBoundary fallback={<ErrorFallback />}>
-          <Suspense fallback={<ProductFallback length={4} />}>
-            <ProductGrid length={4} />
-          </Suspense>
-        </ErrorBoundary>
-      </section>
-
-      <section className="space-y-8">
         <HeaderSection title="Lihat Proyek Lainnya" />
 
         <ErrorBoundary fallback={<ErrorFallback />}>
