@@ -22,7 +22,9 @@ export default function Header() {
           )}
         </div>
 
-        <span className="text-xl tracking-widest font-semibold text-primary">Dashboard</span>
+        <span className="text-xl tracking-widest font-semibold text-primary">
+          Dashboard
+        </span>
       </div>
 
       <div className="flex flex-row space-x-4 items-center justify-center">

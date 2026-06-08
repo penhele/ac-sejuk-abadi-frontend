@@ -30,9 +30,8 @@ export default function ProductCard({ product }: { product: Product }) {
         <span className="text-xs text-gray-400">{product.brand?.name}</span>
         <h1 className="text-sm h-16 line-clamp-3">{product.name}</h1>
 
-        {product.ac_type.name || product.category.name &&
-          <ProductBadge product={product} />
-        }
+        {product.ac_type.name ||
+          (product.category.name && <ProductBadge product={product} />)}
 
         <div className="flex flex-row justify-between">
           <div className="flex flex-col min-h-8 justify-end">

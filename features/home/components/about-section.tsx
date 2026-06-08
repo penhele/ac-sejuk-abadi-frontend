@@ -24,44 +24,46 @@ export default function AboutSection() {
   );
 
   return (
-    <div className="grid grid-cols-2 gap-between-section">
-      <div className="flex flex-col space-y-between-items-lg">
-        <Badge variant={"outline"}>Tentang Kami</Badge>
+    <div className="relative isolate left-1/2 -translate-x-1/2 w-screen overflow-hidden bg-linear-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-950 py-8">
+      <div className="relative z-10 grid grid-cols-2 gap-between-section max-w-7xl mx-auto">
+        <div className="flex flex-col space-y-between-items-lg">
+          <Badge variant={"outline"}>Tentang Kami</Badge>
 
-        <div className="space-y-between-items-sm">
-          <h1 className="text-3xl font-semibold">
-            Solusi Pendingin Ruangan Terpercaya untuk Rumah dan Bisnis Anda
-          </h1>
+          <div className="space-y-between-items-sm">
+            <h1 className="text-3xl font-semibold">
+              Solusi Pendingin Ruangan Terpercaya untuk Rumah dan Bisnis Anda
+            </h1>
+            <p className="text-gray-600 dark:text-white">
+              Menyediakan berbagai pilihan AC berkualitas dari merek-merek
+              terpercaya dengan harga kompetitif, layanan konsultasi yang ramah,
+              serta dukungan instalasi profesional.
+            </p>
+            <Button
+              variant={"ghost"}
+              className="underline w-fit text-primary hover:text-primary"
+              onClick={() => router.push(ROUTES.SHOP)}
+            >
+              <Store />
+              Kunjungi Toko <ArrowUpRight />
+            </Button>
+          </div>
           <p className="text-gray-600 dark:text-white">
-            Menyediakan berbagai pilihan AC berkualitas dari merek-merek
-            terpercaya dengan harga kompetitif, layanan konsultasi yang ramah,
-            serta dukungan instalasi profesional.
+            <strong>Telah dipercaya</strong> oleh ratusan pelanggan, perusahaan,
+            sekolah, perkantoran, dan berbagai instansi di berbagai kota.
           </p>
-          <Button
-            variant={"ghost"}
-            className="underline w-fit text-primary hover:text-primary"
-            onClick={() => router.push(ROUTES.SHOP)}
-          >
-            <Store />
-            Kunjungi Toko <ArrowUpRight />
-          </Button>
         </div>
-        <p className="text-gray-600 dark:text-white">
-          <strong>Telah dipercaya</strong> oleh ratusan pelanggan, perusahaan,
-          sekolah, perkantoran, dan berbagai instansi di berbagai kota.
-        </p>
-      </div>
-      <div className="grid grid-cols-2 gap-between-card">
-        {stats.map((item, index) => (
-          <StatsCard
-            key={index}
-            Icon={item.Icon}
-            label={item.label}
-            value={item.value}
-            description={item.description}
-            className={index === 0 ? "col-span-2" : "col-span-1"}
-          />
-        ))}
+        <div className="grid grid-cols-2 gap-between-card">
+          {stats.map((item, index) => (
+            <StatsCard
+              key={index}
+              Icon={item.Icon}
+              label={item.label}
+              value={item.value}
+              description={item.description}
+              className={index === 0 ? "col-span-2" : "col-span-1"}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

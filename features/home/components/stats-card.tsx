@@ -20,7 +20,7 @@ export default function StatsCard({
   return (
     <div
       className={cn(
-        "flex flex-col justify-between border p-8 rounded-2xl transition hover:shadow-lg bg-secondary",
+        "flex flex-col justify-between border p-8 rounded-2xl transition hover:shadow-lg bg-muted/50",
         className,
       )}
     >

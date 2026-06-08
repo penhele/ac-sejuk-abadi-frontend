@@ -7,9 +7,9 @@ export default function HomePage() {
     <div className="space-y-between-section">
       <AboutSection />
 
-      <ProjectSection />
-
       <ProductSection />
+
+      <ProjectSection />
     </div>
   );
 }

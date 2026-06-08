@@ -13,7 +13,7 @@ export default function PublicLayout({
         <Navbar />
       </nav>
 
-      <main className="min-h-">{children}</main>
+      <main>{children}</main>
 
       <Separator />
 

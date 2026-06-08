@@ -10,7 +10,7 @@ export default function ProjectCard({ project }: { project: Project }) {
   return (
     <Link
       href={ROUTES.PROJECT_DETAIL(project.id)}
-      className="group block overflow-hidden rounded-xl bg-white shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border"
+      className="group block overflow-hidden rounded-lg bg-white shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border"
     >
       <div className="relative">
         <AspectRatio ratio={16 / 9} className="bg-muted relative">

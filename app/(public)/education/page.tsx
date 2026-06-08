@@ -1,5 +1,6 @@
 import EducationPage from "@/components/pages/public/education/education-page";
 import HeroSection from "@/components/sections/hero-section";
+import { Book } from "lucide-react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -11,7 +12,9 @@ export default function page() {
     <div className="space-y-between-section">
       <HeroSection
         title="Articles"
-        description="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, accusamus."
+        description="Kenali HVAC dari sini"
+        Icon={Book}
+        IconLabel="Artikel"
       />
 
       <EducationPage />
