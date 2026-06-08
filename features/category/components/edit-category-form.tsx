@@ -10,7 +10,6 @@ export default function EditCategoryForm({ id }: { id: string | number }) {
   const queryClient = useQueryClient();
 
   const { data: category, isLoading } = useCategory(id);
-  console.log(category);
 
   const { mutateAsync } = useMutation({
     mutationFn: (data: UpdateCategoryPayload) => updateCategory(id, data),

@@ -34,7 +34,6 @@ export default function EditProjectForm({ id }: { id: string }) {
       toast.error("Gagal update project", {
         id: context?.toastId,
       });
-      console.log(error.message);
     },
   });
 

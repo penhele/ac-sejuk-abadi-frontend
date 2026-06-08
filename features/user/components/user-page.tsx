@@ -8,7 +8,6 @@ import { userColumns } from "./user-columns";
 
 export default function UsersPage() {
   const { data: users } = useUsers();
-  console.log(users);
 
   return (
     <div className="space-y-6">

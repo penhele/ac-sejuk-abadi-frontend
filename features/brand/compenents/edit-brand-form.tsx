@@ -26,7 +26,6 @@ export default function EditBrandForm({ id }: { id: string | number }) {
   });
 
   const { data: brand, isLoading } = useBrand(id);
-  console.log(brand);
 
   return (
     <BrandForm

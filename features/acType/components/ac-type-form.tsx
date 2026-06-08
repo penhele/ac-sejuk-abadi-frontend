@@ -23,7 +23,6 @@ export default function AcTypeForm({
       modeAfterSubmission: "blur",
     }),
     onSubmit: async ({ value }) => {
-      console.log("submit", value);
       await onSubmit(value);
     },
   });

@@ -50,7 +50,6 @@ export default function EditUserForm({ id }: { id: string | number }) {
       modeAfterSubmission: "blur",
     }),
     onSubmit: async ({ value }) => {
-      console.log("submit", value);
       await mutateAsync(value);
     },
   });

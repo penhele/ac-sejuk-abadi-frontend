@@ -21,7 +21,6 @@ export default function EditAcTypeForm({ id }: { id: string | number }) {
       toast.success("AC Type berhasil ditambahkan.");
     },
     onError: (error) => {
-      console.log(error.message);
       toast.error("Gagal menambahkan ac type.");
     },
   });
