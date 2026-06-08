@@ -16,8 +16,6 @@ import { ROUTES } from "@/constants/routes";
 import {
   AirVent,
   Building2,
-  Cuboid,
-  Layers2,
   LayoutDashboard,
   Monitor,
   Moon,
@@ -77,7 +75,7 @@ export function AppSidebar() {
   const router = useRouter();
 
   return (
-    <Sidebar variant="floating">
+    <Sidebar>
       <SidebarHeader />
       <SidebarContent>
         {navProduct.map((item, index) => (

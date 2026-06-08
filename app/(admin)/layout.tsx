@@ -1,3 +1,4 @@
+import Header from "@/components/layouts/header";
 import { AppSidebar } from "@/components/sidebar/app-sidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 
@@ -10,9 +11,10 @@ export default function AdminLayout({
     <SidebarProvider>
       <AppSidebar />
 
-      <div className="w-full px-default-page">
-        <SidebarTrigger />
-        {children}
+      <div className="w-full">
+        <Header />
+
+        <div className="p-4">{children}</div>
       </div>
     </SidebarProvider>
   );

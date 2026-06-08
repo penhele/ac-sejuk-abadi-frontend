@@ -3,7 +3,7 @@ import { revalidateLogic } from "@tanstack/react-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { UpdateUserPayload } from "../types/update-user-payload";
 import { updateUser } from "../api/update-user";
-import { userKeys } from "@/features/user/queries/use-keys";
+import { userKeys } from "@/features/user/queries/user-keys";
 import { toast } from "sonner";
 import { registerSchema } from "@/features/auth/schemas/register.schema";
 import { userSchema } from "../schemas/user.schema";

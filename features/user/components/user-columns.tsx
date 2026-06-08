@@ -1,7 +1,7 @@
 import DeleteButton from "@/components/buttons/delete-button";
 import { Badge } from "@/components/ui/badge";
 import { deleteUser } from "@/features/user/api/delete-user";
-import { userKeys } from "@/features/user/queries/use-keys";
+import { userKeys } from "@/features/user/queries/user-keys";
 import { User } from "@/features/user/types/user";
 import EditButton from "@/features/brand/compenents/edit-button";
 import { ColumnDef } from "@tanstack/react-table";
