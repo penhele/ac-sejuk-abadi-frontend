@@ -1,13 +1,12 @@
 "use client";
 
+import { useCompany } from "@/features/company/hooks/use-company";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { Separator } from "../ui/separator";
-import { cn } from "@/lib/utils";
-import { useQuery } from "@tanstack/react-query";
-import { getCompanyQueryOptions } from "@/hooks/queries/company-queries";
 
 export default function FooterProfile({ className }: { className?: string }) {
-  const { data: response } = useQuery(getCompanyQueryOptions());
+  const { data: response } = useCompany();
 
   const company = response;
 

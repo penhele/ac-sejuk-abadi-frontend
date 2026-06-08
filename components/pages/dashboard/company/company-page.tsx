@@ -1,5 +1,5 @@
-import EditCompanyForm from "@/components/forms/company/edit-company-form";
-import EditCompanyImageForm from "@/components/forms/company/edit-company-image-form";
+import EditCompanyForm from "@/features/company/components/edit-company-form";
+import EditCompanyImageForm from "@/features/company/components/edit-company-image-form";
 
 export default function CompanyPage() {
   return (

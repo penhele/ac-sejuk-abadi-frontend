@@ -1,13 +1,12 @@
 "use client";
 
-import { getCompanyQueryOptions } from "@/hooks/queries/company-queries";
 import { cn } from "@/lib/utils";
-import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
-import { Spinner } from "../../ui/spinner";
+import { Spinner } from "../../../components/ui/spinner";
+import { useCompany } from "../hooks/use-company";
 
 export default function EditCompanyImageForm() {
-  const { data: company } = useQuery(getCompanyQueryOptions());
+  const { data: company } = useCompany();
 
   return (
     <div
