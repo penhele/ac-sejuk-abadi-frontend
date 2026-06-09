@@ -22,10 +22,10 @@ export default function ProjectPage() {
         <div className="flex flex-row space-x-2">
           <Button
             variant={"outline"}
-            onClick={() => router.push(ROUTES.DASHBOARD_CREATE_PROJECT_IMAGES)}
+            onClick={() => router.push(ROUTES.DASHBOARD_GALLERY_PROJECT)}
           >
             <Images />
-            Add Images
+            Gallery Images
           </Button>
           <Button onClick={() => router.push(ROUTES.DASHBOARD_CREATE_PROJECT)}>
             <Plus /> Add New Project
