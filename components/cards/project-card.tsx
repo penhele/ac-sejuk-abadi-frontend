@@ -18,7 +18,7 @@ export default function ProjectCard({ project }: { project: Project }) {
       <div className="relative group block overflow-hidden rounded-lg bg-white shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border">
         <div className="">
           <Link
-            href={ROUTES.PRODUCT_DETAIL(project.id)}
+            href={ROUTES.PROJECT_DETAIL(project.id)}
             className="absolute inset-0 z-10"
             prefetch={false}
           />

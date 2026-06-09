@@ -37,4 +37,6 @@ export const ROUTES = {
     `/dashboard/projects/${id}/images/create`,
 
   DASHBOARD_GALLERY_PROJECT: "/dashboard/projects/images",
+
+  DASHBOARD_SETTING: "/dashboard/setting",
 } as const;

@@ -57,7 +57,7 @@ export default async function ShopPage() {
 
             <div className="">
               <ErrorBoundary fallback={<ErrorFallback />}>
-                <Suspense fallback={<ProductFallback length={3} />}>
+                <Suspense fallback={<ProductFallback length={10} />}>
                   <ProductGrid className="grid-cols-4!" />
                 </Suspense>
               </ErrorBoundary>

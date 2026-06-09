@@ -20,6 +20,7 @@ import {
   Monitor,
   Moon,
   Package,
+  Settings2,
   Sun,
   Users,
 } from "lucide-react";
@@ -59,6 +60,11 @@ export function AppSidebar() {
           Icon: Users,
           label: "Users",
           href: ROUTES.USERS,
+        },
+        {
+          Icon: Settings2,
+          label: "Setting",
+          href: ROUTES.DASHBOARD_SETTING,
         },
       ],
     },

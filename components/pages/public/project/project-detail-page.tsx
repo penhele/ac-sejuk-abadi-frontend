@@ -3,9 +3,7 @@
 import BreadcrumbComponent from "@/components/breadcrumb-component";
 import ProjectDetailContent from "@/components/contents/project-detail-content";
 import ErrorFallback from "@/components/fallback/error-fallback";
-import ProductFallback from "@/components/fallback/product-fallback";
 import ProjectFallback from "@/components/fallback/project-fallback";
-import ProductGrid from "@/components/grid/product-grid";
 import ProjectGrid from "@/components/grid/project-grid";
 import { HeaderSection } from "@/components/util/header";
 import { useParams } from "next/navigation";

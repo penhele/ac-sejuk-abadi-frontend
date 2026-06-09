@@ -28,7 +28,7 @@ export default function ProductCard({ product }: { product: Product }) {
     >
       <div className="group relative overflow-hidden rounded-sm bg-card shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5 border h-full">
         <Link
-          href={ROUTES.PROJECT_DETAIL(product.id)}
+          href={ROUTES.PRODUCT_DETAIL(product.id)}
           className="absolute inset-0 z-10"
           prefetch={false}
         />

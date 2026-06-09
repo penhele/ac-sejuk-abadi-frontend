@@ -5,13 +5,23 @@ import useProductFilters from "@/hooks/use-product-filters";
 import { cn } from "@/lib/utils";
 
 export default function TotalItems({ className }: { className?: string }) {
-  const { search, sortBy, sortOrder, id_brand, min_price, max_price } =
-    useProductFilters();
+  const {
+    search,
+    sortBy,
+    id_ac_type,
+    id_category,
+    sortOrder,
+    id_brand,
+    min_price,
+    max_price,
+  } = useProductFilters();
 
   const { data } = useProductsInfinite({
     search,
     sortBy,
     sortOrder,
+    id_ac_type,
+    id_category,
     id_brand,
     min_price,
     max_price,
