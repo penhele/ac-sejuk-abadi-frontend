@@ -1,4 +1,8 @@
-import { useProduct } from "@/features/product";
+import {
+  deleteProductImage,
+  productKeys,
+  useProduct,
+} from "@/features/product";
 import Image from "next/image";
 import DeleteImageButton from "../buttons/delete-image-button";
 
@@ -23,8 +27,8 @@ export default function ImageGrid({ id }: { id: string }) {
 
               <DeleteImageButton
                 className="opacity-0 group-hover:opacity-100 absolute top-2 right-2"
-                idProduct={id}
-                idImage={image.id}
+                mutationFn={() => deleteProductImage(id, image.id)}
+                queryKey={productKeys.all}
               />
             </div>
           ))}

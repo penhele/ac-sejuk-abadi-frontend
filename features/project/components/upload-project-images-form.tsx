@@ -1,16 +1,21 @@
 "use client";
 
 import { useAppForm } from "@/hooks/use-app-form";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { uploadProjectImage } from "../api/upload-project-images";
 import { UploadProjectImagePayload } from "../types/upload-project-image-payload";
-import { useProjects } from "../hooks/use-projects";
+import { projectKeys } from "../queries/project-keys";
+import { useRouter } from "next/navigation";
+import { ROUTES } from "@/constants/routes";
 
-export default function UploadProjectImageForm() {
+export default function UploadProjectImageForm({ id }: { id: string }) {
+  const queryClient = useQueryClient();
+  const router = useRouter();
+
   const { mutateAsync } = useMutation({
     mutationFn: (data: UploadProjectImagePayload) => {
-      return uploadProjectImage(data.projectId, data);
+      return uploadProjectImage(id, data);
     },
     onMutate(variables, context) {
       const toastId = toast.loading("Uploading...");
@@ -19,6 +24,9 @@ export default function UploadProjectImageForm() {
     onSuccess(data, variables, onMutateResult, context) {
       toast.dismiss(onMutateResult?.toastId);
       toast.success("Berhasil");
+
+      queryClient.invalidateQueries({ queryKey: projectKeys.all });
+      router.push(ROUTES.DASHBOARD_GALLERY_PROJECT);
     },
     onError(error, variables, onMutateResult, context) {
       console.log(error.message);
@@ -29,20 +37,12 @@ export default function UploadProjectImageForm() {
 
   const form = useAppForm({
     defaultValues: {
-      projectId: "",
       files: [] as File[],
     },
     onSubmit: async ({ value }) => {
       await mutateAsync(value);
     },
   });
-
-  const { data: projects } = useProjects();
-  const projectOptions =
-    projects?.map((project) => ({
-      label: project.name,
-      value: project.id.toString(),
-    })) ?? [];
 
   return (
     <form.AppForm>
@@ -53,14 +53,8 @@ export default function UploadProjectImageForm() {
         }}
         className="space-y-between-items"
       >
-        <form.AppField name="projectId">
-          {(field) => (
-            <field.SelectField options={projectOptions} label="ID Project" />
-          )}
-        </form.AppField>
-
         <form.AppField name="files">
-          {(field) => <field.ImageField label="Images" />}
+          {(field) => <field.ImageField label="Upload Images" />}
         </form.AppField>
 
         <form.SubmitButton label="Save" />

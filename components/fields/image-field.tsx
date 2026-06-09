@@ -59,7 +59,7 @@ export default function ImageField({ className, label }: Props) {
 
       <FieldInfo field={field} />
 
-      <div className="grid grid-cols-2 gap-between-card">
+      <div className="grid grid-cols-5 gap-between-card">
         {field.state.value.map((item, index) => {
           const imageUrl = URL.createObjectURL(item);
 

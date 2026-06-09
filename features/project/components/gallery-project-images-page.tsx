@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardAction,
@@ -7,14 +8,19 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useProjects } from "../hooks/use-projects";
 import { Separator } from "@/components/ui/separator";
-import Image from "next/image";
+import { ROUTES } from "@/constants/routes";
 import { ArrowUpRight, Pencil, Plus } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useProjects } from "../hooks/use-projects";
+import DeleteImageButton from "@/components/buttons/delete-image-button";
+import { deleteProjectImage } from "../api/delete-project-image";
+import { projectKeys } from "../queries/project-keys";
 
 export default function GalleryProjectPage() {
   const { data: projects = [] } = useProjects();
+  const router = useRouter();
 
   return (
     <div className="space-y-between-items-lg">
@@ -22,7 +28,7 @@ export default function GalleryProjectPage() {
 
       <div className="grid grid-cols-2 gap-between-card">
         {projects.map((project) => (
-          <Card>
+          <Card key={project.id}>
             <CardHeader>
               <CardTitle>{project.name}</CardTitle>
               <CardAction className="space-x-2">
@@ -32,7 +38,16 @@ export default function GalleryProjectPage() {
                 <Button size={"icon-xs"} variant={"outline"}>
                   <Pencil />
                 </Button>
-                <Button size={"icon-xs"} variant={"outline"} className="group">
+                <Button
+                  size={"icon-xs"}
+                  variant={"outline"}
+                  className="group"
+                  onClick={() =>
+                    router.push(
+                      ROUTES.DASHBOARD_CREATE_PROJECT_IMAGES(project.id),
+                    )
+                  }
+                >
                   <Plus className="transition group-hover:rotate-90" />
                 </Button>
               </CardAction>
@@ -42,14 +57,25 @@ export default function GalleryProjectPage() {
 
             <CardContent>
               {project.images && project.images.length > 0 ? (
-                <div className="flex flex-row space-x-1">
+                <div className="flex flex-row space-x-1 overflow-x-hidden">
                   {project.images.map((image, index) => (
-                    <div key={image.id ?? index} className="relative h-40 w-40">
+                    <div
+                      key={image.id ?? index}
+                      className="relative h-40 w-40 aspect-square group"
+                    >
                       <Image
                         src={image.image_url}
                         alt={`${project.name}-image-${index}`}
                         fill
                         className="object-contain bg-muted"
+                      />
+
+                      <DeleteImageButton
+                        className="absolute top-2 right-0 opacity-0 group-hover:opacity-100"
+                        mutationFn={() =>
+                          deleteProjectImage(project.id, image.id)
+                        }
+                        queryKey={projectKeys.all}
                       />
                     </div>
                   ))}

@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { QueryKey, useMutation, useQueryClient } from "@tanstack/react-query";
 import { X } from "lucide-react";
 import { toast } from "sonner";
 import {
@@ -17,19 +17,33 @@ import { Button } from "../ui/button";
 import { deleteProductImage } from "@/features/product";
 import { productKeys } from "@/features/product";
 
+interface DeleteButtonProps {
+  className?: string;
+  mutationFn: () => Promise<unknown>;
+  queryKey: QueryKey;
+
+  title?: string;
+  description?: string;
+
+  successMessage?: string;
+  errorMessage?: string;
+}
+
 export default function DeleteImageButton({
   className,
-  idProduct,
-  idImage,
-}: {
-  className?: string;
-  idProduct: string | number;
-  idImage: string | number;
-}) {
+  mutationFn,
+  queryKey,
+
+  title = "Are you sure?",
+  description = "This action cannot be undone.",
+
+  successMessage = "Berhasil menghapus data",
+  errorMessage = "Gagal menghapus data",
+}: DeleteButtonProps) {
   const queryClient = useQueryClient();
 
   const { mutate } = useMutation({
-    mutationFn: () => deleteProductImage(idProduct, idImage),
+    mutationFn,
     onMutate() {
       const toastId = toast.loading("Loading...");
       return { toastId };
@@ -38,7 +52,7 @@ export default function DeleteImageButton({
       toast.success("Berhasil menghapus gambar", { id: context.toastId });
 
       queryClient.invalidateQueries({
-        queryKey: productKeys.all,
+        queryKey,
       });
     },
     onError(_, __, context) {
