@@ -3,7 +3,7 @@
 import { useFieldContext } from "@/hooks/use-app-form";
 import { cn } from "@/lib/utils";
 import { Input } from "../ui/input";
-import ImageUploadDropzone from "../forms/product/upload-dropzone";
+import ImageUploadDropzone from "../../features/product/components/upload-dropzone";
 import { FieldInfo } from "../field-info";
 import Image from "next/image";
 import { Button } from "../ui/button";

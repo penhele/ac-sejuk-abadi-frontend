@@ -1,6 +1,6 @@
 "use client";
 
-import ProjectGrid from "@/components/grid/project-grid";
+import ProjectGrid from "@/features/project/components/project-grid";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/constants/routes";
 import { useProjects } from "@/features/project";

@@ -1,4 +1,4 @@
-import ProjectPage from "@/components/pages/public/project/project-page";
+import ProjectPage from "@/features/project/components/project-page";
 import HeroSection from "@/components/sections/hero-section";
 import { Briefcase } from "lucide-react";
 import { Metadata } from "next";

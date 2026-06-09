@@ -1,4 +1,4 @@
-import ProductPage from "@/components/pages/dashboard/product/product-page";
+import ProductPage from "@/features/product/components/product-page";
 import { Suspense } from "react";
 
 export default function page() {

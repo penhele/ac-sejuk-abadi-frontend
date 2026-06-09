@@ -32,9 +32,6 @@
    * ========================================== */
   --color-discount: var(--color-yellow-500);
 
-  --color-text-title: var(--color-gray-900);
-  --color-text-description: var(--color-gray-400);
-
   /* ==========================================
    * TEXT (CUSTOM)
    * ========================================== */
@@ -46,9 +43,6 @@
   --text-header-h4: 1rem;
 
   --text-2xs: 0.6875rem;
-
-  --text-title: var(--text-lg);
-  --text-description: var(--text-sm);
 
   /* ==========================================
    * FONTS
@@ -279,29 +273,5 @@
   }
   footer {
     @apply max-w-7xl mx-auto px-page-inline xl:px-0;
-  }
-}
-
-@layer components {
-  .header-h1 {
-    font-size: var(--text-header-h1);
-    font-weight: var(--font-weight-bold);
-  }
-
-  .header-h2 {
-    font-size: var(--text-header-h2);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-text-title);
-  }
-
-  .title {
-    font-size: var(--text-title);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-text-title);
-  }
-
-  .description {
-    font-size: var(--text-description);
-    color: var(--color-text-description);
   }
 }

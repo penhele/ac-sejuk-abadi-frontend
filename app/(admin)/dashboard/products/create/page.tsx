@@ -1,4 +1,4 @@
-import CreateProductPage from "@/components/pages/dashboard/product/create-product-page";
+import CreateProductPage from "@/features/product/components/create-product-page";
 
 export default function page() {
   return <CreateProductPage />;

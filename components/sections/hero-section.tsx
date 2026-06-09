@@ -1,6 +1,5 @@
-import Image from "next/image";
+import { LucideIcon } from "lucide-react";
 import { Badge } from "../ui/badge";
-import { Briefcase, LucideIcon } from "lucide-react";
 
 type Props = {
   title: string;

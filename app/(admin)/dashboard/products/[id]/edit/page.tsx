@@ -1,4 +1,4 @@
-import EditProductPage from "@/components/pages/dashboard/product/edit-product-page";
+import EditProductPage from "@/features/product/components/edit-product-page";
 
 export default function Page() {
   return <EditProductPage />;

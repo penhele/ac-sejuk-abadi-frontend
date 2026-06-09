@@ -1,4 +1,4 @@
-import ProductDetailPage from "@/components/pages/public/shop/product-detail-page";
+import ProductDetailPage from "@/features/product/components/product-detail-page";
 import { getProductById } from "@/features/product";
 import { Metadata } from "next";
 

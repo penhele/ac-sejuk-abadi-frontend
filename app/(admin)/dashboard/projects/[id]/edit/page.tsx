@@ -1,4 +1,4 @@
-import EditProjectPage from "@/components/pages/dashboard/project/edit-project-page";
+import EditProjectPage from "@/features/project/components/edit-project-page";
 
 export default function Page() {
   return <EditProjectPage />;

@@ -1,5 +1,5 @@
 import Header from "@/components/layouts/header";
-import { AppSidebar } from "@/components/sidebar/app-sidebar";
+import { AppSidebar } from "@/components/layouts/app-sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 
 export default function AdminLayout({

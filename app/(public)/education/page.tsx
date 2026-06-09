@@ -1,4 +1,4 @@
-import EducationPage from "@/components/pages/public/education/education-page";
+import EducationPage from "@/features/article/components/education-page";
 import HeroSection from "@/components/sections/hero-section";
 import { Book } from "lucide-react";
 import { Metadata } from "next";

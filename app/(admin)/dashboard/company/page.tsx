@@ -1,4 +1,4 @@
-import CompanyPage from "@/components/pages/dashboard/company/company-page";
+import CompanyPage from "@/features/company/components/company-page";
 
 export default function Page() {
   return <CompanyPage />;

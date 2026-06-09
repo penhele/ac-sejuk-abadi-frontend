@@ -1,6 +1,5 @@
-import CarouselProduct from "@/components/carousel/carousel-product";
 import ErrorFallback from "@/components/fallback/error-fallback";
-import ProductGrid from "@/components/grid/product-grid";
+import ProductGrid from "@/features/product/components/product-grid";
 import { Header } from "@/components/header";
 import { ROUTES } from "@/constants/routes";
 import { Suspense } from "react";

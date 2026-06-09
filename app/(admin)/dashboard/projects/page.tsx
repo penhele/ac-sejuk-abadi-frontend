@@ -1,5 +1,5 @@
-import ProjectPage from "@/components/pages/dashboard/project/project-page";
+import DashboardProjectPage from "@/features/project/components/dashboard-project-page";
 
 export default function Page() {
-  return <ProjectPage />;
+  return <DashboardProjectPage />;
 }
