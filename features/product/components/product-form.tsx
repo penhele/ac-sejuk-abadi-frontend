@@ -11,8 +11,9 @@ import { getAcTypesQueryOptions } from "@/features/acType/queries/ac-type-querie
 import { getCategoriesQueryOptions } from "@/features/category/queries/category-queries";
 import { useAppForm } from "@/hooks/use-app-form";
 import { formatNumber } from "@/lib/format/currency";
-import { revalidateLogic } from "@tanstack/react-form";
+import { revalidateLogic, useStore } from "@tanstack/react-form";
 import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 
 export default function ProductForm({
   defaultValues,
@@ -64,6 +65,8 @@ export default function ProductForm({
       value: acType.id.toString(),
     })) ?? [];
 
+  console.log(form);
+
   const pkOptions = [
     { label: "1/2", value: "1/2" },
     { label: "3/4", value: "3/4" },
@@ -74,6 +77,33 @@ export default function ProductForm({
     { label: "4", value: "4" },
     { label: "8", value: "8" },
   ];
+
+  const idBrand = useStore(form.store, (state) => state.values.id_brand);
+  const idCategory = useStore(form.store, (state) => state.values.id_category);
+  const idAcType = useStore(form.store, (state) => state.values.id_ac_type);
+  const pk = useStore(form.store, (state) => state.values.pk);
+  const selectedBrand = brandOptions.find((option) => option.value === idBrand);
+  const selectedCategory = categoryOptions.find(
+    (option) => option.value === idCategory,
+  );
+  const selectedAcType = acTypeOptions.find(
+    (option) => option.value === idAcType,
+  );
+
+  const productName = [
+    selectedBrand?.label,
+    selectedCategory?.label,
+    selectedAcType?.label,
+    pk && `${pk} PK`,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  useEffect(() => {
+    if (!productName) return;
+
+    form.setFieldValue("name", productName);
+  }, [productName]);
 
   return (
     <form.AppForm>
@@ -93,6 +123,7 @@ export default function ProductForm({
                   isDisabled={isFetching}
                   label="Nama Produk"
                   placeholder="Daikin Zeta 2 PK"
+                  readOnly
                 />
               )}
             />
