@@ -33,4 +33,5 @@ export const ROUTES = {
   DASHBOARD_CREATE_PROJECT: "/dashboard/projects/create",
   DASHBOARD_EDIT_PROJECT: (id: string | number) =>
     `/dashboard/projects/${id}/edit`,
+  DASHBOARD_CREATE_PROJECT_IMAGES: "/dashboard/projects/create/images",
 } as const;
