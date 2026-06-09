@@ -1,9 +1,9 @@
 import { api } from "@/lib/api/axios";
-import { UploadImagePayload } from "../types/upload-image-payload";
+import { UploadProjectImagePayload } from "../types/upload-project-image-payload";
 
-export const uploadProductImages = async (
+export const uploadProjectImage = async (
   id: string | number,
-  data: UploadImagePayload,
+  data: UploadProjectImagePayload,
 ) => {
   const formData = new FormData();
 
@@ -11,7 +11,7 @@ export const uploadProductImages = async (
     formData.append("files", file);
   });
 
-  const response = await api.post(`/products/${id}/images`, formData, {
+  const response = await api.post(`/projects/${id}/images`, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },

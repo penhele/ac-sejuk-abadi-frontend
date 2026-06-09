@@ -10,8 +10,14 @@ import { Button } from "../ui/button";
 import { X } from "lucide-react";
 import { useState } from "react";
 import { compressImages } from "@/lib/image";
+import { Field, FieldLabel } from "../ui/field";
 
-export default function ImageField({ className }: { className?: string }) {
+type Props = {
+  className?: string;
+  label?: string;
+};
+
+export default function ImageField({ className, label }: Props) {
   const field = useFieldContext<File[]>();
 
   const [isCompressing, setIsCompressing] = useState(false);
@@ -34,7 +40,9 @@ export default function ImageField({ className }: { className?: string }) {
   };
 
   return (
-    <div className="flex flex-col gap-between-items">
+    <Field className="flex flex-col gap-between-items">
+      <FieldLabel>{label}</FieldLabel>
+
       <label className="cursor-pointer">
         <Input
           multiple
@@ -87,6 +95,6 @@ export default function ImageField({ className }: { className?: string }) {
           );
         })}
       </div>
-    </div>
+    </Field>
   );
 }
