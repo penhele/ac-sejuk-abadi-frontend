@@ -1,10 +1,10 @@
 "use client";
 
-import EditProductForm from "@/components/forms/product/edit-product-form";
 import UploadProductImageForm from "@/features/product/components/upload-product-image-form";
 import ImageGrid from "@/features/product/components/image-grid";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useParams } from "next/navigation";
+import EditProductForm from "./edit-product-form";
 
 export default function EditProductPage() {
   const params = useParams();
