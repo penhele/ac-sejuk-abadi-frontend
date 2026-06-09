@@ -14,7 +14,7 @@ export default function ProjectCard({ project }: { project: Project }) {
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
     >
-      <div className="relative group block overflow-hidden rounded-lg bg-white shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border">
+      <div className="relative group block overflow-hidden rounded-lg bg-card shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border">
         <div className="">
           <Link
             href={ROUTES.PROJECT_DETAIL(project.id)}
