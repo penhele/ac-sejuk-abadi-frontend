@@ -62,7 +62,7 @@ export default function GalleryProjectPage() {
 
             <CardContent>
               {project.images && project.images.length > 0 ? (
-                <div className="flex flex-row space-x-1 overflow-x-hidden">
+                <div className="flex flex-row space-x-1 overflow-x-scroll ">
                   {project.images.map((image, index) => (
                     <div
                       key={image.id ?? index}
@@ -88,7 +88,9 @@ export default function GalleryProjectPage() {
               ) : (
                 <div className="p-4 bg-muted/50 rounded-lg border border-dashed flex flex-col items-center justify-center space-y-2">
                   <ImageOff className="text-muted-foreground" />
-                  <span className="text-muted-foreground text-xs">Belum ada gambar</span>
+                  <span className="text-muted-foreground text-xs">
+                    Belum ada gambar
+                  </span>
                 </div>
               )}
             </CardContent>

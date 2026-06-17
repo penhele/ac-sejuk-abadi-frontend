@@ -15,6 +15,7 @@ import {
 import { ROUTES } from "@/constants/routes";
 import {
   AirVent,
+  BookOpen,
   Building2,
   LayoutDashboard,
   Monitor,
@@ -55,6 +56,11 @@ export function AppSidebar() {
           Icon: AirVent,
           label: "Portofolio",
           href: ROUTES.DASHBOARD_PROJECT,
+        },
+        {
+          Icon: BookOpen,
+          label: "Article",
+          href: ROUTES.DASHBOARD_ARTICLE,
         },
         {
           Icon: Users,

@@ -112,8 +112,8 @@ export default function ProductForm({
         }}
         className="space-y-between-items"
       >
-        <div className="grid grid-cols-5 gap-between-items-lg">
-          <div className="col-span-3 space-y-between-items-lg">
+        <div className="grid grid-cols-5 gap-between-items-sm md:gap-between-items-lg">
+          <div className="col-span-5 lg:col-span-3 space-y-between-items-sm md:space-y-between-items-lg">
             <form.AppField
               name="name"
               children={(field) => (
@@ -125,6 +125,7 @@ export default function ProductForm({
                 />
               )}
             />
+
             <form.AppField
               name="description"
               children={(field) => (
@@ -137,8 +138,8 @@ export default function ProductForm({
             />
           </div>
 
-          <div className="col-span-2">
-            <div className="grid grid-cols-2 gap-between-items-lg">
+          <div className="col-span-5 lg:col-span-2">
+            <div className="grid grid-cols-2 gap-between-items-sm md:gap-between-items-lg">
               <form.AppField
                 name="id_brand"
                 children={(field) => (
