@@ -14,6 +14,7 @@ export default function Navbar() {
   const { data: company } = useCompany();
 
   return (
+<<<<<<< HEAD
     <div className="sticky top-0 z-50 bg-white dark:bg-background h-16">
       <div className="max-w-7xl mx-auto flex flex-row items-center justify-between">
         <div className="flex lg:flex-row flex-col lg:justify-between items-center py-2">
@@ -29,6 +30,19 @@ export default function Navbar() {
               ) : (
                 <span>logo</span>
               )}
+=======
+    <div className="sticky top-0 z-50 bg-white h-16">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex lg:flex-row flex-col lg:justify-between items-center px-page-inline xl:px-0 py-2">
+          <div className="flex w-full lg:w-fit xs:justify-between justify-center flex-row gap-16 items-center ">
+            <Link href={"/"} className="relative h-12 min-w-28">
+              <Image
+                src="/logo.png"
+                alt="logo"
+                fill
+                className="object-contain"
+              />
+>>>>>>> a48fc63b33cef8bb70f3e7dd456e65181a42407b
             </Link>
 
             <div className="hidden xs:block">

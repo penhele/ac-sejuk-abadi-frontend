@@ -6,6 +6,7 @@ type Props = {
   params: Promise<{ id: string }>;
 };
 
+<<<<<<< HEAD
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const id = (await params).id;
 
@@ -34,4 +35,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default function page() {
   return <ProductDetailPage />;
+=======
+export default function page() {
+  return (
+    <div className="max-w-7xl mx-auto py-default-page px-page-inline xl:px-0">
+      <ProductDetailPage />
+    </div>
+  );
+>>>>>>> a48fc63b33cef8bb70f3e7dd456e65181a42407b
 }
