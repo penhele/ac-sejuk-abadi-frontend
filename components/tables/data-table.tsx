@@ -1,12 +1,15 @@
 "use client";
 
 import {
+  ColumnDef,
   ColumnFiltersState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
+  OnChangeFn,
+  PaginationState,
   SortingState,
   useReactTable,
 } from "@tanstack/react-table";
@@ -20,16 +23,45 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
-import { DataTableProps } from "@/types/data-table";
 import { Search } from "lucide-react";
 import { useState } from "react";
 import { Button } from "../ui/button";
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../ui/card";
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
 } from "../ui/input-group";
 import { Skeleton } from "../ui/skeleton";
+
+interface DataTableProps<TData, TValue> {
+  columns: ColumnDef<TData, TValue>[];
+  data: TData[];
+  className?: string;
+  isFetching?: boolean;
+  pageSize?: number;
+  pageIndex?: number;
+  isPagination?: boolean;
+  isFilter?: boolean;
+  pagination?: PaginationState;
+  onPaginationChange?: OnChangeFn<PaginationState>;
+  pageCount?: number;
+  rowCount?: number;
+
+  searchValue?: string;
+  onSearchChange?: (value: string) => void;
+
+  title?: string;
+  description?: string;
+  action?: React.ReactNode;
+}
 
 export function DataTable<TData, TValue>({
   columns,
@@ -45,6 +77,10 @@ export function DataTable<TData, TValue>({
 
   searchValue,
   onSearchChange,
+
+  title,
+  description,
+  action,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -88,78 +124,88 @@ export function DataTable<TData, TValue>({
         </div>
       )}
 
-      <div className="overflow-hidden rounded-md border">
-        <Table>
-          <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id}>
-                      {!isFetching ? (
-                        <>
-                          {header.isPlaceholder
-                            ? null
-                            : flexRender(
-                                header.column.columnDef.header,
-                                header.getContext(),
-                              )}
-                        </>
-                      ) : (
-                        <div className="">
-                          <Skeleton className="h-4 w-24" />
-                        </div>
-                      )}
-                    </TableHead>
-                  );
-                })}
-              </TableRow>
-            ))}
-          </TableHeader>
-          <TableBody>
-            {!isFetching ? (
-              table.getRowModel().rows?.length ? (
-                table.getRowModel().rows.map((row) => (
-                  <TableRow
-                    key={row.id}
-                    data-state={row.getIsSelected() && "selected"}
-                  >
-                    {row.getVisibleCells().map((cell) => (
-                      <TableCell key={cell.id}>
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext(),
+      <Card>
+        <CardHeader>
+          <CardTitle>{title}</CardTitle>
+          <CardDescription>{description}</CardDescription>
+
+          {action && <CardAction>{action}</CardAction>}
+        </CardHeader>
+        <CardContent>
+          <Table>
+            <TableHeader>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => {
+                    return (
+                      <TableHead key={header.id}>
+                        {!isFetching ? (
+                          <>
+                            {header.isPlaceholder
+                              ? null
+                              : flexRender(
+                                  header.column.columnDef.header,
+                                  header.getContext(),
+                                )}
+                          </>
+                        ) : (
+                          <div className="">
+                            <Skeleton className="h-4 w-24" />
+                          </div>
                         )}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                ))
-              ) : (
-                <TableRow>
-                  <TableCell
-                    colSpan={columns.length}
-                    className="h-24 text-center"
-                  >
-                    No results.
-                  </TableCell>
+                      </TableHead>
+                    );
+                  })}
                 </TableRow>
-              )
-            ) : (
-              Array(10)
-                .fill(null)
-                .map((_, rowIndex) => (
-                  <TableRow key={`skeleton-row-${rowIndex}`}>
-                    {columns.map((_, colIndex) => (
-                      <TableCell key={`skeleton-cell-${rowIndex}-${colIndex}`}>
-                        <Skeleton className="h-6 w-1/2" />
-                      </TableCell>
-                    ))}
+              ))}
+            </TableHeader>
+            <TableBody>
+              {!isFetching ? (
+                table.getRowModel().rows?.length ? (
+                  table.getRowModel().rows.map((row) => (
+                    <TableRow
+                      key={row.id}
+                      data-state={row.getIsSelected() && "selected"}
+                    >
+                      {row.getVisibleCells().map((cell) => (
+                        <TableCell key={cell.id}>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext(),
+                          )}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell
+                      colSpan={columns.length}
+                      className="h-24 text-center"
+                    >
+                      No results.
+                    </TableCell>
                   </TableRow>
-                ))
-            )}
-          </TableBody>
-        </Table>
-      </div>
+                )
+              ) : (
+                Array(10)
+                  .fill(null)
+                  .map((_, rowIndex) => (
+                    <TableRow key={`skeleton-row-${rowIndex}`}>
+                      {columns.map((_, colIndex) => (
+                        <TableCell
+                          key={`skeleton-cell-${rowIndex}-${colIndex}`}
+                        >
+                          <Skeleton className="h-6 w-1/2" />
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  ))
+              )}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
 
       {isPagination && (
         <div className="flex flex-row justify-between items-center">

@@ -41,4 +41,5 @@ export const ROUTES = {
   DASHBOARD_SETTING: "/dashboard/setting",
 
   DASHBOARD_ARTICLE: "/dashboard/articles",
+  DASHBOARD_CREATE_ARTICLE: "/dashboard/articles/create",
 } as const;
