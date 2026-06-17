@@ -5,7 +5,7 @@ import { Textarea } from "../ui/textarea";
 import { cn } from "@/lib/utils";
 import { readonly } from "zod";
 
-export default function TextField({
+export default function TextareaField({
   label,
   placeholder,
   isDisabled,

@@ -12,7 +12,7 @@ export default function ProductSection() {
       <Header title="Produk" href={ROUTES.SHOP} />
 
       <ErrorBoundary fallback={<ErrorFallback />}>
-        <Suspense >
+        <Suspense>
           <ProductGrid length={10} className="hidden xl:grid" />
         </Suspense>
       </ErrorBoundary>

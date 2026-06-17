@@ -22,7 +22,7 @@ export default function ArticlePage() {
         action={
           <Button
             size={"sm"}
-            variant={'outline'}
+            variant={"outline"}
             onClick={() => router.push(ROUTES.DASHBOARD_CREATE_ARTICLE)}
           >
             <Plus />

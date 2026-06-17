@@ -40,7 +40,11 @@ export default function CategoryPage() {
         </Sheet>
       </div>
 
-      <DataTable columns={categoryColumns} data={categories || []} isFetching={isFetching} />
+      <DataTable
+        columns={categoryColumns}
+        data={categories || []}
+        isFetching={isFetching}
+      />
     </div>
   );
 }

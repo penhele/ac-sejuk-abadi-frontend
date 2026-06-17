@@ -52,7 +52,7 @@ export default function AboutSection() {
             sekolah, perkantoran, dan berbagai instansi di berbagai kota.
           </p>
         </div>
-        
+
         <div className="grid grid-cols-2 gap-between-card col-span-2 xl:col-span-1">
           {stats.map((item, index) => (
             <StatsCard

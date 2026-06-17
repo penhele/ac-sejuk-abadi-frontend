@@ -40,7 +40,11 @@ export default function AcTypePage() {
         </Sheet>
       </div>
 
-      <DataTable columns={acTypeColumns} data={acTypes || []} isFetching={isFetching} />
+      <DataTable
+        columns={acTypeColumns}
+        data={acTypes || []}
+        isFetching={isFetching}
+      />
     </div>
   );
 }

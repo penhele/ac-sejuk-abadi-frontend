@@ -31,7 +31,9 @@ export default function FooterContact({ className }: { className?: string }) {
             </div>
             <div className="flex flex-col">
               <span>{item.title}</span>
-              <span className="text-sm  text-muted-foreground">{item.value}</span>
+              <span className="text-sm  text-muted-foreground">
+                {item.value}
+              </span>
             </div>
           </div>
         ))}
