@@ -25,8 +25,8 @@ export default function AboutSection() {
 
   return (
     <div className="relative isolate left-1/2 -translate-x-1/2 w-screen overflow-hidden bg-linear-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-950 py-8">
-      <div className="relative z-10 grid grid-cols-2 gap-between-section max-w-7xl mx-auto">
-        <div className="flex flex-col space-y-between-items-lg">
+      <div className="relative z-10 grid grid-cols-2 gap-between-section max-w-7xl mx-auto px-page-inline xl:px-0">
+        <div className="flex flex-col space-y-between-items-lg col-span-2 xl:col-span-1">
           <Badge variant={"outline"}>Tentang Kami</Badge>
 
           <div className="space-y-between-items-sm">
@@ -52,7 +52,8 @@ export default function AboutSection() {
             sekolah, perkantoran, dan berbagai instansi di berbagai kota.
           </p>
         </div>
-        <div className="grid grid-cols-2 gap-between-card">
+        
+        <div className="grid grid-cols-2 gap-between-card col-span-2 xl:col-span-1">
           {stats.map((item, index) => (
             <StatsCard
               key={index}

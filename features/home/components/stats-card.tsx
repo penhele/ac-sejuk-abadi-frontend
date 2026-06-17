@@ -20,7 +20,7 @@ export default function StatsCard({
   return (
     <div
       className={cn(
-        "flex flex-col justify-between border p-8 rounded-2xl transition hover:shadow-lg bg-muted/50",
+        "flex flex-col justify-between border p-8 rounded-2xl transition hover:shadow-lg bg-muted/50 space-x-between-items-xs",
         className,
       )}
     >
@@ -29,9 +29,9 @@ export default function StatsCard({
         {label}
       </Badge>
 
-      <div className="space-y-between-items-xs">
+      <div className="space-y-2">
         <h1 className="text-3xl font-bold ">{value}+</h1>
-        <span className="font-light text-sm">{description}</span>
+        <span className="font-light text-sm line-clamp-1">{description}</span>
       </div>
     </div>
   );
