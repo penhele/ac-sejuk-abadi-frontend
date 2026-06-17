@@ -23,7 +23,7 @@ export default function FooterProfile({ className }: { className?: string }) {
 
       <Separator />
 
-      <p className="text-sm leading-relaxed text-gray-600">
+      <p className="text-sm leading-relaxed text-muted-foreground">
         {company?.description}
       </p>
     </div>

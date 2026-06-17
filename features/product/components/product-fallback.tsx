@@ -1,7 +1,7 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 
-export default function ProductFallback({ length = 3 }: { length?: number }) {
+export default function ProductFallback({ length }: { length: number }) {
   return (
     <div className={cn("grid grid-cols-5 gap-between-card")}>
       {Array.from({ length }).map((_, index) => (

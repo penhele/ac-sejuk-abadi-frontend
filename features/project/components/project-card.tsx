@@ -46,9 +46,9 @@ export default function ProjectCard({ project }: { project: Project }) {
         </div>
 
         <div className="p-4 space-y-2">
-          <h1 className="text-lg font-bold">{project.name}</h1>
+          <h1 className="text-lg font-bold h-12">{project.name}</h1>
 
-          <span className="text-sm text-muted-foreground h-12 line-clamp-2">
+          <span className="text-sm text-muted-foreground h-12 line-clamp-1">
             {project.description}
           </span>
 
