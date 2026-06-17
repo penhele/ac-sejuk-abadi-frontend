@@ -32,8 +32,6 @@ export async function compressImages(files: File[]): Promise<File[]> {
       }),
     );
   } catch (error) {
-    console.error("Gagal mengompres beberapa gambar:", error);
-    // Jika kompresi gagal, fallback mengembalikan file asli agar user tidak stuck
     return files;
   }
 }

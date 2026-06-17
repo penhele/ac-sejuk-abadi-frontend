@@ -4,6 +4,7 @@ import { Header } from "@/components/header";
 import { ROUTES } from "@/constants/routes";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
+import ProductCarousel from "./product-carousel";
 
 export default function ProductSection() {
   return (
@@ -11,10 +12,12 @@ export default function ProductSection() {
       <Header title="Produk" href={ROUTES.SHOP} />
 
       <ErrorBoundary fallback={<ErrorFallback />}>
-        <Suspense>
-          <ProductGrid length={10} />
+        <Suspense >
+          <ProductGrid length={10} className="hidden xl:grid" />
         </Suspense>
       </ErrorBoundary>
+
+      <ProductCarousel className="xl:hidden" />
     </div>
   );
 }

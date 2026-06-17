@@ -65,8 +65,6 @@ export default function ProductForm({
       value: acType.id.toString(),
     })) ?? [];
 
-  console.log(form);
-
   const pkOptions = [
     { label: "1/2", value: "1/2" },
     { label: "3/4", value: "3/4" },

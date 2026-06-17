@@ -8,10 +8,17 @@ import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { ROUTES } from "@/constants/routes";
 import { useCompany } from "@/features/company/hooks/use-company";
+import { useEffect, useState } from "react";
 
 export default function Navbar() {
   const { theme, setTheme } = useTheme();
   const { data: company } = useCompany();
+
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <div className="sticky top-0 z-50 bg-white dark:bg-background h-16">
@@ -37,13 +44,17 @@ export default function Navbar() {
           </div>
         </div>
 
-        <Toggle
-          pressed={theme === "dark"}
-          onPressedChange={() => setTheme(theme === "dark" ? "light" : "dark")}
-        >
-          {theme === "light" ? <Sun /> : <Moon />}
-          {theme}
-        </Toggle>
+        {mounted && (
+          <Toggle
+            pressed={theme === "dark"}
+            onPressedChange={() =>
+              setTheme(theme === "dark" ? "light" : "dark")
+            }
+          >
+            {theme === "light" ? <Sun /> : <Moon />}
+            {theme}
+          </Toggle>
+        )}
       </div>
     </div>
   );
