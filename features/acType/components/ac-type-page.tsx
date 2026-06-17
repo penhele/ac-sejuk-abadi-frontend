@@ -15,7 +15,7 @@ import useAcTypes from "../hooks/use-ac-types";
 import CreateAcTypeForm from "./create-ac-type-form";
 
 export default function AcTypePage() {
-  const { data: acTypes } = useAcTypes();
+  const { data: acTypes, isFetching } = useAcTypes();
 
   return (
     <div className="space-y-between-items">
@@ -40,7 +40,7 @@ export default function AcTypePage() {
         </Sheet>
       </div>
 
-      <DataTable columns={acTypeColumns} data={acTypes || []} />
+      <DataTable columns={acTypeColumns} data={acTypes || []} isFetching={isFetching} />
     </div>
   );
 }

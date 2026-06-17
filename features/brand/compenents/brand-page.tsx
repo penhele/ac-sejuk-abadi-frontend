@@ -15,7 +15,7 @@ import { useBrands } from "../hooks/use-brands";
 import { brandColumns } from "./brand-columns";
 
 export default function BrandPage() {
-  const { data: brands } = useBrands();
+  const { data: brands, isFetching } = useBrands();
 
   return (
     <div className="space-y-between-items">
@@ -40,7 +40,11 @@ export default function BrandPage() {
         </Sheet>
       </div>
 
-      <DataTable columns={brandColumns} data={brands || []} />
+      <DataTable
+        columns={brandColumns}
+        data={brands || []}
+        isFetching={isFetching}
+      />
     </div>
   );
 }

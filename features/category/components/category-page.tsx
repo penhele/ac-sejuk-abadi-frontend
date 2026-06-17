@@ -15,7 +15,7 @@ import { categoryColumns } from "./category-column";
 import CreateCategoryForm from "./create-category-form";
 
 export default function CategoryPage() {
-  const { data: categories } = useCategories();
+  const { data: categories, isFetching } = useCategories();
 
   return (
     <div className="space-y-between-items">
@@ -40,7 +40,7 @@ export default function CategoryPage() {
         </Sheet>
       </div>
 
-      <DataTable columns={categoryColumns} data={categories || []} />
+      <DataTable columns={categoryColumns} data={categories || []} isFetching={isFetching} />
     </div>
   );
 }

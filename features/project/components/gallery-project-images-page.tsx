@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { ROUTES } from "@/constants/routes";
-import { ArrowUpRight, Pencil, Plus } from "lucide-react";
+import { ArrowUpRight, ImageOff, Pencil, PencilLine, Plus } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useProjects } from "../hooks/use-projects";
@@ -35,8 +35,13 @@ export default function GalleryProjectPage() {
                 <Button size={"icon-xs"} variant={"outline"}>
                   <ArrowUpRight />
                 </Button>
-                <Button size={"icon-xs"} variant={"outline"}>
-                  <Pencil />
+                <Button
+                  size={"icon-xs"}
+                  variant={"outline"}
+                  className="group relative"
+                >
+                  <Pencil className="transition-all duration-300 ease-in-out group-hover:opacity-0" />
+                  <PencilLine className="absolute opacity-0 transition-all duration-300 ease-in-out group-hover:opacity-100" />
                 </Button>
                 <Button
                   size={"icon-xs"}
@@ -81,7 +86,10 @@ export default function GalleryProjectPage() {
                   ))}
                 </div>
               ) : (
-                <div>Tidak ada foto</div>
+                <div className="p-4 bg-muted/50 rounded-lg border border-dashed flex flex-col items-center justify-center space-y-2">
+                  <ImageOff className="text-muted-foreground" />
+                  <span className="text-muted-foreground text-xs">Belum ada gambar</span>
+                </div>
               )}
             </CardContent>
           </Card>
