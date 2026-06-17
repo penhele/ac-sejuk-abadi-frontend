@@ -29,7 +29,6 @@ export default function UploadProjectImageForm({ id }: { id: string }) {
       router.push(ROUTES.DASHBOARD_GALLERY_PROJECT);
     },
     onError(error, variables, onMutateResult, context) {
-      console.log(error.message);
       toast.dismiss(onMutateResult?.toastId);
       toast.error("Gagal");
     },

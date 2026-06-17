@@ -21,7 +21,7 @@ export default function ProductForm({
   submitLabel = "Submit",
   isFetching,
 }: {
-  defaultValues: ProductFormValues;
+  defaultValues: ProductFor mValues;
   onSubmit: (values: ProductFormValues) => void;
   submitLabel?: string;
   isFetching?: boolean;
@@ -64,8 +64,6 @@ export default function ProductForm({
       label: acType.name,
       value: acType.id.toString(),
     })) ?? [];
-
-  console.log(form);
 
   const pkOptions = [
     { label: "1/2", value: "1/2" },
