@@ -16,6 +16,10 @@ export interface Product {
   quantity: number;
   pk: string;
 
+  freon_type?: string;
+  model_code?: string;
+  series_name?: string;
+
   created_at: string;
   updated_at: string;
   is_deleted: boolean;

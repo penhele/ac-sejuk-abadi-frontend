@@ -31,13 +31,16 @@ export default function CreateProductForm() {
     <ProductForm
       defaultValues={{
         name: "",
-        description: "",
+        description: undefined,
         id_brand: "",
-        id_category: "",
-        id_ac_type: "",
-        pk: "",
+        id_category: undefined,
+        id_ac_type: undefined,
+        pk: undefined,
         price: "",
         quantity: "",
+        freon_type: undefined,
+        model_code: undefined,
+        series_name: undefined,
       }}
       onSubmit={async (value) => {
         await mutateAsync(value);

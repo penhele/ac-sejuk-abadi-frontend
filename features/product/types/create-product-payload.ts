@@ -1,10 +1,13 @@
 export interface CreateProductPayload {
   name: string;
-  description: string;
+  description?: string;
   price: string;
   quantity: string;
-  pk: string;
+  pk?: string;
   id_brand: string;
-  id_category: string;
-  id_ac_type: string;
+  id_category?: string;
+  id_ac_type?: string;
+  freon_type?: string;
+  model_code?: string;
+  series_name?: string;
 }

@@ -125,12 +125,14 @@ export function DataTable<TData, TValue>({
       )}
 
       <Card>
-        <CardHeader>
-          <CardTitle>{title}</CardTitle>
-          <CardDescription>{description}</CardDescription>
+        {(title || description || action) && (
+          <CardHeader>
+            <CardTitle>{title}</CardTitle>
+            <CardDescription>{description}</CardDescription>
 
-          {action && <CardAction>{action}</CardAction>}
-        </CardHeader>
+            {action && <CardAction>{action}</CardAction>}
+          </CardHeader>
+        )}
         <CardContent>
           <Table>
             <TableHeader>

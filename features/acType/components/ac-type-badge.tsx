@@ -13,8 +13,19 @@ const acTypeStyles: Record<string, string> = {
   "ac split duck": "bg-pink-100 text-pink-700 hover:bg-pink-100",
 };
 
-export default function AcProductTypeBadge({ acType }: { acType: string }) {
+export default function AcProductTypeBadge({
+  acType,
+}: {
+  acType: string | undefined;
+}) {
+  console.log(acType);
+
   return (
-    <Badge className={cn(acTypeStyles[acType.toLowerCase()])}>{acType}</Badge>
+    <Badge
+      className={cn(acType ? acTypeStyles[acType.toLowerCase()] : undefined)}
+      variant={!acType ? "outline" : "default"}
+    >
+      {acType ? acType : "Not Specified"}
+    </Badge>
   );
 }

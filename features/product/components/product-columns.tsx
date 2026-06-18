@@ -57,15 +57,15 @@ export const productColumns: ColumnDef<Product>[] = [
     cell: ({ row }) => <PkBadge pk={row.original.pk} />,
   },
   {
-    accessorFn: (row) => row.ac_type.name,
     header: "Type",
     cell: ({ row }) => (
-      <AcProductTypeBadge acType={row.original.ac_type.name} />
+      <AcProductTypeBadge
+        acType={row.original.id_ac_type ? row.original.ac_type.name : undefined}
+      />
     ),
   },
   {
     id: "category",
-    accessorFn: (row) => row.category.name,
     header: ({ column }) => {
       return (
         <Button
@@ -77,8 +77,15 @@ export const productColumns: ColumnDef<Product>[] = [
         </Button>
       );
     },
-
-    cell: ({ row }) => <CategoryBadge category={row.original.category.name} />,
+    cell: ({ row }) => {
+      return (
+        <div className="">
+          {row.original.id_category && (
+            <CategoryBadge category={row.original.category.name} />
+          )}
+        </div>
+      );
+    },
   },
   {
     accessorKey: "price",

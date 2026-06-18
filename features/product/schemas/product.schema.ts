@@ -2,11 +2,14 @@ import z, { number, object, string, infer as zodInfer } from "zod";
 
 export const createProductSchema = object({
   name: string().min(1, "Nama produk wajib diisi"),
-  description: string().min(1, "Deskripsi wajib diisi"),
+  description: string().optional(),
   id_brand: string().min(1, "Brand wajib dipilih"),
-  id_category: string().min(1, "Kategori wajib dipilih"),
-  id_ac_type: string().min(1, "Tipe AC wajib dipilih"),
-  pk: string().min(1, "PK wajib dipilih"),
+  id_category: string().optional(),
+  id_ac_type: string().optional(),
+  pk: string().optional(),
+  freon_type: string().optional(),
+  model_code: string().optional(),
+  series_name: string().optional(),
   price: string().min(1, "Harga wajib diisi"),
   quantity: string().min(1, "Stok wajib diisi"),
 });
