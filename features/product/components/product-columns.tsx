@@ -111,6 +111,7 @@ export const productColumns: ColumnDef<Product>[] = [
         <DropdownMenuContent>
           <DropdownMenuGroup>
             <EditButton href={ROUTES.EDIT_PRODUCT(row.original.id)} />
+
             <DeleteButton
               mutationFn={deleteProduct}
               queryKey={productKeys.all}

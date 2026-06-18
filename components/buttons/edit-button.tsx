@@ -12,6 +12,6 @@ export default function EditButton({ href }: { href: string }) {
           <Pencil size={12} />
         </DropdownMenuShortcut>
       </Link>
-    </DropdownMenuItem>
+    </DropdownMenuItem> 
   );
 }
