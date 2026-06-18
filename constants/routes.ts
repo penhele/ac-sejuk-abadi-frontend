@@ -40,6 +40,9 @@ export const ROUTES = {
 
   DASHBOARD_SETTING: "/dashboard/setting",
 
+  // Article
+  ARTICLE_DETAIL: (id: string | number) => `/education/${id}`,
+
   DASHBOARD_ARTICLE: "/dashboard/articles",
   DASHBOARD_CREATE_ARTICLE: "/dashboard/articles/create",
   DASHBOARD_UPDATE_ARTICLE: (id: string | number) =>

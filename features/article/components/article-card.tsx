@@ -3,10 +3,17 @@ import { AspectRatio } from "../../../components/ui/aspect-ratio";
 import { formatDate } from "@/lib/format/date";
 import Image from "next/image";
 import { ImageOff } from "lucide-react";
+import Link from "next/link";
+import { ROUTES } from "@/constants/routes";
 
 export default function ArticleCard({ article }: { article: Article }) {
   return (
-    <div className="shadow-xs flex flex-col h-full rounded-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+    <div className="relative shadow-xs flex flex-col h-full rounded-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+      <Link
+        href={ROUTES.ARTICLE_DETAIL(article.id)}
+        className="absolute inset-0 z-10"
+      />
+
       <div className="relative rounded-t-lg">
         <AspectRatio ratio={16 / 9} className="bg-muted rounded-t-lg">
           {article.images && article.images.length > 0 ? (
@@ -31,9 +38,9 @@ export default function ArticleCard({ article }: { article: Article }) {
 
       <div className="border flex flex-col flex-1 rounded-b-lg">
         <div className="flex flex-col space-y-2 p-inside-card flex-1">
-          <span className="font-bold text-gray-600">{article.name}</span>
+          <span className="font-bold">{article.name}</span>
 
-          <span className="text-sm text-gray-600 line-clamp-5">
+          <span className="text-sm text-muted-foreground line-clamp-5">
             {article.description}
           </span>
         </div>

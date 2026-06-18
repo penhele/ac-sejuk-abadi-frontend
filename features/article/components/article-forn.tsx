@@ -7,6 +7,7 @@ import { revalidateLogic } from "@tanstack/react-form";
 import { cn } from "tailwind-variants";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import ArticleContent from "./article-content";
 
 type Props = {
   defaultValues: ArticleFormValues;
@@ -80,19 +81,12 @@ export default function ArticleForm({ defaultValues, onSubmit }: Props) {
 
               <Separator />
 
-              <CardContent className="space-y-4">
-                <div className="">
-                  <h1 className="text-lg font-semibold">
-                    {title || "Judul Artikel"}
-                  </h1>
-                  <span className="text-xs text-muted-foreground">
-                    {`Kategori: ${category || "-"}`}
-                  </span>
-                </div>
-
-                <div className="whitespace-pre-wrap leading-6">
-                  {content || "Konten artikel akan tampil di sini"}
-                </div>
+              <CardContent>
+                <ArticleContent
+                  title={title}
+                  category={category}
+                  content={content}
+                />
               </CardContent>
             </Card>
           )}
