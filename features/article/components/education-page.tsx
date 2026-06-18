@@ -10,6 +10,8 @@ import {
 } from "@tanstack/react-query";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
+import HeroSection from "@/components/sections/hero-section";
+import { Book } from "lucide-react";
 
 export default async function EducationPage() {
   const queryClient = new QueryClient();
@@ -18,7 +20,14 @@ export default async function EducationPage() {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <div className="space-y-between-section">
+      <div className="space-y-between-items">
+        <HeroSection
+          title="Articles"
+          description="Kenali HVAC dari sini"
+          Icon={Book}
+          IconLabel="Artikel"
+        />
+
         <BreadcrumbComponent />
 
         <ErrorBoundary fallback={<ErrorFallback />}>

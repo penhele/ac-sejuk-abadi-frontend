@@ -9,6 +9,7 @@ import { ROUTES } from "@/constants/routes";
 import { Button } from "@/components/ui/button";
 import { Pencil } from "lucide-react";
 import EditButtonHref from "@/components/buttons/edit-button-href";
+import ButtonLink from "@/components/buttons/button-link";
 
 export const articleColumns: ColumnDef<Article>[] = [
   {
@@ -40,6 +41,10 @@ export const articleColumns: ColumnDef<Article>[] = [
     cell: ({ row }) => {
       return (
         <div className="space-x-2">
+          <ButtonLink
+            routes={ROUTES.DASHBOARD_UPLOAD_ARTICLE_IMAGE(row.original.id)}
+          />
+
           <EditButtonHref
             routes={ROUTES.DASHBOARD_UPDATE_ARTICLE(row.original.id)}
           />

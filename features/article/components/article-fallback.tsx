@@ -1,4 +1,4 @@
-import ArticleCardSkeleton from "../../../components/skeletons/article-card-skeleton";
+import ArticleCardSkeleton from "./article-card-skeleton";
 
 export default function ArticleFallback() {
   return (

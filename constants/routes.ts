@@ -47,4 +47,6 @@ export const ROUTES = {
   DASHBOARD_CREATE_ARTICLE: "/dashboard/articles/create",
   DASHBOARD_UPDATE_ARTICLE: (id: string | number) =>
     `/dashboard/articles/${id}/edit`,
+  DASHBOARD_UPLOAD_ARTICLE_IMAGE: (id: string | number) =>
+    `/dashboard/articles/${id}/images/create`,
 } as const;

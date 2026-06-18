@@ -3,7 +3,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { addArticle } from "../api/add-article";
-import ArticleForm from "./article-forn";
+import ArticleForm from "./article-form";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/constants/routes";
 import { articleKeys } from "../queries/article-keys";

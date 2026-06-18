@@ -8,49 +8,39 @@ import { ROUTES } from "@/constants/routes";
 
 export default function ArticleCard({ article }: { article: Article }) {
   return (
-    <div className="relative shadow-xs flex flex-col h-full rounded-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+    <div
+      key={article.id}
+      className="relative space-y-between-items-xs transition duration-300 hover:-translate-y-1"
+    >
       <Link
         href={ROUTES.ARTICLE_DETAIL(article.id)}
         className="absolute inset-0 z-10"
       />
 
-      <div className="relative rounded-t-lg">
-        <AspectRatio ratio={16 / 9} className="bg-muted rounded-t-lg">
-          {article.images && article.images.length > 0 ? (
+      <div className="relative">
+        {article.images.length > 0 ? (
+          <div className="aspect-video relative">
             <Image
               src={article.images[0].image_url}
               alt={`${article.name}-image`}
               fill
-              className="object-cover rounded-t-lg"
+              className="rounded-lg object-cover"
             />
-          ) : (
-            <div className="flex flex-col space-y-2 items-center justify-center h-full ">
-              <ImageOff />
-              <span className="text-sm">No Image</span>
-            </div>
-          )}
-        </AspectRatio>
-
-        <div className="absolute top-3 right-3 border bg-primary rounded-lg px-2 py-1 text-white text-xs">
-          <span>{article.category}</span>
-        </div>
+          </div>
+        ) : (
+          <div className="aspect-video bg-muted rounded-lg" />
+        )}
+        <span className="absolute top-4 left-4 text-xs px-2 py-1 bg-card rounded-card">
+          {article.category}
+        </span>
+        <span className="absolute bottom-4 right-4 text-xs px-2 py-1 bg-card rounded-card">
+          {formatDate(article.updated_at)}
+        </span>
       </div>
-
-      <div className="border flex flex-col flex-1 rounded-b-lg">
-        <div className="flex flex-col space-y-2 p-inside-card flex-1">
-          <span className="font-bold">{article.name}</span>
-
-          <span className="text-sm text-muted-foreground line-clamp-5">
-            {article.description}
-          </span>
-        </div>
-
-        <div className="border-t">
-          <span className="text-sm text-red-500 px-4 py-2 block">
-            {formatDate(article.created_at)}
-          </span>
-        </div>
-      </div>
+      <h1 className="font-semibold">{article.name}</h1>
+      <p className="line-clamp-3 text-sm text-muted-foreground">
+        {article.description}
+      </p>
     </div>
   );
 }

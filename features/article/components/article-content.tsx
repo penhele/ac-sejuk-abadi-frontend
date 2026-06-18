@@ -1,6 +1,7 @@
 import { Separator } from "@/components/ui/separator";
 import { formatDate } from "@/lib/format/date";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -11,6 +12,7 @@ type Props = {
   createdAt?: string;
   className?: string;
   imageUrl?: string;
+  previewUrl?: File;
 };
 
 export default function ArticleContent({
@@ -20,11 +22,10 @@ export default function ArticleContent({
   createdAt,
   className,
   imageUrl,
+  previewUrl,
 }: Props) {
   return (
     <div className={cn("space-y-4", className)}>
-      {imageUrl && <div className="bg-muted aspect-video rounded-lg"></div>}
-
       <div className="flex flex-col space-y-1">
         <h1 className="text-xl font-semibold">{title || "Judul Artikel"}</h1>
         <span className="text-xs text-muted-foreground">
@@ -42,8 +43,26 @@ export default function ArticleContent({
 
       <Separator />
 
+      {imageUrl && (
+        <div className="relative aspect-video">
+          <Image
+            src={imageUrl}
+            alt={`${title}-image`}
+            fill
+            className="rounded-lg object-cover"
+          />
+        </div>
+      )}
+
+      {previewUrl && (
+        <img
+          src={URL.createObjectURL(previewUrl)}
+          className="w-full rounded-lg object-cover aspect-videop"
+        />
+      )}
+
       <div className="whitespace-pre-wrap leading-6">
-        <Markdown remarkPlugins={[remarkGfm]}>{content}</Markdown>
+        <Markdown>{content}</Markdown>
       </div>
     </div>
   );

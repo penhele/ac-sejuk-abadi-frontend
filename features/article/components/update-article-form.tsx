@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { updateArticle } from "../api/update-article";
 import { useArticle } from "../hooks/use-article";
 import { UpdateArticlePayload } from "../types/update-article-payload";
-import ArticleForm from "./article-forn";
+import ArticleForm from "./article-form";
 import { articleKeys } from "../queries/article-keys";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/constants/routes";
