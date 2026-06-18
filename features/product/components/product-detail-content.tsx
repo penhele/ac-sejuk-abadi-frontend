@@ -14,7 +14,7 @@ export default function ProductDetailContent({ id }: { id: string }) {
   const { data: product, isLoading } = useProduct(id);
 
   if (isLoading) {
-    return <ProductFallback />;
+    return <ProductFallback length={8} />;
   }
 
   if (!product) {

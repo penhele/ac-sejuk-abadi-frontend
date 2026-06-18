@@ -41,7 +41,7 @@ export default function ProductGrid({
   const products = data?.pages?.flatMap((page) => page?.data ?? []) ?? [];
 
   if (isPending) {
-    return <ProductFallback length={length} />;
+    return <ProductFallback length={length || 8} />;
   }
 
   if (!products.length) {
