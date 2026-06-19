@@ -89,11 +89,13 @@ export default function ProductPriceAction({ product }: { product: Product }) {
       <Separator />
 
       <div className="flex flex-row gap-4 items-center">
-        <span className="text-sm text-gray-700">Share this product: </span>
+        <span className="text-sm text-muted-foreground">
+          Share this product:
+        </span>
         <div className="flex flex-row gap-2">
-          <FaWhatsapp className="text-gray-700 hover:scale-110" />
-          <FaInstagram className="text-gray-700 hover:scale-110" />
-          <FaFacebookF className="text-gray-700 hover:scale-110" />
+          <FaWhatsapp className="text-muted-foreground hover:scale-110" />
+          <FaInstagram className="text-muted-foreground hover:scale-110" />
+          <FaFacebookF className="text-muted-foreground hover:scale-110" />
         </div>
       </div>
     </div>
