@@ -29,7 +29,7 @@ export default function LoginPage() {
         Back
       </Button>
 
-      <Card className="absolute w-md ">
+      <Card className="absolute w-lg">
         <CardHeader>
           <CardTitle>Log in</CardTitle>
           <CardDescription>

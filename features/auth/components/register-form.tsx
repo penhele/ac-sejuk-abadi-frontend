@@ -19,7 +19,7 @@ export default function RegisterForm({ className }: { className?: string }) {
     mutationFn: (data: RegisterPayload) => register(data),
     onSuccess() {
       toast.success("Berhasil register");
-      router.push(ROUTES.LOGIN);
+      router.push(ROUTES.VERIFY_EMAIL);
     },
     onError() {
       toast.error("Gagal register");

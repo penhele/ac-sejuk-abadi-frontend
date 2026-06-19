@@ -29,7 +29,7 @@ export default function RegisterPage() {
         Back
       </Button>
 
-      <Card className="absolute w-lg ">
+      <Card className="absolute w-lg">
         <CardHeader>
           <CardTitle>Create an account</CardTitle>
           <CardDescription>
