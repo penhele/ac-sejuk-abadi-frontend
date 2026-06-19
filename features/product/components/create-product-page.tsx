@@ -12,6 +12,6 @@ export default function CreateProductPage() {
       </div>
 
       <CreateProductForm />
-    </div>  
+    </div>
   );
 }

@@ -2,7 +2,7 @@
 
 import { ROUTES } from "@/constants/routes";
 import { formatRupiah } from "@/lib/format/currency";
-import { ShoppingCart } from "lucide-react";
+import { ImageOff, ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import ProductBadge from "../../../components/badges/product-badge";
 import CarouselProductBasic from "./carousel-product-basic";
@@ -33,7 +33,13 @@ export default function ProductCard({ product }: { product: Product }) {
           prefetch={false}
         />
 
-        <CarouselProductBasic images={product.images} className="z-20" />
+        {product.images.length > 0 ? (
+          <CarouselProductBasic images={product.images} className="z-20" />
+        ) : (
+          <div className="aspect-square bg-muted flex justify-center items-center text-muted-foreground">
+            <ImageOff />
+          </div>
+        )}
 
         <div className="p-4 flex flex-col gap-2 ">
           <span className="text-xs text-gray-400">{product.brand?.name}</span>
