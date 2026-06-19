@@ -1,31 +1,39 @@
 import { cn } from "@/lib/utils";
 import { Badge } from "../../../components/ui/badge";
 
-const acTypeStyles: Record<string, string> = {
-  "ac split wall": "bg-red-100 text-red-700 hover:bg-red-100",
+import { tv } from "tailwind-variants";
 
-  "ac cassette": "bg-purple-100 text-purple-700 hover:bg-purple-100",
+export const acTypeBadge = tv({
+  variants: {
+    type: {
+      splitWall: "bg-red-100 text-red-700 hover:bg-red-100",
+      cassette: "bg-purple-100 text-purple-700 hover:bg-purple-100",
+      floorStanding: "bg-orange-100 text-orange-700 hover:bg-orange-100",
+      portable: "bg-green-100 text-green-700 hover:bg-green-100",
+      splitDuct: "bg-pink-100 text-pink-700 hover:bg-pink-100",
+    },
+  },
+});
 
-  "ac floor standing": "bg-orange-100 text-orange-700 hover:bg-orange-100",
+const acTypeVariantMap = {
+  "ac split wall": "splitWall",
+  "ac cassette": "cassette",
+  "ac floor standing": "floorStanding",
+  "ac portable": "portable",
+  "ac split duct": "splitDuct",
+} as const;
 
-  "ac portable": "bg-green-100 text-green-700 hover:bg-green-100",
-
-  "ac split duck": "bg-pink-100 text-pink-700 hover:bg-pink-100",
-};
-
-export default function AcProductTypeBadge({
-  acType,
-}: {
-  acType: string | undefined;
-}) {
-  console.log(acType);
+export default function AcProductTypeBadge({ acType }: { acType?: string }) {
+  const variant = acType
+    ? acTypeVariantMap[acType.toLowerCase() as keyof typeof acTypeVariantMap]
+    : undefined;
 
   return (
     <Badge
-      className={cn(acType ? acTypeStyles[acType.toLowerCase()] : undefined)}
       variant={!acType ? "outline" : "default"}
+      className={acTypeBadge({ type: variant })}
     >
-      {acType ? acType : "Not Specified"}
+      {acType ?? "Not Specified"}
     </Badge>
   );
 }

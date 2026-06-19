@@ -58,14 +58,19 @@ export const productColumns: ColumnDef<Product>[] = [
   },
   {
     header: "Type",
-    cell: ({ row }) => (
-      <AcProductTypeBadge
-        acType={row.original.id_ac_type ? row.original.ac_type.name : undefined}
-      />
-    ),
+    cell: ({ row }) => {
+      const acTypeId = row.original.id_ac_type;
+
+      return (
+        <AcProductTypeBadge
+          acType={acTypeId ? row.original.ac_type.name : undefined}
+        />
+      );
+    },
   },
   {
     id: "category",
+    accessorFn: (row) => row.category?.name ?? "",
     header: ({ column }) => {
       return (
         <Button
@@ -78,12 +83,12 @@ export const productColumns: ColumnDef<Product>[] = [
       );
     },
     cell: ({ row }) => {
+      const categoryId = row.original.id_category;
+
       return (
-        <div className="">
-          {row.original.id_category && (
-            <CategoryBadge category={row.original.category.name} />
-          )}
-        </div>
+        <CategoryBadge
+          category={categoryId ? row.original.category.name : undefined}
+        />
       );
     },
   },

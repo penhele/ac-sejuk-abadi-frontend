@@ -143,6 +143,7 @@ export default function ProductForm({
                   options={categoryOptions}
                   className="col-span-2"
                   disabled={isPendingCategory || isFetching}
+                  isOpsional
                 />
               )}
             />
@@ -154,6 +155,7 @@ export default function ProductForm({
                   placeholder="Pilih Jenis Produk"
                   options={acTypeOptions}
                   className="col-span-2"
+                  isOpsional
                   disabled={isPendingAcType || isFetching}
                 />
               )}
@@ -173,6 +175,7 @@ export default function ProductForm({
                   label="Kapasitas"
                   placeholder="Pilih PK"
                   options={pkOptions}
+                  isOpsional
                 />
               )}
             />
@@ -192,13 +195,18 @@ export default function ProductForm({
                 <field.TextField
                   label="Jenis Freon"
                   placeholder="R32 / R4104"
+                  isOpsional
                 />
               )}
             />
             <form.AppField
               name="model_code"
               children={(field) => (
-                <field.TextField label="Kode Model" placeholder="STKC15NV" />
+                <field.TextField
+                  label="Kode Model"
+                  placeholder="STKC15NV"
+                  isOpsional
+                />
               )}
             />
 
@@ -212,6 +220,7 @@ export default function ProductForm({
                   isPrice
                   placeholder={formatNumber("2000000")}
                   className="col-span-2"
+                  isOpsional
                 />
               )}
             />
@@ -236,6 +245,7 @@ export default function ProductForm({
                   label="Deskripsi"
                   placeholder="Detail fitur produk, garansi, opsi kendala pintar, dll..."
                   className="col-span-4"
+                  isOpsional
                 />
               )}
             />

@@ -22,6 +22,7 @@ export type Props = {
   isDisabled?: boolean;
   readOnly?: boolean;
   IconAddon?: LucideIcon;
+  isOpsional?: boolean;
 };
 
 export default function TextField({
@@ -33,6 +34,7 @@ export default function TextField({
   isDisabled,
   readOnly,
   IconAddon,
+  isOpsional,
 }: Props) {
   const field = useFieldContext<string>();
 
@@ -43,7 +45,11 @@ export default function TextField({
   return (
     <Field className={cn(className)}>
       <div className="flex justify-between items-center">
-        <FieldLabel>{label}</FieldLabel>
+        <FieldLabel>
+          <div>
+            {label} {!isOpsional && <span className="text-red-600">*</span>}
+          </div>
+        </FieldLabel>
 
         <FieldInfo field={field} />
       </div>

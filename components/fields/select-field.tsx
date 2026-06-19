@@ -11,25 +11,33 @@ import {
 import { cn } from "@/lib/utils";
 import { Field, FieldLabel } from "../ui/field";
 
+type Props = {
+  label: string;
+  placeholder?: string;
+  options: { label: string; value: string }[];
+  disabled?: boolean;
+  className?: string;
+  isOpsional?: boolean;
+};
+
 export default function SelectField({
   label,
   placeholder,
   options,
   disabled,
   className,
-}: {
-  label: string;
-  placeholder?: string;
-  options: { label: string; value: string }[];
-  disabled?: boolean;
-  className?: string;
-}) {
+  isOpsional,
+}: Props) {
   const field = useFieldContext<string>();
 
   return (
     <Field className={cn(className)}>
       <div className="flex justify-between items-center">
-        <FieldLabel htmlFor={field.name}>{label}</FieldLabel>
+        <FieldLabel htmlFor={field.name}>
+          <div>
+            {label} {!isOpsional && <span className="text-red-600">*</span>}
+          </div>
+        </FieldLabel>
 
         <FieldInfo field={field} />
       </div>
