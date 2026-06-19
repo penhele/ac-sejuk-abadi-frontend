@@ -34,11 +34,14 @@ export default function EditProductForm({ id }: { id: string }) {
       isFetching={isFetching}
       defaultValues={{
         name: products?.name ?? "",
-        description: products?.description ?? "",
+        description: products?.description ?? undefined,
         id_brand: String(products?.id_brand ?? ""),
-        id_category: String(products?.id_category ?? ""),
-        id_ac_type: String(products?.id_ac_type ?? ""),
-        pk: products?.pk ?? "",
+        id_category: String(products?.id_category ?? undefined),
+        id_ac_type: String(products?.id_ac_type ?? undefined),
+        pk: products?.pk ?? undefined,
+        freon_type: products?.freon_type ?? undefined,
+        series_name: products?.series_name ?? undefined,
+        model_code: products?.model_code ?? undefined,
         price: products?.price ?? "",
         quantity: String(products?.quantity ?? ""),
       }}

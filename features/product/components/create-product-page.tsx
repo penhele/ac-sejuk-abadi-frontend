@@ -1,6 +1,4 @@
 import CreateProductForm from "@/features/product/components/create-product-form";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 
 export default function CreateProductPage() {
   return (
@@ -13,11 +11,7 @@ export default function CreateProductPage() {
         </span>
       </div>
 
-      <Card>
-        <CardContent>
-          <CreateProductForm />
-        </CardContent>
-      </Card>
-    </div>
+      <CreateProductForm />
+    </div>  
   );
 }

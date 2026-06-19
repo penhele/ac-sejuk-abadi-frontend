@@ -9,6 +9,7 @@ import {
   SelectValue,
 } from "../ui/select";
 import { cn } from "@/lib/utils";
+import { Field, FieldLabel } from "../ui/field";
 
 export default function SelectField({
   label,
@@ -26,9 +27,9 @@ export default function SelectField({
   const field = useFieldContext<string>();
 
   return (
-    <div className={cn("space-y-between-items-xs", className)}>
+    <Field className={cn(className)}>
       <div className="flex justify-between items-center">
-        <Label htmlFor={field.name}>{label}</Label>
+        <FieldLabel htmlFor={field.name}>{label}</FieldLabel>
 
         <FieldInfo field={field} />
       </div>
@@ -55,6 +56,6 @@ export default function SelectField({
           ))}
         </SelectContent>
       </Select>
-    </div>
+    </Field>
   );
 }

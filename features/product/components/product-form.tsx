@@ -14,6 +14,8 @@ import { formatNumber } from "@/lib/format/currency";
 import { revalidateLogic, useStore } from "@tanstack/react-form";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useProductName } from "../hooks/use-product-name";
 
 export default function ProductForm({
   defaultValues,
@@ -76,26 +78,12 @@ export default function ProductForm({
     { label: "8", value: "8" },
   ];
 
-  const idBrand = useStore(form.store, (state) => state.values.id_brand);
-  const idCategory = useStore(form.store, (state) => state.values.id_category);
-  const idAcType = useStore(form.store, (state) => state.values.id_ac_type);
-  const pk = useStore(form.store, (state) => state.values.pk);
-  const selectedBrand = brandOptions.find((option) => option.value === idBrand);
-  const selectedCategory = categoryOptions.find(
-    (option) => option.value === idCategory,
-  );
-  const selectedAcType = acTypeOptions.find(
-    (option) => option.value === idAcType,
-  );
-
-  const productName = [
-    selectedBrand?.label,
-    selectedCategory?.label,
-    selectedAcType?.label,
-    pk && `${pk} PK`,
-  ]
-    .filter(Boolean)
-    .join(" ");
+  const productName = useProductName({
+    form,
+    brandOptions,
+    categoryOptions,
+    acTypeOptions,
+  });
 
   useEffect(() => {
     if (!productName) return;
@@ -110,10 +98,10 @@ export default function ProductForm({
           e.preventDefault();
           form.handleSubmit();
         }}
-        className="space-y-between-items"
+        className="grid grid-cols-2 gap-between-field"
       >
-        <div className="grid grid-cols-5 gap-between-items-sm md:gap-between-items-lg">
-          <div className="col-span-5 lg:col-span-3 space-y-between-items-sm md:space-y-between-items-lg">
+        <Card className="col-span-2">
+          <CardContent>
             <form.AppField
               name="name"
               children={(field) => (
@@ -122,6 +110,120 @@ export default function ProductForm({
                   label="Nama Produk"
                   placeholder="Daikin Zeta 2 PK"
                   readOnly
+                  className="col-span-8"
+                />
+              )}
+            />
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>Klasifikasi Produk</CardTitle>
+          </CardHeader>
+
+          <CardContent className="space-y-between-card">
+            <form.AppField
+              name="id_brand"
+              children={(field) => (
+                <field.SelectField
+                  label="Brand"
+                  placeholder="Pilih Brand"
+                  options={brandOptions}
+                  className="col-span-2"
+                  disabled={isPendingBrand || isFetching}
+                />
+              )}
+            />
+            <form.AppField
+              name="id_category"
+              children={(field) => (
+                <field.SelectField
+                  label="Tipe Kompresor"
+                  placeholder="Pilih Kategori"
+                  options={categoryOptions}
+                  className="col-span-2"
+                  disabled={isPendingCategory || isFetching}
+                />
+              )}
+            />
+            <form.AppField
+              name="id_ac_type"
+              children={(field) => (
+                <field.SelectField
+                  label="Jenis Produk"
+                  placeholder="Pilih Jenis Produk"
+                  options={acTypeOptions}
+                  className="col-span-2"
+                  disabled={isPendingAcType || isFetching}
+                />
+              )}
+            />
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>Spesifikasi & Inventori</CardTitle>
+          </CardHeader>
+
+          <CardContent className="grid grid-cols-4 gap-between-field">
+            <form.AppField
+              name="pk"
+              children={(field) => (
+                <field.SelectField
+                  label="Kapasitas"
+                  placeholder="Pilih PK"
+                  options={pkOptions}
+                />
+              )}
+            />
+
+            <form.AppField
+              name="series_name"
+              children={(field) => (
+                <field.TextField
+                  label="Nama Seri"
+                  placeholder="Flash Thailand"
+                />
+              )}
+            />
+            <form.AppField
+              name="freon_type"
+              children={(field) => (
+                <field.TextField
+                  label="Jenis Freon"
+                  placeholder="R32 / R4104"
+                />
+              )}
+            />
+            <form.AppField
+              name="model_code"
+              children={(field) => (
+                <field.TextField label="Kode Model" placeholder="STKC15NV" />
+              )}
+            />
+
+            <form.AppField
+              name="price"
+              children={(field) => (
+                <field.TextField
+                  isDisabled={isFetching}
+                  label="Harga (Rp)"
+                  type="number"
+                  isPrice
+                  placeholder={formatNumber("2000000")}
+                  className="col-span-2"
+                />
+              )}
+            />
+            <form.AppField
+              name="quantity"
+              children={(field) => (
+                <field.TextField
+                  isDisabled={isFetching}
+                  label="Stok"
+                  type="number"
+                  placeholder="10"
+                  className="col-span-2"
                 />
               )}
             />
@@ -132,84 +234,13 @@ export default function ProductForm({
                 <field.TextareaField
                   isDisabled={isFetching}
                   label="Deskripsi"
-                  placeholder="Opsi kendali via WiFi melalui aplikasi yang tersedia bagi perangkat berbasis Android dan iOS..."
+                  placeholder="Detail fitur produk, garansi, opsi kendala pintar, dll..."
+                  className="col-span-4"
                 />
               )}
             />
-          </div>
-
-          <div className="col-span-5 lg:col-span-2">
-            <div className="grid grid-cols-2 gap-between-items-sm md:gap-between-items-lg">
-              <form.AppField
-                name="id_brand"
-                children={(field) => (
-                  <field.SelectField
-                    label="Brand"
-                    placeholder="Pilih Brand"
-                    options={brandOptions}
-                    disabled={isPendingBrand || isFetching}
-                  />
-                )}
-              />
-              <form.AppField
-                name="id_category"
-                children={(field) => (
-                  <field.SelectField
-                    label="Kategori"
-                    placeholder="Pilih Kategori"
-                    options={categoryOptions}
-                    disabled={isPendingCategory || isFetching}
-                  />
-                )}
-              />
-              <form.AppField
-                name="id_ac_type"
-                children={(field) => (
-                  <field.SelectField
-                    label="Type AC"
-                    placeholder="Pilih Tipe AC"
-                    options={acTypeOptions}
-                    disabled={isPendingAcType || isFetching}
-                  />
-                )}
-              />
-              <form.AppField
-                name="pk"
-                children={(field) => (
-                  <field.SelectField
-                    label="PK"
-                    placeholder="Pilih PK"
-                    options={pkOptions}
-                  />
-                )}
-              />
-
-              <form.AppField
-                name="price"
-                children={(field) => (
-                  <field.TextField
-                    isDisabled={isFetching}
-                    label="Harga (Rp)"
-                    type="number"
-                    isPrice
-                    placeholder={formatNumber("2000000")}
-                  />
-                )}
-              />
-              <form.AppField
-                name="quantity"
-                children={(field) => (
-                  <field.TextField
-                    isDisabled={isFetching}
-                    label="Stok"
-                    type="number"
-                    placeholder="10"
-                  />
-                )}
-              />
-            </div>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
 
         <div className="space-x-between-items flex flex-row">
           <CancelButton

@@ -38,6 +38,8 @@ export default function TextField({
 
   const [showPassword, setShowPassword] = useState(false);
 
+  const inputType = isPrice ? "text" : showPassword ? "text" : type;
+
   return (
     <Field className={cn(className)}>
       <div className="flex justify-between items-center">
@@ -72,7 +74,7 @@ export default function TextField({
           }}
           onBlur={field.handleBlur}
           placeholder={placeholder}
-          type={showPassword ? "text" : type}
+          type={inputType}
           disabled={isDisabled}
           readOnly={readOnly}
         />
