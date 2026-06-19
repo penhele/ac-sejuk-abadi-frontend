@@ -11,6 +11,7 @@ export const acTypeBadge = tv({
       floorStanding: "bg-orange-100 text-orange-700 hover:bg-orange-100",
       portable: "bg-green-100 text-green-700 hover:bg-green-100",
       splitDuct: "bg-pink-100 text-pink-700 hover:bg-pink-100",
+      multiS: "bg-yellow-100 text-yellow-700 hover:bg-yellow-100",
     },
   },
 });
@@ -21,6 +22,7 @@ const acTypeVariantMap = {
   "ac floor standing": "floorStanding",
   "ac portable": "portable",
   "ac split duct": "splitDuct",
+  "ac multi-s": "multiS",
 } as const;
 
 export default function AcProductTypeBadge({ acType }: { acType?: string }) {
