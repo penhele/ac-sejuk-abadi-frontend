@@ -24,8 +24,8 @@ export default function Navbar() {
     <div className="sticky top-0 z-50 bg-white dark:bg-background h-16">
       <div className="max-w-7xl mx-auto flex flex-row items-center justify-between">
         <div className="flex lg:flex-row flex-col lg:justify-between items-center py-2">
-          <div className="flex w-full lg:w-``fit xs:justify-between justify-center flex-row gap-16 items-center ">
-            <Link href={ROUTES.HOME} className="relative h-12 w-28">
+          <div className="flex w-full lg:w-fit xs:justify-between justify-center flex-row gap-8 items-center ">
+            <Link href={ROUTES.HOME} className="relative h-12 w-12">
               {company?.logo_url ? (
                 <Image
                   src={company?.logo_url}
