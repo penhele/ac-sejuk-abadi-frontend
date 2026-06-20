@@ -1,9 +1,17 @@
+"use client";
+
 import { AuroraBackground } from "@/components/ui/aurora-background";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import { useMutation } from "@tanstack/react-query";
+import { verifyEmail } from "../api/verify-email";
 
 export default function VerifyEmailPage() {
+  const { mutate, isPending } = useMutation({
+    mutationFn: (token: string) => verifyEmail(token),
+  });
+
   return (
     <AuroraBackground className="relative">
       <Card className="absolute w-lg">
