@@ -33,16 +33,13 @@ export default function CarouselBanner() {
       <CarouselContent className="flex items-center gap-4">
         {banners?.map((banner, index) => (
           <CarouselItem key={index}>
-            <AspectRatio
-              ratio={3 / 1}
-              className="overflow-hidden rounded-sm relative"
-            >
+            <div className="overflow-hidden rounded-sm relative aspect-video xs:aspect-2/1 lg:aspect-3/1">
               <img
                 src={banner.image_url}
                 alt={banner.name}
                 className="object-contain w-full h-full bg-muted"
               />
-            </AspectRatio>
+            </div>
           </CarouselItem>
         ))}
       </CarouselContent>

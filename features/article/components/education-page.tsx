@@ -20,7 +20,7 @@ export default async function EducationPage() {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <div className="space-y-between-items">
+      <div className="space-y-between-section">
         <HeroSection
           title="Articles"
           description="Kenali HVAC dari sini"

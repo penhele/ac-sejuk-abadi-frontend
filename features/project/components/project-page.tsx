@@ -7,7 +7,7 @@ import { ErrorBoundary } from "react-error-boundary";
 
 export default async function ProjectPage() {
   return (
-    <div className="space-y-between-items-lg">
+    <div className="space-y-between-section">
       <BreadcrumbComponent />
 
       <div className="">
