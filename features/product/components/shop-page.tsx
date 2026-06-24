@@ -33,7 +33,7 @@ export default async function ShopPage() {
         <CarouselBanner />
 
         <BreadcrumbComponent />
-        
+
         <div className="flex flex-row gap-8 items-start">
           <Suspense>
             <ShopFilter className="hidden lg:block" />

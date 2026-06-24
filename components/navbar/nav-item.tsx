@@ -8,14 +8,14 @@ import {
 import { ROUTES } from "@/constants/routes";
 import Link from "next/link";
 
-export default function NavItem() {
-  const menuItems: { label: string; href: string }[] = [
-    { label: "Beranda", href: ROUTES.HOME },
-    { label: "Toko", href: ROUTES.SHOP },
-    { label: "Portofolio", href: ROUTES.PORTOFOLIO },
-    { label: "Edukasi", href: ROUTES.EDUCATION },
-  ];
+export const menuItems: { label: string; href: string }[] = [
+  { label: "Beranda", href: ROUTES.HOME },
+  { label: "Toko", href: ROUTES.SHOP },
+  { label: "Portofolio", href: ROUTES.PORTOFOLIO },
+  { label: "Edukasi", href: ROUTES.EDUCATION },
+];
 
+export default function NavItem() {
   return (
     <NavigationMenu>
       <NavigationMenuList>

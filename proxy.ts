@@ -42,7 +42,10 @@ export function proxy(request: NextRequest) {
   }
 
   // Jika sudah login dan mencoba mengakses halaman auth (login/register)
-  if ((pathname.startsWith("/login") || pathname.startsWith("/register")) && token) {
+  if (
+    (pathname.startsWith("/login") || pathname.startsWith("/register")) &&
+    token
+  ) {
     const role = getRoleFromToken(token);
     if (role && role.toLowerCase() === "admin") {
       return NextResponse.redirect(new URL("/dashboard", request.url));

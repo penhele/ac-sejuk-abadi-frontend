@@ -1,6 +1,9 @@
 import { useInView, useMotionValue, useSpring } from "motion/react";
 import { useCallback, useEffect, useRef } from "react";
 
+// Client-side module-scoped memory to track animated components across SPA transitions
+const animatedKeys = new Set<string>();
+
 interface CountUpProps {
   to: number;
   from?: number;
@@ -12,6 +15,7 @@ interface CountUpProps {
   separator?: string;
   onStart?: () => void;
   onEnd?: () => void;
+  id?: string;
 }
 
 export default function CountUp({
@@ -25,9 +29,24 @@ export default function CountUp({
   separator = "",
   onStart,
   onEnd,
+  id,
 }: CountUpProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const motionValue = useMotionValue(direction === "down" ? to : from);
+
+  const animationKey = id || `${from}-${to}`;
+  const alreadyAnimated =
+    typeof window !== "undefined" && animatedKeys.has(animationKey);
+
+  // If already animated in this session, start at the end value
+  const startVal = alreadyAnimated
+    ? direction === "down"
+      ? from
+      : to
+    : direction === "down"
+      ? to
+      : from;
+
+  const motionValue = useMotionValue(startVal);
 
   const damping = 20 + 40 * (1 / duration);
   const stiffness = 100 * (1 / duration);
@@ -73,14 +92,35 @@ export default function CountUp({
     [maxDecimals, separator],
   );
 
+  // Set the initial text content based on whether it has already animated
   useEffect(() => {
     if (ref.current) {
-      ref.current.textContent = formatValue(direction === "down" ? to : from);
+      const initialTextVal = alreadyAnimated
+        ? direction === "down"
+          ? from
+          : to
+        : direction === "down"
+          ? to
+          : from;
+      ref.current.textContent = formatValue(initialTextVal);
     }
-  }, [from, to, direction, formatValue]);
+  }, [from, to, direction, formatValue, alreadyAnimated]);
 
   useEffect(() => {
     if (isInView && startWhen) {
+      if (alreadyAnimated) {
+        // If already animated, immediately ensure the target text is displayed and exit
+        if (ref.current) {
+          ref.current.textContent = formatValue(
+            direction === "down" ? from : to,
+          );
+        }
+        return;
+      }
+
+      // Mark this element as animated
+      animatedKeys.add(animationKey);
+
       if (typeof onStart === "function") {
         onStart();
       }
@@ -114,6 +154,9 @@ export default function CountUp({
     onStart,
     onEnd,
     duration,
+    alreadyAnimated,
+    animationKey,
+    formatValue,
   ]);
 
   useEffect(() => {

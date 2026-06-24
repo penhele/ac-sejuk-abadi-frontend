@@ -10,16 +10,5 @@ export const metadata: Metadata = {
 };
 
 export default function page() {
-  return (
-    <div className="space-y-between-items-lg">
-      <HeroSection
-        title="Karya Terbaik Kami"
-        description="Jelajahi berbagai proyek instalasi dan perawatan AC yang telah kami selesaikan dengan standar kualitas tinggi."
-        Icon={Briefcase}
-        IconLabel="Portofolio"
-      />
-
-      <ProjectPage />
-    </div>
-  );
+  return <ProjectPage />;
 }

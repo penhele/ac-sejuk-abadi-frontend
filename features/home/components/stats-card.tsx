@@ -31,7 +31,12 @@ export default function StatsCard({
       </Badge>
 
       <div className="space-y-1">
-        <CountUp from={0} to={value} className="text-3xl font-bold" />
+        <CountUp
+          id={label}
+          from={0}
+          to={value}
+          className="text-3xl font-bold"
+        />
         <span className="font-light text-sm line-clamp-1">{description}</span>
       </div>
     </div>

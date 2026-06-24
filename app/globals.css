@@ -13,7 +13,7 @@
   --spacing-between-card: 1rem;
   --spacing-inside-card: 1rem;
 
-  --spacing-between-section: 2rem;
+  --spacing-between-section: 1rem;
 
   --spacing-between-items-xs: 0.5rem;
   --spacing-between-items-sm: 1rem;
@@ -23,9 +23,6 @@
   --spacing-between-field: 1rem;
 
   --spacing-page-inline: 1rem;
-
-
-
 
   /* ==========================================
    * BREAKPOINT
