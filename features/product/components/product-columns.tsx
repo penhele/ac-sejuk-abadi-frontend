@@ -94,6 +94,24 @@ export const productColumns: ColumnDef<Product>[] = [
     },
   },
   {
+    header: "Freon",
+    cell: ({ row }) => {
+      return <span>{row.original.freon_type}</span>;
+    },
+  },
+  {
+    header: "Nama Seri",
+    cell: ({ row }) => {
+      return <span>{row.original.series_name}</span>;
+    },
+  },
+  {
+    header: "Kode Model",
+    cell: ({ row }) => {
+      return <span>{row.original.model_code}</span>;
+    },
+  },
+  {
     accessorKey: "price",
     header: "Price",
     cell: ({ row }) => <span>IDR {formatNumber(row.original.price)}</span>,

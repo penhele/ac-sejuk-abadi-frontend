@@ -11,7 +11,7 @@ export default function AdminLayout({
     <SidebarProvider>
       <AppSidebar />
 
-      <div className="w-full">
+      <div className="flex-1 min-w-0">
         <Header />
 
         <div className="p-4">{children}</div>
