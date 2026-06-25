@@ -16,7 +16,7 @@ const fallbackColors = [
 
 function getCategoryColor(categoryName: string): string {
   const normalized = categoryName.toLowerCase().trim();
-  
+
   if (normalized === "inverter") {
     return "bg-blue-100 text-blue-700 hover:bg-blue-100 border-blue-200/50";
   }
@@ -29,7 +29,7 @@ function getCategoryColor(categoryName: string): string {
   for (let i = 0; i < normalized.length; i++) {
     hash = normalized.charCodeAt(i) + ((hash << 5) - hash);
   }
-  
+
   const index = Math.abs(hash) % fallbackColors.length;
   return fallbackColors[index];
 }

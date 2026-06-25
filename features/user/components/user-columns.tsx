@@ -1,12 +1,18 @@
 import DeleteButton from "@/components/buttons/delete-button";
-import { Badge } from "@/components/ui/badge";
+import { RoleSelect } from "@/components/fields/role-select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import EditButton from "@/features/brand/compenents/edit-button";
 import { deleteUser } from "@/features/user/api/delete-user";
 import { userKeys } from "@/features/user/queries/user-keys";
 import { User } from "@/features/user/types/user";
-import EditButton from "@/features/brand/compenents/edit-button";
 import { ColumnDef } from "@tanstack/react-table";
 import { Mail, MapPin } from "lucide-react";
-import EditUserForm from "./edit-user-form";
 
 export const userColumns: ColumnDef<User>[] = [
   {
@@ -63,11 +69,7 @@ export const userColumns: ColumnDef<User>[] = [
     cell: ({ row }) => {
       const role = row.original.role;
 
-      return (
-        <Badge variant={role === "admin" ? "default" : "secondary"}>
-          {row.original.role}
-        </Badge>
-      );
+      return <RoleSelect role={role} userId={row.original.id} />;
     },
   },
   {

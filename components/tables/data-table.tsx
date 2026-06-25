@@ -23,7 +23,13 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
-import { Search } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
+  ChevronsRight,
+  Search,
+} from "lucide-react";
 import { useState } from "react";
 import { Button } from "../ui/button";
 import {
@@ -40,6 +46,13 @@ import {
   InputGroupInput,
 } from "../ui/input-group";
 import { Skeleton } from "../ui/skeleton";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -133,7 +146,7 @@ export function DataTable<TData, TValue>({
             {action && <CardAction>{action}</CardAction>}
           </CardHeader>
         )}
-        <CardContent className="overflow-x-auto max-w-full">
+        <CardContent className="overflow-x-auto max-w-full space-y-4">
           <Table>
             <TableHeader>
               {table.getHeaderGroups().map((headerGroup) => (
@@ -206,42 +219,110 @@ export function DataTable<TData, TValue>({
               )}
             </TableBody>
           </Table>
+
+          {isPagination && (
+            <div className="flex flex-row items-center space-x-4 justify-end">
+              <div className="flex items-center space-x-2">
+                <p className="text-sm font-medium">Rows per page</p>
+                <Select
+                  value={`${table.getState().pagination.pageSize}`}
+                  onValueChange={(value) => {
+                    table.setPageSize(Number(value));
+                  }}
+                  defaultValue={`30`}
+                >
+                  <SelectTrigger className="h-8 w-17.5">
+                    <SelectValue
+                      placeholder={table.getState().pagination.pageSize}
+                    />
+                  </SelectTrigger>
+                  <SelectContent side="top">
+                    {[10, 20, 25, 30, 40, 50].map((pageSize) => (
+                      <SelectItem key={pageSize} value={`${pageSize}`}>
+                        {pageSize}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="flex w-fit items-center justify-center text-sm font-medium">
+                Page {table.getState().pagination.pageIndex + 1} of{" "}
+                {table.getPageCount()}
+              </div>
+
+              <div className="space-x-1">
+                <Button
+                  variant="outline"
+                  onClick={() => table.setPageIndex(0)}
+                  disabled={!table.getCanPreviousPage()}
+                >
+                  <span className="sr-only">Go to first page</span>
+                  <ChevronsLeft />
+                </Button>
+                <Button
+                  variant="outline"
+                  onClick={() => table.previousPage()}
+                  disabled={!table.getCanPreviousPage()}
+                >
+                  <span className="sr-only">Go to previous page</span>
+                  <ChevronLeft />
+                </Button>
+
+                <Button
+                  variant={"outline"}
+                  onClick={() => table.nextPage()}
+                  disabled={!table.getCanNextPage()}
+                >
+                  <span className="sr-only">Go to next page</span>
+                  <ChevronRight />
+                </Button>
+
+                <Button
+                  variant={"outline"}
+                  onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+                  disabled={!table.getCanNextPage()}
+                >
+                  <span className="sr-only">Go to last page</span>
+                  <ChevronsRight />
+                </Button>
+              </div>
+            </div>
+
+            // <div className="flex flex-row justify-between items-center">
+            //   <div className="text-sm text-muted-foreground">
+            //     {table.getPageCount() > 0 ? (
+            //       <>
+            //         {table.getState().pagination.pageIndex + 1} dari{" "}
+            //         {table.getPageCount()} halaman
+            //       </>
+            //     ) : (
+            //       "0 halaman"
+            //     )}
+            //   </div>
+
+            //   <div className="flex items-center justify-end space-x-2 py-4">
+            //     <Button
+            //       variant="outline"
+            //       size="sm"
+            //       onClick={() => table.previousPage()}
+            //       disabled={!table.getCanPreviousPage() || isFetching}
+            //     >
+            //       Previous
+            //     </Button>
+            //     <Button
+            //       variant="outline"
+            //       size="sm"
+            //       onClick={() => table.nextPage()}
+            //       disabled={!table.getCanNextPage() || isFetching}
+            //     >
+            //       Next
+            //     </Button>
+            //   </div>
+            // </div>
+          )}
         </CardContent>
       </Card>
-
-      {isPagination && (
-        <div className="flex flex-row justify-between items-center">
-          <div className="text-sm text-muted-foreground">
-            {table.getPageCount() > 0 ? (
-              <>
-                {table.getState().pagination.pageIndex + 1} dari{" "}
-                {table.getPageCount()} halaman
-              </>
-            ) : (
-              "0 halaman"
-            )}
-          </div>
-
-          <div className="flex items-center justify-end space-x-2 py-4">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => table.previousPage()}
-              disabled={!table.getCanPreviousPage() || isFetching}
-            >
-              Previous
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => table.nextPage()}
-              disabled={!table.getCanNextPage() || isFetching}
-            >
-              Next
-            </Button>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

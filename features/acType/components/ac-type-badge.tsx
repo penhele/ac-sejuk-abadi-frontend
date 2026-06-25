@@ -18,16 +18,21 @@ const fallbackColors = [
 
 const acTypeSpecificMap: Record<string, string> = {
   "ac split wall": "bg-red-100 text-red-700 hover:bg-red-100 border-red-200/50",
-  "ac cassette": "bg-purple-100 text-purple-700 hover:bg-purple-100 border-purple-200/50",
-  "ac floor standing": "bg-orange-100 text-orange-700 hover:bg-orange-100 border-orange-200/50",
-  "ac portable": "bg-green-100 text-green-700 hover:bg-green-100 border-green-200/50",
-  "ac split duct": "bg-pink-100 text-pink-700 hover:bg-pink-100 border-pink-200/50",
-  "ac multi-s": "bg-yellow-100 text-yellow-700 hover:bg-yellow-100 border-yellow-200/50",
+  "ac cassette":
+    "bg-purple-100 text-purple-700 hover:bg-purple-100 border-purple-200/50",
+  "ac floor standing":
+    "bg-orange-100 text-orange-700 hover:bg-orange-100 border-orange-200/50",
+  "ac portable":
+    "bg-green-100 text-green-700 hover:bg-green-100 border-green-200/50",
+  "ac split duct":
+    "bg-pink-100 text-pink-700 hover:bg-pink-100 border-pink-200/50",
+  "ac multi-s":
+    "bg-yellow-100 text-yellow-700 hover:bg-yellow-100 border-yellow-200/50",
 };
 
 function getAcTypeColor(acTypeName: string): string {
   const normalized = acTypeName.toLowerCase().trim();
-  
+
   if (acTypeSpecificMap[normalized]) {
     return acTypeSpecificMap[normalized];
   }
@@ -37,7 +42,7 @@ function getAcTypeColor(acTypeName: string): string {
   for (let i = 0; i < normalized.length; i++) {
     hash = normalized.charCodeAt(i) + ((hash << 5) - hash);
   }
-  
+
   const index = Math.abs(hash) % fallbackColors.length;
   return fallbackColors[index];
 }
@@ -46,10 +51,7 @@ export default function AcProductTypeBadge({ acType }: { acType?: string }) {
   const colorClass = acType ? getAcTypeColor(acType) : "";
 
   return (
-    <Badge
-      variant={!acType ? "outline" : "default"}
-      className={cn(colorClass)}
-    >
+    <Badge variant={!acType ? "outline" : "default"} className={cn(colorClass)}>
       {acType ?? "Not Specified"}
     </Badge>
   );
