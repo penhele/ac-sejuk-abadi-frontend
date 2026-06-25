@@ -1,11 +1,9 @@
+import DeleteButton from "@/components/buttons/delete-button";
+import EditButtonHref from "@/components/buttons/edit-button-href";
 import { ROUTES } from "@/constants/routes";
-import { Project, projectKeys } from "@/features/project";
-import { deleteProject } from "@/features/project";
+import { deleteProject, Project, projectKeys } from "@/features/project";
 import { formatDate } from "@/lib/format/date";
 import { ColumnDef } from "@tanstack/react-table";
-import { EllipsisIcon } from "lucide-react";
-import DeleteButton from "../../../components/buttons/delete-button2";
-import EditButton from "../../../components/buttons/edit-button";
 import { Button } from "../../../components/ui/button";
 import {
   DropdownMenu,
@@ -89,25 +87,37 @@ export const projectColumns: ColumnDef<Project>[] = [
   },
   {
     header: "Action",
-    cell: ({ row }) => (
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button size={"icon-xs"} variant={"ghost"}>
-            <EllipsisIcon size={12} />
-          </Button>
-        </DropdownMenuTrigger>
+    cell: ({ row }) => {
+      const project = row.original;
 
-        <DropdownMenuContent>
-          <DropdownMenuGroup>
-            <EditButton href={ROUTES.DASHBOARD_EDIT_PROJECT(row.original.id)} />
-            <DeleteButton
-              mutationFn={deleteProject}
-              queryKey={projectKeys.all}
-              id={row.original.id}
-            />
-          </DropdownMenuGroup>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    ),
+      return (
+        <div className="space-x-2">
+          <EditButtonHref routes={ROUTES.DASHBOARD_EDIT_PROJECT(project.id)} />
+          <DeleteButton
+            id={project.id}
+            mutationFn={deleteProject}
+            queryKey={projectKeys.all}
+          />
+        </div>
+        // <DropdownMenu>
+        //   <DropdownMenuTrigger asChild>
+        //     <Button size={"icon-xs"} variant={"ghost"}>
+        //       <EllipsisIcon size={12} />
+        //     </Button>
+        //   </DropdownMenuTrigger>
+
+        //   <DropdownMenuContent>
+        //     <DropdownMenuGroup>
+        //       <EditButton href={ROUTES.DASHBOARD_EDIT_PROJECT(row.original.id)} />
+        //       <DeleteButton
+        //         mutationFn={deleteProject}
+        //         queryKey={projectKeys.all}
+        //         id={row.original.id}
+        //       />
+        //     </DropdownMenuGroup>
+        //   </DropdownMenuContent>
+        // </DropdownMenu>
+      );
+    },
   },
 ];

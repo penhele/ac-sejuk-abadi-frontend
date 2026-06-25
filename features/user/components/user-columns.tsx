@@ -83,7 +83,7 @@ export const userColumns: ColumnDef<User>[] = [
           </EditButton>
 
           <DeleteButton
-            id={row.id}
+            id={user.id}
             mutationFn={deleteUser}
             queryKey={userKeys.all}
           />

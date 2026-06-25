@@ -18,6 +18,7 @@ import {
 import CategoryBadge from "@/components/badges/category-badge";
 import DeleteButton from "@/components/buttons/delete-button";
 import EditButton from "@/components/buttons/edit-button";
+import EditButtonHref from "@/components/buttons/edit-button-href";
 
 export const productColumns: ColumnDef<Product>[] = [
   {
@@ -112,26 +113,19 @@ export const productColumns: ColumnDef<Product>[] = [
   },
   {
     header: "Action",
-    cell: ({ row }) => (
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button size={"icon-xs"} variant={"ghost"}>
-            <EllipsisIcon size={12} />
-          </Button>
-        </DropdownMenuTrigger>
+    cell: ({ row }) => {
+      const product = row.original;
 
-        <DropdownMenuContent>
-          <DropdownMenuGroup>
-            <EditButton href={ROUTES.EDIT_PRODUCT(row.original.id)} />
-
-            <DeleteButton
-              mutationFn={deleteProduct}
-              queryKey={productKeys.all}
-              id={row.original.id}
-            />
-          </DropdownMenuGroup>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    ),
+      return (
+        <div className="space-x-2">
+          <EditButtonHref routes={ROUTES.EDIT_PRODUCT(product.id)} />
+          <DeleteButton
+            id={product.id}
+            mutationFn={deleteProduct}
+            queryKey={productKeys.all}
+          />
+        </div>
+      );
+    },
   },
 ];

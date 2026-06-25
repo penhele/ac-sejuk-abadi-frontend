@@ -133,7 +133,7 @@ export function DataTable<TData, TValue>({
             {action && <CardAction>{action}</CardAction>}
           </CardHeader>
         )}
-        <CardContent>
+        <CardContent className="overflow-x-auto max-w-full">
           <Table>
             <TableHeader>
               {table.getHeaderGroups().map((headerGroup) => (

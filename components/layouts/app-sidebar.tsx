@@ -87,7 +87,7 @@ export function AppSidebar() {
   const router = useRouter();
 
   return (
-    <Sidebar>
+    <Sidebar collapsible="icon">
       <SidebarHeader />
       <SidebarContent>
         {navProduct.map((item, index) => (
