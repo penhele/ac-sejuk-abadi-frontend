@@ -36,7 +36,7 @@ export default function TextareaField({
         <FieldInfo field={field} />
       </div>
       <Textarea
-        value={field.state.value}
+        value={field.state.value ?? ""}
         onChange={(e) => field.handleChange(e.target.value)}
         placeholder={placeholder}
         disabled={isDisabled}

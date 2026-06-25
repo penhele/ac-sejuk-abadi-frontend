@@ -68,7 +68,7 @@ export default function TextField({
         )}
 
         <InputGroupInput
-          value={isPrice ? formatNumber(field.state.value) : field.state.value}
+          value={isPrice ? formatNumber(field.state.value) : (field.state.value ?? "")}
           onChange={(e) => {
             if (isPrice) {
               const rawValue = e.target.value.replace(/\D/g, "");
