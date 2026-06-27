@@ -20,7 +20,7 @@ export default function LoginForm({ className }: { className?: string }) {
     onSuccess(data, variables, onMutateResult, context) {
       toast.success("Berhasil login");
 
-      if (data.user.role === "user") router.push(ROUTES.DASHBOARD);
+      if (data.user.role === "user") router.push(ROUTES.HOME);
       else if (data.user.role === "admin") router.push(ROUTES.DASHBOARD);
     },
     onError() {
