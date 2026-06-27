@@ -13,7 +13,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
-import { MessageCircle, RotateCcw, X } from "lucide-react";
+import { Bot, MessageCircle, RotateCcw, X } from "lucide-react";
 import { useState } from "react";
 import ChatbotMessage from "./chatbot-message";
 
@@ -113,48 +113,76 @@ export default function ChatbotWidget() {
 
               <Separator />
 
-              <CardContent className="space-y-2 max-h-100 overflow-y-scroll">
-                {messages.map((msg) => (
-                  <div
-                    key={msg.id}
-                    className={`flex flex-col space-y-1 max-w-[75%] w-fit p-3 rounded-xl border ${
-                      msg.sender === "user"
-                        ? "bg-primary text-white ml-auto items-end rounded-br-none"
-                        : "bg-muted text-foreground mr-auto items-start rounded-bl-none"
-                    }`}
-                  >
-                    <span className="whitespace-pre-line text-sm">
-                      {msg.text}
-                    </span>
-                    <span className="text-[10px] opacity-70">{msg.time}</span>
-                  </div>
-                ))}
+              <CardContent className="space-y-2 max-h-100 min-h-80 overflow-y-scroll">
+                {messages.length !== 0 ? (
+                  <>
+                    {messages.map((msg) => (
+                      <div
+                        key={msg.id}
+                        className={`flex flex-col space-y-1 max-w-[75%] w-fit p-3 rounded-xl border ${
+                          msg.sender === "user"
+                            ? "bg-primary text-white ml-auto items-end rounded-br-none"
+                            : "bg-muted text-foreground mr-auto items-start rounded-bl-none"
+                        }`}
+                      >
+                        <span className="whitespace-pre-line text-sm">
+                          {msg.text}
+                        </span>
+                        <span className="text-[10px] opacity-70">
+                          {msg.time}
+                        </span>
+                      </div>
+                    ))}
 
-                {/* 2. Indikator Chat Bergelombang saat Loading */}
-                {isLoading && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="bg-muted text-foreground mr-auto flex flex-col space-y-1 max-w-[75%] w-fit p-4 rounded-xl rounded-bl-none border"
-                  >
-                    <div className="flex items-center space-x-1.5 h-4 px-1">
-                      {[0, 1, 2].map((index) => (
-                        <motion.span
-                          key={index}
-                          className="w-2 h-2 bg-foreground/60 rounded-full"
-                          variants={dotVariants}
-                          initial="initial"
-                          animate="animate"
-                          transition={{
-                            duration: 0.6,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                            delay: index * 0.15,
-                          }}
-                        />
-                      ))}
+                    {/* 2. Indikator Chat Bergelombang saat Loading */}
+                    {isLoading && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="bg-muted text-foreground mr-auto flex flex-col space-y-1 max-w-[75%] w-fit p-4 rounded-xl rounded-bl-none border"
+                      >
+                        <div className="flex items-center space-x-1.5 h-4 px-1">
+                          {[0, 1, 2].map((index) => (
+                            <motion.span
+                              key={index}
+                              className="w-2 h-2 bg-foreground/60 rounded-full"
+                              variants={dotVariants}
+                              initial="initial"
+                              animate="animate"
+                              transition={{
+                                duration: 0.6,
+                                repeat: Infinity,
+                                ease: "easeInOut",
+                                delay: index * 0.15,
+                              }}
+                            />
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </>
+                ) : (
+                  <div className="">
+                    <div className="flex flex-col items-center text-center space-y-1 bg-muted/40 p-4 rounded-card shadow-inner">
+                      <div className="relative">
+                        <div className="bg-primary/10 rounded-full p-3">
+                          <Bot />
+                        </div>
+
+                        <span className="absolute bottom-0 right-0 flex h-3.5 w-3.5">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                          <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 border-2 border-background" />
+                        </span>
+                      </div>
+                      <span className="font-semibold text-sm text-foreground">
+                        Sejuk Abadi AI Asisten
+                      </span>
+                      <span className="text-muted-foreground text-xs">
+                        Tanyakan seputar cuci AC, perbaikan bocor, bongkar
+                        pasang, atau estimasi tarif kami.
+                      </span>
                     </div>
-                  </motion.div>
+                  </div>
                 )}
               </CardContent>
 

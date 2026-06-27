@@ -1,187 +1,202 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   MessageCircle,
+  RotateCcw,
   X,
-  SendHorizontal,
   Bot,
   Sparkles,
-  RotateCcw,
-  MessageSquare,
-  HelpCircle,
-  ExternalLink,
+  Wrench,
+  Droplets,
+  Phone,
+  DollarSign,
+  ArrowRight,
 } from "lucide-react";
-import ReactMarkdown from "react-markdown";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { cn } from "@/lib/utils";
-import { Message } from "../types";
-import { sendChatbotMessage } from "../api/chatbot-client";
-
-// Suggested questions for quick interaction
-const QUICK_SUGGESTIONS = [
-  { text: "🧹 Cuci AC", value: "Berapa biaya cuci AC?" },
-  {
-    text: "🔧 Perbaikan AC",
-    value: "AC saya tidak dingin dan bocor, bisa diperbaiki?",
-  },
-  { text: "💰 Info Tarif", value: "Berapa harga/biaya layanan servis AC?" },
-  { text: "📍 Area Layanan", value: "Apakah melayani area luar Jabodetabek?" },
-];
+import { useState, useEffect, useRef } from "react";
+import ChatbotMessage from "./chatbot-message";
+import { useMutation } from "@tanstack/react-query";
+import { sendMessage } from "../api/send-message";
 
 export default function ChatbotWidget() {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [inputValue, setInputValue] = useState("");
-  const [isTyping, setIsTyping] = useState(false);
-  const [sessionId, setSessionId] = useState<string>("");
-  const [hasNewMessage, setHasNewMessage] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
+  // State untuk floating tooltip
+  const [showTooltip, setShowTooltip] = useState(false);
+  const [isTooltipDismissed, setIsTooltipDismissed] = useState(false);
 
-  // Initialize session and load messages from localStorage on mount
-  useEffect(() => {
-    // Generate a simple session ID if not exists
-    let activeSession = localStorage.getItem("acsa_chat_session_id");
-    if (!activeSession) {
-      activeSession = `session_${Math.random().toString(36).substring(2, 11)}`;
-      localStorage.setItem("acsa_chat_session_id", activeSession);
-    }
-    setSessionId(activeSession);
-
-    // Load messages
-    const savedMessages = localStorage.getItem("acsa_chat_history");
-    if (savedMessages) {
-      try {
-        setMessages(JSON.parse(savedMessages));
-      } catch (e) {
-        console.error("Failed to parse saved chat history", e);
-        initializeWelcomeMessage();
-      }
-    } else {
-      initializeWelcomeMessage();
-    }
-  }, []);
-
-  // Save messages to localStorage whenever they change
-  useEffect(() => {
-    if (messages.length > 0) {
-      localStorage.setItem("acsa_chat_history", JSON.stringify(messages));
-    }
-  }, [messages]);
-
-  // Scroll to the bottom of the chat list
-  useEffect(() => {
-    if (isOpen) {
-      scrollToBottom();
-      // Refocus input
-      setTimeout(() => inputRef.current?.focus(), 100);
-    }
-  }, [isOpen, messages, isTyping]);
-
-  const initializeWelcomeMessage = () => {
-    const welcome: Message = {
+  const [messages, setMessages] = useState([
+    {
       id: "welcome",
       sender: "bot",
-      text: "Halo! Selamat datang di **AC Sejuk Abadi**. Saya asisten virtual AI Anda. ❄️\n\nAda yang bisa saya bantu mengenai layanan cuci AC, perbaikan, bongkar pasang, atau informasi tarif hari ini?",
-      timestamp: getCurrentTime(),
-    };
-    setMessages([welcome]);
+      text: "Halo! Ada yang bisa saya bantu hari ini?",
+      time:
+        new Date().toLocaleTimeString("id-ID", {
+          hour: "2-digit",
+          minute: "2-digit",
+        }) + " WIB",
+    },
+  ]);
+
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll ke bawah saat ada pesan baru atau loading
+  const scrollToBottom = () => {
+    if (contentRef.current) {
+      contentRef.current.scrollTo({
+        top: contentRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
   };
 
-  const getCurrentTime = () => {
-    return new Date().toLocaleTimeString("id-ID", {
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, isLoading]);
+
+  // Efek delay untuk memunculkan tooltip "Mulai Percakapan"
+  useEffect(() => {
+    if (!isOpen && !isTooltipDismissed) {
+      const timer = setTimeout(() => {
+        setShowTooltip(true);
+      }, 2500);
+      return () => clearTimeout(timer);
+    } else {
+      setShowTooltip(false);
+    }
+  }, [isOpen, isTooltipDismissed]);
+
+  const { mutate: mutateSend } = useMutation({
+    mutationFn: sendMessage,
+  });
+
+  // Varian animasi untuk titik-titik melompat
+  const dotVariants = {
+    initial: { y: 0 },
+    animate: { y: [-5, 5, -5] },
+  };
+
+  // Helper untuk mendapatkan waktu saat ini
+  const getCurrentTime = () =>
+    new Date().toLocaleTimeString("id-ID", {
       hour: "2-digit",
       minute: "2-digit",
-    });
-  };
+    }) + " WIB";
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  const handleSendMessageSuccess = (
+    userMessage: string,
+    botResponse: string,
+  ) => {
+    setIsLoading(false);
 
-  const handleSendMessage = async (textToSend: string) => {
-    if (!textToSend.trim()) return;
-
-    // Create user message
-    const userMsg: Message = {
-      id: `user_${Date.now()}`,
-      sender: "user",
-      text: textToSend,
-      timestamp: getCurrentTime(),
-    };
-
-    setMessages((prev) => [...prev, userMsg]);
-    setInputValue("");
-    setIsTyping(true);
-
-    try {
-      const response = await sendChatbotMessage(textToSend, sessionId);
-
-      const botMsg: Message = {
-        id: `bot_${Date.now()}`,
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: `user-${Date.now()}`,
+        sender: "user",
+        text: userMessage,
+        time: getCurrentTime(),
+      },
+      {
+        id: `bot-${Date.now()}`,
         sender: "bot",
-        text: response.message,
-        timestamp: getCurrentTime(),
-      };
-
-      setMessages((prev) => [...prev, botMsg]);
-    } catch (error) {
-      const errorMsg: Message = {
-        id: `error_${Date.now()}`,
-        sender: "bot",
-        text: "Maaf, terjadi gangguan koneksi. Silakan coba kirim ulang pesan Anda atau hubungi kami langsung via WhatsApp.",
-        timestamp: getCurrentTime(),
-        status: "error",
-      };
-      setMessages((prev) => [...prev, errorMsg]);
-    } finally {
-      setIsTyping(false);
-    }
+        text: botResponse,
+        time: getCurrentTime(),
+      },
+    ]);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    handleSendMessage(inputValue);
+  const handleSendSuggestion = (text: string) => {
+    if (isLoading) return;
+    setIsLoading(true);
+
+    // Tambahkan pesan user secara instan ke dalam obrolan
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: `user-${Date.now()}`,
+        sender: "user",
+        text: text,
+        time: getCurrentTime(),
+      },
+    ]);
+
+    // Kirim ke API chatbot
+    mutateSend(
+      { message: text },
+      {
+        onSuccess: (data) => {
+          setIsLoading(false);
+          setMessages((prev) => [
+            ...prev,
+            {
+              id: `bot-${Date.now()}`,
+              sender: "bot",
+              text: data,
+              time: getCurrentTime(),
+            },
+          ]);
+        },
+        onError: (error) => {
+          console.error("Gagal mengirim pesan saran:", error);
+          setIsLoading(false);
+          setMessages((prev) => [
+            ...prev,
+            {
+              id: `bot-${Date.now()}`,
+              sender: "bot",
+              text: "Maaf, terjadi kesalahan saat menghubungi asisten. Silakan coba lagi.",
+              time: getCurrentTime(),
+            },
+          ]);
+        },
+      },
+    );
   };
 
-  const handleClearHistory = () => {
-    if (
-      confirm("Apakah Anda yakin ingin menghapus seluruh riwayat percakapan?")
-    ) {
-      localStorage.removeItem("acsa_chat_history");
-      initializeWelcomeMessage();
-    }
+  const handleResetChat = () => {
+    setMessages([]);
+    setIsLoading(false);
   };
 
-  const handleToggleChat = () => {
-    setIsOpen(!isOpen);
-    if (!isOpen) {
-      setHasNewMessage(false);
-    }
-  };
-
-  // Helper to open WhatsApp directly
-  const handleWhatsAppRedirect = () => {
-    const phoneNumber = "6281234567890"; // Replaced with their CS phone number
-    const message =
-      "Halo AC Sejuk Abadi, saya ingin bertanya tentang layanan servis AC...";
-    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-    window.open(url, "_blank");
-  };
+  const suggestions = [
+    {
+      label: "Berapa Tarif Cuci / Servis AC?",
+      text: "Berapa biaya servis atau cuci AC?",
+      icon: <DollarSign size={14} />,
+    },
+    {
+      label: "Jadwalkan Layanan Cuci AC",
+      text: "Saya ingin memesan layanan cuci AC.",
+      icon: <Droplets size={14} />,
+    },
+    {
+      label: "AC Saya Bocor / Kurang Dingin",
+      text: "AC saya bermasalah (bocor/kurang dingin). Mohon bantuannya.",
+      icon: <Wrench size={14} />,
+    },
+    {
+      label: "Hubungi WhatsApp Resmi",
+      text: "Bagaimana cara menghubungi WhatsApp AC Sejuk Abadi?",
+      icon: <Phone size={14} />,
+    },
+  ];
 
   return (
     <div className="relative">
-      {/* Chat Bubble Widget Panel */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -189,199 +204,254 @@ export default function ChatbotWidget() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 30, scale: 0.95 }}
             transition={{ type: "spring", duration: 0.4 }}
-            className={cn(
-              "fixed z-[9999] flex flex-col bg-card border border-border shadow-2xl rounded-2xl overflow-hidden",
-              // Mobile layout vs Desktop layout
-              "bottom-24 right-4 left-4 h-[500px] sm:h-[580px] sm:w-[380px] sm:left-auto sm:right-6",
-            )}
+            className="fixed z-50 bottom-24 right-8"
           >
-            {/* Header */}
-            <div className="bg-linear-to-r from-primary to-blue-600 px-4 py-3 text-primary-foreground flex items-center justify-between shadow-sm">
-              <div className="flex items-center space-x-3">
-                <div className="relative">
-                  <div className="h-9 w-9 rounded-full bg-white/15 flex items-center justify-center border border-white/20 backdrop-blur-xs">
-                    <Bot className="h-5 w-5 text-white animate-pulse" />
-                  </div>
-                  <span className="absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full bg-green-400 border-2 border-primary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-sm leading-tight flex items-center">
-                    Sejuk Abadi AI
-                    <Sparkles className="h-3.5 w-3.5 ml-1.5 text-yellow-300 fill-yellow-300" />
-                  </h3>
-                  <span className="text-[10px] text-blue-100 font-medium">
-                    Asisten Virtual (Aktif)
-                  </span>
-                </div>
-              </div>
+            <Card className="w-md">
+              <CardHeader>
+                <CardTitle>Sejuk Abadi AI</CardTitle>
+                <CardDescription>Asisten Virtual (Aktif)</CardDescription>
 
-              <div className="flex items-center space-x-1">
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="h-8 w-8 text-primary-foreground hover:bg-white/10 rounded-full"
-                      onClick={handleClearHistory}
-                    >
-                      <RotateCcw className="h-4 w-4" />
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent side="bottom" className="text-xs">
-                    Hapus Percakapan
-                  </TooltipContent>
-                </Tooltip>
+                <CardAction>
+                  <Button
+                    variant={"ghost"}
+                    size={"icon-sm"}
+                    onClick={handleResetChat}
+                    title="Mulai Ulang Percakapan"
+                  >
+                    <RotateCcw />
+                  </Button>
+                  <Button
+                    variant={"ghost"}
+                    size={"icon-sm"}
+                    onClick={() => setIsOpen(false)}
+                    title="Tutup Chat"
+                  >
+                    <X />
+                  </Button>
+                </CardAction>
+              </CardHeader>
 
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 text-primary-foreground hover:bg-white/10 rounded-full"
-                  onClick={handleToggleChat}
-                >
-                  <X className="h-4 w-4" />
-                </Button>
-              </div>
-            </div>
+              <Separator />
 
-            {/* Messages Area */}
-            <ScrollArea className="flex-1 p-4 bg-slate-50/50 dark:bg-zinc-950/20">
-              <div className="space-y-4 pr-2">
+              <CardContent
+                ref={contentRef}
+                className="space-y-4 max-h-100 min-h-80 overflow-y-auto scrollbar-thin pb-4"
+              >
+                {/* Render daftar pesan */}
                 {messages.map((msg) => (
                   <div
                     key={msg.id}
-                    className={cn(
-                      "flex w-full items-end",
-                      msg.sender === "user" ? "justify-end" : "justify-start",
-                    )}
+                    className={`flex flex-col space-y-1 max-w-[75%] w-fit p-3 rounded-xl border ${
+                      msg.sender === "user"
+                        ? "bg-primary text-white ml-auto items-end rounded-br-none shadow-sm"
+                        : "bg-muted text-foreground mr-auto items-start rounded-bl-none shadow-sm"
+                    }`}
                   >
-                    <div
-                      className={cn(
-                        "max-w-[80%] rounded-2xl px-4 py-2.5 text-sm shadow-2xs",
-                        msg.sender === "user"
-                          ? "bg-primary text-primary-foreground rounded-br-none"
-                          : "bg-card text-foreground border border-border/80 rounded-bl-none",
-                        msg.status === "error" &&
-                          "bg-destructive/10 text-destructive border-destructive/20",
-                      )}
-                    >
-                      {/* Markdown rendering for bot, plain text for user */}
-                      {msg.sender === "bot" ? (
-                        <div className="prose prose-sm dark:prose-invert max-w-none break-words leading-relaxed text-slate-800 dark:text-slate-200">
-                          <ReactMarkdown>{msg.text}</ReactMarkdown>
-                        </div>
-                      ) : (
-                        <p className="whitespace-pre-wrap break-words leading-relaxed">
-                          {msg.text}
-                        </p>
-                      )}
-                      <span
-                        className={cn(
-                          "block text-[9px] mt-1 text-right font-medium opacity-60",
-                          msg.sender === "user"
-                            ? "text-blue-100"
-                            : "text-muted-foreground",
-                        )}
-                      >
-                        {msg.timestamp}
-                      </span>
-                    </div>
+                    <span className="whitespace-pre-line text-sm">
+                      {msg.text}
+                    </span>
+                    <span className="text-[10px] opacity-70">{msg.time}</span>
                   </div>
                 ))}
 
-                {/* Bot Typing Indicator */}
-                {isTyping && (
-                  <div className="flex justify-start items-end">
-                    <div className="bg-card text-foreground border border-border/85 rounded-2xl rounded-bl-none px-4 py-3 shadow-2xs max-w-[80%]">
-                      <div className="flex items-center space-x-1.5 py-1">
-                        <span className="h-2 w-2 rounded-full bg-primary/60 animate-bounce [animation-delay:-0.3s]" />
-                        <span className="h-2 w-2 rounded-full bg-primary/60 animate-bounce [animation-delay:-0.15s]" />
-                        <span className="h-2 w-2 rounded-full bg-primary/60 animate-bounce" />
+                {/* Indikator Chat Bergelombang saat Loading */}
+                {isLoading && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-muted text-foreground mr-auto flex flex-col space-y-1 max-w-[75%] w-fit p-4 rounded-xl rounded-bl-none border shadow-sm"
+                  >
+                    <div className="flex items-center space-x-1.5 h-4 px-1">
+                      {[0, 1, 2].map((index) => (
+                        <motion.span
+                          key={index}
+                          className="w-2 h-2 bg-foreground/60 rounded-full"
+                          variants={dotVariants}
+                          initial="initial"
+                          animate="animate"
+                          transition={{
+                            duration: 0.6,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                            delay: index * 0.15,
+                          }}
+                        />
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* Dashboard Awal & Starter Chips jika chat kosong atau hanya ada welcome message */}
+                {messages.length <= 1 && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="flex flex-col space-y-4 pt-2"
+                  >
+                    <div className="flex flex-col items-center text-center p-4 bg-muted/30 rounded-2xl border border-dashed border-muted-foreground/20 shadow-inner">
+                      <div className="relative">
+                        <div className="p-3 bg-primary/10 rounded-full text-primary">
+                          <Bot size={32} className="animate-pulse" />
+                        </div>
+                        {/* Indikator Online Hijau Berkedip */}
+                        <span className="absolute bottom-0 right-0 flex h-3.5 w-3.5">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 border-2 border-background"></span>
+                        </span>
+                      </div>
+                      <h4 className="font-semibold text-sm mt-3 text-foreground">
+                        Sejuk Abadi AI Asisten
+                      </h4>
+                      <p className="text-xs text-muted-foreground mt-1 max-w-[240px]">
+                        Tanyakan seputar cuci AC, perbaikan bocor, bongkar
+                        pasang, atau estimasi tarif kami.
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col space-y-2">
+                      <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground px-1">
+                        Pilih Topik untuk Mulai:
+                      </p>
+
+                      <div className="grid grid-cols-1 gap-2">
+                        {suggestions.map((suggestion, idx) => (
+                          <motion.button
+                            key={idx}
+                            onClick={() =>
+                              handleSendSuggestion(suggestion.text)
+                            }
+                            disabled={isLoading}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.1 * idx + 0.3 }}
+                            whileHover={{ scale: 1.02, x: 4 }}
+                            whileTap={{ scale: 0.98 }}
+                            className="flex items-center justify-between text-left p-3 rounded-xl border bg-card hover:bg-muted/50 hover:border-primary/40 transition-all text-xs font-medium cursor-pointer group shadow-sm disabled:opacity-50"
+                          >
+                            <div className="flex items-center space-x-3 text-foreground">
+                              <span className="p-1.5 bg-muted rounded-lg text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+                                {suggestion.icon}
+                              </span>
+                              <span>{suggestion.label}</span>
+                            </div>
+                            <ArrowRight
+                              size={14}
+                              className="text-muted-foreground opacity-0 group-hover:opacity-100 group-hover:text-primary transition-all transform translate-x-[-4px] group-hover:translate-x-0"
+                            />
+                          </motion.button>
+                        ))}
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 )}
-                <div ref={messagesEndRef} />
-              </div>
-            </ScrollArea>
+              </CardContent>
 
-            {/* Quick Suggestions */}
-            {messages.length === 1 && !isTyping && (
-              <div className="px-4 py-2 bg-slate-50/75 dark:bg-zinc-950/40 border-t border-border/40">
-                <p className="text-[10px] text-muted-foreground font-medium mb-1.5 flex items-center">
-                  <HelpCircle className="h-3 w-3 mr-1" /> Pertanyaan Populer:
-                </p>
-                <div className="flex flex-wrap gap-1.5">
-                  {QUICK_SUGGESTIONS.map((suggestion, index) => (
-                    <button
-                      key={index}
-                      onClick={() => handleSendMessage(suggestion.value)}
-                      className="text-xs bg-card hover:bg-slate-100 dark:hover:bg-zinc-850 border border-border text-slate-700 dark:text-slate-300 px-2.5 py-1 rounded-full transition-all duration-200 hover:border-primary/40 active:scale-95 text-left"
-                    >
-                      {suggestion.text}
-                    </button>
-                  ))}
-                  <button
-                    onClick={handleWhatsAppRedirect}
-                    className="text-xs bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-700 dark:bg-emerald-950/25 dark:hover:bg-emerald-950/40 dark:border-emerald-900 dark:text-emerald-400 px-2.5 py-1 rounded-full transition-all duration-200 flex items-center"
-                  >
-                    📞 WhatsApp CS <ExternalLink className="h-2.5 w-2.5 ml-1" />
-                  </button>
-                </div>
-              </div>
-            )}
+              <Separator />
 
-            {/* Input Form */}
-            <form
-              onSubmit={handleSubmit}
-              className="p-3 bg-card border-t border-border flex items-center gap-2"
-            >
-              <Input
-                ref={inputRef}
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                placeholder="Ketik pesan Anda di sini..."
-                className="flex-1 bg-slate-50 dark:bg-zinc-950/40 focus-visible:ring-primary border-border h-10 text-sm rounded-full px-4"
-                disabled={isTyping}
-              />
-              <Button
-                type="submit"
-                size="icon"
-                disabled={!inputValue.trim() || isTyping}
-                className="h-10 w-10 rounded-full shrink-0 bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-200 active:scale-95"
-              >
-                <SendHorizontal className="h-4.5 w-4.5" />
-              </Button>
-            </form>
+              <CardFooter>
+                <ChatbotMessage
+                  onSuccess={handleSendMessageSuccess}
+                  onSendStart={() => setIsLoading(true)}
+                />
+              </CardFooter>
+            </Card>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Floating Action Button (FAB) */}
-      <motion.button
-        onClick={handleToggleChat}
-        className={cn(
-          "fixed bottom-6 right-6 z-[9999] h-14 w-14 rounded-full shadow-lg flex items-center justify-center cursor-pointer transition-all duration-350 select-none",
-          isOpen
-            ? "bg-destructive text-destructive-foreground rotate-90"
-            : "bg-primary text-primary-foreground hover:shadow-primary/25 hover:shadow-xl",
+      {/* Floating Tooltip "Mulai Percakapan" */}
+      <AnimatePresence>
+        {showTooltip && (
+          <motion.div
+            initial={{ opacity: 0, y: 15, scale: 0.85 }}
+            animate={{
+              opacity: 1,
+              y: [0, -6, 0], // Melayang halus
+              scale: 1,
+            }}
+            exit={{ opacity: 0, y: 10, scale: 0.9 }}
+            transition={{
+              y: {
+                repeat: Infinity,
+                duration: 3,
+                ease: "easeInOut",
+              },
+              default: { duration: 0.3 },
+            }}
+            className="fixed z-50 bottom-24 right-8 bg-card text-card-foreground border shadow-xl rounded-2xl p-4 pr-9 max-w-[260px] cursor-pointer hover:border-primary/50 transition-colors"
+            onClick={() => setIsOpen(true)}
+          >
+            {/* Segitiga penunjuk kecil */}
+            <div className="absolute bottom-[-8px] right-[22px] w-4 h-4 bg-card border-r border-b rotate-45" />
+
+            {/* Tombol close kecil */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation(); // Agar tidak men-trigger membuka obrolan
+                setIsTooltipDismissed(true);
+                setShowTooltip(false);
+              }}
+              className="absolute top-2 right-2 p-0.5 rounded-full hover:bg-muted text-muted-foreground transition-colors"
+            >
+              <X size={12} />
+            </button>
+
+            <div className="flex gap-2 items-start">
+              <div className="p-1.5 bg-primary/10 rounded-lg text-primary mt-0.5">
+                <Sparkles size={16} />
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-foreground">
+                  Butuh bantuan AC?
+                </p>
+                <p className="text-[11px] text-muted-foreground mt-0.5 leading-relaxed">
+                  Mulai percakapan dengan AI Sejuk Abadi di sini! 👋
+                </p>
+              </div>
+            </div>
+          </motion.div>
         )}
-        whileHover={{ scale: 1.08, y: -2 }}
-        whileTap={{ scale: 0.93 }}
-      >
-        {isOpen ? (
-          <X className="h-6 w-6" />
-        ) : (
-          <div className="relative">
-            <MessageCircle className="h-6 w-6" />
-            {hasNewMessage && (
-              <span className="absolute -top-1 -right-1 flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                <span className="relative inline-flex   rounded-full h-3 w-3 bg-red-500"></span>
-              </span>
-            )}
-          </div>
-        )}
-      </motion.button>
+      </AnimatePresence>
+
+      {/* Tombol Float Chatbot dengan Ring Denyut Cahaya */}
+      <div className="fixed bottom-8 right-8 z-50">
+        {/* Ring Denyut Cahaya saat tooltip aktif */}
+        <AnimatePresence>
+          {showTooltip && (
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: [1, 1.4, 1], opacity: [0.5, 0, 0.5] }}
+              exit={{ opacity: 0 }}
+              transition={{
+                repeat: Infinity,
+                duration: 2,
+                ease: "easeInOut",
+              }}
+              className="absolute inset-0 rounded-full bg-primary/40 -z-10 pointer-events-none"
+            />
+          )}
+        </AnimatePresence>
+
+        <motion.button
+          onClick={() => {
+            setIsOpen(!isOpen);
+            if (!isOpen) {
+              setShowTooltip(false);
+            }
+          }}
+          whileHover={{ scale: 1.08, y: -2 }}
+          whileTap={{ scale: 0.93 }}
+          className={cn(
+            "rounded-full h-14 w-14 flex items-center justify-center cursor-pointer text-primary-foreground shadow-lg transition-all",
+            isOpen
+              ? "bg-destructive hover:bg-destructive/90"
+              : "bg-primary hover:bg-primary/90",
+          )}
+        >
+          {isOpen ? <X size={24} /> : <MessageCircle size={24} />}
+        </motion.button>
+      </div>
     </div>
   );
 }
