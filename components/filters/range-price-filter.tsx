@@ -29,26 +29,21 @@ export default function RangePriceFilter() {
   }, [min_price, max_price]);
 
   useEffect(() => {
-    const currentMin = debouncedValue[0];
-    const currentMax = debouncedValue[1];
+    const [min, max] = debouncedValue;
 
-    const isDifferent =
-      currentMin !== (min_price ? Number(min_price) : MIN_LIMIT) ||
-      currentMax !== (max_price ? Number(max_price) : MAX_LIMIT);
+    const newMin = min === MIN_LIMIT ? undefined : String(min);
+    const newMax = max === MAX_LIMIT ? undefined : String(max);
 
-    if (isDifferent) {
-      const isDefault = currentMin === MIN_LIMIT && currentMax === MAX_LIMIT;
+    if (newMin === min_price && newMax === max_price) return;
 
-      setFilters({
-        min_price: isDefault ? undefined : currentMin.toString(),
-        max_price: isDefault ? undefined : currentMax.toString(),
-      });
-    }
-  }, [debouncedValue, setFilters, min_price, max_price]);
+    setFilters({
+      min_price: newMin,
+      max_price: newMax,
+    });
+  }, [debouncedValue, min_price, max_price, setFilters]);
 
   const handleReset = () => {
     setValue([MIN_LIMIT, MAX_LIMIT]);
-    setFilters({ min_price: undefined, max_price: undefined });
   };
 
   return (
