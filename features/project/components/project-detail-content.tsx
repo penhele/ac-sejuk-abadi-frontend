@@ -4,6 +4,7 @@ import { Building2, Calendar, ImageOff, MapPin } from "lucide-react";
 import Image from "next/image";
 import ErrorFallback from "../../../components/fallback/error-fallback";
 import ProjectFallback from "./project-fallback";
+import MarkdownRenderer from "@/components/markdown-renderer";
 
 export default function ProjectDetailContent({ id }: { id: string }) {
   const { data: project, isLoading } = useProject(id);
@@ -75,9 +76,9 @@ export default function ProjectDetailContent({ id }: { id: string }) {
       <div className="">
         <h1 className="text-lg font-bold">Deskripsi Proyek</h1>
 
-        <span className="text-sm text-muted-foreground h-12 line-clamp-2">
+        <MarkdownRenderer className="text-sm text-muted-foreground h-12">
           {project.description}
-        </span>
+        </MarkdownRenderer>
       </div>
 
       {/* <div className="">

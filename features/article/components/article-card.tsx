@@ -21,7 +21,7 @@ export default function ArticleCard({ article }: { article: Article }) {
         {article.images.length > 0 ? (
           <div className="aspect-video relative">
             <Image
-              src={article.images[0].image_url}
+              src={article.images[article.images.length - 1].image_url}
               alt={`${article.name}-image`}
               fill
               className="rounded-lg object-cover"

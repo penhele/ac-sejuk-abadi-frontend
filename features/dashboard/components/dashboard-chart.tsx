@@ -37,11 +37,7 @@ export function DashboardChart() {
               axisLine={false}
             />
             <YAxis dataKey={"total"} />
-            <Area
-              dataKey={"total"}
-              type="natural"
-              fill="var(--color-brands)"
-            />
+            <Area dataKey={"total"} type="natural" fill="var(--color-brands)" />
           </AreaChart>
         </ChartContainer>
       </CardContent>
