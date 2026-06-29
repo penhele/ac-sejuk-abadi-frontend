@@ -12,8 +12,6 @@ function getRoleFromToken(token: string) {
     );
     const payload = JSON.parse(jsonPayload);
 
-    console.log(payload);
-
     return payload?.role;
   } catch (e) {
     return null;

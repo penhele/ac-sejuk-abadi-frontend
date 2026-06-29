@@ -57,7 +57,7 @@ export default function ArticleContent({
       {previewUrl && (
         <img
           src={URL.createObjectURL(previewUrl)}
-          className="w-full rounded-lg object-cover aspect-videop"
+          className="w-full rounded-lg object-cover aspect-video"
         />
       )}
 

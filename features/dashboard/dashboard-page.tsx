@@ -8,10 +8,9 @@ import CategoryPage from "@/features/category/components/category-page";
 import StatCard from "./components/stat-card";
 import { DashboardChart } from "./components/dashboard-chart";
 import { useDashboardStats } from "./hooks/use-dashboard-stats";
+import SummarySection from "./components/summary-section";
 
 export default function DashboardPage() {
-  const statItems = useDashboardStats();
-
   return (
     <div className="space-y-between-items">
       <div className="shadow-2xl bg-linear-to-r text-white rounded-lg from-sky-600 via-blue-600 to-indigo-600 p-8">
@@ -40,11 +39,7 @@ export default function DashboardPage() {
         </TabsList>
 
         <TabsContent value="ringkasan">
-          <div className="grid grid-cols-3 gap-between-card">
-            {statItems.map((stat) => (
-              <StatCard key={stat.title} {...stat} />
-            ))}
-          </div>
+          <SummarySection />
         </TabsContent>
 
         <TabsContent value="brand">
@@ -59,8 +54,6 @@ export default function DashboardPage() {
           <AcTypePage />
         </TabsContent>
       </Tabs>
-
-      <DashboardChart />
     </div>
   );
 }
