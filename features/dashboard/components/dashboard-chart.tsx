@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { useBrands } from "@/features/brand/hooks/use-brands";
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
@@ -22,6 +22,10 @@ export function DashboardChart() {
 
   return (
     <Card>
+      <CardHeader>
+        <CardTitle>Perbandingan Antar Brand</CardTitle>
+      </CardHeader>
+
       <CardContent>
         <ChartContainer config={chartConfig} className="max-h-75 w-full">
           <AreaChart accessibilityLayer data={chartData}>
@@ -33,7 +37,11 @@ export function DashboardChart() {
               axisLine={false}
             />
             <YAxis dataKey={"total"} />
-            <Area dataKey={"total"} type="natural" fillOpacity={0.4} />
+            <Area
+              dataKey={"total"}
+              type="natural"
+              fill="var(--color-brands)"
+            />
           </AreaChart>
         </ChartContainer>
       </CardContent>

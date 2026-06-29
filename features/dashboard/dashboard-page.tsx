@@ -23,9 +23,8 @@ export default function DashboardPage() {
             Selamat Datang, Admin
           </h1>
           <p className="text-sky-100">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi
-            molestiae eaque accusantium voluptates et non blanditiis nihil
-            quisquam, velit optio.
+            Kelola artikel, pantau aktivitas konten, dan pastikan seluruh
+            informasi yang dipublikasikan tetap terorganisir dengan baik.
           </p>
         </div>
       </div>
