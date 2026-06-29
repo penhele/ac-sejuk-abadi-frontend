@@ -1,3 +1,4 @@
+import MarkdownRenderer from "@/components/markdown-renderer";
 import { Separator } from "@/components/ui/separator";
 import { formatDate } from "@/lib/format/date";
 import { cn } from "@/lib/utils";
@@ -61,9 +62,9 @@ export default function ArticleContent({
         />
       )}
 
-      <div className="whitespace-pre-wrap leading-6">
-        <Markdown>{content}</Markdown>
-      </div>
+      <MarkdownRenderer className="whitespace-pre-wrap">
+        {content}
+      </MarkdownRenderer>
     </div>
   );
 }

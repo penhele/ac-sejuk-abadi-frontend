@@ -41,6 +41,7 @@ export default function TextareaField({
         placeholder={placeholder}
         disabled={isDisabled}
         readOnly={readOnly}
+        className="whitespace-pre-wrap"
       />
     </div>
   );

@@ -1,5 +1,6 @@
 import { Product } from "@/features/product/types/product";
 import ProductBadge from "../badges/product-badge";
+import MarkdownRenderer from "../markdown-renderer";
 
 export default function ProductInfo({ product }: { product: Product }) {
   return (
@@ -15,7 +16,9 @@ export default function ProductInfo({ product }: { product: Product }) {
 
       <div className="flex flex-col gap-1">
         <h1 className="text-header-h4 font-medium">Deskripsi</h1>
-        <p className="text-body min-h-20 md:min-h-80">{product.description}</p>
+        {/* <p className="text-body min-h-20 md:min-h-80 whitespace-pre-wrap">{product.description}</p> */}
+
+        <MarkdownRenderer className="text-body min-h-20 md:min-h-80 whitespace-pre-wrap">{product.description}</MarkdownRenderer>
       </div>
     </div>
   );
