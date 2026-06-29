@@ -11,7 +11,7 @@ export default function RangePriceFilter() {
   const { min_price, max_price, setFilters } = useProductFilters();
 
   const MIN_LIMIT = 0;
-  const MAX_LIMIT = 20000000;
+  const MAX_LIMIT = 30000000;
   const STEP = 100000;
 
   const [value, setValue] = useState<number[]>([
@@ -61,7 +61,7 @@ export default function RangePriceFilter() {
         </Button>
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-4">
         <Slider
           value={value}
           onValueChange={setValue}
