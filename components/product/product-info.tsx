@@ -18,7 +18,9 @@ export default function ProductInfo({ product }: { product: Product }) {
         <h1 className="text-header-h4 font-medium">Deskripsi</h1>
         {/* <p className="text-body min-h-20 md:min-h-80 whitespace-pre-wrap">{product.description}</p> */}
 
-        <MarkdownRenderer className="text-body min-h-20 md:min-h-80 whitespace-pre-wrap">{product.description}</MarkdownRenderer>
+        <MarkdownRenderer className="text-body min-h-20 md:min-h-80 whitespace-pre-wrap">
+          {product.description}
+        </MarkdownRenderer>
       </div>
     </div>
   );
