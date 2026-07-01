@@ -1,8 +1,15 @@
 import { Input } from "@/components/ui/input";
 import { useAppForm } from "@/hooks/use-app-form";
 import { useMutation } from "@tanstack/react-query";
-import { SendHorizontal } from "lucide-react";
+import { ArrowUpIcon, SendHorizontal } from "lucide-react";
 import { sendMessage } from "../api/send-message";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupTextarea,
+} from "@/components/ui/input-group";
+import { Button } from "@/components/ui/button";
 
 interface ChatbotMessageProps {
   onSuccess: (userMessage: string, botResponse: string) => void;
@@ -63,17 +70,21 @@ export default function ChatbotMessage({
         >
           <form.AppField name="message">
             {(field) => (
-              <Input
-                placeholder="Ketik pesan Anda di sini..."
-                value={field.state.value}
-                onChange={(e) => field.handleChange(e.target.value)}
-                disabled={isPending} // Otomatis disabled saat nunggu jawaban
-              />
+
+              <InputGroup >
+                <InputGroupTextarea  value={field.state.value} onChange={(e) => field.handleChange(e.target.value)} disabled={isPending} placeholder="Produk apa yang tersedia di website ini?" />
+
+                <InputGroupAddon align={'block-end'}>
+                  <InputGroupButton asChild>
+                    <form.SubmitButton Icon={ArrowUpIcon} className="rounded-full ml-auto" />
+                  </InputGroupButton>
+                </InputGroupAddon>
+              </InputGroup>
             )}
           </form.AppField>
 
           {/* Menggunakan isPending bawaan React Query untuk disable tombol kirim */}
-          <form.SubmitButton Icon={SendHorizontal} isDisabled={isPending} />
+          {/* <form.SubmitButton Icon={SendHorizontal} isDisabled={isPending} /> */}
         </form>
       </form.AppForm>
     </div>
