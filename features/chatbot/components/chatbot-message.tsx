@@ -70,13 +70,20 @@ export default function ChatbotMessage({
         >
           <form.AppField name="message">
             {(field) => (
+              <InputGroup>
+                <InputGroupTextarea
+                  value={field.state.value}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                  disabled={isPending}
+                  placeholder="Produk apa yang tersedia di website ini?"
+                />
 
-              <InputGroup >
-                <InputGroupTextarea  value={field.state.value} onChange={(e) => field.handleChange(e.target.value)} disabled={isPending} placeholder="Produk apa yang tersedia di website ini?" />
-
-                <InputGroupAddon align={'block-end'}>
+                <InputGroupAddon align={"block-end"}>
                   <InputGroupButton asChild>
-                    <form.SubmitButton Icon={ArrowUpIcon} className="rounded-full ml-auto" />
+                    <form.SubmitButton
+                      Icon={ArrowUpIcon}
+                      className="rounded-full ml-auto"
+                    />
                   </InputGroupButton>
                 </InputGroupAddon>
               </InputGroup>

@@ -32,7 +32,7 @@ export default function SubmitButton({
         <Button
           type="submit"
           disabled={!canSubmit || isSubmitting || isDisabled}
-          className={cn( className)}
+          className={cn(className)}
         >
           {label && <span>{isSubmitting ? <Spinner /> : label}</span>}
           {Icon && <Icon />}
