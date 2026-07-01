@@ -13,7 +13,14 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
-import { Bot, MessageCircle, RotateCcw, RotateCwIcon, X } from "lucide-react";
+import {
+  Bot,
+  MessageCircle,
+  MessageCircleDashedIcon,
+  RotateCcw,
+  RotateCwIcon,
+  X,
+} from "lucide-react";
 import { useState } from "react";
 import ChatbotMessage from "./chatbot-message";
 import {
@@ -28,6 +35,14 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 export default function ChatbotWidget() {
   const [isOpen, setIsOpen] = useState(false);
@@ -122,19 +137,35 @@ export default function ChatbotWidget() {
             <Separator />
 
             <CardContent className="max-h-100 min-h-80 overflow-y-scroll">
-              <MessageScroller>
-                <MessageScrollerViewport>
-                  <MessageScrollerContent>
-                    {messages.map((message) => (
-                      <MessageAnimated
-                        key={message.id}
-                        message={message}
-                        // scrollAnchor={message.role === "user"}
-                      />
-                    ))}
-                  </MessageScrollerContent>
-                </MessageScrollerViewport>
-              </MessageScroller>
+              {messages.length === 0 ? (
+                <Empty className="h-full">
+                  <EmptyHeader>
+                    <EmptyMedia variant="icon">
+                      <MessageCircleDashedIcon />
+                    </EmptyMedia>
+                    <EmptyTitle className="flex flex-row items-center">
+                      Halo, Pelanggan Setia!
+                    </EmptyTitle>
+                    <EmptyDescription>
+                      Tanya AI tentang AC yang Anda inginkan dan perlukan!
+                    </EmptyDescription>
+                  </EmptyHeader>
+                </Empty>
+              ) : (
+                <MessageScroller>
+                  <MessageScrollerViewport>
+                    <MessageScrollerContent>
+                      {messages.map((message) => (
+                        <MessageAnimated
+                          key={message.id}
+                          message={message}
+                          // scrollAnchor={message.role === "user"}
+                        />
+                      ))}
+                    </MessageScrollerContent>
+                  </MessageScrollerViewport>
+                </MessageScroller>
+              )}
             </CardContent>
 
             <CardFooter>
