@@ -1,33 +1,25 @@
+import { Button } from "@/components/ui/button";
+import { SheetClose, SheetFooter } from "@/components/ui/sheet";
+import { userKeys } from "@/features/user/queries/user-keys";
 import { useAppForm } from "@/hooks/use-app-form";
+import { AppError } from "@/types/error";
 import { revalidateLogic } from "@tanstack/react-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { UpdateUserPayload } from "../types/update-user-payload";
+import { goeyToast } from "goey-toast";
 import { updateUser } from "../api/update-user";
-import { userKeys } from "@/features/user/queries/user-keys";
-import { toast } from "sonner";
-import { registerSchema } from "@/features/auth/schemas/register.schema";
 import { userSchema } from "../schemas/user.schema";
-import { SheetClose, SheetFooter } from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
-import useUser from "../hooks/use-user";
+import { UpdateUserPayload } from "../types/update-user-payload";
+import { User } from "../types/user";
 
-export default function EditUserForm({ id }: { id: string | number }) {
+interface Props {
+  user: User;
+}
+
+export default function EditUserForm({ user }: Props) {
   const queryClient = useQueryClient();
 
-  const { data: user, isLoading } = useUser(id);
-
-  const { mutateAsync } = useMutation({
-    mutationFn: (data: UpdateUserPayload) => updateUser(id, data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: userKeys.all,
-      });
-
-      toast.success("User berhasil ditambahkan.");
-    },
-    onError: () => {
-      toast.error("Gagal menambahkan user.");
-    },
+  const { mutateAsync, isPending } = useMutation({
+    mutationFn: (data: UpdateUserPayload) => updateUser(user.id, data),
   });
 
   const form = useAppForm({
@@ -35,7 +27,6 @@ export default function EditUserForm({ id }: { id: string | number }) {
       first_name: user?.first_name ?? "",
       last_name: user?.last_name ?? "",
       email: user?.email ?? "",
-      password: user?.password ?? "",
       address: user?.address ?? "",
       rt: user?.rt ?? "",
       rw: user?.rw ?? "",
@@ -49,8 +40,18 @@ export default function EditUserForm({ id }: { id: string | number }) {
       mode: "submit",
       modeAfterSubmission: "blur",
     }),
-    onSubmit: async ({ value }) => {
-      await mutateAsync(value);
+    onSubmit: ({ value }) => {
+      goeyToast.promise(mutateAsync(value), {
+        loading: "Updating...",
+        success: () => {
+          queryClient.invalidateQueries({
+            queryKey: userKeys.all,
+          });
+
+          return "Berhasil";
+        },
+        error: (err) => (err as AppError).message,
+      });
     },
   });
 
@@ -63,14 +64,58 @@ export default function EditUserForm({ id }: { id: string | number }) {
         }}
         className="h-full flex flex-col justify-between"
       >
-        <div className="px-4">
+        <div className="gap-between-field grid grid-cols-2 px-4">
           <form.AppField name="first_name">
-            {(field) => <field.TextField label="Name" isDisabled={isLoading} />}
+            {(field) => (
+              <field.TextField
+                className="col-span-2"
+                label="Nama Depan"
+                placeholder="First Name"
+              />
+            )}
+          </form.AppField>
+
+          <form.AppField name="last_name">
+            {(field) => (
+              <field.TextField
+                className="col-span-2"
+                label="Nama Belakang"
+                placeholder="Last Name"
+              />
+            )}
+          </form.AppField>
+
+          <form.AppField name="address">
+            {(field) => (
+              <field.TextareaField
+                className="col-span-2"
+                label="Alamat"
+                placeholder="Ruko Srengseng Permai Village Jl. Srengseng Sawah No.2"
+              />
+            )}
+          </form.AppField>
+
+          <form.AppField name="rt">
+            {(field) => <field.TextField label="Name" placeholder="12" />}
+          </form.AppField>
+
+          <form.AppField name="rw">
+            {(field) => <field.TextField label="RW" placeholder="7" />}
+          </form.AppField>
+
+          <form.AppField name="zip_code">
+            {(field) => (
+              <field.TextField
+                label="Kode Pos"
+                placeholder="12640"
+                className="col-span-2"
+              />
+            )}
           </form.AppField>
         </div>
 
         <SheetFooter>
-          <form.SubmitButton label="Save changes" />
+          <form.SubmitButton label="Save changes" loading={isPending} />
           <SheetClose asChild>
             <Button variant="outline">Close</Button>
           </SheetClose>
