@@ -38,6 +38,7 @@ export const categoryColumns: ColumnDef<Category>[] = [
           id={row.original.id}
           mutationFn={deleteCategory}
           queryKey={categoryKeys.all}
+          item={row.original.name}
         />
       </div>
     ),

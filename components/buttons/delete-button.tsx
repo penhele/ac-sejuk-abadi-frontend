@@ -1,8 +1,9 @@
 "use client";
 
+import { AppError } from "@/types/error";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Trash } from "lucide-react";
-import { toast } from "sonner";
+import { goeyToast } from "goey-toast";
+import { Delete, Trash, Trash2 } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -11,75 +12,81 @@ import {
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
+  AlertDialogMedia,
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
-import { DropdownMenuShortcut } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
+import { DropdownMenuShortcut } from "../ui/dropdown-menu";
+import { Spinner } from "../ui/spinner";
 
-type Props<TId = string | number> = {
+interface Props<TId = string | number> {
   id: TId;
   mutationFn: (id: TId) => Promise<unknown>;
   queryKey: readonly unknown[];
   successMessage?: string;
   errorMessage?: string;
-};
+  item: string;
+}
 
 export default function DeleteButton<TId = string | number>({
   id,
   mutationFn,
   queryKey,
   successMessage = "Berhasil menghapus data.",
-  errorMessage = "Gagal menghapus data.",
+  item,
 }: Props<TId>) {
   const queryClient = useQueryClient();
 
-  const { mutate } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationFn,
-    onMutate() {
-      const toastId = toast.loading("Loading...");
-      return { toastId };
-    },
-    onSuccess(_, __, context) {
-      queryClient.invalidateQueries({
-        queryKey,
-      });
-
-      toast.success(successMessage, {
-        id: context?.toastId,
-      });
-    },
-    onError(_, __, context) {
-      toast.error(errorMessage, {
-        id: context?.toastId,
-      });
-    },
   });
+
+  const handleDelete = () => {
+    goeyToast.promise(mutateAsync(id), {
+      loading: "Loading...",
+      success: () => {
+        queryClient.invalidateQueries({ queryKey });
+        return successMessage;
+      },
+      error: (err) => (err as AppError).message,
+    });
+  };
 
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <DropdownMenuShortcut>
-          <Button size={"icon-xs"} variant={"outline"}>
-            <Trash />
+          <Button size={"icon-xs"} variant={"outline"} disabled={isPending}>
+            {isPending ? <Spinner /> : <Trash />}
           </Button>
         </DropdownMenuShortcut>
       </AlertDialogTrigger>
 
       <AlertDialogContent>
         <AlertDialogHeader>
+          <AlertDialogMedia>
+            <Trash2 />
+          </AlertDialogMedia>
+
           <AlertDialogTitle>Konfirmasi Hapus</AlertDialogTitle>
-          <AlertDialogDescription>
-            Apakah Anda yakin ingin menghapus data ini secara permanen? Tindakan
-            ini tidak dapat dibatalkan.
+          <AlertDialogDescription className="flex flex-col space-y-2">
+            <span>
+              Apakah Anda yakin ingin menghapus data ini secara permanen?
+            </span>
+
+            <div className="p-4 bg-muted/50 flex flex-col rounded-lg">
+              <span className="text-sm text-muted-foreground">
+                Data yang akan dihapus:
+              </span>
+              <span className="text-base font-bold">{item}</span>
+            </div>
           </AlertDialogDescription>
         </AlertDialogHeader>
 
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={() => mutate(id)}>
-            Continue
-          </AlertDialogAction>
+          <AlertDialogAction onClick={handleDelete}>Continue</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

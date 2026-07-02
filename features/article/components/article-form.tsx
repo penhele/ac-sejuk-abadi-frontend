@@ -16,7 +16,7 @@ interface Props {
   loading?: boolean;
 }
 
-export default function ArticleForm({
+export default function ArticledeForm({
   defaultValues,
   onSubmit,
   loading,
