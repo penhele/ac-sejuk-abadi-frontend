@@ -39,6 +39,7 @@ export const acTypeColumns: ColumnDef<AcType>[] = [
           id={row.original.id}
           mutationFn={deleteAcType}
           queryKey={acTypeKeys.all}
+          item={row.original.name}
         />
       </div>
     ),

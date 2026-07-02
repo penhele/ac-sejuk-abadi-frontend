@@ -258,7 +258,6 @@ export default function ProductForm({
             onCancel={() => form.reset()}
             onCloseEdit={() => ({})}
             className="max-w-24"
-            href={ROUTES.PRODUCTS}
           />
 
           <form.SubmitButton label={submitLabel} />

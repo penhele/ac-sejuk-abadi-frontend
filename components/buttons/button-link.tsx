@@ -4,9 +4,9 @@ import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import { ImagePlus } from "lucide-react";
 
-type Props = {
+interface Props {
   routes: string;
-};
+}
 
 export default function ButtonLink({ routes }: Props) {
   const router = useRouter();

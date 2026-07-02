@@ -97,26 +97,9 @@ export const projectColumns: ColumnDef<Project>[] = [
             id={project.id}
             mutationFn={deleteProject}
             queryKey={projectKeys.all}
+            item={row.original.name}
           />
         </div>
-        // <DropdownMenu>
-        //   <DropdownMenuTrigger asChild>
-        //     <Button size={"icon-xs"} variant={"ghost"}>
-        //       <EllipsisIcon size={12} />
-        //     </Button>
-        //   </DropdownMenuTrigger>
-
-        //   <DropdownMenuContent>
-        //     <DropdownMenuGroup>
-        //       <EditButton href={ROUTES.DASHBOARD_EDIT_PROJECT(row.original.id)} />
-        //       <DeleteButton
-        //         mutationFn={deleteProject}
-        //         queryKey={projectKeys.all}
-        //         id={row.original.id}
-        //       />
-        //     </DropdownMenuGroup>
-        //   </DropdownMenuContent>
-        // </DropdownMenu>
       );
     },
   },

@@ -1,9 +1,10 @@
-import { ColumnDef } from "@tanstack/react-table";
-import { Brand } from "../types/brand";
 import DeleteButton from "@/components/buttons/delete-button";
+import SheetButton from "@/components/buttons/sheet-button";
+import { ColumnDef } from "@tanstack/react-table";
+import { Pencil } from "lucide-react";
 import { deleteBrand } from "../api/delete-brand";
 import { brandKeys } from "../queries/brand-keys";
-import EditButton from "./edit-button";
+import { Brand } from "../types/brand";
 import EditBrandForm from "./edit-brand-form";
 
 export const brandColumns: ColumnDef<Brand>[] = [
@@ -25,14 +26,15 @@ export const brandColumns: ColumnDef<Brand>[] = [
     header: "Action",
     cell: ({ row }) => (
       <div className="space-x-1">
-        <EditButton title="Update Brand">
+        <SheetButton title="Update Brand" Icon={Pencil}>
           <EditBrandForm id={row.original.id} />
-        </EditButton>
+        </SheetButton>
 
         <DeleteButton
           id={row.original.id}
           mutationFn={deleteBrand}
           queryKey={brandKeys.all}
+          item={row.original.name}
         />
       </div>
     ),

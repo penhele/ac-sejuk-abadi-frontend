@@ -1,24 +1,16 @@
+import CategoryBadge from "@/components/badges/category-badge";
+import PkBadge from "@/components/badges/pk-badge";
+import DeleteButton from "@/components/buttons/delete-button";
+import EditButtonHref from "@/components/buttons/edit-button-href";
+import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/constants/routes";
-import { formatNumber } from "@/lib/format/currency";
+import AcProductTypeBadge from "@/features/acType/components/ac-type-badge";
+import { deleteProduct, productKeys } from "@/features/product";
 import { Product } from "@/features/product/types/product";
+import { formatNumber } from "@/lib/format/currency";
 import { ColumnDef } from "@tanstack/react-table";
 import { formatDistanceToNow } from "date-fns";
-import { ArrowUpDown, EllipsisIcon } from "lucide-react";
-import { deleteProduct } from "@/features/product";
-import { productKeys } from "@/features/product";
-import { Button } from "@/components/ui/button";
-import PkBadge from "@/components/badges/pk-badge";
-import AcProductTypeBadge from "@/features/acType/components/ac-type-badge";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import CategoryBadge from "@/components/badges/category-badge";
-import DeleteButton from "@/components/buttons/delete-button";
-import EditButton from "@/components/buttons/edit-button";
-import EditButtonHref from "@/components/buttons/edit-button-href";
+import { ArrowUpDown } from "lucide-react";
 
 export const productColumns: ColumnDef<Product>[] = [
   {
@@ -141,6 +133,7 @@ export const productColumns: ColumnDef<Product>[] = [
             id={product.id}
             mutationFn={deleteProduct}
             queryKey={productKeys.all}
+            item={product.name}
           />
         </div>
       );

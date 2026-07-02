@@ -88,6 +88,7 @@ export const userColumns: ColumnDef<User>[] = [
             id={user.id}
             mutationFn={deleteUser}
             queryKey={userKeys.all}
+            item={`${user.first_name} ${user.last_name}`}
           />
         </div>
       );
