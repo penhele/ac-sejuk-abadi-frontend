@@ -11,22 +11,19 @@ import { login } from "../api/login";
 import { LoginPayload } from "../types/login-payload";
 import { loginSchema } from "../schemas/login.schema";
 import { Key, Lock, Mail } from "lucide-react";
+import { AppError } from "@/types/error";
+import { goeyToast } from "goey-toast";
+import { error } from "console";
 
-export default function LoginForm({ className }: { className?: string }) {
+interface Props {
+  className?: string;
+}
+
+export default function LoginForm({ className }: Props) {
   const router = useRouter();
 
   const { mutateAsync } = useMutation({
     mutationFn: (data: LoginPayload) => login(data),
-    onSuccess(data, variables, onMutateResult, context) {
-      toast.success("Berhasil login");
-
-      if (data.user.role === "user") router.push(ROUTES.HOME);
-      else if (data.user.role === "admin") router.push(ROUTES.DASHBOARD);
-    },
-    onError() {
-      toast.error("Gagal login");
-      form.reset();
-    },
   });
 
   const form = useAppForm({
@@ -38,7 +35,19 @@ export default function LoginForm({ className }: { className?: string }) {
       onSubmit: loginSchema,
     },
     onSubmit: async ({ value }) => {
-      await mutateAsync(value);
+      goeyToast.promise(mutateAsync(value), {
+        loading: "Logging in...",
+        success: (data) => {
+          if (data.user.role === "user") router.push(ROUTES.HOME);
+          else if (data.user.role === "admin") router.push(ROUTES.DASHBOARD);
+
+          return "Berhasil login";
+        },
+        error: (err) => {
+          const error = err as AppError;
+          return error.message;
+        },
+      });
     },
   });
 

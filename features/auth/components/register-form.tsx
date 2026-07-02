@@ -11,20 +11,14 @@ import { RegisterPayload } from "../types/register-payload";
 import { register } from "../api/register";
 import { registerSchema } from "../schemas/register.schema";
 import { Lock, Mail } from "lucide-react";
+import { goeyToast } from "goey-toast";
+import { AppError } from "@/types/error";
 
 export default function RegisterForm({ className }: { className?: string }) {
   const router = useRouter();
 
   const { mutateAsync } = useMutation({
     mutationFn: (data: RegisterPayload) => register(data),
-    onSuccess() {
-      toast.success("Berhasil register");
-      router.push(ROUTES.VERIFY_EMAIL);
-    },
-    onError() {
-      toast.error("Gagal register");
-      form.reset();
-    },
   });
 
   const form = useAppForm({
@@ -42,7 +36,14 @@ export default function RegisterForm({ className }: { className?: string }) {
       onSubmit: registerSchema,
     },
     onSubmit: async ({ value }) => {
-      await mutateAsync(value);
+      goeyToast.promise(mutateAsync(value), {
+        loading: "Loading...",
+        success: "Berhasil Register",
+        error: (err) => {
+          const error = err as AppError;
+          return error.message;
+        },
+      });
     },
   });
 

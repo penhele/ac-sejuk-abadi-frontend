@@ -6,6 +6,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "sonner";
 import QueryProvider from "@/providers/query-provider";
 import { ThemeProvider } from "@/providers/theme-provider";
+import { GooeyToaster } from "@/components/ui/goey-toaster";
+
 const geist = Geist({
   subsets: ["latin"],
 });
@@ -25,6 +27,7 @@ export default function RootLayout({
           <TooltipProvider>
             <QueryProvider>{children}</QueryProvider>
             <Toaster />
+            <GooeyToaster />
           </TooltipProvider>
         </ThemeProvider>
       </body>
