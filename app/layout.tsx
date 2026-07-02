@@ -27,7 +27,7 @@ export default function RootLayout({
           <TooltipProvider>
             <QueryProvider>{children}</QueryProvider>
             <Toaster />
-            <GooeyToaster />
+            <GooeyToaster duration={10000} />
           </TooltipProvider>
         </ThemeProvider>
       </body>

@@ -1,8 +1,11 @@
+import BackButton from "@/components/buttons/back-button";
 import CreateProductForm from "@/features/product/components/create-product-form";
 
 export default function CreateProductPage() {
   return (
     <div className="space-y-between-items">
+      <BackButton />
+
       <div>
         <h1 className="text-2xl font-semibold">Tambah Produk Baru</h1>
         <span className="text-sm text-gray-600">

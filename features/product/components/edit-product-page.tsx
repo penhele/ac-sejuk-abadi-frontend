@@ -1,14 +1,15 @@
-"use client";
-
-import { useParams } from "next/navigation";
+import BackButton from "@/components/buttons/back-button";
 import EditProductForm from "./edit-product-form";
 
-export default function EditProductPage() {
-  const params = useParams();
-  const id = params.id as string;
+interface Props {
+  id: string;
+}
 
+export default async function EditProductPage({ id }: Props) {
   return (
     <div className="space-y-between-items">
+      <BackButton />
+
       <div>
         <h1 className="text-2xl font-semibold">Edit Produk</h1>
         <span className="text-sm text-muted-foreground">

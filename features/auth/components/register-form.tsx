@@ -39,10 +39,7 @@ export default function RegisterForm({ className }: { className?: string }) {
       goeyToast.promise(mutateAsync(value), {
         loading: "Loading...",
         success: "Berhasil Register",
-        error: (err) => {
-          const error = err as AppError;
-          return error.message;
-        },
+        error: (err) => (err as AppError).message,
       });
     },
   });

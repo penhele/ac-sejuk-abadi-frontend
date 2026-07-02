@@ -4,16 +4,14 @@ import { FieldGroup } from "@/components/ui/field";
 import { ROUTES } from "@/constants/routes";
 import { useAppForm } from "@/hooks/use-app-form";
 import { cn } from "@/lib/utils";
-import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
-import { toast } from "sonner";
-import { login } from "../api/login";
-import { LoginPayload } from "../types/login-payload";
-import { loginSchema } from "../schemas/login.schema";
-import { Key, Lock, Mail } from "lucide-react";
 import { AppError } from "@/types/error";
+import { useMutation } from "@tanstack/react-query";
 import { goeyToast } from "goey-toast";
-import { error } from "console";
+import { Lock, Mail } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { login } from "../api/login";
+import { loginSchema } from "../schemas/login.schema";
+import { LoginPayload } from "../types/login-payload";
 
 interface Props {
   className?: string;
@@ -22,9 +20,11 @@ interface Props {
 export default function LoginForm({ className }: Props) {
   const router = useRouter();
 
-  const { mutateAsync } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationFn: (data: LoginPayload) => login(data),
   });
+
+  console.log("isPending: ", isPending);
 
   const form = useAppForm({
     defaultValues: {
@@ -43,10 +43,7 @@ export default function LoginForm({ className }: Props) {
 
           return "Berhasil login";
         },
-        error: (err) => {
-          const error = err as AppError;
-          return error.message;
-        },
+        error: (err) => (err as AppError).message,
       });
     },
   });
@@ -84,7 +81,11 @@ export default function LoginForm({ className }: Props) {
             )}
           />
 
-          <form.SubmitButton label="Sign in" className="w-full" />
+          <form.SubmitButton
+            label="Sign in"
+            className="w-full"
+            loading={isPending}
+          />
         </form>
       </FieldGroup>
     </form.AppForm>

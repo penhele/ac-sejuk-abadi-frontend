@@ -2,32 +2,18 @@
 
 import { ROUTES } from "@/constants/routes";
 import { addProject, projectKeys } from "@/features/project";
+import { AppError } from "@/types/error";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { goeyToast } from "goey-toast";
 import { useRouter } from "next/navigation";
-import { toast } from "sonner";
-import { Suspense } from "react";
 import ProjectForm from "./project-form";
 
 export default function CreateProjectForm() {
   const router = useRouter();
   const queryClient = useQueryClient();
 
-  const { mutateAsync } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationFn: addProject,
-    onMutate() {
-      const toastId = toast.loading("Creating...");
-      return { toastId };
-    },
-    onSuccess(_, __, context) {
-      toast.success("Berhasil menambahkan project", { id: context?.toastId });
-      router.push(ROUTES.DASHBOARD_PROJECT);
-      queryClient.invalidateQueries({
-        queryKey: projectKeys.all,
-      });
-    },
-    onError(_, __, context) {
-      toast.error("Gagal menambahkan project", { id: context?.toastId });
-    },
   });
 
   return (
@@ -41,8 +27,20 @@ export default function CreateProjectForm() {
         id_products: [],
       }}
       onSubmit={async (value) => {
-        await mutateAsync(value);
+        goeyToast.promise(mutateAsync(value), {
+          loading: "Creating...",
+          success: () => {
+            router.push(ROUTES.DASHBOARD_PROJECT);
+            queryClient.invalidateQueries({
+              queryKey: projectKeys.all,
+            });
+
+            return "Berhasil menambahkan project";
+          },
+          error: (err) => (err as AppError).message,
+        });
       }}
+      loading={isPending}
     />
   );
 }

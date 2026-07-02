@@ -13,12 +13,14 @@ import { useProducts } from "@/features/product";
 import { productColumns } from "@/features/product/components/product-columns";
 import useDebounce from "@/hooks/use-debounce";
 import useProductFilters from "@/hooks/use-product-filters";
-import { Info, Plus } from "lucide-react";
+import { Info, Plus, PlusIcon } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function ProductPage() {
   const { search, setFilters } = useProductFilters();
+  const router = useRouter();
 
   const [localSearch, setLocalSearch] = useState(search || "");
 
@@ -50,12 +52,6 @@ export default function ProductPage() {
     <div className="space-y-between-items">
       <div className="flex justify-between items-center">
         <h1 className="text-xl font-bold text-gray-800">Products</h1>
-
-        <Link href={ROUTES.CREATE_PRODUCT}>
-          <Button>
-            <Plus /> Add New Product
-          </Button>
-        </Link>
       </div>
 
       <div className="grid grid-cols-4 gap-between-card">
@@ -117,10 +113,14 @@ export default function ProductPage() {
         rowCount={totalProducts}
         isFilter
         isPagination
-        // 5. Berikan state lokal ke DataTable agar input terasa responsif saat diketik
         searchValue={localSearch}
-        // 6. Ketika diketik, langsung ubah state lokal (tanpa debounce di sini)
         onSearchChange={(value) => setLocalSearch(value)}
+        title="Data Produk"
+        action={
+          <Button onClick={() => router.push(ROUTES.CREATE_PRODUCT)}>
+            <PlusIcon /> Add New product
+          </Button>
+        }
       />
     </div>
   );

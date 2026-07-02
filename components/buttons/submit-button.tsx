@@ -5,15 +5,19 @@ import { Button } from "../ui/button";
 import { Spinner } from "../ui/spinner";
 import { cn } from "@/lib/utils";
 
+interface Props {
+  label: string;
+  className?: string;
+  isDisabled?: boolean;
+  loading?: boolean;
+}
+
 export default function SubmitButton({
   label,
   className,
   isDisabled,
-}: {
-  label: string;
-  className?: string;
-  isDisabled?: boolean;
-}) {
+  loading = false,
+}: Props) {
   const form = useFormContext();
 
   return (
@@ -23,15 +27,19 @@ export default function SubmitButton({
         canSubmit: state.canSubmit,
       })}
     >
-      {({ isSubmitting, canSubmit }) => (
-        <Button
-          type="submit"
-          disabled={!canSubmit || isSubmitting || isDisabled}
-          className={cn("min-w-24", className)}
-        >
-          {isSubmitting ? <Spinner /> : label}
-        </Button>
-      )}
+      {({ isSubmitting, canSubmit }) => {
+        const isLoading = isSubmitting || loading;
+
+        return (
+          <Button
+            type="submit"
+            disabled={!canSubmit || isLoading || isDisabled}
+            className={cn("min-w-24", className)}
+          >
+            {isLoading ? <Spinner /> : label}
+          </Button>
+        );
+      }}
     </form.Subscribe>
   );
 }
