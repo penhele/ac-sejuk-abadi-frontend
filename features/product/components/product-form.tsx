@@ -17,17 +17,21 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useProductName } from "../hooks/use-product-name";
 
+interface Props {
+  defaultValues: ProductFormValues;
+  onSubmit: (values: ProductFormValues) => void;
+  submitLabel?: string;
+  isFetching?: boolean;
+  loading?: boolean;
+}
+
 export default function ProductForm({
   defaultValues,
   onSubmit,
   submitLabel = "Submit",
   isFetching,
-}: {
-  defaultValues: ProductFormValues;
-  onSubmit: (values: ProductFormValues) => void;
-  submitLabel?: string;
-  isFetching?: boolean;
-}) {
+  loading,
+}: Props) {
   const form = useAppForm({
     defaultValues,
     validators: {
@@ -260,7 +264,7 @@ export default function ProductForm({
             className="max-w-24"
           />
 
-          <form.SubmitButton label={submitLabel} />
+          <form.SubmitButton label={submitLabel} loading={loading} />
         </div>
       </form>
     </form.AppForm>

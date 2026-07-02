@@ -46,7 +46,7 @@ export default function CategoryForm({
         </div>
 
         <SheetFooter>
-          <form.SubmitButton label="Save changes" />
+          <form.SubmitButton label="Save changes" loading={isLoading} />
           <SheetClose asChild>
             <Button variant="outline">Close</Button>
           </SheetClose>

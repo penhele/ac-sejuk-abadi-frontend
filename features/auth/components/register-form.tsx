@@ -1,18 +1,16 @@
 "use client";
 
 import { FieldGroup } from "@/components/ui/field";
-import { ROUTES } from "@/constants/routes";
 import { useAppForm } from "@/hooks/use-app-form";
 import { cn } from "@/lib/utils";
+import { AppError } from "@/types/error";
 import { useMutation } from "@tanstack/react-query";
+import { goeyToast } from "goey-toast";
+import { Lock, Mail } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { toast } from "sonner";
-import { RegisterPayload } from "../types/register-payload";
 import { register } from "../api/register";
 import { registerSchema } from "../schemas/register.schema";
-import { Lock, Mail } from "lucide-react";
-import { goeyToast } from "goey-toast";
-import { AppError } from "@/types/error";
+import { RegisterPayload } from "../types/register-payload";
 
 export default function RegisterForm({ className }: { className?: string }) {
   const router = useRouter();

@@ -3,9 +3,10 @@
 import CancelButton from "@/components/buttons/cancel-button";
 import { useAppForm } from "@/hooks/use-app-form";
 import { cn } from "@/lib/utils";
+import { AppError } from "@/types/error";
 import { useMutation } from "@tanstack/react-query";
+import { goeyToast } from "goey-toast";
 import { useState } from "react";
-import { toast } from "sonner";
 import { Button } from "../../../components/ui/button";
 import { updateCompany } from "../api/update-company";
 import { useCompany } from "../hooks/use-company";
@@ -18,15 +19,6 @@ export default function EditCompanyForm({ className }: { className?: string }) {
 
   const { mutateAsync, isPending } = useMutation({
     mutationFn: (data: UpdateCompanyPayload) => updateCompany(data),
-
-    onSuccess() {
-      toast.success("Berhasil memperbarui data");
-      setIsEditing(false);
-    },
-
-    onError(error) {
-      toast.error(error.message);
-    },
   });
 
   const form = useAppForm({
@@ -39,8 +31,15 @@ export default function EditCompanyForm({ className }: { className?: string }) {
       location_url: company?.location_url ?? "",
     },
 
-    onSubmit: async ({ value }) => {
-      await mutateAsync(value);
+    onSubmit: ({ value }) => {
+      goeyToast.promise(mutateAsync(value), {
+        loading: "Loading",
+        success: () => {
+          setIsEditing(false);
+          return "Berhasil";
+        },
+        error: (err) => (err as AppError).message,
+      });
     },
   });
 
@@ -148,7 +147,11 @@ export default function EditCompanyForm({ className }: { className?: string }) {
               onCloseEdit={() => setIsEditing(false)}
             />
 
-            <form.SubmitButton label={"Update"} className="w-full" />
+            <form.SubmitButton
+              label={"Update"}
+              className="w-full"
+              loading={isPending}
+            />
           </div>
         ) : (
           <Button

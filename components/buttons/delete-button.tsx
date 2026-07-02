@@ -3,7 +3,7 @@
 import { AppError } from "@/types/error";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { goeyToast } from "goey-toast";
-import { Delete, Trash, Trash2 } from "lucide-react";
+import { Trash, Trash2 } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -33,7 +33,7 @@ export default function DeleteButton<TId = string | number>({
   id,
   mutationFn,
   queryKey,
-  successMessage = "Berhasil menghapus data.",
+  successMessage = "Berhasil menghapus data",
   item,
 }: Props<TId>) {
   const queryClient = useQueryClient();
@@ -50,6 +50,10 @@ export default function DeleteButton<TId = string | number>({
         return successMessage;
       },
       error: (err) => (err as AppError).message,
+
+      description: {
+        success: `Berhasil menghapus ${item} dari database`,
+      },
     });
   };
 

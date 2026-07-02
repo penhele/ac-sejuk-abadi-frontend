@@ -28,7 +28,7 @@ export default function SheetButton({
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline" size={Icon && !label ? "icon-xs" : "default"}>
+        <Button variant="outline" size={Icon && !label ? "icon-xs" : "xs"}>
           {Icon && <Icon />} {label}
         </Button>
       </SheetTrigger>

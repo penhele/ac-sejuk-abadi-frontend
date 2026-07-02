@@ -1,7 +1,8 @@
 import { cn } from "@/lib/utils";
+import { AppError } from "@/types/error";
 import { QueryKey, useMutation, useQueryClient } from "@tanstack/react-query";
+import { goeyToast } from "goey-toast";
 import { X } from "lucide-react";
-import { toast } from "sonner";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -14,8 +15,6 @@ import {
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
 import { Button } from "../ui/button";
-import { deleteProductImage } from "@/features/product";
-import { productKeys } from "@/features/product";
 
 interface DeleteButtonProps {
   className?: string;
@@ -33,32 +32,26 @@ export default function DeleteImageButton({
   className,
   mutationFn,
   queryKey,
-
-  title = "Are you sure?",
-  description = "This action cannot be undone.",
-
-  successMessage = "Berhasil menghapus data",
-  errorMessage = "Gagal menghapus data",
 }: DeleteButtonProps) {
   const queryClient = useQueryClient();
 
-  const { mutate } = useMutation({
+  const { mutateAsync } = useMutation({
     mutationFn,
-    onMutate() {
-      const toastId = toast.loading("Loading...");
-      return { toastId };
-    },
-    onSuccess(_, __, context) {
-      toast.success("Berhasil menghapus gambar", { id: context.toastId });
-
-      queryClient.invalidateQueries({
-        queryKey,
-      });
-    },
-    onError(_, __, context) {
-      toast.error("Gagal menghapus error", { id: context?.toastId });
-    },
   });
+
+  const handleDelete = () => {
+    goeyToast.promise(mutateAsync(), {
+      loading: "Loading",
+      success: () => {
+        queryClient.invalidateQueries({
+          queryKey,
+        });
+
+        return "Berhasil";
+      },
+      error: (err) => (err as AppError).message,
+    });
+  };
 
   return (
     <AlertDialog>
@@ -83,9 +76,7 @@ export default function DeleteImageButton({
 
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={() => mutate()}>
-            Continue
-          </AlertDialogAction>
+          <AlertDialogAction onClick={handleDelete}>Continue</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

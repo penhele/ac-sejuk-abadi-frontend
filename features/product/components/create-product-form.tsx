@@ -1,12 +1,12 @@
 "use client";
 
 import { ROUTES } from "@/constants/routes";
+import { addProduct, productKeys } from "@/features/product";
+import { AppError } from "@/types/error";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { goeyToast } from "goey-toast";
 import { useRouter } from "next/navigation";
-import { toast } from "sonner";
 import ProductForm from "./product-form";
-import { addProduct } from "@/features/product";
-import { productKeys } from "@/features/product";
 
 export default function CreateProductForm() {
   const queryClient = useQueryClient();
@@ -14,17 +14,6 @@ export default function CreateProductForm() {
 
   const { mutateAsync } = useMutation({
     mutationFn: addProduct,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: productKeys.all,
-      });
-
-      toast.success("Produk berhasil ditambahkan.");
-      router.push(ROUTES.PRODUCTS);
-    },
-    onError: () => {
-      toast.error("Gagal menambahkan produk.");
-    },
   });
 
   return (
@@ -42,8 +31,19 @@ export default function CreateProductForm() {
         model_code: undefined,
         series_name: undefined,
       }}
-      onSubmit={async (value) => {
-        await mutateAsync(value);
+      onSubmit={(value) => {
+        goeyToast.promise(mutateAsync(value), {
+          loading: "Loading...",
+          success: () => {
+            queryClient.invalidateQueries({
+              queryKey: productKeys.all,
+            });
+            router.push(ROUTES.PRODUCTS);
+
+            return "Berhasil";
+          },
+          error: (err) => (err as AppError).message,
+        });
       }}
     />
   );

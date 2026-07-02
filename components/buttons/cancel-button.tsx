@@ -1,10 +1,9 @@
 "use client";
 
-import { toast } from "sonner";
-import { Button } from "../ui/button";
-import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { goeyToast } from "goey-toast";
 import { useRouter } from "next/navigation";
+import { Button } from "../ui/button";
 
 interface Props {
   onCancel: () => void;
@@ -32,7 +31,7 @@ export default function CancelButton({
         onCloseEdit();
         router.back();
 
-        toast.info("Batal diperbarui", { position: "top-center" });
+        goeyToast.info("Batal diperbarui");
       }}
       disabled={isDisabled}
       className={cn("w-full", className)}
