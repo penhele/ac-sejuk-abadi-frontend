@@ -1,13 +1,21 @@
 "use client";
 import { useParams } from "next/navigation";
 import UpdateArticleForm from "./update-article-form";
+import BackButton from "@/components/buttons/back-button";
 
-export default function EditArticlePage() {
-  const params = useParams();
-  const id = params.id as string;
+interface Props {
+  id: string;
+}
 
+export default function EditArticlePage({ id }: Props) {
   return (
-    <div className="">
+    <div className="space-y-between-items">
+      <BackButton />
+
+      <div>
+        <h1 className="text-lg font-semibold">Perbarui Artikel</h1>
+      </div>
+
       <UpdateArticleForm id={id} />
     </div>
   );

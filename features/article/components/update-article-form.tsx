@@ -1,41 +1,29 @@
 "use client";
 
+import { ROUTES } from "@/constants/routes";
+import { AppError } from "@/types/error";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { toast } from "sonner";
+import { goeyToast } from "goey-toast";
+import { useRouter } from "next/navigation";
 import { updateArticle } from "../api/update-article";
 import { useArticle } from "../hooks/use-article";
+import { articleKeys } from "../queries/article-keys";
 import { UpdateArticlePayload } from "../types/update-article-payload";
 import ArticleForm from "./article-form";
-import { articleKeys } from "../queries/article-keys";
-import { useRouter } from "next/navigation";
-import { ROUTES } from "@/constants/routes";
 
-type Props = {
+interface Props {
   id: string;
-};
+}
 
 export default function UpdateArticleForm({ id }: Props) {
   const queryClient = useQueryClient();
   const router = useRouter();
 
-  const { mutateAsync } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationFn: (data: UpdateArticlePayload) => updateArticle(id, data),
-    onMutate(variables, context) {
-      const toastId = toast.loading("Loading...");
-      return { toastId };
-    },
-    onSuccess(data, variables, onMutateResult, context) {
-      toast.success("Berhasil", { id: onMutateResult.toastId });
-
-      queryClient.invalidateQueries({ queryKey: articleKeys.all });
-      router.push(ROUTES.DASHBOARD_ARTICLE);
-    },
-    onError(error, variables, onMutateResult, context) {
-      toast.error("Gagal", { id: onMutateResult?.toastId });
-    },
   });
 
-  const { data: article } = useArticle(id);
+  const { data: article, isFetching } = useArticle(id);
 
   return (
     <ArticleForm
@@ -45,8 +33,18 @@ export default function UpdateArticleForm({ id }: Props) {
         category: article?.category ?? "",
       }}
       onSubmit={async (value) => {
-        await mutateAsync(value);
+        goeyToast.promise(mutateAsync(value), {
+          loading: "Updating...",
+          success: () => {
+            queryClient.invalidateQueries({ queryKey: articleKeys.all });
+            router.push(ROUTES.DASHBOARD_ARTICLE);
+
+            return "Berhasil";
+          },
+          error: (err) => (err as AppError).message,
+        });
       }}
+      loading={isPending}
     />
   );
 }
