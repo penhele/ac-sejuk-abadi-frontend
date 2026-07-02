@@ -62,12 +62,6 @@ export default function ChatbotWidget() {
     },
   ]);
 
-  // Varian animasi untuk titik-titik melompat
-  const dotVariants = {
-    initial: { y: 0 },
-    animate: { y: [-5, 5, -5] },
-  };
-
   // Helper untuk mendapatkan waktu saat ini
   const getCurrentTime = () =>
     new Date().toLocaleTimeString("id-ID", {
