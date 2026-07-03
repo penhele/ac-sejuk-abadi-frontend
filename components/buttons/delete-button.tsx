@@ -9,7 +9,6 @@ import {
   AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
-  AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogMedia,
@@ -52,7 +51,11 @@ export default function DeleteButton<TId = string | number>({
       error: (err) => (err as AppError).message,
 
       description: {
-        success: `Berhasil menghapus ${item} dari database`,
+        success: () => (
+          <span>
+            Berhasil menghapus <strong>{item}</strong> dari database
+          </span>
+        ),
       },
     });
   };
@@ -74,18 +77,23 @@ export default function DeleteButton<TId = string | number>({
           </AlertDialogMedia>
 
           <AlertDialogTitle>Konfirmasi Hapus</AlertDialogTitle>
-          <AlertDialogDescription className="flex flex-col space-y-2">
-            <span>
+          <div className="flex flex-col space-y-2 text-sm">
+            <span className="text-muted-foreground">
               Apakah Anda yakin ingin menghapus data ini secara permanen?
             </span>
 
-            <div className="p-4 bg-muted/50 flex flex-col rounded-lg">
-              <span className="text-sm text-muted-foreground">
-                Data yang akan dihapus:
-              </span>
-              <span className="text-base font-bold">{item}</span>
-            </div>
-          </AlertDialogDescription>
+            <span className="text-muted-foreground">
+              Data yang akan dihapus:
+            </span>
+
+            <span className="text-base font-semibold p-4 bg-muted/40 rounded-lg flex flex-row gap-2 items-center">
+              <Trash2
+                size={32}
+                className="p-1 bg-red-100 text-red-600 rounded-lg"
+              />
+              {item}
+            </span>
+          </div>
         </AlertDialogHeader>
 
         <AlertDialogFooter>

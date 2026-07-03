@@ -39,7 +39,9 @@ export default function ProductDetailContent({ id }: { id: string }) {
       <div className="">
         <HeaderSection title="Deskripsi" />
 
-        <MarkdownRenderer text={product.description || 'Tidak ada deskripsi.'} />
+        <MarkdownRenderer
+          text={product.description || "Tidak ada deskripsi."}
+        />
       </div>
 
       <div className="">
