@@ -1,3 +1,4 @@
+import VerifiedBadge from "@/components/badges/verified-badge";
 import DeleteButton from "@/components/buttons/delete-button";
 import SheetButton from "@/components/buttons/sheet-button";
 import { RoleSelect } from "@/components/fields/role-select";
@@ -7,12 +8,10 @@ import { User } from "@/features/user/types/user";
 import { ColumnDef } from "@tanstack/react-table";
 import { Mail, MapPin, Pencil } from "lucide-react";
 import EditUserForm from "./edit-user-form";
-import VerifiedBadge from "@/components/badges/verified-badge";
-import { Separator } from "@/components/ui/separator";
 
 export const userColumns: ColumnDef<User>[] = [
   {
-    header: "ID Brand",
+    header: "ID User",
     cell: ({ row }) => {
       const user = row.original;
 
