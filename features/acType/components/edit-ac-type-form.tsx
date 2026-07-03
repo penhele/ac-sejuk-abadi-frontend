@@ -1,5 +1,6 @@
+import { AppError } from "@/types/error";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { toast } from "sonner";
+import { goeyToast } from "goey-toast";
 import { updateAcType } from "../api/update-ac-type";
 import useAcType from "../hooks/use-ac-type";
 import { acTypeKeys } from "../queries/ac-type-keys";
@@ -11,18 +12,8 @@ export default function EditAcTypeForm({ id }: { id: string | number }) {
 
   const { data: acType, isLoading } = useAcType(id);
 
-  const { mutateAsync } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationFn: (data: UpdateAcTypePayload) => updateAcType(id, data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: acTypeKeys.all,
-      });
-
-      toast.success("AC Type berhasil ditambahkan.");
-    },
-    onError: (error) => {
-      toast.error("Gagal menambahkan ac type.");
-    },
   });
 
   return (
@@ -30,12 +21,20 @@ export default function EditAcTypeForm({ id }: { id: string | number }) {
       defaultValues={{
         name: acType?.name ?? "",
       }}
-      onSubmit={async (value) => {
-        await mutateAsync({
-          name: value.name,
+      onSubmit={(value) => {
+        goeyToast.promise(mutateAsync(value), {
+          loading: "Loading...",
+          success: () => {
+            queryClient.invalidateQueries({
+              queryKey: acTypeKeys.all,
+            });
+
+            return "Berhasil";
+          },
+          error: (err) => (err as AppError).message,
         });
       }}
-      isLoading={isLoading}
+      isLoading={isLoading || isPending}
     />
   );
 }

@@ -30,7 +30,7 @@ export default function ArticleDetailContent({ id }: Props) {
             className="col-span-2"
             imageUrl={
               article.images.length > 0
-                ? article.images[0].image_url
+                ? article.images[article.images.length - 1].image_url
                 : undefined
             }
           />

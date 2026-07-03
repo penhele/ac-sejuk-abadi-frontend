@@ -1,54 +1,47 @@
 "use client";
 
-import { useAppForm } from "@/hooks/use-app-form";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { UploadArticleImagePayload } from "../types/upload-article-image-payload";
-import { uploadArticleImage } from "../api/upload-article-image";
-import { toast } from "sonner";
-import { ROUTES } from "@/constants/routes";
-import { useRouter } from "next/navigation";
-import { articleKeys } from "../queries/article-keys";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { title } from "process";
-import ArticleContent from "./article-content";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { ROUTES } from "@/constants/routes";
+import { useAppForm } from "@/hooks/use-app-form";
+import { AppError } from "@/types/error";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { goeyToast } from "goey-toast";
+import { useRouter } from "next/navigation";
+import { uploadArticleImage } from "../api/upload-article-image";
 import { useArticle } from "../hooks/use-article";
+import { articleKeys } from "../queries/article-keys";
+import { UploadArticleImagePayload } from "../types/upload-article-image-payload";
+import ArticleContent from "./article-content";
 
-export default function UploadArticleImagesForm({
-  id,
-}: {
+interface Props {
   id: string | number;
-}) {
+}
+
+export default function UploadArticleImagesForm({ id }: Props) {
   const router = useRouter();
   const queryClient = useQueryClient();
 
   const { mutateAsync } = useMutation({
     mutationFn: (data: UploadArticleImagePayload) =>
       uploadArticleImage(id, data),
-
-    onMutate(variables, context) {
-      const toastId = toast.loading("Uploading...");
-      return { toastId };
-    },
-    onSuccess(data, variables, onMutateResult, context) {
-      toast.dismiss(onMutateResult?.toastId);
-      toast.success("Berhasil");
-
-      queryClient.invalidateQueries({ queryKey: articleKeys.all });
-      router.push(ROUTES.DASHBOARD_ARTICLE);
-    },
-    onError(error, variables, onMutateResult, context) {
-      toast.dismiss(onMutateResult?.toastId);
-      toast.error("Gagal");
-    },
   });
 
   const form = useAppForm({
     defaultValues: {
       files: [] as File[],
     },
-    onSubmit: async ({ value }) => {
-      await mutateAsync(value);
+    onSubmit: ({ value }) => {
+      goeyToast.promise(mutateAsync(value), {
+        loading: "Uploading...",
+        success: () => {
+          queryClient.invalidateQueries({ queryKey: articleKeys.all });
+          router.push(ROUTES.DASHBOARD_ARTICLE);
+
+          return "Berhasil";
+        },
+        error: (err) => (err as AppError).message,
+      });
     },
   });
 

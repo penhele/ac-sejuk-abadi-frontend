@@ -1,15 +1,12 @@
-import { ColumnDef } from "@tanstack/react-table";
-import { Article } from "../types/article";
-import { formatDate } from "@/lib/format/date";
+import ButtonLink from "@/components/buttons/button-link";
 import DeleteButton from "@/components/buttons/delete-button";
+import EditButtonHref from "@/components/buttons/edit-button-href";
+import { ROUTES } from "@/constants/routes";
+import { formatDate } from "@/lib/format/date";
+import { ColumnDef } from "@tanstack/react-table";
 import { deleteArticle } from "../api/delete-article";
 import { articleKeys } from "../queries/article-keys";
-import EditButton from "@/components/buttons/edit-button";
-import { ROUTES } from "@/constants/routes";
-import { Button } from "@/components/ui/button";
-import { Pencil } from "lucide-react";
-import EditButtonHref from "@/components/buttons/edit-button-href";
-import ButtonLink from "@/components/buttons/button-link";
+import { Article } from "../types/article";
 
 export const articleColumns: ColumnDef<Article>[] = [
   {
@@ -53,6 +50,7 @@ export const articleColumns: ColumnDef<Article>[] = [
             id={row.original.id}
             mutationFn={deleteArticle}
             queryKey={articleKeys.all}
+            item={row.original.name}
           />
         </div>
       );

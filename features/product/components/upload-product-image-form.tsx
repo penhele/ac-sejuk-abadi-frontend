@@ -1,36 +1,20 @@
 "use client";
 
 import CancelButton from "@/components/buttons/cancel-button";
-import { uploadProductImages } from "@/features/product";
-import { productKeys } from "@/features/product";
-import { useAppForm } from "@/hooks/use-app-form";
+import { productKeys, uploadProductImages } from "@/features/product";
 import { uploadProductImageSchema } from "@/features/product/schemas/product.schema";
+import { UploadImagePayload } from "@/features/product/types/upload-image-payload";
+import { useAppForm } from "@/hooks/use-app-form";
+import { AppError } from "@/types/error";
 import { revalidateLogic } from "@tanstack/react-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { toast } from "sonner";
-import { UploadImagePayload } from "@/features/product/types/upload-image-payload";
+import { goeyToast } from "goey-toast";
 
 export default function UploadProductImageForm({ id }: { id: string }) {
   const queryClient = useQueryClient();
 
   const { mutateAsync } = useMutation({
     mutationFn: (data: UploadImagePayload) => uploadProductImages(id, data),
-    onMutate(variables, context) {
-      const toastId = toast.loading("Loading...");
-      return { toastId };
-    },
-    onSuccess(data, variables, onMutateResult, context) {
-      toast.success("Berhasil menambahkan gambar", {
-        id: onMutateResult.toastId,
-      });
-      form.reset();
-      queryClient.invalidateQueries({
-        queryKey: productKeys.all,
-      });
-    },
-    onError(error, variables, onMutateResult, context) {
-      toast.error("Gagal menambahkan gambar", { id: onMutateResult?.toastId });
-    },
   });
 
   const form = useAppForm({
@@ -44,8 +28,18 @@ export default function UploadProductImageForm({ id }: { id: string }) {
       mode: "submit",
       modeAfterSubmission: "blur",
     }),
-    onSubmit: async ({ value }) => {
-      await mutateAsync(value);
+    onSubmit: ({ value }) => {
+      goeyToast.promise(mutateAsync(value), {
+        loading: "Loading...",
+        success: () => {
+          queryClient.invalidateQueries({
+            queryKey: productKeys.all,
+          });
+
+          return "Berhasil";
+        },
+        error: (err) => (err as AppError).message,
+      });
     },
   });
 

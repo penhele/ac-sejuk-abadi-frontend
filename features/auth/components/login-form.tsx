@@ -4,30 +4,27 @@ import { FieldGroup } from "@/components/ui/field";
 import { ROUTES } from "@/constants/routes";
 import { useAppForm } from "@/hooks/use-app-form";
 import { cn } from "@/lib/utils";
+import { AppError } from "@/types/error";
 import { useMutation } from "@tanstack/react-query";
+import { goeyToast } from "goey-toast";
+import { Lock, Mail } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { toast } from "sonner";
 import { login } from "../api/login";
-import { LoginPayload } from "../types/login-payload";
 import { loginSchema } from "../schemas/login.schema";
-import { Key, Lock, Mail } from "lucide-react";
+import { LoginPayload } from "../types/login-payload";
 
-export default function LoginForm({ className }: { className?: string }) {
+interface Props {
+  className?: string;
+}
+
+export default function LoginForm({ className }: Props) {
   const router = useRouter();
 
-  const { mutateAsync } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationFn: (data: LoginPayload) => login(data),
-    onSuccess(data, variables, onMutateResult, context) {
-      toast.success("Berhasil login");
-
-      if (data.user.role === "user") router.push(ROUTES.DASHBOARD);
-      else if (data.user.role === "admin") router.push(ROUTES.DASHBOARD);
-    },
-    onError() {
-      toast.error("Gagal login");
-      form.reset();
-    },
   });
+
+  console.log("isPending: ", isPending);
 
   const form = useAppForm({
     defaultValues: {
@@ -38,7 +35,16 @@ export default function LoginForm({ className }: { className?: string }) {
       onSubmit: loginSchema,
     },
     onSubmit: async ({ value }) => {
-      await mutateAsync(value);
+      goeyToast.promise(mutateAsync(value), {
+        loading: "Logging in...",
+        success: (data) => {
+          if (data.user.role === "user") router.push(ROUTES.HOME);
+          else if (data.user.role === "admin") router.push(ROUTES.DASHBOARD);
+
+          return "Berhasil login";
+        },
+        error: (err) => (err as AppError).message,
+      });
     },
   });
 
@@ -55,7 +61,7 @@ export default function LoginForm({ className }: { className?: string }) {
           <form.AppField
             name="email"
             children={(field) => (
-              <field.TextField
+              <field.InputField
                 label="Email"
                 placeholder="john@doe.com"
                 IconAddon={Mail}
@@ -66,7 +72,7 @@ export default function LoginForm({ className }: { className?: string }) {
           <form.AppField
             name="password"
             children={(field) => (
-              <field.TextField
+              <field.InputField
                 type="password"
                 label="Password"
                 placeholder="••••••••"
@@ -75,7 +81,11 @@ export default function LoginForm({ className }: { className?: string }) {
             )}
           />
 
-          <form.SubmitButton label="Sign in" className="w-full" />
+          <form.SubmitButton
+            label="Sign in"
+            className="w-full"
+            loading={isPending}
+          />
         </form>
       </FieldGroup>
     </form.AppForm>

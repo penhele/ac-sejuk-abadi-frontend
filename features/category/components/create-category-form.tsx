@@ -1,24 +1,15 @@
+import { AppError } from "@/types/error";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import CategoryForm from "./category-form";
+import { goeyToast } from "goey-toast";
 import { addCategory } from "../api/add-category";
 import { categoryKeys } from "../queries/category-keys";
-import { toast } from "sonner";
+import CategoryForm from "./category-form";
 
 export default function CreateCategoryForm() {
   const queryClient = useQueryClient();
 
   const { mutateAsync } = useMutation({
     mutationFn: addCategory,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: categoryKeys.all,
-      });
-
-      toast.success("Category berhasil ditambahkan.");
-    },
-    onError: () => {
-      toast.error("Gagal menambahkan category.");
-    },
   });
 
   return (
@@ -27,8 +18,16 @@ export default function CreateCategoryForm() {
         name: "",
       }}
       onSubmit={async (value) => {
-        await mutateAsync({
-          name: value.name,
+        goeyToast.promise(mutateAsync(value), {
+          loading: "Loading...",
+          success: () => {
+            queryClient.invalidateQueries({
+              queryKey: categoryKeys.all,
+            });
+
+            return "Kategori berhasil ditambahkan";
+          },
+          error: (err) => (err as AppError).message,
         });
       }}
     />

@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 
 export default function ProductFallback({ length }: { length: number }) {
   return (
-    <div className={cn("grid grid-cols-5 gap-between-card")}>
+    <div className={cn("grid grid-cols-4 gap-between-card")}>
       {Array.from({ length }).map((_, index) => (
         <div key={index} className="border-gray-200 border rounded-lg ">
           <Skeleton className="w-full aspect-square" />

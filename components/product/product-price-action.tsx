@@ -42,7 +42,7 @@ export default function ProductPriceAction({ product }: { product: Product }) {
 
         <div className="flex flex-row gap-2 items-end">
           <div className="flex flex-row gap-1">
-            <span>
+            <span className="font-semibold">
               {formatRupiah(discountPrice != 0 ? discountPrice : originalPrice)}
             </span>
             {discountPrice != 0 && (

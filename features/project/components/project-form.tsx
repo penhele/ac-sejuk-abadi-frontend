@@ -13,17 +13,21 @@ import { useState } from "react";
 import { Button } from "../../../components/ui/button";
 import { MapPin } from "lucide-react";
 
+interface Props {
+  defaultValues: ProjectFormValues;
+  onSubmit: (values: ProjectFormValues) => void;
+  submitLabel?: string;
+  isFetching?: boolean;
+  loading?: boolean;
+}
+
 export default function ProjectForm({
   defaultValues,
   onSubmit,
   submitLabel = "Submit",
   isFetching,
-}: {
-  defaultValues: ProjectFormValues;
-  onSubmit: (values: ProjectFormValues) => void;
-  submitLabel?: string;
-  isFetching?: boolean;
-}) {
+  loading,
+}: Props) {
   const [productSearch, setProductSearch] = useState("");
 
   const form = useAppForm({
@@ -55,12 +59,12 @@ export default function ProjectForm({
           e.preventDefault();
           await form.handleSubmit();
         }}
-        className="space-y-between-items-lg"
+        className="space-y-between-field"
       >
         <div className="grid grid-cols-2 gap-between-items-lg">
           <form.AppField name="name">
             {(field) => (
-              <field.TextField
+              <field.InputField
                 isDisabled={isFetching}
                 label="Name"
                 placeholder="Office Renovation Central Jakarta"
@@ -70,7 +74,7 @@ export default function ProjectForm({
 
           <form.AppField name="location">
             {(field) => (
-              <field.TextField
+              <field.InputField
                 isDisabled={isFetching}
                 label="Location"
                 placeholder="Semarang, Indonesia"
@@ -106,11 +110,12 @@ export default function ProjectForm({
 
           <form.AppField name="description">
             {(field) => (
-              <field.TextareaField
+              <field.InputField
                 isDisabled={isFetching}
                 className="col-span-2"
                 label="Description"
                 placeholder="Describe the project detail, scope of work, or installation notes..."
+                isTextarea
               />
             )}
           </form.AppField>
@@ -134,7 +139,8 @@ export default function ProjectForm({
               Cancel
             </Button>
           </Link>
-          <form.SubmitButton label={submitLabel} isDisabled={isFetching} />
+
+          <form.SubmitButton label={submitLabel} loading={loading} />
         </div>
       </form>
     </form.AppForm>

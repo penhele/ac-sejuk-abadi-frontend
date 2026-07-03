@@ -1,30 +1,22 @@
 "use client";
 
 import { FieldGroup } from "@/components/ui/field";
-import { ROUTES } from "@/constants/routes";
 import { useAppForm } from "@/hooks/use-app-form";
 import { cn } from "@/lib/utils";
+import { AppError } from "@/types/error";
 import { useMutation } from "@tanstack/react-query";
+import { goeyToast } from "goey-toast";
+import { Lock, Mail } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { toast } from "sonner";
-import { RegisterPayload } from "../types/register-payload";
 import { register } from "../api/register";
 import { registerSchema } from "../schemas/register.schema";
-import { Lock, Mail } from "lucide-react";
+import { RegisterPayload } from "../types/register-payload";
 
 export default function RegisterForm({ className }: { className?: string }) {
   const router = useRouter();
 
   const { mutateAsync } = useMutation({
     mutationFn: (data: RegisterPayload) => register(data),
-    onSuccess() {
-      toast.success("Berhasil register");
-      router.push(ROUTES.VERIFY_EMAIL);
-    },
-    onError() {
-      toast.error("Gagal register");
-      form.reset();
-    },
   });
 
   const form = useAppForm({
@@ -42,7 +34,11 @@ export default function RegisterForm({ className }: { className?: string }) {
       onSubmit: registerSchema,
     },
     onSubmit: async ({ value }) => {
-      await mutateAsync(value);
+      goeyToast.promise(mutateAsync(value), {
+        loading: "Loading...",
+        success: "Berhasil Register",
+        error: (err) => (err as AppError).message,
+      });
     },
   });
 
@@ -62,7 +58,7 @@ export default function RegisterForm({ className }: { className?: string }) {
           <form.AppField
             name="first_name"
             children={(field) => (
-              <field.TextField
+              <field.InputField
                 label="First Name"
                 placeholder="John"
                 className="col-span-2"
@@ -72,7 +68,7 @@ export default function RegisterForm({ className }: { className?: string }) {
           <form.AppField
             name="last_name"
             children={(field) => (
-              <field.TextField
+              <field.InputField
                 label="Last Name"
                 placeholder="Doe"
                 className="col-span-2"
@@ -82,7 +78,7 @@ export default function RegisterForm({ className }: { className?: string }) {
           <form.AppField
             name="address"
             children={(field) => (
-              <field.TextareaField
+              <field.InputField
                 label="Address"
                 placeholder="Ruko Srengseng Permai Village Jl. Srengseng Sawah No.2"
                 className="col-span-4"
@@ -93,19 +89,21 @@ export default function RegisterForm({ className }: { className?: string }) {
           <form.AppField
             name="rt"
             children={(field) => (
-              <field.TextField label="RT" placeholder="12" />
+              <field.InputField label="RT" placeholder="12" />
             )}
           />
 
           <form.AppField
             name="rw"
-            children={(field) => <field.TextField label="RW" placeholder="7" />}
+            children={(field) => (
+              <field.InputField label="RW" placeholder="7" />
+            )}
           />
 
           <form.AppField
             name="zip_code"
             children={(field) => (
-              <field.TextField
+              <field.InputField
                 label="Zip Code"
                 placeholder="12640"
                 className="col-span-2"
@@ -116,7 +114,7 @@ export default function RegisterForm({ className }: { className?: string }) {
           <form.AppField
             name="email"
             children={(field) => (
-              <field.TextField
+              <field.InputField
                 label="Email"
                 placeholder="john@doe.com"
                 className="col-span-4"
@@ -128,7 +126,7 @@ export default function RegisterForm({ className }: { className?: string }) {
           <form.AppField
             name="password"
             children={(field) => (
-              <field.TextField
+              <field.InputField
                 type="password"
                 label="Password"
                 placeholder="********"

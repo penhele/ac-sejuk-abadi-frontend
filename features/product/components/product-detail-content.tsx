@@ -9,6 +9,9 @@ import CarouselProduct from "./carousel-product";
 import ErrorFallback from "../../../components/fallback/error-fallback";
 import { HeaderSection } from "../../../components/util/header";
 import ProductFallback from "@/features/product/components/product-fallback";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import MarkdownRenderer from "@/components/product/markdown-renderer";
 
 export default function ProductDetailContent({ id }: { id: string }) {
   const { data: product, isLoading } = useProduct(id);
@@ -26,12 +29,21 @@ export default function ProductDetailContent({ id }: { id: string }) {
       <div className="grid grid-cols-2 gap-between-items-lg">
         <ProductImages product={product} className="col-span-2 md:col-span-1" />
 
-        <div className="flex flex-col gap-4 col-span-2 md:col-span-1">
+        <div className="flex flex-col gap-8 col-span-2 md:col-span-1">
           <ProductInfo product={product} />
 
           <ProductPriceAction product={product} />
         </div>
       </div>
+
+      <div className="">
+        <HeaderSection title="Deskripsi" />
+
+        <MarkdownRenderer
+          text={product.description || "Tidak ada deskripsi."}
+        />
+      </div>
+
       <div className="">
         <HeaderSection
           title="Produk Serupa"

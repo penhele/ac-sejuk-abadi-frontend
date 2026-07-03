@@ -1,11 +1,10 @@
+import MarkdownRenderer from "@/components/markdown-renderer";
 import { Separator } from "@/components/ui/separator";
 import { formatDate } from "@/lib/format/date";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import Markdown from "react-markdown";
-import remarkGfm from "remark-gfm";
 
-type Props = {
+interface Props {
   title: string;
   category: string;
   content: string;
@@ -13,7 +12,7 @@ type Props = {
   className?: string;
   imageUrl?: string;
   previewUrl?: File;
-};
+}
 
 export default function ArticleContent({
   title,
@@ -57,13 +56,13 @@ export default function ArticleContent({
       {previewUrl && (
         <img
           src={URL.createObjectURL(previewUrl)}
-          className="w-full rounded-lg object-cover aspect-videop"
+          className="w-full rounded-lg object-cover aspect-video"
         />
       )}
 
-      <div className="whitespace-pre-wrap leading-6">
-        <Markdown>{content}</Markdown>
-      </div>
+      <MarkdownRenderer className="whitespace-pre-wrap">
+        {content || "--"}
+      </MarkdownRenderer>
     </div>
   );
 }

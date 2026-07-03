@@ -17,6 +17,7 @@ import { useProjects } from "../hooks/use-projects";
 import DeleteImageButton from "@/components/buttons/delete-image-button";
 import { deleteProjectImage } from "../api/delete-project-image";
 import { projectKeys } from "../queries/project-keys";
+import DeleteButton from "@/components/buttons/delete-button";
 
 export default function GalleryProjectPage() {
   const { data: projects = [] } = useProjects();

@@ -3,9 +3,10 @@
 import CancelButton from "@/components/buttons/cancel-button";
 import { useAppForm } from "@/hooks/use-app-form";
 import { cn } from "@/lib/utils";
+import { AppError } from "@/types/error";
 import { useMutation } from "@tanstack/react-query";
+import { goeyToast } from "goey-toast";
 import { useState } from "react";
-import { toast } from "sonner";
 import { Button } from "../../../components/ui/button";
 import { updateCompany } from "../api/update-company";
 import { useCompany } from "../hooks/use-company";
@@ -18,15 +19,6 @@ export default function EditCompanyForm({ className }: { className?: string }) {
 
   const { mutateAsync, isPending } = useMutation({
     mutationFn: (data: UpdateCompanyPayload) => updateCompany(data),
-
-    onSuccess() {
-      toast.success("Berhasil memperbarui data");
-      setIsEditing(false);
-    },
-
-    onError(error) {
-      toast.error(error.message);
-    },
   });
 
   const form = useAppForm({
@@ -39,8 +31,15 @@ export default function EditCompanyForm({ className }: { className?: string }) {
       location_url: company?.location_url ?? "",
     },
 
-    onSubmit: async ({ value }) => {
-      await mutateAsync(value);
+    onSubmit: ({ value }) => {
+      goeyToast.promise(mutateAsync(value), {
+        loading: "Loading",
+        success: () => {
+          setIsEditing(false);
+          return "Berhasil";
+        },
+        error: (err) => (err as AppError).message,
+      });
     },
   });
 
@@ -57,7 +56,7 @@ export default function EditCompanyForm({ className }: { className?: string }) {
           name="name"
           children={(field) => {
             return (
-              <field.TextField
+              <field.InputField
                 label="Company"
                 isDisabled={isPending}
                 readOnly={!isEditing}
@@ -70,10 +69,11 @@ export default function EditCompanyForm({ className }: { className?: string }) {
           name="description"
           children={(field) => {
             return (
-              <field.TextareaField
+              <field.InputField
                 label="Description"
                 isDisabled={isPending}
                 readOnly={!isEditing}
+                isTextarea
               />
             );
           }}
@@ -85,7 +85,7 @@ export default function EditCompanyForm({ className }: { className?: string }) {
               name="email"
               children={(field) => {
                 return (
-                  <field.TextField
+                  <field.InputField
                     label="Email"
                     type="email"
                     isDisabled={isPending}
@@ -101,7 +101,7 @@ export default function EditCompanyForm({ className }: { className?: string }) {
               name="phone"
               children={(field) => {
                 return (
-                  <field.TextField
+                  <field.InputField
                     label="Phone"
                     type="number"
                     placeholder="62818355788"
@@ -118,10 +118,11 @@ export default function EditCompanyForm({ className }: { className?: string }) {
           name="location"
           children={(field) => {
             return (
-              <field.TextField
+              <field.InputField
                 label="Location"
                 isDisabled={isPending}
                 readOnly={!isEditing}
+                isTextarea
               />
             );
           }}
@@ -131,7 +132,7 @@ export default function EditCompanyForm({ className }: { className?: string }) {
           name="location_url"
           children={(field) => {
             return (
-              <field.TextField
+              <field.InputField
                 label="Location URL"
                 isDisabled={isPending}
                 readOnly={!isEditing}
@@ -148,7 +149,11 @@ export default function EditCompanyForm({ className }: { className?: string }) {
               onCloseEdit={() => setIsEditing(false)}
             />
 
-            <form.SubmitButton label={"Update"} className="w-full" />
+            <form.SubmitButton
+              label={"Update"}
+              className="w-full"
+              loading={isPending}
+            />
           </div>
         ) : (
           <Button

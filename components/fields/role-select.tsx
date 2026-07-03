@@ -1,4 +1,10 @@
+import { updateUser } from "@/features/user/api/update-user";
+import { userKeys } from "@/features/user/queries/user-keys";
+import { UpdateUserPayload } from "@/features/user/types/update-user-payload";
+import { useAppForm } from "@/hooks/use-app-form";
+import { AppError } from "@/types/error";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { goeyToast } from "goey-toast";
 import {
   Select,
   SelectContent,
@@ -6,11 +12,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { updateUser } from "@/features/user/api/update-user";
-import { UpdateUserPayload } from "@/features/user/types/update-user-payload";
-import { toast } from "sonner";
-import { userKeys } from "@/features/user/queries/user-keys";
-import { useAppForm } from "@/hooks/use-app-form";
 
 type Props = {
   userId: string;
@@ -20,26 +21,26 @@ type Props = {
 export function RoleSelect({ userId, role }: Props) {
   const queryClient = useQueryClient();
 
-  const { mutate } = useMutation({
+  const { mutateAsync } = useMutation({
     mutationFn: (data: UpdateUserPayload) => updateUser(userId, data),
-    onSuccess: () => {
-      toast.success("Role berhasil diubah");
-
-      queryClient.invalidateQueries({
-        queryKey: userKeys.all,
-      });
-    },
-    onError: () => {
-      toast.error("Gagal mengubah role");
-    },
   });
 
   const form = useAppForm({
     defaultValues: {
       role,
     },
-    onSubmit: async ({ value }) => {
-      mutate(value);
+    onSubmit: ({ value }) => {
+      goeyToast.promise(mutateAsync(value), {
+        loading: "Loading...",
+        success: () => {
+          queryClient.invalidateQueries({
+            queryKey: userKeys.all,
+          });
+
+          return "Role berhasil diubah";
+        },
+        error: (err) => (err as AppError).message,
+      });
     },
   });
 

@@ -28,6 +28,7 @@ import {
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
+  PlusIcon,
   Search,
 } from "lucide-react";
 import { useState } from "react";
@@ -120,30 +121,34 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className={cn(className)}>
-      {isFilter && (
-        <div className="flex items-center py-4">
-          <InputGroup className="max-w-xs">
-            <InputGroupAddon>
-              <Search />
-            </InputGroupAddon>
-
-            <InputGroupInput
-              placeholder="Filter name..."
-              value={searchValue}
-              onChange={(e) => onSearchChange?.(e.target.value)}
-              disabled={isFetching}
-            />
-          </InputGroup>
-        </div>
-      )}
-
       <Card>
-        {(title || description || action) && (
+        {(title || description || action || isFilter) && (
           <CardHeader>
             <CardTitle>{title}</CardTitle>
             <CardDescription>{description}</CardDescription>
 
-            {action && <CardAction>{action}</CardAction>}
+            {(action || isFilter) && (
+              <CardAction className="flex flex-row gap-2">
+                {isFilter && (
+                  <div className="flex items-center">
+                    <InputGroup className="max-w-xs">
+                      <InputGroupAddon>
+                        <Search />
+                      </InputGroupAddon>
+
+                      <InputGroupInput
+                        placeholder="Filter name..."
+                        value={searchValue}
+                        onChange={(e) => onSearchChange?.(e.target.value)}
+                        disabled={isFetching}
+                      />
+                    </InputGroup>
+                  </div>
+                )}
+
+                {action}
+              </CardAction>
+            )}
           </CardHeader>
         )}
         <CardContent className="overflow-x-auto max-w-full space-y-4">
@@ -288,38 +293,6 @@ export function DataTable<TData, TValue>({
                 </Button>
               </div>
             </div>
-
-            // <div className="flex flex-row justify-between items-center">
-            //   <div className="text-sm text-muted-foreground">
-            //     {table.getPageCount() > 0 ? (
-            //       <>
-            //         {table.getState().pagination.pageIndex + 1} dari{" "}
-            //         {table.getPageCount()} halaman
-            //       </>
-            //     ) : (
-            //       "0 halaman"
-            //     )}
-            //   </div>
-
-            //   <div className="flex items-center justify-end space-x-2 py-4">
-            //     <Button
-            //       variant="outline"
-            //       size="sm"
-            //       onClick={() => table.previousPage()}
-            //       disabled={!table.getCanPreviousPage() || isFetching}
-            //     >
-            //       Previous
-            //     </Button>
-            //     <Button
-            //       variant="outline"
-            //       size="sm"
-            //       onClick={() => table.nextPage()}
-            //       disabled={!table.getCanNextPage() || isFetching}
-            //     >
-            //       Next
-            //     </Button>
-            //   </div>
-            // </div>
           )}
         </CardContent>
       </Card>

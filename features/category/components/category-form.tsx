@@ -41,12 +41,14 @@ export default function CategoryForm({
       >
         <div className="px-4">
           <form.AppField name="name">
-            {(field) => <field.TextField label="Name" isDisabled={isLoading} />}
+            {(field) => (
+              <field.InputField label="Name" isDisabled={isLoading} />
+            )}
           </form.AppField>
         </div>
 
         <SheetFooter>
-          <form.SubmitButton label="Save changes" />
+          <form.SubmitButton label="Save changes" loading={isLoading} />
           <SheetClose asChild>
             <Button variant="outline">Close</Button>
           </SheetClose>

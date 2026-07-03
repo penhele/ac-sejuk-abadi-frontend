@@ -1,11 +1,12 @@
-import "./globals.css";
 import React from "react";
+import "./globals.css";
 
-import { Geist } from "next/font/google";
+import { GooeyToaster } from "@/components/ui/goey-toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { Toaster } from "sonner";
 import QueryProvider from "@/providers/query-provider";
 import { ThemeProvider } from "@/providers/theme-provider";
+import { Geist } from "next/font/google";
+
 const geist = Geist({
   subsets: ["latin"],
 });
@@ -24,7 +25,7 @@ export default function RootLayout({
         >
           <TooltipProvider>
             <QueryProvider>{children}</QueryProvider>
-            <Toaster />
+            <GooeyToaster position="bottom-left" />
           </TooltipProvider>
         </ThemeProvider>
       </body>

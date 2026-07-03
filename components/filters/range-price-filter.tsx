@@ -11,7 +11,7 @@ export default function RangePriceFilter() {
   const { min_price, max_price, setFilters } = useProductFilters();
 
   const MIN_LIMIT = 0;
-  const MAX_LIMIT = 20000000;
+  const MAX_LIMIT = 30000000;
   const STEP = 100000;
 
   const [value, setValue] = useState<number[]>([
@@ -29,26 +29,21 @@ export default function RangePriceFilter() {
   }, [min_price, max_price]);
 
   useEffect(() => {
-    const currentMin = debouncedValue[0];
-    const currentMax = debouncedValue[1];
+    const [min, max] = debouncedValue;
 
-    const isDifferent =
-      currentMin !== (min_price ? Number(min_price) : MIN_LIMIT) ||
-      currentMax !== (max_price ? Number(max_price) : MAX_LIMIT);
+    const newMin = min === MIN_LIMIT ? undefined : String(min);
+    const newMax = max === MAX_LIMIT ? undefined : String(max);
 
-    if (isDifferent) {
-      const isDefault = currentMin === MIN_LIMIT && currentMax === MAX_LIMIT;
+    if (newMin === min_price && newMax === max_price) return;
 
-      setFilters({
-        min_price: isDefault ? undefined : currentMin.toString(),
-        max_price: isDefault ? undefined : currentMax.toString(),
-      });
-    }
-  }, [debouncedValue, setFilters, min_price, max_price]);
+    setFilters({
+      min_price: newMin,
+      max_price: newMax,
+    });
+  }, [debouncedValue, min_price, max_price, setFilters]);
 
   const handleReset = () => {
     setValue([MIN_LIMIT, MAX_LIMIT]);
-    setFilters({ min_price: undefined, max_price: undefined });
   };
 
   return (
@@ -66,7 +61,7 @@ export default function RangePriceFilter() {
         </Button>
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-4">
         <Slider
           value={value}
           onValueChange={setValue}

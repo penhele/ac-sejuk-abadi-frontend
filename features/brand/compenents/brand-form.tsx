@@ -7,15 +7,13 @@ import {
 } from "@/features/brand/schemas/brand.schema";
 import { revalidateLogic } from "@tanstack/react-form";
 
-export default function BrandForm({
-  defaultValues,
-  onSubmit,
-  isLoading,
-}: {
+interface Props {
   defaultValues: BrandFormValues;
   onSubmit: (values: BrandFormValues) => void;
-  isLoading?: boolean;
-}) {
+  loading?: boolean;
+}
+
+export default function BrandForm({ defaultValues, onSubmit, loading }: Props) {
   const form = useAppForm({
     defaultValues,
     validators: {
@@ -41,12 +39,12 @@ export default function BrandForm({
       >
         <div className="px-4">
           <form.AppField name="name">
-            {(field) => <field.TextField label="Name" isDisabled={isLoading} />}
+            {(field) => <field.InputField label="Name" isDisabled={loading} />}
           </form.AppField>
         </div>
 
         <SheetFooter>
-          <form.SubmitButton label="Save changes" />
+          <form.SubmitButton label="Save changes" loading={loading} />
           <SheetClose asChild>
             <Button variant="outline">Close</Button>
           </SheetClose>

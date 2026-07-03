@@ -1,45 +1,39 @@
 "use client";
 
-import { useAppForm } from "@/hooks/use-app-form";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { toast } from "sonner";
-import { uploadProjectImage } from "../api/upload-project-images";
-import { UploadProjectImagePayload } from "../types/upload-project-image-payload";
-import { projectKeys } from "../queries/project-keys";
-import { useRouter } from "next/navigation";
 import { ROUTES } from "@/constants/routes";
+import { useAppForm } from "@/hooks/use-app-form";
+import { AppError } from "@/types/error";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { goeyToast } from "goey-toast";
+import { useRouter } from "next/navigation";
+import { uploadProjectImage } from "../api/upload-project-images";
+import { projectKeys } from "../queries/project-keys";
+import { UploadProjectImagePayload } from "../types/upload-project-image-payload";
 
 export default function UploadProjectImageForm({ id }: { id: string }) {
   const queryClient = useQueryClient();
   const router = useRouter();
 
   const { mutateAsync } = useMutation({
-    mutationFn: (data: UploadProjectImagePayload) => {
-      return uploadProjectImage(id, data);
-    },
-    onMutate(variables, context) {
-      const toastId = toast.loading("Uploading...");
-      return { toastId };
-    },
-    onSuccess(data, variables, onMutateResult, context) {
-      toast.dismiss(onMutateResult?.toastId);
-      toast.success("Berhasil");
-
-      queryClient.invalidateQueries({ queryKey: projectKeys.all });
-      router.push(ROUTES.DASHBOARD_GALLERY_PROJECT);
-    },
-    onError(error, variables, onMutateResult, context) {
-      toast.dismiss(onMutateResult?.toastId);
-      toast.error("Gagal");
-    },
+    mutationFn: (data: UploadProjectImagePayload) =>
+      uploadProjectImage(id, data),
   });
 
   const form = useAppForm({
     defaultValues: {
       files: [] as File[],
     },
-    onSubmit: async ({ value }) => {
-      await mutateAsync(value);
+    onSubmit: ({ value }) => {
+      goeyToast.promise(mutateAsync(value), {
+        loading: "Uploading...",
+        success: () => {
+          queryClient.invalidateQueries({ queryKey: projectKeys.all });
+          router.push(ROUTES.DASHBOARD_GALLERY_PROJECT);
+
+          return "Berhasil";
+        },
+        error: (err) => (err as AppError).message,
+      });
     },
   });
 

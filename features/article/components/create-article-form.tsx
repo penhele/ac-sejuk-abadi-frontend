@@ -1,32 +1,20 @@
 "use client";
 
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { toast } from "sonner";
-import { addArticle } from "../api/add-article";
-import ArticleForm from "./article-form";
-import { useRouter } from "next/navigation";
 import { ROUTES } from "@/constants/routes";
+import { AppError } from "@/types/error";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { goeyToast } from "goey-toast";
+import { useRouter } from "next/navigation";
+import { addArticle } from "../api/add-article";
 import { articleKeys } from "../queries/article-keys";
+import ArticleForm from "./article-form";
 
 export default function CreateArticleForm() {
   const queryClient = useQueryClient();
   const router = useRouter();
 
-  const { mutateAsync } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationFn: addArticle,
-    onMutate(variables, context) {
-      const toastId = toast.loading("Loading...");
-      return { toastId };
-    },
-    onSuccess(data, variables, onMutateResult, context) {
-      toast.success("Berhasil", { id: onMutateResult.toastId });
-
-      queryClient.invalidateQueries({ queryKey: articleKeys.all });
-      router.push(ROUTES.DASHBOARD_ARTICLE);
-    },
-    onError(error, variables, onMutateResult, context) {
-      toast.error("Gagal", { id: onMutateResult?.toastId });
-    },
   });
 
   return (
@@ -37,8 +25,18 @@ export default function CreateArticleForm() {
         category: "",
       }}
       onSubmit={async (value) => {
-        await mutateAsync(value);
+        goeyToast.promise(mutateAsync(value), {
+          loading: "Creating...",
+          success: () => {
+            queryClient.invalidateQueries({ queryKey: articleKeys.all });
+            router.push(ROUTES.DASHBOARD_ARTICLE);
+
+            return "Berhasil";
+          },
+          error: (err) => (err as AppError).message,
+        });
       }}
+      loading={isPending}
     />
   );
 }

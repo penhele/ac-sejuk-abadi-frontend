@@ -1,26 +1,17 @@
 "use client";
 
-import { brandKeys } from "@/features/brand/queries/brand-keys";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { toast } from "sonner";
-import BrandForm from "./brand-form";
 import { addBrand } from "@/features/brand/api/add-brand";
+import { brandKeys } from "@/features/brand/queries/brand-keys";
+import { AppError } from "@/types/error";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { goeyToast } from "goey-toast";
+import BrandForm from "./brand-form";
 
 export default function CreateBrandForm() {
   const queryClient = useQueryClient();
 
-  const { mutateAsync } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationFn: addBrand,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: brandKeys.all,
-      });
-
-      toast.success("Brand berhasil ditambahkan.");
-    },
-    onError: () => {
-      toast.error("Gagal menambahkan brand.");
-    },
   });
 
   return (
@@ -29,10 +20,19 @@ export default function CreateBrandForm() {
         name: "",
       }}
       onSubmit={async (value) => {
-        await mutateAsync({
-          name: value.name,
+        goeyToast.promise(mutateAsync(value), {
+          loading: "Loading...",
+          success: () => {
+            queryClient.invalidateQueries({
+              queryKey: brandKeys.all,
+            });
+
+            return "Brand berhasil ditambahkan";
+          },
+          error: (err) => (err as AppError).message,
         });
       }}
+      loading={isPending}
     />
   );
 }

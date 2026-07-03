@@ -1,33 +1,37 @@
 "use client";
 
 import CancelButton from "@/components/buttons/cancel-button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ROUTES } from "@/constants/routes";
+import { getAcTypesQueryOptions } from "@/features/acType/queries/ac-type-queries";
 import { useBrands } from "@/features/brand/hooks/use-brands";
+import { getCategoriesQueryOptions } from "@/features/category/queries/category-queries";
 import {
   createProductSchema,
   ProductFormValues,
 } from "@/features/product/schemas/product.schema";
-import { getAcTypesQueryOptions } from "@/features/acType/queries/ac-type-queries";
-import { getCategoriesQueryOptions } from "@/features/category/queries/category-queries";
 import { useAppForm } from "@/hooks/use-app-form";
 import { formatNumber } from "@/lib/format/currency";
-import { revalidateLogic, useStore } from "@tanstack/react-form";
+import { revalidateLogic } from "@tanstack/react-form";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useProductName } from "../hooks/use-product-name";
+
+interface Props {
+  defaultValues: ProductFormValues;
+  onSubmit: (values: ProductFormValues) => void;
+  submitLabel?: string;
+  isFetching?: boolean;
+  loading?: boolean;
+}
 
 export default function ProductForm({
   defaultValues,
   onSubmit,
   submitLabel = "Submit",
   isFetching,
-}: {
-  defaultValues: ProductFormValues;
-  onSubmit: (values: ProductFormValues) => void;
-  submitLabel?: string;
-  isFetching?: boolean;
-}) {
+  loading,
+}: Props) {
   const form = useAppForm({
     defaultValues,
     validators: {
@@ -37,8 +41,8 @@ export default function ProductForm({
       mode: "submit",
       modeAfterSubmission: "blur",
     }),
-    onSubmit: async ({ value }) => {
-      await onSubmit(value);
+    onSubmit: ({ value }) => {
+      onSubmit(value);
     },
   });
 
@@ -105,7 +109,7 @@ export default function ProductForm({
             <form.AppField
               name="name"
               children={(field) => (
-                <field.TextField
+                <field.InputField
                   isDisabled={isFetching}
                   label="Nama Produk"
                   placeholder="Daikin Zeta 2 PK"
@@ -116,7 +120,8 @@ export default function ProductForm({
             />
           </CardContent>
         </Card>
-        <Card>
+
+        <Card className="h-fit">
           <CardHeader>
             <CardTitle>Klasifikasi Produk</CardTitle>
           </CardHeader>
@@ -183,7 +188,7 @@ export default function ProductForm({
             <form.AppField
               name="series_name"
               children={(field) => (
-                <field.TextField
+                <field.InputField
                   label="Nama Seri"
                   placeholder="Flash Thailand"
                 />
@@ -192,7 +197,7 @@ export default function ProductForm({
             <form.AppField
               name="freon_type"
               children={(field) => (
-                <field.TextField
+                <field.InputField
                   label="Jenis Freon"
                   placeholder="R32 / R4104"
                   isOpsional
@@ -202,7 +207,7 @@ export default function ProductForm({
             <form.AppField
               name="model_code"
               children={(field) => (
-                <field.TextField
+                <field.InputField
                   label="Kode Model"
                   placeholder="STKC15NV"
                   isOpsional
@@ -213,7 +218,7 @@ export default function ProductForm({
             <form.AppField
               name="price"
               children={(field) => (
-                <field.TextField
+                <field.InputField
                   isDisabled={isFetching}
                   label="Harga (Rp)"
                   type="number"
@@ -227,7 +232,7 @@ export default function ProductForm({
             <form.AppField
               name="quantity"
               children={(field) => (
-                <field.TextField
+                <field.InputField
                   isDisabled={isFetching}
                   label="Stok"
                   type="number"
@@ -240,12 +245,13 @@ export default function ProductForm({
             <form.AppField
               name="description"
               children={(field) => (
-                <field.TextareaField
+                <field.InputField
                   isDisabled={isFetching}
                   label="Deskripsi"
                   placeholder="Detail fitur produk, garansi, opsi kendala pintar, dll..."
                   className="col-span-4"
                   isOpsional
+                  isTextarea
                 />
               )}
             />
@@ -258,10 +264,9 @@ export default function ProductForm({
             onCancel={() => form.reset()}
             onCloseEdit={() => ({})}
             className="max-w-24"
-            href={ROUTES.PRODUCTS}
           />
 
-          <form.SubmitButton label={submitLabel} />
+          <form.SubmitButton label={submitLabel} loading={loading} />
         </div>
       </form>
     </form.AppForm>

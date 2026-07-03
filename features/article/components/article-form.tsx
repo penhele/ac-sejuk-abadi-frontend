@@ -8,13 +8,19 @@ import { cn } from "tailwind-variants";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import ArticleContent from "./article-content";
+import { Eye } from "lucide-react";
 
-type Props = {
+interface Props {
   defaultValues: ArticleFormValues;
   onSubmit: (values: ArticleFormValues) => void;
-};
+  loading?: boolean;
+}
 
-export default function ArticleForm({ defaultValues, onSubmit }: Props) {
+export default function ArticledeForm({
+  defaultValues,
+  onSubmit,
+  loading,
+}: Props) {
   const form = useAppForm({
     defaultValues,
     validators: {
@@ -30,40 +36,52 @@ export default function ArticleForm({ defaultValues, onSubmit }: Props) {
   });
 
   return (
-    <div className="grid grid-cols-6 space-x-8">
-      <form.AppForm>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            form.handleSubmit();
-          }}
-          className={cn("space-y-between-field col-span-2")}
-        >
-          <form.AppField name="name">
-            {(field) => {
-              return <field.TextField label="Judul" placeholder="Judul" />;
-            }}
-          </form.AppField>
+    <div className="grid grid-cols-6 gap-between-items">
+      <Card className="col-span-2">
+        <CardContent>
+          <form.AppForm>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                form.handleSubmit();
+              }}
+              className={cn("space-y-between-field")}
+            >
+              <form.AppField name="name">
+                {(field) => {
+                  return <field.InputField label="Judul" placeholder="Judul" />;
+                }}
+              </form.AppField>
 
-          <form.AppField name="category">
-            {(field) => {
-              return (
-                <field.TextField label="Kategory" placeholder="Kategori" />
-              );
-            }}
-          </form.AppField>
+              <form.AppField name="category">
+                {(field) => {
+                  return (
+                    <field.InputField label="Kategory" placeholder="Kategori" />
+                  );
+                }}
+              </form.AppField>
 
-          <form.AppField name="description">
-            {(field) => {
-              return (
-                <field.TextareaField label="Konten" placeholder="Konten" />
-              );
-            }}
-          </form.AppField>
+              <form.AppField name="description">
+                {(field) => {
+                  return (
+                    <field.InputField
+                      label="Konten"
+                      placeholder="Konten"
+                      isTextarea
+                    />
+                  );
+                }}
+              </form.AppField>
 
-          <form.SubmitButton label="Save" className="w-full" />
-        </form>
-      </form.AppForm>
+              <form.SubmitButton
+                label="Save"
+                className="w-full"
+                loading={loading}
+              />
+            </form>
+          </form.AppForm>
+        </CardContent>
+      </Card>
 
       <div className="col-span-4">
         <form.Subscribe
@@ -76,7 +94,9 @@ export default function ArticleForm({ defaultValues, onSubmit }: Props) {
           {({ title, content, category }) => (
             <Card>
               <CardHeader>
-                <CardTitle>Preview Article</CardTitle>
+                <CardTitle className="flex flex-row items-center gap-x-2">
+                  <Eye size={18} /> Preview Article
+                </CardTitle>
               </CardHeader>
 
               <Separator />
