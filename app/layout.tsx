@@ -25,7 +25,7 @@ export default function RootLayout({
         >
           <TooltipProvider>
             <QueryProvider>{children}</QueryProvider>
-            <GooeyToaster position="top-center" />
+            <GooeyToaster position="bottom-left" />
           </TooltipProvider>
         </ThemeProvider>
       </body>
