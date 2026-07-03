@@ -1,3 +1,4 @@
+import MarkdownRenderer from "@/components/product/markdown-renderer";
 import { Bubble, BubbleContent } from "@/components/ui/bubble";
 
 interface Props {
@@ -10,7 +11,9 @@ export default function MessageAnimated({ message }: Props) {
       align={message.sender !== "user" ? "start" : "end"}
       variant={message.sender !== "user" ? "muted" : "default"}
     >
-      <BubbleContent>{message.text}</BubbleContent>
+      <BubbleContent>
+        <MarkdownRenderer text={message.text} />
+      </BubbleContent>
     </Bubble>
   );
 }
