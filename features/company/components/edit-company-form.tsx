@@ -56,7 +56,7 @@ export default function EditCompanyForm({ className }: { className?: string }) {
           name="name"
           children={(field) => {
             return (
-              <field.TextField
+              <field.InputField
                 label="Company"
                 isDisabled={isPending}
                 readOnly={!isEditing}
@@ -69,10 +69,11 @@ export default function EditCompanyForm({ className }: { className?: string }) {
           name="description"
           children={(field) => {
             return (
-              <field.TextareaField
+              <field.InputField
                 label="Description"
                 isDisabled={isPending}
                 readOnly={!isEditing}
+                isTextarea
               />
             );
           }}
@@ -84,7 +85,7 @@ export default function EditCompanyForm({ className }: { className?: string }) {
               name="email"
               children={(field) => {
                 return (
-                  <field.TextField
+                  <field.InputField
                     label="Email"
                     type="email"
                     isDisabled={isPending}
@@ -100,7 +101,7 @@ export default function EditCompanyForm({ className }: { className?: string }) {
               name="phone"
               children={(field) => {
                 return (
-                  <field.TextField
+                  <field.InputField
                     label="Phone"
                     type="number"
                     placeholder="62818355788"
@@ -117,10 +118,11 @@ export default function EditCompanyForm({ className }: { className?: string }) {
           name="location"
           children={(field) => {
             return (
-              <field.TextField
+              <field.InputField
                 label="Location"
                 isDisabled={isPending}
                 readOnly={!isEditing}
+                isTextarea
               />
             );
           }}
@@ -130,7 +132,7 @@ export default function EditCompanyForm({ className }: { className?: string }) {
           name="location_url"
           children={(field) => {
             return (
-              <field.TextField
+              <field.InputField
                 label="Location URL"
                 isDisabled={isPending}
                 readOnly={!isEditing}

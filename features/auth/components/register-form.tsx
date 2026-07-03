@@ -58,7 +58,7 @@ export default function RegisterForm({ className }: { className?: string }) {
           <form.AppField
             name="first_name"
             children={(field) => (
-              <field.TextField
+              <field.InputField
                 label="First Name"
                 placeholder="John"
                 className="col-span-2"
@@ -68,7 +68,7 @@ export default function RegisterForm({ className }: { className?: string }) {
           <form.AppField
             name="last_name"
             children={(field) => (
-              <field.TextField
+              <field.InputField
                 label="Last Name"
                 placeholder="Doe"
                 className="col-span-2"
@@ -78,7 +78,7 @@ export default function RegisterForm({ className }: { className?: string }) {
           <form.AppField
             name="address"
             children={(field) => (
-              <field.TextareaField
+              <field.InputField
                 label="Address"
                 placeholder="Ruko Srengseng Permai Village Jl. Srengseng Sawah No.2"
                 className="col-span-4"
@@ -89,19 +89,21 @@ export default function RegisterForm({ className }: { className?: string }) {
           <form.AppField
             name="rt"
             children={(field) => (
-              <field.TextField label="RT" placeholder="12" />
+              <field.InputField label="RT" placeholder="12" />
             )}
           />
 
           <form.AppField
             name="rw"
-            children={(field) => <field.TextField label="RW" placeholder="7" />}
+            children={(field) => (
+              <field.InputField label="RW" placeholder="7" />
+            )}
           />
 
           <form.AppField
             name="zip_code"
             children={(field) => (
-              <field.TextField
+              <field.InputField
                 label="Zip Code"
                 placeholder="12640"
                 className="col-span-2"
@@ -112,7 +114,7 @@ export default function RegisterForm({ className }: { className?: string }) {
           <form.AppField
             name="email"
             children={(field) => (
-              <field.TextField
+              <field.InputField
                 label="Email"
                 placeholder="john@doe.com"
                 className="col-span-4"
@@ -124,7 +126,7 @@ export default function RegisterForm({ className }: { className?: string }) {
           <form.AppField
             name="password"
             children={(field) => (
-              <field.TextField
+              <field.InputField
                 type="password"
                 label="Password"
                 placeholder="********"

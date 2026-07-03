@@ -49,14 +49,14 @@ export default function ArticledeForm({
             >
               <form.AppField name="name">
                 {(field) => {
-                  return <field.TextField label="Judul" placeholder="Judul" />;
+                  return <field.InputField label="Judul" placeholder="Judul" />;
                 }}
               </form.AppField>
 
               <form.AppField name="category">
                 {(field) => {
                   return (
-                    <field.TextField label="Kategory" placeholder="Kategori" />
+                    <field.InputField label="Kategory" placeholder="Kategori" />
                   );
                 }}
               </form.AppField>
@@ -64,7 +64,11 @@ export default function ArticledeForm({
               <form.AppField name="description">
                 {(field) => {
                   return (
-                    <field.TextareaField label="Konten" placeholder="Konten" />
+                    <field.InputField
+                      label="Konten"
+                      placeholder="Konten"
+                      isTextarea
+                    />
                   );
                 }}
               </form.AppField>

@@ -61,7 +61,7 @@ export default function LoginForm({ className }: Props) {
           <form.AppField
             name="email"
             children={(field) => (
-              <field.TextField
+              <field.InputField
                 label="Email"
                 placeholder="john@doe.com"
                 IconAddon={Mail}
@@ -72,7 +72,7 @@ export default function LoginForm({ className }: Props) {
           <form.AppField
             name="password"
             children={(field) => (
-              <field.TextField
+              <field.InputField
                 type="password"
                 label="Password"
                 placeholder="••••••••"

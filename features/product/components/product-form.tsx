@@ -109,7 +109,7 @@ export default function ProductForm({
             <form.AppField
               name="name"
               children={(field) => (
-                <field.TextField
+                <field.InputField
                   isDisabled={isFetching}
                   label="Nama Produk"
                   placeholder="Daikin Zeta 2 PK"
@@ -188,7 +188,7 @@ export default function ProductForm({
             <form.AppField
               name="series_name"
               children={(field) => (
-                <field.TextField
+                <field.InputField
                   label="Nama Seri"
                   placeholder="Flash Thailand"
                 />
@@ -197,7 +197,7 @@ export default function ProductForm({
             <form.AppField
               name="freon_type"
               children={(field) => (
-                <field.TextField
+                <field.InputField
                   label="Jenis Freon"
                   placeholder="R32 / R4104"
                   isOpsional
@@ -207,7 +207,7 @@ export default function ProductForm({
             <form.AppField
               name="model_code"
               children={(field) => (
-                <field.TextField
+                <field.InputField
                   label="Kode Model"
                   placeholder="STKC15NV"
                   isOpsional
@@ -218,7 +218,7 @@ export default function ProductForm({
             <form.AppField
               name="price"
               children={(field) => (
-                <field.TextField
+                <field.InputField
                   isDisabled={isFetching}
                   label="Harga (Rp)"
                   type="number"
@@ -232,7 +232,7 @@ export default function ProductForm({
             <form.AppField
               name="quantity"
               children={(field) => (
-                <field.TextField
+                <field.InputField
                   isDisabled={isFetching}
                   label="Stok"
                   type="number"
@@ -245,12 +245,13 @@ export default function ProductForm({
             <form.AppField
               name="description"
               children={(field) => (
-                <field.TextareaField
+                <field.InputField
                   isDisabled={isFetching}
                   label="Deskripsi"
                   placeholder="Detail fitur produk, garansi, opsi kendala pintar, dll..."
                   className="col-span-4"
                   isOpsional
+                  isTextarea
                 />
               )}
             />

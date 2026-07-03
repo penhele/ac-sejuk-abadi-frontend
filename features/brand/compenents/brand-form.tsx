@@ -39,7 +39,7 @@ export default function BrandForm({ defaultValues, onSubmit, loading }: Props) {
       >
         <div className="px-4">
           <form.AppField name="name">
-            {(field) => <field.TextField label="Name" isDisabled={loading} />}
+            {(field) => <field.InputField label="Name" isDisabled={loading} />}
           </form.AppField>
         </div>
 

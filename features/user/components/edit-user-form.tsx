@@ -67,7 +67,7 @@ export default function EditUserForm({ user }: Props) {
         <div className="gap-between-field grid grid-cols-2 px-4">
           <form.AppField name="first_name">
             {(field) => (
-              <field.TextField
+              <field.InputField
                 className="col-span-2"
                 label="Nama Depan"
                 placeholder="First Name"
@@ -77,7 +77,7 @@ export default function EditUserForm({ user }: Props) {
 
           <form.AppField name="last_name">
             {(field) => (
-              <field.TextField
+              <field.InputField
                 className="col-span-2"
                 label="Nama Belakang"
                 placeholder="Last Name"
@@ -87,7 +87,7 @@ export default function EditUserForm({ user }: Props) {
 
           <form.AppField name="address">
             {(field) => (
-              <field.TextareaField
+              <field.InputField
                 className="col-span-2"
                 label="Alamat"
                 placeholder="Ruko Srengseng Permai Village Jl. Srengseng Sawah No.2"
@@ -96,16 +96,16 @@ export default function EditUserForm({ user }: Props) {
           </form.AppField>
 
           <form.AppField name="rt">
-            {(field) => <field.TextField label="Name" placeholder="12" />}
+            {(field) => <field.InputField label="Name" placeholder="12" />}
           </form.AppField>
 
           <form.AppField name="rw">
-            {(field) => <field.TextField label="RW" placeholder="7" />}
+            {(field) => <field.InputField label="RW" placeholder="7" />}
           </form.AppField>
 
           <form.AppField name="zip_code">
             {(field) => (
-              <field.TextField
+              <field.InputField
                 label="Kode Pos"
                 placeholder="12640"
                 className="col-span-2"

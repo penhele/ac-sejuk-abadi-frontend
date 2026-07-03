@@ -11,6 +11,7 @@ import {
   InputGroupButton,
   InputGroupInput,
   InputGroupText,
+  InputGroupTextarea,
 } from "../ui/input-group";
 
 export type Props = {
@@ -23,9 +24,10 @@ export type Props = {
   readOnly?: boolean;
   IconAddon?: LucideIcon;
   isOpsional?: boolean;
+  isTextarea?: boolean;
 };
 
-export default function TextField({
+export default function InputField({
   label,
   type = "text",
   placeholder,
@@ -35,6 +37,7 @@ export default function TextField({
   readOnly,
   IconAddon,
   isOpsional,
+  isTextarea,
 }: Props) {
   const field = useFieldContext<string>();
 
@@ -67,27 +70,50 @@ export default function TextField({
           </InputGroupAddon>
         )}
 
-        <InputGroupInput
-          value={
-            isPrice
-              ? formatNumber(field.state.value)
-              : (field.state.value ?? "")
-          }
-          onChange={(e) => {
-            if (isPrice) {
-              const rawValue = e.target.value.replace(/\D/g, "");
-
-              field.handleChange(rawValue);
-            } else {
-              field.handleChange(e.target.value);
+        {isTextarea ? (
+          <InputGroupTextarea
+            value={
+              isPrice
+                ? formatNumber(field.state.value)
+                : (field.state.value ?? "")
             }
-          }}
-          onBlur={field.handleBlur}
-          placeholder={placeholder}
-          type={inputType}
-          disabled={isDisabled}
-          readOnly={readOnly}
-        />
+            onChange={(e) => {
+              if (isPrice) {
+                const rawValue = e.target.value.replace(/\D/g, "");
+
+                field.handleChange(rawValue);
+              } else {
+                field.handleChange(e.target.value);
+              }
+            }}
+            onBlur={field.handleBlur}
+            placeholder={placeholder}
+            disabled={isDisabled}
+            readOnly={readOnly}
+          />
+        ) : (
+          <InputGroupInput
+            value={
+              isPrice
+                ? formatNumber(field.state.value)
+                : (field.state.value ?? "")
+            }
+            onChange={(e) => {
+              if (isPrice) {
+                const rawValue = e.target.value.replace(/\D/g, "");
+
+                field.handleChange(rawValue);
+              } else {
+                field.handleChange(e.target.value);
+              }
+            }}
+            onBlur={field.handleBlur}
+            placeholder={placeholder}
+            type={inputType}
+            disabled={isDisabled}
+            readOnly={readOnly}
+          />
+        )}
 
         {type === "password" && (
           <InputGroupAddon align={"inline-end"}>

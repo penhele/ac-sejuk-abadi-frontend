@@ -64,7 +64,7 @@ export default function ProjectForm({
         <div className="grid grid-cols-2 gap-between-items-lg">
           <form.AppField name="name">
             {(field) => (
-              <field.TextField
+              <field.InputField
                 isDisabled={isFetching}
                 label="Name"
                 placeholder="Office Renovation Central Jakarta"
@@ -74,7 +74,7 @@ export default function ProjectForm({
 
           <form.AppField name="location">
             {(field) => (
-              <field.TextField
+              <field.InputField
                 isDisabled={isFetching}
                 label="Location"
                 placeholder="Semarang, Indonesia"
@@ -110,11 +110,12 @@ export default function ProjectForm({
 
           <form.AppField name="description">
             {(field) => (
-              <field.TextareaField
+              <field.InputField
                 isDisabled={isFetching}
                 className="col-span-2"
                 label="Description"
                 placeholder="Describe the project detail, scope of work, or installation notes..."
+                isTextarea
               />
             )}
           </form.AppField>
