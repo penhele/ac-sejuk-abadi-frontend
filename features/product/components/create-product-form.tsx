@@ -16,6 +16,21 @@ export default function CreateProductForm() {
     mutationFn: addProduct,
   });
 
+  const handleSubmit = (value: any) => {
+    goeyToast.promise(mutateAsync(value), {
+      loading: "Loading...",
+      success: () => {
+        queryClient.invalidateQueries({
+          queryKey: productKeys.all,
+        });
+        router.push(ROUTES.PRODUCTS);
+
+        return "Berhasil";
+      },
+      error: (err) => (err as AppError).message,
+    });
+  };
+
   return (
     <ProductForm
       defaultValues={{
@@ -31,20 +46,7 @@ export default function CreateProductForm() {
         model_code: undefined,
         series_name: undefined,
       }}
-      onSubmit={(value) => {
-        goeyToast.promise(mutateAsync(value), {
-          loading: "Loading...",
-          success: () => {
-            queryClient.invalidateQueries({
-              queryKey: productKeys.all,
-            });
-            router.push(ROUTES.PRODUCTS);
-
-            return "Berhasil";
-          },
-          error: (err) => (err as AppError).message,
-        });
-      }}
+      onSubmit={handleSubmit}
     />
   );
 }

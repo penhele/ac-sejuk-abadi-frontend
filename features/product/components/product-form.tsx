@@ -41,8 +41,8 @@ export default function ProductForm({
       mode: "submit",
       modeAfterSubmission: "blur",
     }),
-    onSubmit: async ({ value }) => {
-      await onSubmit(value);
+    onSubmit: ({ value }) => {
+      onSubmit(value);
     },
   });
 
@@ -120,7 +120,8 @@ export default function ProductForm({
             />
           </CardContent>
         </Card>
-        <Card>
+
+        <Card className="h-fit">
           <CardHeader>
             <CardTitle>Klasifikasi Produk</CardTitle>
           </CardHeader>

@@ -32,6 +32,15 @@ export default function ProductDetailContent({ id }: { id: string }) {
           <ProductPriceAction product={product} />
         </div>
       </div>
+
+      <div className="">
+        <HeaderSection title="Deskripsi" />
+
+        <p className="leading-7 whitespace-pre-wrap tracking-tight font-light">
+          {product.description || "Tidak ada deskripsi"}
+        </p>
+      </div>
+
       <div className="">
         <HeaderSection
           title="Produk Serupa"

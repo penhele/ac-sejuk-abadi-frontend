@@ -110,7 +110,7 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="sticky top-0 z-50 w-full relative bg-white dark:bg-background border-b border-border/40">
+      <div className="sticky top-0 z-50 w-full bg-white dark:bg-background border-b border-border/40 mb-4">
         {/* Standard Rectangular Header */}
         <div className="max-w-7xl mx-auto h-16 flex items-center justify-between">
           {/* Logo / Company Name */}
