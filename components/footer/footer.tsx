@@ -6,7 +6,7 @@ import FooterProfile from "./footer-profile";
 
 export default async function Footer() {
   return (
-    <div className="space-y-between-items-lg py-4">
+    <div className="space-y-between-items-lg py-4 mt-4">
       <div className="grid grid-cols-4 gap-between-items space-x-between-items-sm">
         <FooterProfile className="col-span-4 lg:col-span-1" />
 

@@ -37,7 +37,11 @@ export const userColumns: ColumnDef<User>[] = [
     header: "Email",
     cell: ({ row }) => (
       <div className="flex items-center gap-between-items-xs ">
-        <Mail size={16} /> {row.original.email}
+        <div className="rounded-full bg-muted p-2">
+          <Mail className="size-4 text-muted-foreground" />
+        </div>
+
+        <span>{row.original.email}</span>
       </div>
     ),
   },

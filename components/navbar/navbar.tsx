@@ -4,13 +4,15 @@ import Image from "next/image";
 import Link from "next/link";
 import NavItem, { menuItems } from "./nav-item";
 import { Toggle } from "../ui/toggle";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun, User } from "lucide-react";
 import { useTheme } from "next-themes";
 import { ROUTES } from "@/constants/routes";
 import { useCompany } from "@/features/company/hooks/use-company";
+import { useMe } from "@/features/auth/hooks/use-me";
 import { useEffect, useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { motion, AnimatePresence } from "framer-motion";
+import { useIsAdmin, useAuthToken } from "@/features/auth/hooks";
 
 const Path = (props: any) => (
   <motion.path
@@ -72,6 +74,9 @@ export default function Navbar() {
   const [mounted, setMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
+  const { isAdmin } = useIsAdmin();
+  const { isAuthenticated } = useAuthToken();
+
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -110,7 +115,7 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="sticky top-0 z-50 w-full bg-white dark:bg-background border-b border-border/40 mb-4">
+      <div className="sticky top-0 z-50 w-full bg-white dark:bg-background">
         {/* Standard Rectangular Header */}
         <div className="max-w-7xl mx-auto h-16 flex items-center justify-between">
           {/* Logo / Company Name */}
@@ -130,7 +135,7 @@ export default function Navbar() {
                 />
               </div>
             ) : (
-              <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-primary to-blue-600 text-white font-bold flex items-center justify-center text-sm shadow-sm shrink-0">
+              <div className="h-10 w-10 rounded-xl bg-linear-to-br from-primary to-blue-600 text-white font-bold flex items-center justify-center text-sm shadow-sm shrink-0">
                 {getInitials(company?.name)}
               </div>
             )}
@@ -153,6 +158,12 @@ export default function Navbar() {
 
           {/* Right Side Controls */}
           <div className="flex items-center gap-2">
+            {mounted && isAuthenticated() && (
+              <div className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-muted text-foreground transition-colors cursor-pointer shrink-0">
+                <User className="h-5 w-5" />
+              </div>
+            )}
+
             {mounted && (
               <Toggle
                 pressed={theme === "dark"}
@@ -196,7 +207,7 @@ export default function Navbar() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -10, scale: 0.98 }}
                 transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                className="absolute top-[72px] left-0 right-0 z-50 bg-white/95 dark:bg-zinc-950/95 border border-border backdrop-blur-md rounded-2xl p-5 shadow-xl flex flex-col gap-4 sm:hidden mx-4"
+                className="absolute top-18 left-0 right-0 z-50 bg-white/95 dark:bg-zinc-950/95 border border-border backdrop-blur-md rounded-2xl p-5 shadow-xl flex flex-col gap-4 sm:hidden mx-4"
               >
                 <div className="flex flex-col gap-2">
                   {menuItems.map(
@@ -216,6 +227,21 @@ export default function Navbar() {
                         </Link>
                       </motion.div>
                     ),
+                  )}
+                  {isAdmin && (
+                    <motion.div
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: menuItems.length * 0.05 + 0.1 }}
+                    >
+                      <Link
+                        href={ROUTES.DASHBOARD}
+                        onClick={() => setIsOpen(false)}
+                        className="flex items-center w-full px-4 py-3 rounded-xl hover:bg-muted font-medium text-foreground transition-colors"
+                      >
+                        Dashboard
+                      </Link>
+                    </motion.div>
                   )}
                 </div>
               </motion.div>

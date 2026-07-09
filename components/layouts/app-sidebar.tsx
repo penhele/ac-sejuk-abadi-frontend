@@ -18,6 +18,7 @@ import {
   BookOpen,
   Building2,
   LayoutDashboard,
+  LogOut,
   Monitor,
   Moon,
   Package,
@@ -34,6 +35,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import { Button } from "../ui/button";
+import { useAuthToken } from "@/features/auth/hooks";
 
 export function AppSidebar() {
   const navProduct = [
@@ -85,6 +88,12 @@ export function AppSidebar() {
   }, []);
 
   const router = useRouter();
+  const { removeToken } = useAuthToken();
+
+  const handleLogout = () => {
+    removeToken();
+    router.push(ROUTES.HOME);
+  };
 
   return (
     <Sidebar collapsible="icon">
@@ -138,6 +147,14 @@ export function AppSidebar() {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
+          </SidebarMenuItem>
+
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild>
+              <Button variant={"destructive"} onClick={handleLogout}>
+                <LogOut /> Logout
+              </Button>
+            </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarFooter>

@@ -1,17 +1,15 @@
+import MarkdownRenderer from "@/components/markdown-renderer";
 import ProductImages from "@/components/product/product-images";
 import ProductInfo from "@/components/product/product-info";
 import ProductPriceAction from "@/components/product/product-price-action";
 import { ROUTES } from "@/constants/routes";
 import { useProduct } from "@/features/product";
+import ProductFallback from "@/features/product/components/product-fallback";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import CarouselProduct from "./carousel-product";
 import ErrorFallback from "../../../components/fallback/error-fallback";
 import { HeaderSection } from "../../../components/util/header";
-import ProductFallback from "@/features/product/components/product-fallback";
-import Markdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import MarkdownRenderer from "@/components/product/markdown-renderer";
+import CarouselProduct from "./carousel-product";
 
 export default function ProductDetailContent({ id }: { id: string }) {
   const { data: product, isLoading } = useProduct(id);
