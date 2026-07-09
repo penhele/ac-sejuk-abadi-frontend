@@ -60,9 +60,7 @@ export default function ArticleContent({
         />
       )}
 
-      <MarkdownRenderer className="whitespace-pre-wrap">
-        {content || "--"}
-      </MarkdownRenderer>
+      <MarkdownRenderer text={content || "--"} />
     </div>
   );
 }
