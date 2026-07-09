@@ -20,9 +20,9 @@ export default function ProjectDetailContent({ id }: { id: string }) {
   const products = project.products.map((product) => product.product);
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-between-section">
       <div className="space-y-8">
-        {/* <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
           <div className="space-y-4">
             <div className="flex items-center gap-2 text-primary font-bold uppercase tracking-widest text-xs">
               <Building2 className="w-4 h-4" />
@@ -42,7 +42,7 @@ export default function ProjectDetailContent({ id }: { id: string }) {
               </div>
             </div>
           </div>
-        </div> */}
+        </div>
 
         <ProjectImages project={project} />
       </div>
@@ -52,16 +52,6 @@ export default function ProjectDetailContent({ id }: { id: string }) {
 
         <MarkdownRenderer text={project.description} />
       </div>
-
-      {/* <div className="">
-        <HeaderSection title="Produk yang digunakan" />
-
-        <div className="grid grid-cols-5">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-      </div> */}
     </div>
   );
 }
