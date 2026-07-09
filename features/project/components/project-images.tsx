@@ -97,49 +97,34 @@ export default function ProjectImages({ project }: Props) {
         </CarouselContent>
       </Carousel>
 
-      <Carousel
-        setApi={setThumbApi}
-        className="w-1/4"
-        opts={{
-          containScroll: "keepSnaps",
-          dragFree: true,
-          axis: "y",
-        }}
-      >
-        <CarouselContent
-          className="h-120 flex-col gap-4 overflow-y-auto *:ml-0! *:pl-0!"
-          style={{
-            marginLeft: 0,
-            paddingLeft: 0,
-          }}
-        >
+      <div className="w-1/4">
+        <div className="h-120 flex flex-col gap-4 overflow-y-auto">
           {images.map((img, index) => (
-            <CarouselItem key={index} className="basis-auto pl-0 ml-0">
-              <button
-                type="button"
-                onClick={() => onThumbClick(index)}
-                className="w-full block text-left focus:outline-none"
+            <button
+              key={index}
+              type="button"
+              onClick={() => onThumbClick(index)}
+              className="w-full block text-left focus:outline-none"
+            >
+              <div
+                className={cn(
+                  "aspect-video relative bg-muted rounded-lg overflow-hidden transition-all duration-200 border-2",
+                  index === selectedIndex
+                    ? " opacity-100"
+                    : "border-transparent opacity-60 hover:opacity-100",
+                )}
               >
-                <div
-                  className={cn(
-                    "aspect-video relative bg-muted rounded-lg overflow-hidden transition-all duration-200 border-2",
-                    index === selectedIndex
-                      ? "opacity-100"
-                      : "border-transparent opacity-60 hover:opacity-100",
-                  )}
-                >
-                  <Image
-                    src={img.image_url}
-                    alt={`${project.name}-thumb-${index}`}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              </button>
-            </CarouselItem>
+                <Image
+                  src={img.image_url}
+                  alt={`${project.name}-thumb-${index}`}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            </button>
           ))}
-        </CarouselContent>
-      </Carousel>
+        </div>
+      </div>
     </div>
   );
 }
