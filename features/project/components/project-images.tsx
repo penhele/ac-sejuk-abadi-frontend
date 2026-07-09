@@ -19,23 +19,21 @@ export default function ProjectImages({ project }: Props) {
   const totalImages = images.length;
 
   const [mainApi, setMainApi] = useState<CarouselApi>();
-  const [thumbApi, setThumbApi] = useState<CarouselApi>();
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   const onThumbClick = useCallback(
     (index: number) => {
-      if (!mainApi || !thumbApi) return;
+      if (!mainApi) return;
       mainApi.scrollTo(index);
     },
-    [mainApi, thumbApi],
+    [mainApi],
   );
 
   const onSelect = useCallback(() => {
-    if (!mainApi || !thumbApi) return;
+    if (!mainApi) return;
     const activeIndex = mainApi.selectedScrollSnap();
     setSelectedIndex(activeIndex);
-    thumbApi.scrollTo(activeIndex);
-  }, [mainApi, thumbApi]);
+  }, [mainApi]);
 
   useEffect(() => {
     if (!mainApi) return;
@@ -79,6 +77,7 @@ export default function ProjectImages({ project }: Props) {
 
   return (
     <div className="flex gap-4">
+      {/* Main Carousel */}
       <Carousel setApi={setMainApi} className="flex-1">
         <CarouselContent>
           {images.map((img, index) => (
@@ -97,33 +96,32 @@ export default function ProjectImages({ project }: Props) {
         </CarouselContent>
       </Carousel>
 
-      <div className="w-1/4">
-        <div className="h-120 flex flex-col gap-4 overflow-y-auto">
-          {images.map((img, index) => (
-            <button
-              key={index}
-              type="button"
-              onClick={() => onThumbClick(index)}
-              className="w-full block text-left focus:outline-none"
+      {/* Thumbnail Grid (statis, tidak bisa scroll) */}
+      <div className="w-1/4 flex flex-col gap-4 max-h-120 overflow-y-auto">
+        {images.map((img, index) => (
+          <button
+            key={index}
+            type="button"
+            onClick={() => onThumbClick(index)}
+            className="w-full block text-left focus:outline-none shrink-0"
+          >
+            <div
+              className={cn(
+                "aspect-video relative bg-muted rounded-lg overflow-hidden transition-all duration-200 border-2",
+                index === selectedIndex
+                  ? "opacity-100"
+                  : "border-transparent opacity-60 hover:opacity-100",
+              )}
             >
-              <div
-                className={cn(
-                  "aspect-video relative bg-muted rounded-lg overflow-hidden transition-all duration-200 border-2",
-                  index === selectedIndex
-                    ? " opacity-100"
-                    : "border-transparent opacity-60 hover:opacity-100",
-                )}
-              >
-                <Image
-                  src={img.image_url}
-                  alt={`${project.name}-thumb-${index}`}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            </button>
-          ))}
-        </div>
+              <Image
+                src={img.image_url}
+                alt={`${project.name}-thumb-${index}`}
+                fill
+                className="object-cover"
+              />
+            </div>
+          </button>
+        ))}
       </div>
     </div>
   );
