@@ -1,3 +1,5 @@
+"use client";
+
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -7,6 +9,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { ROUTES } from "@/constants/routes";
 import Link from "next/link";
+import { useMe } from "@/features/auth/hooks/use-me";
 
 export const menuItems: { label: string; href: string }[] = [
   { label: "Beranda", href: ROUTES.HOME },
@@ -16,6 +19,10 @@ export const menuItems: { label: string; href: string }[] = [
 ];
 
 export default function NavItem() {
+  const { data: user } = useMe();
+
+  const isAdmin = user?.role === "admin";
+
   return (
     <NavigationMenu>
       <NavigationMenuList>
@@ -29,6 +36,16 @@ export default function NavItem() {
             </NavigationMenuLink>
           </NavigationMenuItem>
         ))}
+        {isAdmin && (
+          <NavigationMenuItem>
+            <NavigationMenuLink
+              asChild
+              className={navigationMenuTriggerStyle()}
+            >
+              <Link href={ROUTES.DASHBOARD}>Dashboard</Link>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+        )}
       </NavigationMenuList>
     </NavigationMenu>
   );

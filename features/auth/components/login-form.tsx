@@ -10,6 +10,7 @@ import { goeyToast } from "goey-toast";
 import { Lock, Mail } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { login } from "../api/login";
+import { useAuthToken } from "../hooks";
 import { loginSchema } from "../schemas/login.schema";
 import { LoginPayload } from "../types/login-payload";
 
@@ -19,12 +20,23 @@ interface Props {
 
 export default function LoginForm({ className }: Props) {
   const router = useRouter();
+  const { setToken } = useAuthToken();
 
   const { mutateAsync, isPending } = useMutation({
     mutationFn: (data: LoginPayload) => login(data),
+    onSuccess: ({ access_token, user }) => {
+      setToken(access_token);
+      router.push(user.role === "admin" ? ROUTES.DASHBOARD : ROUTES.HOME);
+    },
   });
 
-  console.log("isPending: ", isPending);
+  const handleLogin = ({ value }: { value: LoginPayload }) => {
+    goeyToast.promise(mutateAsync(value), {
+      loading: "Logging in...",
+      success: "Berhasil login",
+      error: (err) => (err as AppError).message,
+    });
+  };
 
   const form = useAppForm({
     defaultValues: {
@@ -34,18 +46,7 @@ export default function LoginForm({ className }: Props) {
     validators: {
       onSubmit: loginSchema,
     },
-    onSubmit: async ({ value }) => {
-      goeyToast.promise(mutateAsync(value), {
-        loading: "Logging in...",
-        success: (data) => {
-          if (data.user.role === "user") router.push(ROUTES.HOME);
-          else if (data.user.role === "admin") router.push(ROUTES.DASHBOARD);
-
-          return "Berhasil login";
-        },
-        error: (err) => (err as AppError).message,
-      });
-    },
+    onSubmit: handleLogin,
   });
 
   return (

@@ -23,25 +23,25 @@ export function RoleSelect({ userId, role }: Props) {
 
   const { mutateAsync } = useMutation({
     mutationFn: (data: UpdateUserPayload) => updateUser(userId, data),
+    onSuccess() {
+      queryClient.invalidateQueries({
+        queryKey: userKeys.all,
+      });
+    },
   });
+
+  const handleSubmit = ({ value }: { value: UpdateUserPayload }) =>
+    goeyToast.promise(mutateAsync(value), {
+      loading: "Loading...",
+      success: () => "Role berhasil diubah",
+      error: (err) => (err as AppError).message,
+    });
 
   const form = useAppForm({
     defaultValues: {
       role,
     },
-    onSubmit: ({ value }) => {
-      goeyToast.promise(mutateAsync(value), {
-        loading: "Loading...",
-        success: () => {
-          queryClient.invalidateQueries({
-            queryKey: userKeys.all,
-          });
-
-          return "Role berhasil diubah";
-        },
-        error: (err) => (err as AppError).message,
-      });
-    },
+    onSubmit: handleSubmit,
   });
 
   return (

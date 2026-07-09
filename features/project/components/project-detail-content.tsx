@@ -6,6 +6,7 @@ import ErrorFallback from "../../../components/fallback/error-fallback";
 import ProjectFallback from "./project-fallback";
 import MarkdownRenderer from "@/components/markdown-renderer";
 import ProjectImages from "./project-images";
+import { HeaderSection } from "@/components/util/header";
 export default function ProjectDetailContent({ id }: { id: string }) {
   const { data: project, isLoading } = useProject(id);
 
@@ -48,7 +49,7 @@ export default function ProjectDetailContent({ id }: { id: string }) {
       </div>
 
       <div className="">
-        <h1 className="text-lg font-bold">Deskripsi Proyek</h1>
+        <HeaderSection title="Deskripsi" />
 
         <MarkdownRenderer text={project.description} />
       </div>
