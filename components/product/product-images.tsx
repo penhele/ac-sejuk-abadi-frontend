@@ -13,15 +13,15 @@ import { ImageOff } from "lucide-react";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 
-type ProductImageGalleryProps = {
+interface ProductImagesProps {
   product: Product;
   className?: string;
-};
+}
 
-export default function ProductImageGallery({
+export default function ProductImages({
   product,
   className,
-}: ProductImageGalleryProps) {
+}: ProductImagesProps) {
   const images = product.images ?? [];
   const totalImages = images.length;
 
@@ -67,7 +67,6 @@ export default function ProductImageGallery({
 
   return (
     <div className={cn("flex flex-col gap-3 w-full", className)}>
-      {/* 1. MAIN CAROUSEL */}
       <Carousel setApi={setMainApi} className="w-full relative">
         <CarouselContent className="ml-0">
           {images.map((img, index) => (
@@ -90,7 +89,6 @@ export default function ProductImageGallery({
         </CarouselContent>
       </Carousel>
 
-      {/* 2. THUMBNAILS CAROUSEL (Hanya muncul jika gambar lebih dari 1) */}
       {totalImages > 1 && (
         <Carousel
           setApi={setThumbApi}
