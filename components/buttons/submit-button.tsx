@@ -4,20 +4,19 @@ import { useFormContext } from "@/hooks/use-app-form";
 import { Button } from "../ui/button";
 import { Spinner } from "../ui/spinner";
 import { cn } from "@/lib/utils";
-import { LucideIcon } from "lucide-react";
 
-type Props = {
-  label?: string;
+interface Props {
+  label: string;
   className?: string;
   isDisabled?: boolean;
-  Icon?: LucideIcon;
-};
+  loading?: boolean;
+}
 
 export default function SubmitButton({
   label,
   className,
   isDisabled,
-  Icon,
+  loading = false,
 }: Props) {
   const form = useFormContext();
 
@@ -28,16 +27,19 @@ export default function SubmitButton({
         canSubmit: state.canSubmit,
       })}
     >
-      {({ isSubmitting, canSubmit }) => (
-        <Button
-          type="submit"
-          disabled={!canSubmit || isSubmitting || isDisabled}
-          className={cn(className)}
-        >
-          {label && <span>{isSubmitting ? <Spinner /> : label}</span>}
-          {Icon && <Icon />}
-        </Button>
-      )}
+      {({ isSubmitting, canSubmit }) => {
+        const isLoading = isSubmitting || loading;
+
+        return (
+          <Button
+            type="submit"
+            disabled={!canSubmit || isLoading || isDisabled}
+            className={cn("min-w-24", className)}
+          >
+            {isLoading ? <Spinner /> : label}
+          </Button>
+        );
+      }}
     </form.Subscribe>
   );
 }

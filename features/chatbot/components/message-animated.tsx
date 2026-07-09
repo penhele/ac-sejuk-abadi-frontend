@@ -1,4 +1,4 @@
-import MarkdownRenderer from "@/components/product/markdown-renderer";
+import MarkdownRenderer from "@/components/markdown-renderer";
 import { Bubble, BubbleContent } from "@/components/ui/bubble";
 
 interface Props {
