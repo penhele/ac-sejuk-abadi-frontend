@@ -19,6 +19,7 @@ import {
   Building2,
   LayoutDashboard,
   LogOut,
+  MessageCircle,
   Monitor,
   Moon,
   Package,
@@ -74,6 +75,16 @@ export function AppSidebar() {
           Icon: Settings2,
           label: "Setting",
           href: ROUTES.DASHBOARD_SETTING,
+        },
+      ],
+    },
+    {
+      title: "Chatbot",
+      items: [
+        {
+          Icon: MessageCircle,
+          label: "Shortcut",
+          href: ROUTES.CHATBOT_SHORTCUT,
         },
       ],
     },
