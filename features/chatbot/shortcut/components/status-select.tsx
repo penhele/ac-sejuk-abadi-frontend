@@ -28,10 +28,7 @@ export default function StatusSelect({ id, isActive }: Props) {
     goeyToast.promise(mutateAsync(value), {
       loading: "Loading...",
       success: "Berhasil",
-      error: (err) => {
-        console.log(err);
-        return (err as AppError).message;
-      },
+      error: (err) => (err as AppError).message,
     });
   };
 

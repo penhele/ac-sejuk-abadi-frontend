@@ -42,6 +42,7 @@ import ChatbotMessage from "./chatbot-message";
 import MessageAnimated from "./message-animated";
 import { Badge } from "@/components/ui/badge";
 import { useChatShortcuts } from "../shortcut/hooks/use-chat-shortcuts";
+import { sendMessage } from "../api/send-message";
 
 export default function ChatbotWidget() {
   const [isOpen, setIsOpen] = useState(false);
@@ -88,6 +89,36 @@ export default function ChatbotWidget() {
   const handleResetChat = () => {
     setMessages([]);
     setIsLoading(false);
+  };
+
+  const handleSendMessage = async (message: string) => {
+    setIsLoading(true);
+
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: `user-${Date.now()}`,
+        sender: "user",
+        text: message,
+        time: getCurrentTime(),
+      },
+    ]);
+
+    try {
+      const response = await sendMessage({ message }); // API chatbot
+
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: `bot-${Date.now()}`,
+          sender: "bot",
+          text: response.answer,
+          time: getCurrentTime(),
+        },
+      ]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const { data: chatShortcuts } = useChatShortcuts();
@@ -157,7 +188,7 @@ export default function ChatbotWidget() {
                   <Badge
                     key={shortcut.id}
                     variant={"outline"}
-                    onClick={() => {}}
+                    onClick={() => handleSendMessage(shortcut.content)}
                     className="cursor-pointer"
                   >
                     <div className="aspect-square h-2  rounded-full bg-yellow-400" />
