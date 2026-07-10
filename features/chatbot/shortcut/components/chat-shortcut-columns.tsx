@@ -1,13 +1,12 @@
 import DeleteButton from "@/components/buttons/delete-button";
-import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
+import SheetButton from "@/components/buttons/sheet-button";
 import { ColumnDef } from "@tanstack/react-table";
+import { Pencil } from "lucide-react";
 import { deleteChatShortcut } from "../api/delete-chat-shortcut";
 import { chatShortcutKeys } from "../queries/chat-shortcut-keys";
 import { ChatShortcut } from "../types/chat-shortcut";
-import SheetButton from "@/components/buttons/sheet-button";
+import StatusSelect from "./status-select";
 import UpdateChatShortcutForm from "./update-chat-shortcut-form";
-import { Pencil } from "lucide-react";
 
 export const chatbotShortcutColumns: ColumnDef<ChatShortcut>[] = [
   {
@@ -32,15 +31,7 @@ export const chatbotShortcutColumns: ColumnDef<ChatShortcut>[] = [
       const isActive = row.original.isActive;
 
       return (
-        <Badge variant={"outline"} className="flex flex-row gap-2">
-          <div
-            className={cn(
-              "h-2 aspect-square rounded-full",
-              isActive ? "bg-green-400" : "bg-gray-400",
-            )}
-          />
-          {isActive ? "Aktif" : "Tidak Aktif"}
-        </Badge>
+        <StatusSelect id={row.original.id} isActive={row.original.isActive} />
       );
     },
   },
