@@ -30,8 +30,8 @@ export default function LoginForm({ className }: Props) {
     },
   });
 
-  const handleLogin = ({ value }: { value: LoginPayload }) => {
-    goeyToast.promise(mutateAsync(value), {
+  const handleLogin = async ({ value }: { value: LoginPayload }) => {
+    await goeyToast.promise(mutateAsync(value), {
       loading: "Logging in...",
       success: "Berhasil login",
       error: (err) => (err as AppError).message,

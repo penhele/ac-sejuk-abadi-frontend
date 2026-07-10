@@ -10,31 +10,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { cn } from "@/lib/utils";
-import { AnimatePresence, motion } from "framer-motion";
-import {
-  Bot,
-  MessageCircle,
-  MessageCircleDashedIcon,
-  RotateCcw,
-  RotateCwIcon,
-  X,
-} from "lucide-react";
-import { useState } from "react";
-import ChatbotMessage from "./chatbot-message";
-import {
-  MessageScroller,
-  MessageScrollerContent,
-  MessageScrollerProvider,
-  MessageScrollerViewport,
-} from "@/components/ui/message-scroller";
-import MessageAnimated from "./message-animated";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import {
   Empty,
   EmptyDescription,
@@ -42,27 +17,44 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@/components/ui/empty";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import {
+  MessageScroller,
+  MessageScrollerContent,
+  MessageScrollerProvider,
+  MessageScrollerViewport,
+} from "@/components/ui/message-scroller";
+import { Separator } from "@/components/ui/separator";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
+import {
+  MessageCircle,
+  MessageCircleDashedIcon,
+  RotateCwIcon,
+  X,
+} from "lucide-react";
+import { useState } from "react";
+import ChatbotMessage from "./chatbot-message";
+import MessageAnimated from "./message-animated";
+import { Badge } from "@/components/ui/badge";
 
 export default function ChatbotWidget() {
   const [isOpen, setIsOpen] = useState(false);
-  // 1. Tambahkan state untuk melacak status loading
   const [isLoading, setIsLoading] = useState(false);
 
-  const [messages, setMessages] = useState([
+  const [messages, setMessages] = useState<
     {
-      id: "welcome",
-      sender: "bot",
-      text: "Halo! Ada yang bisa saya bantu hari ini?",
-      time:
-        new Date().toLocaleTimeString("id-ID", {
-          hour: "2-digit",
-          minute: "2-digit",
-        }) + " WIB",
-    },
-  ]);
+      id: string;
+      sender: "user" | "bot";
+      text: string;
+      time: string;
+    }[]
+  >([]);
 
-  // Helper untuk mendapatkan waktu saat ini
   const getCurrentTime = () =>
     new Date().toLocaleTimeString("id-ID", {
       hour: "2-digit",
@@ -73,7 +65,6 @@ export default function ChatbotWidget() {
     userMessage: string,
     botResponse: string,
   ) => {
-    // Matikan loading ketika respon sudah berhasil didapatkan
     setIsLoading(false);
 
     setMessages((prev) => [
@@ -102,7 +93,7 @@ export default function ChatbotWidget() {
     <div className="relative">
       {isOpen && (
         <MessageScrollerProvider>
-          <Card className="fixed z-50 bottom-24 right-8 w-md">
+          <Card className="fixed z-50 bottom-9 right-20 w-md">
             <CardHeader>
               <CardTitle>Sejuk Abadi AI</CardTitle>
               <CardDescription>Asisten Virtual (Aktif)</CardDescription>
@@ -115,7 +106,6 @@ export default function ChatbotWidget() {
                       size="icon"
                       aria-label="Reset conversation"
                       onClick={handleResetChat}
-                      // disabled={isBusy}
                       className="group"
                     >
                       <RotateCwIcon className="group-hover:rotate-90 transition" />
@@ -150,11 +140,7 @@ export default function ChatbotWidget() {
                   <MessageScrollerViewport>
                     <MessageScrollerContent>
                       {messages.map((message) => (
-                        <MessageAnimated
-                          key={message.id}
-                          message={message}
-                          // scrollAnchor={message.role === "user"}
-                        />
+                        <MessageAnimated key={message.id} message={message} />
                       ))}
                     </MessageScrollerContent>
                   </MessageScrollerViewport>
@@ -162,7 +148,18 @@ export default function ChatbotWidget() {
               )}
             </CardContent>
 
-            <CardFooter>
+            <CardFooter className="flex flex-col gap-2 items-start">
+              <div className="">
+                <Badge
+                  variant={"outline"}
+                  onClick={() => {}}
+                  className="cursor-pointer"
+                >
+                  <div className="aspect-square h-2 rounded-full bg-yellow-400" />
+                  AC untuk kamar 3x4?
+                </Badge>
+              </div>
+
               <ChatbotMessage
                 onSuccess={handleSendMessageSuccess}
                 onSendStart={() => setIsLoading(true)}
@@ -177,11 +174,11 @@ export default function ChatbotWidget() {
         whileHover={{ scale: 1.08, y: -2 }}
         whileTap={{ scale: 0.93 }}
         className={cn(
-          "fixed bottom-8 right-8 rounded-full h-14 w-14 flex items-center justify-center cursor-pointer text-primary-foreground transition-all",
+          "fixed bottom-8 right-8 rounded-full h-8 w-8 flex items-center justify-center cursor-pointer text-primary-foreground transition-all",
           isOpen ? "bg-destructive" : "bg-primary",
         )}
       >
-        {isOpen ? <X size={24} /> : <MessageCircle size={24} />}
+        {isOpen ? <X size={16} /> : <MessageCircle size={16} />}
       </motion.button>
     </div>
   );

@@ -4,12 +4,14 @@ import { useFormContext } from "@/hooks/use-app-form";
 import { Button } from "../ui/button";
 import { Spinner } from "../ui/spinner";
 import { cn } from "@/lib/utils";
+import { LucideIcon } from "lucide-react";
 
 interface Props {
-  label: string;
+  label?: string;
   className?: string;
   isDisabled?: boolean;
   loading?: boolean;
+  Icon?: LucideIcon;
 }
 
 export default function SubmitButton({
@@ -17,6 +19,7 @@ export default function SubmitButton({
   className,
   isDisabled,
   loading = false,
+  Icon,
 }: Props) {
   const form = useFormContext();
 
@@ -34,9 +37,9 @@ export default function SubmitButton({
           <Button
             type="submit"
             disabled={!canSubmit || isLoading || isDisabled}
-            className={cn("min-w-24", className)}
+            className={cn(className)}
           >
-            {isLoading ? <Spinner /> : label}
+            {isLoading ? <Spinner /> : Icon ? <Icon /> : label}
           </Button>
         );
       }}

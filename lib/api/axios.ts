@@ -11,6 +11,11 @@ export const api = axios.create({
   headers: { "Content-Type": "application/json" },
 });
 
+export const chatApi = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_CHATBOT_API_URL,
+  headers: { "Content-Type": "application/json" },
+});
+
 api.interceptors.request.use((config) => {
   const token = Cookies.get("access_token");
 

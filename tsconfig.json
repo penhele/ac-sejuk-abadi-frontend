@@ -30,7 +30,8 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts",
     "components/buttons/edit-button.tsx",
-    "features/category/schema"
+    "features/category/schema",
+    "features/chatbot/shortcut/api/get-chat-shortcuts.ts"
   ],
   "exclude": ["node_modules"]
 }
