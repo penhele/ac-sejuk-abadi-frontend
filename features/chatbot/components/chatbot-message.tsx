@@ -1,15 +1,13 @@
-import { Input } from "@/components/ui/input";
-import { useAppForm } from "@/hooks/use-app-form";
-import { useMutation } from "@tanstack/react-query";
-import { ArrowUpIcon, SendHorizontal } from "lucide-react";
-import { sendMessage } from "../api/send-message";
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
   InputGroupTextarea,
 } from "@/components/ui/input-group";
-import { Button } from "@/components/ui/button";
+import { useAppForm } from "@/hooks/use-app-form";
+import { useMutation } from "@tanstack/react-query";
+import { ArrowUpIcon } from "lucide-react";
+import { sendMessage } from "../api/send-message";
 
 interface ChatbotMessageProps {
   onSuccess: (userMessage: string, botResponse: string) => void;

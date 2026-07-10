@@ -41,6 +41,7 @@ import { useState } from "react";
 import ChatbotMessage from "./chatbot-message";
 import MessageAnimated from "./message-animated";
 import { Badge } from "@/components/ui/badge";
+import { useChatShortcut } from "../shortcut/hooks/use-chat-shortcut";
 
 export default function ChatbotWidget() {
   const [isOpen, setIsOpen] = useState(false);
@@ -88,6 +89,8 @@ export default function ChatbotWidget() {
     setMessages([]);
     setIsLoading(false);
   };
+
+  const { data: chatShortcuts } = useChatShortcut();
 
   return (
     <div className="relative">
@@ -149,15 +152,18 @@ export default function ChatbotWidget() {
             </CardContent>
 
             <CardFooter className="flex flex-col gap-2 items-start">
-              <div className="">
-                <Badge
-                  variant={"outline"}
-                  onClick={() => {}}
-                  className="cursor-pointer"
-                >
-                  <div className="aspect-square h-2 rounded-full bg-yellow-400" />
-                  AC untuk kamar 3x4?
-                </Badge>
+              <div className="flex flex-row gap-2 flex-wrap">
+                {chatShortcuts?.map((shortcut) => (
+                  <Badge
+                    key={shortcut.id}
+                    variant={"outline"}
+                    onClick={() => {}}
+                    className="cursor-pointer"
+                  >
+                    <div className="aspect-square h-2  rounded-full bg-yellow-400" />
+                    {shortcut.title}
+                  </Badge>
+                ))}
               </div>
 
               <ChatbotMessage
