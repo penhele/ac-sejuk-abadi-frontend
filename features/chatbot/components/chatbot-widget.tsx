@@ -41,7 +41,7 @@ import { useState } from "react";
 import ChatbotMessage from "./chatbot-message";
 import MessageAnimated from "./message-animated";
 import { Badge } from "@/components/ui/badge";
-import { useChatShortcut } from "../shortcut/hooks/use-chat-shortcut";
+import { useChatShortcuts } from "../shortcut/hooks/use-chat-shortcuts";
 
 export default function ChatbotWidget() {
   const [isOpen, setIsOpen] = useState(false);
@@ -90,7 +90,7 @@ export default function ChatbotWidget() {
     setIsLoading(false);
   };
 
-  const { data: chatShortcuts } = useChatShortcut();
+  const { data: chatShortcuts } = useChatShortcuts();
 
   return (
     <div className="relative">

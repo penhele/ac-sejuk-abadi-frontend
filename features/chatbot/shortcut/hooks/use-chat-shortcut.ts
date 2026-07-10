@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getChatShortcutQueryOptions } from "../queries/chat-shortcut-queries";
+import { getChatShortcutByIdQueryOptions } from "../queries/chat-shortcut-queries";
 
-export const useChatShortcut = (all?: boolean) =>
-  useQuery(getChatShortcutQueryOptions(all));
+export const useChatShortcut = (id: string) =>
+  useQuery(getChatShortcutByIdQueryOptions(id));

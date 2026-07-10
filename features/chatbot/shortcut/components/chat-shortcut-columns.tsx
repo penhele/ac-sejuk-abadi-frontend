@@ -5,6 +5,9 @@ import { ColumnDef } from "@tanstack/react-table";
 import { deleteChatShortcut } from "../api/delete-chat-shortcut";
 import { chatShortcutKeys } from "../queries/chat-shortcut-keys";
 import { ChatShortcut } from "../types/chat-shortcut";
+import SheetButton from "@/components/buttons/sheet-button";
+import UpdateChatShortcutForm from "./update-chat-shortcut-form";
+import { Pencil } from "lucide-react";
 
 export const chatbotShortcutColumns: ColumnDef<ChatShortcut>[] = [
   {
@@ -45,8 +48,10 @@ export const chatbotShortcutColumns: ColumnDef<ChatShortcut>[] = [
     header: "Aksi",
     cell: ({ row }) => {
       return (
-        <div className="">
-          {/* <SheetButton /> */}
+        <div className="space-x-1">
+          <SheetButton title="Update" Icon={Pencil}>
+            <UpdateChatShortcutForm id={row.original.id} />
+          </SheetButton>
           <DeleteButton
             id={row.original.id}
             mutationFn={deleteChatShortcut}

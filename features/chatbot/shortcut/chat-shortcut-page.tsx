@@ -2,10 +2,10 @@
 
 import { DataTable } from "@/components/tables/data-table";
 import { chatbotShortcutColumns } from "./components/chat-shortcut-columns";
-import { useChatShortcut } from "./hooks/use-chat-shortcut";
+import { useChatShortcuts } from "./hooks/use-chat-shortcuts";
 
 export default function ChatbotShortcutPage() {
-  const { data: chatShortcuts } = useChatShortcut(true);
+  const { data: chatShortcuts } = useChatShortcuts(true);
 
   return (
     <div className="space-y-between-items">
