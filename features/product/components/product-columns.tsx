@@ -88,19 +88,25 @@ export const productColumns: ColumnDef<Product>[] = [
   {
     header: "Freon",
     cell: ({ row }) => {
-      return <span>{row.original.freon_type}</span>;
+      const freonType = row.original.freon_type;
+
+      return <span>{freonType?.length ? freonType : "-"}</span>;
     },
   },
   {
     header: "Nama Seri",
     cell: ({ row }) => {
-      return <span>{row.original.series_name}</span>;
+      const seriesName = row.original.series_name;
+
+      return <span>{seriesName?.length ? seriesName : "-"}</span>;
     },
   },
   {
     header: "Kode Model",
     cell: ({ row }) => {
-      return <span>{row.original.model_code}</span>;
+      const modelCode = row.original.model_code;
+
+      return <span>{modelCode?.length ? modelCode : "-"}</span>;
     },
   },
   {

@@ -5,6 +5,7 @@ import { DataTable } from "@/components/tables/data-table";
 import CreateBrandForm from "@/features/brand/compenents/create-brand-form";
 import { useBrands } from "../hooks/use-brands";
 import { brandColumns } from "./brand-columns";
+import { Plus } from "lucide-react";
 
 export default function BrandPage() {
   const { data: brands, isFetching } = useBrands();
@@ -20,6 +21,7 @@ export default function BrandPage() {
           <SheetButton
             label="Create Brand"
             title="Create Brand"
+            Icon={Plus}
             description="Kelola brand di sini"
           >
             <CreateBrandForm />

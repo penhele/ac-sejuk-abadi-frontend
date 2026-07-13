@@ -14,7 +14,7 @@ export default function ProjectCard({ project }: { project: Project }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.4 }}
-      className="group relative flex flex-col transition-all duration-300 hover:-translate-y-1.5"
+      className="group relative flex flex-col transition-all duration-300"
     >
       <Link
         href={ROUTES.PROJECT_DETAIL(project.id)}

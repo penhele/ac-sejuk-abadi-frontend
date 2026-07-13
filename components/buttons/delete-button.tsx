@@ -39,15 +39,15 @@ export default function DeleteButton<TId = string | number>({
 
   const { mutateAsync, isPending } = useMutation({
     mutationFn,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey });
+    },
   });
 
   const handleDelete = () => {
     goeyToast.promise(mutateAsync(id), {
       loading: "Loading...",
-      success: () => {
-        queryClient.invalidateQueries({ queryKey });
-        return successMessage;
-      },
+      success: successMessage,
       error: (err) => (err as AppError).message,
 
       description: {

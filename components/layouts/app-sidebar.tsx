@@ -39,16 +39,29 @@ import { Button } from "../ui/button";
 import { useAuthToken } from "@/features/auth/hooks";
 
 export function AppSidebar() {
-  const navProduct = [
+  const navItems = [
     {
-      title: "Products",
+      title: "General",
       items: [
-        { Icon: LayoutDashboard, label: "Dashboard", href: ROUTES.DASHBOARD },
-        { Icon: Package, label: "Product", href: ROUTES.PRODUCTS },
+        {
+          Icon: LayoutDashboard,
+          label: "Dashboard",
+          href: ROUTES.DASHBOARD,
+        },
       ],
     },
     {
-      title: "Company",
+      title: "Products",
+      items: [
+        {
+          Icon: Package,
+          label: "Products",
+          href: ROUTES.PRODUCTS,
+        },
+      ],
+    },
+    {
+      title: "Website",
       items: [
         {
           Icon: Building2,
@@ -57,14 +70,19 @@ export function AppSidebar() {
         },
         {
           Icon: AirVent,
-          label: "Portofolio",
+          label: "Portfolio",
           href: ROUTES.DASHBOARD_PROJECT,
         },
         {
           Icon: BookOpen,
-          label: "Article",
+          label: "Articles",
           href: ROUTES.DASHBOARD_ARTICLE,
         },
+      ],
+    },
+    {
+      title: "System",
+      items: [
         {
           Icon: Users,
           label: "Users",
@@ -72,7 +90,7 @@ export function AppSidebar() {
         },
         {
           Icon: Settings2,
-          label: "Setting",
+          label: "Settings",
           href: ROUTES.DASHBOARD_SETTING,
         },
       ],
@@ -99,7 +117,7 @@ export function AppSidebar() {
     <Sidebar collapsible="icon">
       <SidebarHeader />
       <SidebarContent>
-        {navProduct.map((item, index) => (
+        {navItems.map((item, index) => (
           <SidebarGroup key={index}>
             <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
             <SidebarGroupContent>
