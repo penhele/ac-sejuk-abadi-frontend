@@ -43,6 +43,12 @@ export default function ImageField({ className, label }: Props) {
     }
   };
 
+  const handleRemoveImage = (indexToRemove: number) => {
+    field.handleChange(
+      field.state.value.filter((_, index) => index !== indexToRemove),
+    );
+  };
+
   return (
     <Field className="flex flex-col gap-between-items">
       <FieldLabel>{label}</FieldLabel>
@@ -67,7 +73,11 @@ export default function ImageField({ className, label }: Props) {
 
       <div className="grid grid-cols-3 w-full gap-between-card">
         {field.state.value.map((item, index) => (
-          <AttachmentItem key={`${item.name}-${index}`} item={item} />
+          <AttachmentItem
+            key={`${item.name}-${index}`}
+            item={item}
+            onDelete={() => handleRemoveImage(index)}
+          />
         ))}
 
         {isCompressing && (

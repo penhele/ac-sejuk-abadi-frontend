@@ -1,38 +1,42 @@
 "use client";
 
-import { ROUTES } from "@/constants/routes";
 import { useAppForm } from "@/hooks/use-app-form";
 import { AppError } from "@/types/error";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { goeyToast } from "goey-toast";
-import { useRouter } from "next/navigation";
 import { uploadProjectImage } from "../api/upload-project-images";
 import { projectKeys } from "../queries/project-keys";
 import { UploadProjectImagePayload } from "../types/upload-project-image-payload";
 
-export default function UploadProjectImageForm({ id }: { id: string }) {
+interface Props {
+  id: string;
+}
+
+export default function UploadProjectImageForm({ id }: Props) {
   const queryClient = useQueryClient();
-  const router = useRouter();
 
   const { mutateAsync } = useMutation({
     mutationFn: (data: UploadProjectImagePayload) =>
       uploadProjectImage(id, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: projectKeys.all });
+      form.reset();
     },
   });
+
+  const handleSubmit = ({ value }: { value: UploadProjectImagePayload }) => {
+    goeyToast.promise(mutateAsync(value), {
+      loading: "Uploading...",
+      success: "Berhasil",
+      error: (err) => (err as AppError).message,
+    });
+  };
 
   const form = useAppForm({
     defaultValues: {
       files: [] as File[],
     },
-    onSubmit: ({ value }) => {
-      goeyToast.promise(mutateAsync(value), {
-        loading: "Uploading...",
-        success: "Berhasil",
-        error: (err) => (err as AppError).message,
-      });
-    },
+    onSubmit: handleSubmit,
   });
 
   return (

@@ -3,7 +3,7 @@
 import { AppError } from "@/types/error";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { goeyToast } from "goey-toast";
-import { Trash, Trash2 } from "lucide-react";
+import { LucideIcon, Trash2 } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -26,6 +26,8 @@ interface Props<TId = string | number> {
   successMessage?: string;
   errorMessage?: string;
   item: string;
+  className?: string;
+  Icon?: LucideIcon;
 }
 
 export default function DeleteButton<TId = string | number>({
@@ -34,6 +36,8 @@ export default function DeleteButton<TId = string | number>({
   queryKey,
   successMessage = "Berhasil menghapus data",
   item,
+  className,
+  Icon,
 }: Props<TId>) {
   const queryClient = useQueryClient();
 
@@ -64,8 +68,13 @@ export default function DeleteButton<TId = string | number>({
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <DropdownMenuShortcut>
-          <Button size={"icon-xs"} variant={"outline"} disabled={isPending}>
-            {isPending ? <Spinner /> : <Trash />}
+          <Button
+            size={"icon-xs"}
+            variant={"outline"}
+            disabled={isPending}
+            className={className}
+          >
+            {isPending ? <Spinner /> : Icon ? <Icon /> : <Trash2 />}
           </Button>
         </DropdownMenuShortcut>
       </AlertDialogTrigger>

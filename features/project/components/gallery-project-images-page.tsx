@@ -11,19 +11,30 @@ import {
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { ROUTES } from "@/constants/routes";
-import { ArrowUpRight, ImageOff, Pencil, PencilLine, Plus } from "lucide-react";
+import {
+  ArrowUpRight,
+  ImageOff,
+  Pencil,
+  PencilLine,
+  Plus,
+  X,
+} from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { deleteProjectImage } from "../api/delete-project-image";
 import { useProjects } from "../hooks/use-projects";
 import { projectKeys } from "../queries/project-keys";
+import BackButton from "@/components/buttons/back-button";
+import DeleteButton from "@/components/buttons/delete-button";
 
 export default function GalleryProjectPage() {
   const { data: projects = [] } = useProjects();
   const router = useRouter();
 
   return (
-    <div className="space-y-between-items-lg">
+    <div className="space-y-between-items">
+      <BackButton />
+
       <h1 className="text-lg font-semibold">Gallery Image</h1>
 
       <div className="grid grid-cols-2 gap-between-card">
@@ -75,12 +86,15 @@ export default function GalleryProjectPage() {
                         className="object-contain bg-muted"
                       />
 
-                      <DeleteImageButton
-                        className="absolute top-2 right-0 opacity-0 group-hover:opacity-100"
+                      <DeleteButton
                         mutationFn={() =>
-                          deleteProjectImage(project.id, image.id)
+                          deleteProjectImage(image.id_project, image.id)
                         }
                         queryKey={projectKeys.all}
+                        id={image.id}
+                        item={image.id.toString()}
+                        className="absolute top-2 right-2 opacity-0 group-hover:opacity-100"
+                        Icon={X}
                       />
                     </div>
                   ))}

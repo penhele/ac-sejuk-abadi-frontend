@@ -15,7 +15,20 @@ export default function UploadProductImageForm({ id }: { id: string }) {
 
   const { mutateAsync } = useMutation({
     mutationFn: (data: UploadImagePayload) => uploadProductImages(id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: productKeys.all,
+      });
+    },
   });
+
+  const handleSubmit = ({ value }: { value: UploadImagePayload }) => {
+    goeyToast.promise(mutateAsync(value), {
+      loading: "Loading...",
+      success: "Berhasil",
+      error: (err) => (err as AppError).message,
+    });
+  };
 
   const form = useAppForm({
     defaultValues: {
@@ -28,19 +41,7 @@ export default function UploadProductImageForm({ id }: { id: string }) {
       mode: "submit",
       modeAfterSubmission: "blur",
     }),
-    onSubmit: ({ value }) => {
-      goeyToast.promise(mutateAsync(value), {
-        loading: "Loading...",
-        success: () => {
-          queryClient.invalidateQueries({
-            queryKey: productKeys.all,
-          });
-
-          return "Berhasil";
-        },
-        error: (err) => (err as AppError).message,
-      });
-    },
+    onSubmit: handleSubmit,
   });
 
   return (
