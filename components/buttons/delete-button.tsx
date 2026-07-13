@@ -67,10 +67,10 @@ export default function DeleteButton<TId = string | number>({
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger asChild>
-        <Tooltip>
-          <TooltipTrigger>
-            <DropdownMenuShortcut>
+      <AlertDialogTrigger>
+        <DropdownMenuShortcut>
+          <Tooltip>
+            <TooltipTrigger asChild>
               <Button
                 size={"icon-xs"}
                 variant={"outline"}
@@ -79,13 +79,13 @@ export default function DeleteButton<TId = string | number>({
               >
                 {isPending ? <Spinner /> : Icon ? <Icon /> : <Trash2 />}
               </Button>
-            </DropdownMenuShortcut>
+            </TooltipTrigger>
 
             <TooltipContent>
               <p>Hapus</p>
             </TooltipContent>
-          </TooltipTrigger>
-        </Tooltip>
+          </Tooltip>
+        </DropdownMenuShortcut>
       </AlertDialogTrigger>
 
       <AlertDialogContent>

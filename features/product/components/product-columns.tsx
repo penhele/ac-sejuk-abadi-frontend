@@ -1,5 +1,6 @@
 import CategoryBadge from "@/components/badges/category-badge";
 import PkBadge from "@/components/badges/pk-badge";
+import ButtonLink from "@/components/buttons/button-link";
 import DeleteButton from "@/components/buttons/delete-button";
 import EditButtonHref from "@/components/buttons/edit-button-href";
 import { Button } from "@/components/ui/button";
@@ -9,12 +10,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { ROUTES } from "@/constants/routes";
 import AcProductTypeBadge from "@/features/acType/components/ac-type-badge";
 import { deleteProduct, productKeys } from "@/features/product";
@@ -159,6 +154,10 @@ export const productColumns: ColumnDef<Product>[] = [
               <ProductCard product={product} />
             </DialogContent>
           </Dialog>
+
+          <ButtonLink
+            routes={ROUTES.DASHBOARD_UPLOAD_PRODUCT_IMAGES(product.id)}
+          />
 
           <EditButtonHref routes={ROUTES.EDIT_PRODUCT(product.id)} />
           <DeleteButton

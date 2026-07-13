@@ -63,7 +63,6 @@ export default function ImageField({ className, label }: Props) {
           className={cn(className)}
           hidden
           onChange={handleFileChange}
-          disabled={isCompressing}
         />
 
         <UploadDropzone />
