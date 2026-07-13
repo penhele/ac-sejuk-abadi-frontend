@@ -17,6 +17,9 @@ export default function UploadProjectImageForm({ id }: { id: string }) {
   const { mutateAsync } = useMutation({
     mutationFn: (data: UploadProjectImagePayload) =>
       uploadProjectImage(id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: projectKeys.all });
+    },
   });
 
   const form = useAppForm({
@@ -26,12 +29,7 @@ export default function UploadProjectImageForm({ id }: { id: string }) {
     onSubmit: ({ value }) => {
       goeyToast.promise(mutateAsync(value), {
         loading: "Uploading...",
-        success: () => {
-          queryClient.invalidateQueries({ queryKey: projectKeys.all });
-          router.push(ROUTES.DASHBOARD_GALLERY_PROJECT);
-
-          return "Berhasil";
-        },
+        success: "Berhasil",
         error: (err) => (err as AppError).message,
       });
     },

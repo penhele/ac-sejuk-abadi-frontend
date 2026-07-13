@@ -1,5 +1,6 @@
 "use client";
 
+import DeleteImageButton from "@/components/buttons/delete-image-button";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -13,11 +14,9 @@ import { ROUTES } from "@/constants/routes";
 import { ArrowUpRight, ImageOff, Pencil, PencilLine, Plus } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useProjects } from "../hooks/use-projects";
-import DeleteImageButton from "@/components/buttons/delete-image-button";
 import { deleteProjectImage } from "../api/delete-project-image";
+import { useProjects } from "../hooks/use-projects";
 import { projectKeys } from "../queries/project-keys";
-import DeleteButton from "@/components/buttons/delete-button";
 
 export default function GalleryProjectPage() {
   const { data: projects = [] } = useProjects();
