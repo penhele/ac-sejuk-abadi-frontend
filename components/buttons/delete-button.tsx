@@ -18,6 +18,7 @@ import {
 import { Button } from "../ui/button";
 import { DropdownMenuShortcut } from "../ui/dropdown-menu";
 import { Spinner } from "../ui/spinner";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
 interface Props<TId = string | number> {
   id: TId;
@@ -67,16 +68,24 @@ export default function DeleteButton<TId = string | number>({
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <DropdownMenuShortcut>
-          <Button
-            size={"icon-xs"}
-            variant={"outline"}
-            disabled={isPending}
-            className={className}
-          >
-            {isPending ? <Spinner /> : Icon ? <Icon /> : <Trash2 />}
-          </Button>
-        </DropdownMenuShortcut>
+        <Tooltip>
+          <TooltipTrigger>
+            <DropdownMenuShortcut>
+              <Button
+                size={"icon-xs"}
+                variant={"outline"}
+                disabled={isPending}
+                className={className}
+              >
+                {isPending ? <Spinner /> : Icon ? <Icon /> : <Trash2 />}
+              </Button>
+            </DropdownMenuShortcut>
+
+            <TooltipContent>
+              <p>Hapus</p>
+            </TooltipContent>
+          </TooltipTrigger>
+        </Tooltip>
       </AlertDialogTrigger>
 
       <AlertDialogContent>

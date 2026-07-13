@@ -3,6 +3,18 @@ import PkBadge from "@/components/badges/pk-badge";
 import DeleteButton from "@/components/buttons/delete-button";
 import EditButtonHref from "@/components/buttons/edit-button-href";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { ROUTES } from "@/constants/routes";
 import AcProductTypeBadge from "@/features/acType/components/ac-type-badge";
 import { deleteProduct, productKeys } from "@/features/product";
@@ -10,7 +22,8 @@ import { Product } from "@/features/product/types/product";
 import { formatNumber } from "@/lib/format/currency";
 import { ColumnDef } from "@tanstack/react-table";
 import { formatDistanceToNow } from "date-fns";
-import { ArrowUpDown } from "lucide-react";
+import { ArrowUpDown, Eye } from "lucide-react";
+import ProductCard from "./product-card";
 
 export const productColumns: ColumnDef<Product>[] = [
   {
@@ -134,6 +147,19 @@ export const productColumns: ColumnDef<Product>[] = [
 
       return (
         <div className="space-x-2">
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant={"outline"} size={"icon-xs"}>
+                <Eye />
+              </Button>
+            </DialogTrigger>
+
+            <DialogContent onInteractOutside={(e) => e.preventDefault()}>
+              <DialogTitle>Preview Product</DialogTitle>
+              <ProductCard product={product} />
+            </DialogContent>
+          </Dialog>
+
           <EditButtonHref routes={ROUTES.EDIT_PRODUCT(product.id)} />
           <DeleteButton
             id={product.id}

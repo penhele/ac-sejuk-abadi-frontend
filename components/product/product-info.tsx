@@ -4,9 +4,15 @@ import { Table, TableBody, TableCell, TableHead, TableRow } from "../ui/table";
 
 export default function ProductInfo({ product }: { product: Product }) {
   const items = [
-    { header: "Brand", value: product.brand.name },
-    { header: "Kategori", value: product.ac_type.name },
-    { header: "Tipe AC", value: product.category.name },
+    { header: "Brand", value: product.brand.name || "-" },
+    {
+      header: "Kategori",
+      value: product.id_ac_type ? product.ac_type.name : "-",
+    },
+    {
+      header: "Tipe AC",
+      value: product.id_category ? product.category.name : "-",
+    },
     { header: "Kode Mode", value: product.model_code || "-" },
     { header: "Seri AC", value: product.series_name || "-" },
     { header: "Kapasitas PK", value: product.pk || "-" },
@@ -29,8 +35,8 @@ export default function ProductInfo({ product }: { product: Product }) {
 
         <Table>
           <TableBody>
-            {items.map((item) => (
-              <TableRow className="odd:bg-muted/30">
+            {items.map((item, index) => (
+              <TableRow key={index} className="odd:bg-muted/30">
                 <TableHead>{item.header}</TableHead>
                 <TableCell>{item.value}</TableCell>
               </TableRow>
