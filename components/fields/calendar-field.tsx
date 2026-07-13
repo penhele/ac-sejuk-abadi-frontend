@@ -1,23 +1,27 @@
 import { useFieldContext } from "@/hooks/use-app-form";
 import { formatDate } from "@/lib/format/date";
+import { cn } from "@/lib/utils";
 import { parseISO } from "date-fns";
 import { CalendarFold } from "lucide-react";
 import { FieldInfo } from "../field-info";
 import { Button } from "../ui/button";
 import { Calendar } from "../ui/calendar";
-import { Label } from "../ui/label";
+import { Field, FieldLabel } from "../ui/field";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { cn } from "@/lib/utils";
+
+interface Props {
+  label: string;
+  placeholder?: string;
+  isDisabled?: boolean;
+  isOptional?: boolean;
+}
 
 export default function CalendarField({
   label,
   placeholder = "Pick a date",
   isDisabled,
-}: {
-  label: string;
-  placeholder?: string;
-  isDisabled?: boolean;
-}) {
+  isOptional,
+}: Props) {
   const field = useFieldContext<string>();
 
   const currentValue = field.state.value
@@ -25,10 +29,13 @@ export default function CalendarField({
     : undefined;
 
   return (
-    <div className="space-y-between-items-xs">
+    <Field>
       <div className="flex justify-between items-center">
-        <Label>{label}</Label>
-
+        <FieldLabel>
+          <div>
+            {label} {!isOptional && <span className="text-red-600">*</span>}
+          </div>
+        </FieldLabel>
         <FieldInfo field={field} />
       </div>
 
@@ -63,6 +70,6 @@ export default function CalendarField({
           />
         </PopoverContent>
       </Popover>
-    </div>
+    </Field>
   );
 }

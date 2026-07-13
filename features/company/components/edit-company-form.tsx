@@ -19,6 +19,9 @@ export default function EditCompanyForm({ className }: { className?: string }) {
 
   const { mutateAsync, isPending } = useMutation({
     mutationFn: (data: UpdateCompanyPayload) => updateCompany(data),
+    onSuccess: () => {
+      setIsEditing(false);
+    },
   });
 
   const form = useAppForm({
@@ -34,10 +37,7 @@ export default function EditCompanyForm({ className }: { className?: string }) {
     onSubmit: ({ value }) => {
       goeyToast.promise(mutateAsync(value), {
         loading: "Loading",
-        success: () => {
-          setIsEditing(false);
-          return "Berhasil";
-        },
+        success: "Berhasil",
         error: (err) => (err as AppError).message,
       });
     },
@@ -103,7 +103,6 @@ export default function EditCompanyForm({ className }: { className?: string }) {
                 return (
                   <field.InputField
                     label="Phone"
-                    type="number"
                     placeholder="62818355788"
                     isDisabled={isPending}
                     readOnly={!isEditing}
