@@ -4,7 +4,7 @@ import { useFieldContext } from "@/hooks/use-app-form";
 import { compressImages } from "@/lib/image";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
-import ImageUploadDropzone from "../../features/product/components/upload-dropzone";
+import UploadDropzone from "../../features/product/components/upload-dropzone";
 import { FieldInfo } from "../field-info";
 import {
   Attachment,
@@ -66,7 +66,7 @@ export default function ImageField({ className, label }: Props) {
           disabled={isCompressing}
         />
 
-        <ImageUploadDropzone />
+        <UploadDropzone />
       </label>
 
       <FieldInfo field={field} />
