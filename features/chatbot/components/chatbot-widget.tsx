@@ -42,7 +42,7 @@ import ChatbotMessage from "./chatbot-message";
 import MessageAnimated from "./message-animated";
 import { Badge } from "@/components/ui/badge";
 import { useChatShortcuts } from "../shortcut/hooks/use-chat-shortcuts";
-import { sendMessage } from "../api/send-message";
+import { sendMessage } from "../message/api/send-message";
 
 export default function ChatbotWidget() {
   const [isOpen, setIsOpen] = useState(false);

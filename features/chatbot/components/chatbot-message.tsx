@@ -7,7 +7,7 @@ import {
 import { useAppForm } from "@/hooks/use-app-form";
 import { useMutation } from "@tanstack/react-query";
 import { ArrowUpIcon } from "lucide-react";
-import { sendMessage } from "../api/send-message";
+import { sendMessage } from "../message/api/send-message";
 
 interface ChatbotMessageProps {
   onSuccess: (userMessage: string, botResponse: string) => void;
