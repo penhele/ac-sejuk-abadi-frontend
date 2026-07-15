@@ -12,11 +12,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import { cn } from "@/lib/utils";
 
-type Props = {
+interface Props {
   userId: string;
   role: string;
-};
+}
 
 export function RoleSelect({ userId, role }: Props) {
   const queryClient = useQueryClient();
@@ -66,8 +67,17 @@ export function RoleSelect({ userId, role }: Props) {
               </SelectTrigger>
 
               <SelectContent>
-                <SelectItem value="admin">Admin</SelectItem>
-                <SelectItem value="user">User</SelectItem>
+                {["admin", "user"].map((item) => (
+                  <SelectItem value={item}>
+                    <div
+                      className={cn(
+                        "aspect-square h-2 rounded-full",
+                        item === "admin" ? "bg-yellow-400" : "bg-gray-400",
+                      )}
+                    />
+                    {item[0].toUpperCase() + item.substring(1)}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
           )}

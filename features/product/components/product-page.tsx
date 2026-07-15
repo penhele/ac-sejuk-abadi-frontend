@@ -13,8 +13,7 @@ import { useProducts } from "@/features/product";
 import { productColumns } from "@/features/product/components/product-columns";
 import useDebounce from "@/hooks/use-debounce";
 import useProductFilters from "@/hooks/use-product-filters";
-import { Info, Plus, PlusIcon } from "lucide-react";
-import Link from "next/link";
+import { Info, PlusIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 

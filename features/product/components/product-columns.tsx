@@ -1,8 +1,15 @@
 import CategoryBadge from "@/components/badges/category-badge";
 import PkBadge from "@/components/badges/pk-badge";
+import ButtonLink from "@/components/buttons/button-link";
 import DeleteButton from "@/components/buttons/delete-button";
 import EditButtonHref from "@/components/buttons/edit-button-href";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { ROUTES } from "@/constants/routes";
 import AcProductTypeBadge from "@/features/acType/components/ac-type-badge";
 import { deleteProduct, productKeys } from "@/features/product";
@@ -10,7 +17,8 @@ import { Product } from "@/features/product/types/product";
 import { formatNumber } from "@/lib/format/currency";
 import { ColumnDef } from "@tanstack/react-table";
 import { formatDistanceToNow } from "date-fns";
-import { ArrowUpDown } from "lucide-react";
+import { ArrowUpDown, Eye } from "lucide-react";
+import ProductCard from "./product-card";
 
 export const productColumns: ColumnDef<Product>[] = [
   {
@@ -88,19 +96,25 @@ export const productColumns: ColumnDef<Product>[] = [
   {
     header: "Freon",
     cell: ({ row }) => {
-      return <span>{row.original.freon_type}</span>;
+      const freonType = row.original.freon_type;
+
+      return <span>{freonType?.length ? freonType : "-"}</span>;
     },
   },
   {
     header: "Nama Seri",
     cell: ({ row }) => {
-      return <span>{row.original.series_name}</span>;
+      const seriesName = row.original.series_name;
+
+      return <span>{seriesName?.length ? seriesName : "-"}</span>;
     },
   },
   {
     header: "Kode Model",
     cell: ({ row }) => {
-      return <span>{row.original.model_code}</span>;
+      const modelCode = row.original.model_code;
+
+      return <span>{modelCode?.length ? modelCode : "-"}</span>;
     },
   },
   {
@@ -128,6 +142,23 @@ export const productColumns: ColumnDef<Product>[] = [
 
       return (
         <div className="space-x-2">
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant={"outline"} size={"icon-xs"}>
+                <Eye />
+              </Button>
+            </DialogTrigger>
+
+            <DialogContent onInteractOutside={(e) => e.preventDefault()}>
+              <DialogTitle>Preview Product</DialogTitle>
+              <ProductCard product={product} />
+            </DialogContent>
+          </Dialog>
+
+          <ButtonLink
+            routes={ROUTES.DASHBOARD_UPLOAD_PRODUCT_IMAGES(product.id)}
+          />
+
           <EditButtonHref routes={ROUTES.EDIT_PRODUCT(product.id)} />
           <DeleteButton
             id={product.id}

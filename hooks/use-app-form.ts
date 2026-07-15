@@ -5,7 +5,7 @@ import CalendarField from "@/components/fields/calendar-field";
 import ComboboxField from "@/components/fields/combobox-field";
 import ImageField from "@/components/fields/image-field";
 import SelectField from "@/components/fields/select-field";
-import InputField from "@/components/fields/text-field";
+import InputField from "@/components/fields/input-field";
 import { createFormHook, createFormHookContexts } from "@tanstack/react-form";
 
 export const { fieldContext, formContext, useFieldContext, useFormContext } =

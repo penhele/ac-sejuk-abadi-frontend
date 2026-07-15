@@ -3,7 +3,7 @@
 import { AppError } from "@/types/error";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { goeyToast } from "goey-toast";
-import { Trash, Trash2 } from "lucide-react";
+import { LucideIcon, Trash2 } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -18,6 +18,7 @@ import {
 import { Button } from "../ui/button";
 import { DropdownMenuShortcut } from "../ui/dropdown-menu";
 import { Spinner } from "../ui/spinner";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
 interface Props<TId = string | number> {
   id: TId;
@@ -26,6 +27,8 @@ interface Props<TId = string | number> {
   successMessage?: string;
   errorMessage?: string;
   item: string;
+  className?: string;
+  Icon?: LucideIcon;
 }
 
 export default function DeleteButton<TId = string | number>({
@@ -34,20 +37,22 @@ export default function DeleteButton<TId = string | number>({
   queryKey,
   successMessage = "Berhasil menghapus data",
   item,
+  className,
+  Icon,
 }: Props<TId>) {
   const queryClient = useQueryClient();
 
   const { mutateAsync, isPending } = useMutation({
     mutationFn,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey });
+    },
   });
 
   const handleDelete = () => {
     goeyToast.promise(mutateAsync(id), {
       loading: "Loading...",
-      success: () => {
-        queryClient.invalidateQueries({ queryKey });
-        return successMessage;
-      },
+      success: successMessage,
       error: (err) => (err as AppError).message,
 
       description: {
@@ -62,11 +67,24 @@ export default function DeleteButton<TId = string | number>({
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger asChild>
+      <AlertDialogTrigger>
         <DropdownMenuShortcut>
-          <Button size={"icon-xs"} variant={"outline"} disabled={isPending}>
-            {isPending ? <Spinner /> : <Trash />}
-          </Button>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                size={"icon-xs"}
+                variant={"outline"}
+                disabled={isPending}
+                className={className}
+              >
+                {isPending ? <Spinner /> : Icon ? <Icon /> : <Trash2 />}
+              </Button>
+            </TooltipTrigger>
+
+            <TooltipContent>
+              <p>Hapus</p>
+            </TooltipContent>
+          </Tooltip>
         </DropdownMenuShortcut>
       </AlertDialogTrigger>
 

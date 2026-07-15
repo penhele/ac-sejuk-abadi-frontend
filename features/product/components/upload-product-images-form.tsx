@@ -1,30 +1,30 @@
 "use client";
 
-import { useAppForm } from "@/hooks/use-app-form";
-import { AppError } from "@/types/error";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { uploadProductImages } from "../api/upload-product-images";
+import { productKeys } from "../queries/product-keys";
 import { goeyToast } from "goey-toast";
-import { uploadProjectImage } from "../api/upload-project-images";
-import { projectKeys } from "../queries/project-keys";
-import { UploadProjectImagePayload } from "../types/upload-project-image-payload";
+import { AppError } from "@/types/error";
+import { useAppForm } from "@/hooks/use-app-form";
+import { UploadProductImagePayload } from "../types/upload-product-image-payload";
 
 interface Props {
   id: string;
 }
 
-export default function UploadProjectImageForm({ id }: Props) {
+export default function UploadProductImagesForm({ id }: Props) {
   const queryClient = useQueryClient();
 
-  const { mutateAsync } = useMutation({
-    mutationFn: (data: UploadProjectImagePayload) =>
-      uploadProjectImage(id, data),
+  const { mutateAsync, isPending } = useMutation({
+    mutationFn: (data: UploadProductImagePayload) =>
+      uploadProductImages(id, data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: projectKeys.all });
+      queryClient.invalidateQueries({ queryKey: productKeys.all });
       form.reset();
     },
   });
 
-  const handleSubmit = ({ value }: { value: UploadProjectImagePayload }) => {
+  const handleSubmit = ({ value }: { value: UploadProductImagePayload }) => {
     goeyToast.promise(mutateAsync(value), {
       loading: "Uploading...",
       success: "Berhasil",
@@ -52,7 +52,7 @@ export default function UploadProjectImageForm({ id }: Props) {
           {(field) => <field.ImageField label="Upload Images" />}
         </form.AppField>
 
-        <form.SubmitButton label="Save" />
+        <form.SubmitButton label="Save" loading={isPending} />
       </form>
     </form.AppForm>
   );

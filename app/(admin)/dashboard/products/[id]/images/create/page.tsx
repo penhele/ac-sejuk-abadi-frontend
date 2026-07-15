@@ -1,4 +1,4 @@
-import UploadProjectImagesPage from "@/features/project/components/upload-project-images-page";
+import UploadProductImagesPage from "@/features/product/components/upload-product-images-page";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -7,5 +7,5 @@ interface Props {
 export default async function Page({ params }: Props) {
   const { id } = await params;
 
-  return <UploadProjectImagesPage id={id} />;
+  return <UploadProductImagesPage id={id} />;
 }

@@ -21,7 +21,7 @@ export const ROUTES = {
   DASHBOARD_PRODUCT_IMAGES: (id: string | number) =>
     `/dashboard/products/${id}/images`,
   DASHBOARD_UPLOAD_PRODUCT_IMAGES: (id: string | number) =>
-    `/dashboard/products/${id}/images/upload`,
+    `/dashboard/products/${id}/images/create`,
 
   BRAND: "/dashboard/brands",
   CREATE_BRAND: "/dashboard/brands/create",
