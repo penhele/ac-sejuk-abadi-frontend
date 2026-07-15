@@ -49,15 +49,12 @@ export default function AttachmentItem({ item, onDelete }: Props) {
         </AttachmentDescription>
       </AttachmentContent>
 
-      {/* Tombol Hapus Pojok Kanan Atas */}
       <AttachmentActions className="absolute top-2 right-2 z-30">
         <AttachmentAction
           variant="outline"
           size="icon-xs"
-          // Tombol tersembunyi (opacity-0) dan akan muncul (opacity-100) saat di-hover
           className="opacity-0 group-hover:opacity-100 transition-opacity rounded-full bg-background/80 shadow-sm hover:bg-destructive hover:text-destructive-foreground"
           onClick={(e) => {
-            // Mencegah trigger click tidak sengaja ke input/label di luar grid jika ada
             e.preventDefault();
             e.stopPropagation();
             onDelete();
