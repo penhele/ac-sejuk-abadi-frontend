@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { ROUTES } from "@/constants/routes";
 import { Book, Plus } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import ButtonLink from "@/components/buttons/button-link";
 
 export default function ArticlePage() {
   const router = useRouter();
@@ -15,11 +16,19 @@ export default function ArticlePage() {
 
   return (
     <div className="space-y-4">
-      <div className="">
-        <h1 className="text-3xl font-semibold">Artikel</h1>
-        <p className="text-sm text-muted-foreground">
-          Kelola artikel yang tersimpan dalam sistem
-        </p>
+      <div className="flex flex-row">
+        <div>
+          <h1 className="text-xl font-bold ">Projects</h1>
+        </div>
+
+        <ButtonLink
+          href={ROUTES.DASHBOARD_CREATE_ARTICLE}
+          Icon={Plus}
+          label="Add Article"
+          className="ml-auto"
+          variant="default"
+          size="sm"
+        />
       </div>
 
       <div className="grid grid-cols-4 gap-4">

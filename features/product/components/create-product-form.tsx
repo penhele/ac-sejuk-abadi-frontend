@@ -49,7 +49,7 @@ export default function CreateProductForm() {
         series_name: undefined,
       }}
       onSubmit={handleSubmit}
-      
+
       submitLabel="Save & Continue to Media Upload"
     />
   );

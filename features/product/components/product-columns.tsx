@@ -17,7 +17,7 @@ import { Product } from "@/features/product/types/product";
 import { formatNumber } from "@/lib/format/currency";
 import { ColumnDef } from "@tanstack/react-table";
 import { formatDistanceToNow } from "date-fns";
-import { ArrowUpDown, Eye } from "lucide-react";
+import { ArrowUpDown, Eye, ImagePlus } from "lucide-react";
 import ProductCard from "./product-card";
 
 export const productColumns: ColumnDef<Product>[] = [
@@ -151,12 +151,13 @@ export const productColumns: ColumnDef<Product>[] = [
 
             <DialogContent onInteractOutside={(e) => e.preventDefault()}>
               <DialogTitle>Preview Product</DialogTitle>
-              <ProductCard product={product} preview/>
+              <ProductCard product={product} preview />
             </DialogContent>
           </Dialog>
 
           <ButtonLink
-            routes={ROUTES.DASHBOARD_UPLOAD_PRODUCT_IMAGES(product.id)}
+            href={ROUTES.DASHBOARD_UPLOAD_PRODUCT_IMAGES(product.id)}
+            Icon={ImagePlus}
           />
 
           <EditButtonHref routes={ROUTES.EDIT_PRODUCT(product.id)} />

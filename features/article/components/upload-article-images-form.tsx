@@ -59,7 +59,9 @@ export default function UploadArticleImagesForm({ id }: Props) {
           className="space-y-between-items col-span-2"
         >
           <form.AppField name="files">
-            {(field) => <field.ImageField label="Upload Images" displayGrid={2} />}
+            {(field) => (
+              <field.ImageField label="Upload Images" displayGrid={2} />
+            )}
           </form.AppField>
 
           <form.SubmitButton label="Save" />

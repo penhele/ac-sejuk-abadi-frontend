@@ -11,6 +11,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarSeparator,
 } from "@/components/ui/sidebar";
 import { ROUTES } from "@/constants/routes";
 import {
@@ -115,7 +116,24 @@ export function AppSidebar() {
 
   return (
     <Sidebar collapsible="icon">
-      <SidebarHeader />
+      <SidebarHeader>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton size={"lg"}>
+              <div className="aspect-square size-8 flex items-center justify-center bg-sidebar-primary text-sidebar-primary-foreground rounded-lg">
+                <Building2 />
+              </div>
+              <div className="flex flex-col gap-0.5 leading-none">
+                <span className="truncate font-medium">ACSA</span>
+                <span className="truncate text-xs">Dashboard</span>
+              </div>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarHeader>
+
+      <SidebarSeparator />
+
       <SidebarContent>
         {navItems.map((item, index) => (
           <SidebarGroup key={index}>

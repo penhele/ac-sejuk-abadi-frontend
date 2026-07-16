@@ -18,6 +18,7 @@ import {
   TooltipTrigger,
 } from "../../../components/ui/tooltip";
 import ButtonLink from "@/components/buttons/button-link";
+import { ImagePlus } from "lucide-react";
 
 export const projectColumns: ColumnDef<Project>[] = [
   {
@@ -94,7 +95,8 @@ export const projectColumns: ColumnDef<Project>[] = [
       return (
         <div className="space-x-2">
           <ButtonLink
-            routes={ROUTES.DASHBOARD_UPLOAD_PROJECT_IMAGES(project.id)}
+            href={ROUTES.DASHBOARD_UPLOAD_PROJECT_IMAGES(project.id)}
+            Icon={ImagePlus}
           />
           <EditButtonHref routes={ROUTES.DASHBOARD_EDIT_PROJECT(project.id)} />
           <DeleteButton
