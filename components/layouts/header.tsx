@@ -14,6 +14,7 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { SidebarTrigger } from "../ui/sidebar";
+import { Separator } from "../ui/separator";
 
 export default function Header() {
   const { data: me } = useMe();
@@ -41,10 +42,12 @@ export default function Header() {
     <div className="border-b sticky top-0 p-4 backdrop-blur-lg z-30 flex flex-row bg-background/80">
       <SidebarTrigger />
 
-      <div className="flex flex-row items-center space-x-2 ml-auto">
+      <div className="flex flex-row items-center space-x-4 ml-auto">
         <Button size={"icon-xs"} variant={"ghost"} onClick={handleTheme}>
           {theme === "light" ? <Sun /> : <Moon />}
         </Button>
+
+        <Separator orientation="vertical" />
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
