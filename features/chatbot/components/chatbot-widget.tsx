@@ -1,5 +1,6 @@
 "use client";
 
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -37,12 +38,12 @@ import {
   RotateCwIcon,
   X,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { sendMessage } from "../message/api/send-message";
+import { createChatSession } from "../session/api/create-chat-session";
+import { useChatShortcuts } from "../shortcut/hooks/use-chat-shortcuts";
 import ChatbotMessage from "./chatbot-message";
 import MessageAnimated from "./message-animated";
-import { Badge } from "@/components/ui/badge";
-import { useChatShortcuts } from "../shortcut/hooks/use-chat-shortcuts";
-import { sendMessage } from "../message/api/send-message";
 
 export default function ChatbotWidget() {
   const [isOpen, setIsOpen] = useState(false);
@@ -56,6 +57,20 @@ export default function ChatbotWidget() {
       time: string;
     }[]
   >([]);
+
+  const [sessionId, setSessionId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const init = async () => {
+      const { id } = await createChatSession({
+        title: "Percakapan Baru",
+      });
+
+      setSessionId(id);
+    };
+
+    init();
+  }, []);
 
   const getCurrentTime = () =>
     new Date().toLocaleTimeString("id-ID", {
@@ -92,6 +107,8 @@ export default function ChatbotWidget() {
   };
 
   const handleSendMessage = async (message: string) => {
+    if (!sessionId) return;
+
     setIsLoading(true);
 
     setMessages((prev) => [
@@ -105,14 +122,29 @@ export default function ChatbotWidget() {
     ]);
 
     try {
-      const response = await sendMessage({ message }); // API chatbot
+      const response = await sendMessage({
+        message,
+        sessionId,
+      });
+
+      console.log(response);
 
       setMessages((prev) => [
         ...prev,
         {
           id: `bot-${Date.now()}`,
           sender: "bot",
-          text: response.answer,
+          text: response,
+          time: getCurrentTime(),
+        },
+      ]);
+    } catch {
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: `bot-${Date.now()}`,
+          sender: "bot",
+          text: "Maaf, terjadi kesalahan. Silakan coba lagi.",
           time: getCurrentTime(),
         },
       ]);
@@ -197,10 +229,13 @@ export default function ChatbotWidget() {
                 ))}
               </div>
 
-              <ChatbotMessage
-                onSuccess={handleSendMessageSuccess}
-                onSendStart={() => setIsLoading(true)}
-              />
+              {sessionId && (
+                <ChatbotMessage
+                  sessionId={sessionId}
+                  onSuccess={handleSendMessageSuccess}
+                  onSendStart={() => setIsLoading(true)}
+                />
+              )}
             </CardFooter>
           </Card>
         </MessageScrollerProvider>

@@ -8,52 +8,39 @@ import { useAppForm } from "@/hooks/use-app-form";
 import { useMutation } from "@tanstack/react-query";
 import { ArrowUpIcon } from "lucide-react";
 import { sendMessage } from "../message/api/send-message";
+import { Message } from "../types/message";
 
 interface ChatbotMessageProps {
+  sessionId: string;
   onSuccess: (userMessage: string, botResponse: string) => void;
   onSendStart: () => void;
 }
 
 export default function ChatbotMessage({
+  sessionId,
   onSuccess,
   onSendStart,
 }: ChatbotMessageProps) {
   const { mutate, isPending } = useMutation({
     mutationFn: sendMessage,
+    onSuccess: (response, variables) => {
+      onSuccess(variables.message, response);
+    },
   });
+
+  // console.log(sessionId);
+
+  const handleSubmit = ({ value }: { value: Message }) => {
+    onSendStart();
+    mutate(value);
+  };
 
   const form = useAppForm({
     defaultValues: {
       message: "",
+      sessionId,
     },
-    onSubmit: (values) => {
-      // 1. Validasi input kosong (biar tidak trigger loading kalau kosong)
-      if (!values.value.message.trim()) return;
-
-      // 2. Trigger status loading di komponen induk (ChatbotWidget)
-      onSendStart();
-
-      // 3. Jalankan mutasi kirim data ke backend
-      mutate(
-        { message: values.value.message },
-        {
-          onSuccess: (data) => {
-            // Asumsi 'data' dari backend langsung mengembalikan string respons AI
-            onSuccess(values.value.message, data);
-            form.reset(); // Kosongkan input setelah berhasil kirim
-          },
-          onError: (error) => {
-            console.error("Gagal mengirim pesan:", error);
-            // Opsional: Kamu bisa mematikan status loading di parent jika terjadi error,
-            // dengan mengirimkan teks error khusus lewat onSuccess atau membuat prop onError khusus.
-            onSuccess(
-              values.value.message,
-              "Maaf, terjadi kesalahan. Silakan coba lagi.",
-            );
-          },
-        },
-      );
-    },
+    onSubmit: handleSubmit,
   });
 
   return (
