@@ -151,7 +151,7 @@ export const productColumns: ColumnDef<Product>[] = [
 
             <DialogContent onInteractOutside={(e) => e.preventDefault()}>
               <DialogTitle>Preview Product</DialogTitle>
-              <ProductCard product={product} />
+              <ProductCard product={product} preview/>
             </DialogContent>
           </Dialog>
 
