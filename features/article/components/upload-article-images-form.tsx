@@ -25,24 +25,25 @@ export default function UploadArticleImagesForm({ id }: Props) {
   const { mutateAsync } = useMutation({
     mutationFn: (data: UploadArticleImagePayload) =>
       uploadArticleImage(id, data),
+    onSuccess() {
+      queryClient.invalidateQueries({ queryKey: articleKeys.all });
+      router.push(ROUTES.DASHBOARD_ARTICLE);
+    },
   });
+
+  const handleSubmit = ({ value }: { value: UploadArticleImagePayload }) => {
+    goeyToast.promise(mutateAsync(value), {
+      loading: "Uploading...",
+      success: "Berhasil",
+      error: (err) => (err as AppError).message,
+    });
+  };
 
   const form = useAppForm({
     defaultValues: {
       files: [] as File[],
     },
-    onSubmit: ({ value }) => {
-      goeyToast.promise(mutateAsync(value), {
-        loading: "Uploading...",
-        success: () => {
-          queryClient.invalidateQueries({ queryKey: articleKeys.all });
-          router.push(ROUTES.DASHBOARD_ARTICLE);
-
-          return "Berhasil";
-        },
-        error: (err) => (err as AppError).message,
-      });
-    },
+    onSubmit: handleSubmit,
   });
 
   const { data: article } = useArticle(id);
@@ -58,7 +59,7 @@ export default function UploadArticleImagesForm({ id }: Props) {
           className="space-y-between-items col-span-2"
         >
           <form.AppField name="files">
-            {(field) => <field.ImageField label="Upload Images" />}
+            {(field) => <field.ImageField label="Upload Images" displayGrid={2} />}
           </form.AppField>
 
           <form.SubmitButton label="Save" />

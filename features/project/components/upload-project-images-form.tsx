@@ -15,7 +15,7 @@ interface Props {
 export default function UploadProjectImageForm({ id }: Props) {
   const queryClient = useQueryClient();
 
-  const { mutateAsync } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationFn: (data: UploadProjectImagePayload) =>
       uploadProjectImage(id, data),
     onSuccess: () => {
@@ -52,7 +52,7 @@ export default function UploadProjectImageForm({ id }: Props) {
           {(field) => <field.ImageField label="Upload Images" />}
         </form.AppField>
 
-        <form.SubmitButton label="Save" />
+        <form.SubmitButton label="Save" loading={isPending} />
       </form>
     </form.AppForm>
   );

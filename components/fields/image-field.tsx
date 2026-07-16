@@ -21,9 +21,14 @@ import { Spinner } from "../ui/spinner";
 interface Props {
   className?: string;
   label?: string;
+  displayGrid?: number;
 }
 
-export default function ImageField({ className, label }: Props) {
+export default function ImageField({
+  className,
+  label,
+  displayGrid = 3,
+}: Props) {
   const field = useFieldContext<File[]>();
 
   const [isCompressing, setIsCompressing] = useState(false);
@@ -49,6 +54,8 @@ export default function ImageField({ className, label }: Props) {
     );
   };
 
+  console.log(field.state.value.length);
+
   return (
     <Field className="flex flex-col gap-between-items">
       <FieldLabel>{label}</FieldLabel>
@@ -70,34 +77,42 @@ export default function ImageField({ className, label }: Props) {
 
       <FieldInfo field={field} />
 
-      <div className="grid grid-cols-3 w-full gap-between-card">
-        {field.state.value.map((item, index) => (
-          <AttachmentItem
-            key={`${item.name}-${index}`}
-            item={item}
-            onDelete={() => handleRemoveImage(index)}
-          />
-        ))}
+      {(field.state.value.length > 0 || isCompressing) && (
+        <div
+          className={cn(
+            "grid w-full gap-between-card",
+            displayGrid === 3 && "grid-cols-3",
+            displayGrid === 2 && "grid-cols-2",
+          )}
+        >
+          {field.state.value.map((item, index) => (
+            <AttachmentItem
+              key={`${item.name}-${index}`}
+              item={item}
+              onDelete={() => handleRemoveImage(index)}
+            />
+          ))}
 
-        {isCompressing && (
-          <Attachment
-            orientation={"vertical"}
-            className="w-full"
-            state="processing"
-          >
-            <AttachmentMedia>
-              <Spinner />
-            </AttachmentMedia>
+          {isCompressing && (
+            <Attachment
+              orientation={"vertical"}
+              className="w-full"
+              state="processing"
+            >
+              <AttachmentMedia>
+                <Spinner />
+              </AttachmentMedia>
 
-            <AttachmentContent>
-              <AttachmentTitle>Memproses...</AttachmentTitle>
-              <AttachmentDescription>
-                Mohon tunggu sebentar
-              </AttachmentDescription>
-            </AttachmentContent>
-          </Attachment>
-        )}
-      </div>
+              <AttachmentContent>
+                <AttachmentTitle>Memproses...</AttachmentTitle>
+                <AttachmentDescription>
+                  Mohon tunggu sebentar
+                </AttachmentDescription>
+              </AttachmentContent>
+            </Attachment>
+          )}
+        </div>
+      )}
     </Field>
   );
 }

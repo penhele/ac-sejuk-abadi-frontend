@@ -19,13 +19,6 @@ export default function DashboardProjectPage() {
         <h1 className="text-xl font-bold text-gray-800">Projects</h1>
 
         <div className="flex flex-row space-x-2">
-          <Button
-            variant={"outline"}
-            onClick={() => router.push(ROUTES.DASHBOARD_GALLERY_PROJECT)}
-          >
-            <Images />
-            Gallery Images
-          </Button>
           <Button onClick={() => router.push(ROUTES.DASHBOARD_CREATE_PROJECT)}>
             <Plus /> Add New Project
           </Button>
