@@ -38,9 +38,8 @@ import {
   RotateCwIcon,
   X,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { sendMessage } from "../message/api/send-message";
-import { createChatSession } from "../session/api/create-chat-session";
 import { useChatShortcuts } from "../shortcut/hooks/use-chat-shortcuts";
 import ChatbotMessage from "./chatbot-message";
 import MessageAnimated from "./message-animated";
