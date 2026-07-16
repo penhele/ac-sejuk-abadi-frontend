@@ -2,19 +2,18 @@
 
 import { useMe } from "@/features/auth/hooks/use-me";
 import { useCompany } from "@/features/company/hooks/use-company";
-import Image from "next/image";
-import { Button } from "../ui/button";
+import { LogOut, Moon, Settings, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
-import { Moon, Settings, Sun } from "lucide-react";
+import { Button } from "../ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import { SidebarTrigger } from "../ui/sidebar";
 
 export default function Header() {
   const { data: me } = useMe();
@@ -26,49 +25,58 @@ export default function Header() {
     setTheme(theme === "dark" ? "light" : "dark");
   };
 
-  console.log(theme);
+  const getInitials = (name: string): string => {
+    const words = name.trim().split(/\s+/).filter(Boolean);
+
+    if (words.length === 0) return "";
+
+    if (words.length === 1) {
+      return words[0][0].toUpperCase();
+    }
+
+    return `${words[0][0]}${words[1][0]}`.toUpperCase();
+  };
 
   return (
     <div className="border-b sticky top-0 p-4 backdrop-blur-lg z-30 flex flex-row bg-background/80">
-      {/* <div className="flex flex-row space-x-4 items-center justify-center">
-        <div className="aspect-square rounded-full h-full flex items-center justify-center bg-indigo-200">
-          <span className="text-indigo-600 font-bold">
-            {me?.first_name[0].toUpperCase()}
-          </span>
-        </div>
+      <SidebarTrigger />
 
-        <div className="flex flex-col">
-          <span className="text-sm font-semibold">{me?.first_name}</span>
-          <span className="text-xs text-muted-foreground">{me?.email}</span>
-        </div>
-      </div> */}
+      <div className="flex flex-row items-center space-x-2 ml-auto">
+        <Button size={"icon-xs"} variant={"ghost"} onClick={handleTheme}>
+          {theme === "light" ? <Sun /> : <Moon />}
+        </Button>
 
-      <Button size={"icon-sm"} variant={"ghost"} onClick={handleTheme}>
-        {theme === "light" ? <Sun /> : <Moon />}
-      </Button>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant={"outline"} size={"icon-xs"} className="text-2xs">
+              {getInitials(`${me?.first_name} ${me?.last_name}`)}
+            </Button>
+          </DropdownMenuTrigger>
 
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant={"ghost"} size={"icon-sm"}>
-            S
-          </Button>
-        </DropdownMenuTrigger>
+          <DropdownMenuContent className="w-3xs">
+            <DropdownMenuGroup>
+              <div className="px-2 py-1.5 flex flex-col">
+                <span className="text-sm">{me?.first_name}</span>
+                <span className="text-xs text-muted-foreground">
+                  {me?.email}
+                </span>
+              </div>
 
-        <DropdownMenuContent className="w-3xs">
-          <DropdownMenuGroup>
-            <div className="px-2 py-1.5 flex flex-col">
-              <span className="text-sm">{me?.first_name}</span>
-              <span className="text-xs text-muted-foreground">{me?.email}</span>
-            </div>
+              <DropdownMenuSeparator />
 
-            <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                <Settings /> Settings
+              </DropdownMenuItem>
 
-            <DropdownMenuItem>
-              <Settings /> Settings
-            </DropdownMenuItem>
-          </DropdownMenuGroup>
-        </DropdownMenuContent>
-      </DropdownMenu>
+              <DropdownMenuSeparator />
+
+              <DropdownMenuItem variant="destructive">
+                <LogOut /> Logout
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
     </div>
   );
 }
