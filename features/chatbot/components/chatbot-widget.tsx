@@ -166,7 +166,7 @@ export default function ChatbotWidget() {
 
             <Separator />
 
-            <CardContent className="max-h-100 min-h-80 overflow-y-scroll">
+            <CardContent className="h-100">
               {messages.length === 0 ? (
                 <Empty className="h-full">
                   <EmptyHeader>
@@ -182,7 +182,7 @@ export default function ChatbotWidget() {
                   </EmptyHeader>
                 </Empty>
               ) : (
-                <MessageScroller>
+                <MessageScroller className="h-full">
                   <MessageScrollerViewport>
                     <MessageScrollerContent>
                       {messages.map((message) => (

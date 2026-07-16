@@ -1,4 +1,4 @@
-import MarkdownRenderer from "@/components/product/markdown-renderer";
+import MarkdownRenderer from "@/components/markdown-renderer";
 import { Separator } from "@/components/ui/separator";
 import { formatDate } from "@/lib/format/date";
 import { cn } from "@/lib/utils";

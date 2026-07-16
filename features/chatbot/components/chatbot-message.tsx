@@ -56,6 +56,7 @@ export default function ChatbotMessage({
                   onChange={(e) => field.handleChange(e.target.value)}
                   disabled={isPending}
                   placeholder="Produk apa yang tersedia di website ini?"
+                  className="min-h-12 max-h-24"
                 />
 
                 <InputGroupAddon align={"block-end"}>
@@ -69,9 +70,6 @@ export default function ChatbotMessage({
               </InputGroup>
             )}
           </form.AppField>
-
-          {/* Menggunakan isPending bawaan React Query untuk disable tombol kirim */}
-          {/* <form.SubmitButton Icon={SendHorizontal} isDisabled={isPending} /> */}
         </form>
       </form.AppForm>
     </div>
