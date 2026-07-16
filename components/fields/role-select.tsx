@@ -67,8 +67,8 @@ export function RoleSelect({ userId, role }: Props) {
               </SelectTrigger>
 
               <SelectContent>
-                {["admin", "user"].map((item) => (
-                  <SelectItem value={item}>
+                {["admin", "user"].map((item, index) => (
+                  <SelectItem key={index} value={item}>
                     <div
                       className={cn(
                         "aspect-square h-2 rounded-full",

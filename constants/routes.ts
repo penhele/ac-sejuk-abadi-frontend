@@ -34,7 +34,7 @@ export const ROUTES = {
   DASHBOARD_CREATE_PROJECT: "/dashboard/projects/create",
   DASHBOARD_EDIT_PROJECT: (id: string | number) =>
     `/dashboard/projects/${id}/edit`,
-  DASHBOARD_CREATE_PROJECT_IMAGES: (id: string | number) =>
+  DASHBOARD_UPLOAD_PROJECT_IMAGES: (id: string | number) =>
     `/dashboard/projects/${id}/images/create`,
 
   DASHBOARD_GALLERY_PROJECT: "/dashboard/projects/images",

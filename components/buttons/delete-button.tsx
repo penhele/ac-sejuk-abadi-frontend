@@ -67,7 +67,7 @@ export default function DeleteButton<TId = string | number>({
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger>
+      <AlertDialogTrigger asChild>
         <DropdownMenuShortcut>
           <Tooltip>
             <TooltipTrigger asChild>

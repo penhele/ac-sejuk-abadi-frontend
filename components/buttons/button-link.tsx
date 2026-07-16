@@ -1,23 +1,40 @@
 "use client";
 
+import { LucideIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
-import { ImagePlus } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface Props {
-  routes: string;
+  href: string;
+  label?: string;
+  Icon?: LucideIcon;
+  className?: string;
+  variant?:
+    "default" | "link" | "outline" | "secondary" | "ghost" | "destructive";
+  size?:
+    "default" | "xs" | "sm" | "lg" | "icon" | "icon-xs" | "icon-sm" | "icon-lg";
 }
 
-export default function ButtonLink({ routes }: Props) {
+export default function ButtonLink({
+  href,
+  label,
+  Icon,
+  className,
+  variant = "outline",
+  size = "icon-xs",
+}: Props) {
   const router = useRouter();
 
   return (
     <Button
-      onClick={() => router.push(routes)}
-      variant={"outline"}
-      size={"icon-xs"}
+      onClick={() => router.push(href)}
+      variant={variant}
+      size={size}
+      className={cn(className)}
     >
-      <ImagePlus />
+      {Icon && <Icon />}
+      {label && label}
     </Button>
   );
 }

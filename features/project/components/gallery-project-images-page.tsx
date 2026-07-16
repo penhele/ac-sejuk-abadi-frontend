@@ -60,7 +60,7 @@ export default function GalleryProjectPage() {
                   className="group"
                   onClick={() =>
                     router.push(
-                      ROUTES.DASHBOARD_CREATE_PROJECT_IMAGES(project.id),
+                      ROUTES.DASHBOARD_UPLOAD_PROJECT_IMAGES(project.id),
                     )
                   }
                 >

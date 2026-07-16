@@ -11,6 +11,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarSeparator,
 } from "@/components/ui/sidebar";
 import { ROUTES } from "@/constants/routes";
 import {
@@ -126,7 +127,22 @@ export function AppSidebar() {
 
   return (
     <Sidebar collapsible="icon">
-      <SidebarHeader />
+      <SidebarHeader>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton size={"lg"}>
+              <div className="aspect-square size-8 flex items-center justify-center bg-sidebar-primary text-sidebar-primary-foreground rounded-lg">
+                <Building2 />
+              </div>
+              <div className="flex flex-col gap-0.5 leading-none">
+                <span className="truncate font-medium">ACSA</span>
+                <span className="truncate text-xs">Dashboard</span>
+              </div>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarHeader>
+
       <SidebarContent>
         {navItems.map((item, index) => (
           <SidebarGroup key={index}>
@@ -150,34 +166,6 @@ export function AppSidebar() {
       </SidebarContent>
       <SidebarFooter>
         <SidebarMenu>
-          <SidebarMenuItem>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <SidebarMenuButton>
-                  {/* 3. Wrap theme checking with the mounted condition */}
-                  {mounted && theme === themes[0] && <Sun />}
-                  {mounted && theme === themes[1] && <Moon />}
-                  {mounted && theme === themes[2] && <Monitor />}
-
-                  {/* Optional: Render placeholder text or nothing until mounted */}
-                  {mounted ? theme : "Loading theme..."}
-                </SidebarMenuButton>
-              </DropdownMenuTrigger>
-
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => setTheme("light")}>
-                  Light
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("dark")}>
-                  Dark
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("system")}>
-                  System
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </SidebarMenuItem>
-
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
               <Button variant={"destructive"} onClick={handleLogout}>

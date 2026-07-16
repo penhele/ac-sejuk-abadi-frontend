@@ -7,6 +7,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { deleteArticle } from "../api/delete-article";
 import { articleKeys } from "../queries/article-keys";
 import { Article } from "../types/article";
+import { ImagePlus } from "lucide-react";
 
 export const articleColumns: ColumnDef<Article>[] = [
   {
@@ -39,7 +40,8 @@ export const articleColumns: ColumnDef<Article>[] = [
       return (
         <div className="space-x-2">
           <ButtonLink
-            routes={ROUTES.DASHBOARD_UPLOAD_ARTICLE_IMAGE(row.original.id)}
+            href={ROUTES.DASHBOARD_UPLOAD_ARTICLE_IMAGE(row.original.id)}
+            Icon={ImagePlus}
           />
 
           <EditButtonHref

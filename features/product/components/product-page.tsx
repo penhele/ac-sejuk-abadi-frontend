@@ -1,7 +1,8 @@
 "use client";
 
+import BreadcrumbComponent from "@/components/breadcrumb-component";
+import ButtonLink from "@/components/buttons/button-link";
 import { DataTable } from "@/components/tables/data-table";
-import { Button } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
@@ -13,7 +14,7 @@ import { useProducts } from "@/features/product";
 import { productColumns } from "@/features/product/components/product-columns";
 import useDebounce from "@/hooks/use-debounce";
 import useProductFilters from "@/hooks/use-product-filters";
-import { Info, PlusIcon } from "lucide-react";
+import { Info, Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -49,8 +50,24 @@ export default function ProductPage() {
 
   return (
     <div className="space-y-between-items">
-      <div className="flex justify-between items-center">
-        <h1 className="text-xl font-bold text-gray-800">Products</h1>
+      <BreadcrumbComponent />
+
+      <div className="flex flex-row">
+        <div>
+          <h1 className="text-xl font-bold ">Products</h1>
+          <p className="text-sm text-muted-foreground">
+            Browse and manage your product catalog.
+          </p>
+        </div>
+
+        <ButtonLink
+          href={ROUTES.CREATE_PRODUCT}
+          Icon={Plus}
+          label="Add Product"
+          className="ml-auto"
+          variant="default"
+          size="default"
+        />
       </div>
 
       <div className="grid grid-cols-4 gap-between-card">
@@ -114,12 +131,6 @@ export default function ProductPage() {
         isPagination
         searchValue={localSearch}
         onSearchChange={(value) => setLocalSearch(value)}
-        title="Data Produk"
-        action={
-          <Button onClick={() => router.push(ROUTES.CREATE_PRODUCT)}>
-            <PlusIcon /> Add New product
-          </Button>
-        }
       />
     </div>
   );
