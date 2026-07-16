@@ -132,8 +132,6 @@ export function AppSidebar() {
         </SidebarMenu>
       </SidebarHeader>
 
-      <SidebarSeparator />
-
       <SidebarContent>
         {navItems.map((item, index) => (
           <SidebarGroup key={index}>
@@ -157,34 +155,6 @@ export function AppSidebar() {
       </SidebarContent>
       <SidebarFooter>
         <SidebarMenu>
-          <SidebarMenuItem>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <SidebarMenuButton>
-                  {/* 3. Wrap theme checking with the mounted condition */}
-                  {mounted && theme === themes[0] && <Sun />}
-                  {mounted && theme === themes[1] && <Moon />}
-                  {mounted && theme === themes[2] && <Monitor />}
-
-                  {/* Optional: Render placeholder text or nothing until mounted */}
-                  {mounted ? theme : "Loading theme..."}
-                </SidebarMenuButton>
-              </DropdownMenuTrigger>
-
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => setTheme("light")}>
-                  Light
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("dark")}>
-                  Dark
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("system")}>
-                  System
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </SidebarMenuItem>
-
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
               <Button variant={"destructive"} onClick={handleLogout}>
