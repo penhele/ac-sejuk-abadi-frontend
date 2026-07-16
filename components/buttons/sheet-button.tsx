@@ -16,6 +16,8 @@ interface Props {
   title: string;
   description?: string;
   children: ReactNode;
+  size?:
+    "default" | "xs" | "sm" | "lg" | "icon" | "icon-xs" | "icon-sm" | "icon-lg";
 }
 
 export default function SheetButton({
@@ -24,11 +26,12 @@ export default function SheetButton({
   title,
   description,
   children,
+  size,
 }: Readonly<Props>) {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline" size={Icon && !label ? "icon-sm" : "sm"}>
+        <Button variant="outline" size={size}>
           {Icon && <Icon />} {label}
         </Button>
       </SheetTrigger>

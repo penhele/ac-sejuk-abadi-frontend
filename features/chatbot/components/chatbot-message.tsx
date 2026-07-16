@@ -11,13 +11,11 @@ import { sendMessage } from "../message/api/send-message";
 import { Message } from "../types/message";
 
 interface ChatbotMessageProps {
-  sessionId: string;
   onSuccess: (userMessage: string, botResponse: string) => void;
   onSendStart: () => void;
 }
 
 export default function ChatbotMessage({
-  sessionId,
   onSuccess,
   onSendStart,
 }: ChatbotMessageProps) {
@@ -28,8 +26,6 @@ export default function ChatbotMessage({
     },
   });
 
-  // console.log(sessionId);
-
   const handleSubmit = ({ value }: { value: Message }) => {
     onSendStart();
     mutate(value);
@@ -38,7 +34,6 @@ export default function ChatbotMessage({
   const form = useAppForm({
     defaultValues: {
       message: "",
-      sessionId,
     },
     onSubmit: handleSubmit,
   });

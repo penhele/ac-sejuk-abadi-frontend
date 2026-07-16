@@ -58,20 +58,6 @@ export default function ChatbotWidget() {
     }[]
   >([]);
 
-  const [sessionId, setSessionId] = useState<string | null>(null);
-
-  useEffect(() => {
-    const init = async () => {
-      const { id } = await createChatSession({
-        title: "Percakapan Baru",
-      });
-
-      setSessionId(id);
-    };
-
-    init();
-  }, []);
-
   const getCurrentTime = () =>
     new Date().toLocaleTimeString("id-ID", {
       hour: "2-digit",
@@ -107,8 +93,6 @@ export default function ChatbotWidget() {
   };
 
   const handleSendMessage = async (message: string) => {
-    if (!sessionId) return;
-
     setIsLoading(true);
 
     setMessages((prev) => [
@@ -124,10 +108,7 @@ export default function ChatbotWidget() {
     try {
       const response = await sendMessage({
         message,
-        sessionId,
       });
-
-      console.log(response);
 
       setMessages((prev) => [
         ...prev,
@@ -229,13 +210,10 @@ export default function ChatbotWidget() {
                 ))}
               </div>
 
-              {sessionId && (
-                <ChatbotMessage
-                  sessionId={sessionId}
-                  onSuccess={handleSendMessageSuccess}
-                  onSendStart={() => setIsLoading(true)}
-                />
-              )}
+              <ChatbotMessage
+                onSuccess={handleSendMessageSuccess}
+                onSendStart={() => setIsLoading(true)}
+              />
             </CardFooter>
           </Card>
         </MessageScrollerProvider>

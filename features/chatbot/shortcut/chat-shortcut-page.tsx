@@ -12,28 +12,20 @@ export default function ChatbotShortcutPage() {
 
   return (
     <div className="space-y-between-items">
-      <div>
-        <h1 className="text-xl font-bold">Kelola Shortcut Chat</h1>
-        <p className="text-muted-foreground">
-          Kelola daftar shortcut chat yang akan ditampilkan kepada pengguna
-          untuk mempercepat interaksi dengan chatbot.
-        </p>
+      <div className="flex flex-row">
+        <div>
+          <h1 className="text-xl font-bold ">Chat Shortcuts</h1>
+          <p className="text-sm text-muted-foreground">
+            Browse and manage your product catalog.
+          </p>
+        </div>
       </div>
 
-      <DataTable
-        title="Chat Shortcut"
-        action={
-          <SheetButton
-            title="Tambah Shortcut"
-            Icon={Plus}
-            label="Tambah Shortcut"
-          >
-            <CreateChatShortcutForm />
-          </SheetButton>
-        }
-        columns={chatbotShortcutColumns}
-        data={chatShortcuts || []}
-      />
+      <SheetButton title="Tambah Shortcut" Icon={Plus} label="Tambah Shortcut">
+        <CreateChatShortcutForm />
+      </SheetButton>
+
+      <DataTable columns={chatbotShortcutColumns} data={chatShortcuts || []} />
     </div>
   );
 }

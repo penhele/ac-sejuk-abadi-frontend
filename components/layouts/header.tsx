@@ -15,10 +15,16 @@ import {
 } from "../ui/dropdown-menu";
 import { SidebarTrigger } from "../ui/sidebar";
 import { Separator } from "../ui/separator";
+import { useEffect, useState } from "react";
 
 export default function Header() {
   const { data: me } = useMe();
-  const { data: company } = useCompany();
+
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const { theme, setTheme } = useTheme();
 
@@ -43,9 +49,11 @@ export default function Header() {
       <SidebarTrigger />
 
       <div className="flex flex-row items-center space-x-4 ml-auto">
-        <Button size={"icon-xs"} variant={"ghost"} onClick={handleTheme}>
-          {theme === "light" ? <Sun /> : <Moon />}
-        </Button>
+        {mounted && (
+          <Button size={"icon-xs"} variant={"ghost"} onClick={handleTheme}>
+            {theme === "light" ? <Sun /> : <Moon />}
+          </Button>
+        )}
 
         <Separator orientation="vertical" />
 

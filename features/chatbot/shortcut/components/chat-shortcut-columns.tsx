@@ -40,7 +40,7 @@ export const chatbotShortcutColumns: ColumnDef<ChatShortcut>[] = [
     cell: ({ row }) => {
       return (
         <div className="space-x-1">
-          <SheetButton title="Perbarui Shortcut" Icon={Pencil}>
+          <SheetButton title="Perbarui Shortcut" Icon={Pencil} size="icon-xs">
             <UpdateChatShortcutForm id={row.original.id} />
           </SheetButton>
           <DeleteButton
