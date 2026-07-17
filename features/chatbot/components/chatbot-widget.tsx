@@ -63,29 +63,6 @@ export default function ChatbotWidget() {
       minute: "2-digit",
     }) + " WIB";
 
-  const handleSendMessageSuccess = (
-    userMessage: string,
-    botResponse: string,
-  ) => {
-    setIsLoading(false);
-
-    setMessages((prev) => [
-      ...prev,
-      {
-        id: `user-${Date.now()}`,
-        sender: "user",
-        text: userMessage,
-        time: getCurrentTime(),
-      },
-      {
-        id: `bot-${Date.now()}`,
-        sender: "bot",
-        text: botResponse,
-        time: getCurrentTime(),
-      },
-    ]);
-  };
-
   const handleResetChat = () => {
     setMessages([]);
     setIsLoading(false);
@@ -94,30 +71,26 @@ export default function ChatbotWidget() {
   const handleSendMessage = async (message: string) => {
     setIsLoading(true);
 
-    setMessages((prev) => [
-      ...prev,
-      {
-        id: `user-${Date.now()}`,
-        sender: "user",
-        text: message,
-        time: getCurrentTime(),
-      },
-    ]);
+    const userMessage = {
+      id: `user-${Date.now()}`,
+      sender: "user" as const,
+      text: message,
+      time: getCurrentTime(),
+    };
+
+    setMessages((prev) => [...prev, userMessage]);
 
     try {
-      const response = await sendMessage({
-        message,
-      });
+      const { data } = await sendMessage({ message });
 
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: `bot-${Date.now()}`,
-          sender: "bot",
-          text: response,
-          time: getCurrentTime(),
-        },
-      ]);
+      const botMessage = {
+        id: `bot-${Date.now()}`,
+        sender: "bot" as const,
+        text: data,
+        time: getCurrentTime(),
+      };
+
+      setMessages((prev) => [...prev, botMessage]);
     } catch {
       setMessages((prev) => [
         ...prev,
@@ -210,8 +183,8 @@ export default function ChatbotWidget() {
               </div>
 
               <ChatbotMessage
-                onSuccess={handleSendMessageSuccess}
-                onSendStart={() => setIsLoading(true)}
+                onSend={handleSendMessage}
+                isLoading={isLoading}
               />
             </CardFooter>
           </Card>
