@@ -1,4 +1,4 @@
-import { chatApi } from "@/lib/api/axios";
+import { chatApi } from "@/lib/api/chatbot-api";
 import { UpdateChatShortcutPayload } from "../types/update-chat-shortcut-payload";
 
 export const updateChatShortcut = async (
