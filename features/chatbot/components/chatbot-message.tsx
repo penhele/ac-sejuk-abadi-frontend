@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/input-group";
 import { useAppForm } from "@/hooks/use-app-form";
 import { ArrowUpIcon } from "lucide-react";
-import { Message } from "../types/message";
+import { Message } from "../message/types/message";
 
 interface ChatbotMessageProps {
   onSend: (message: string) => void;

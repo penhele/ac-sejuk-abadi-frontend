@@ -43,10 +43,10 @@ import { sendMessage } from "../message/api/send-message";
 import { useChatShortcuts } from "../shortcut/hooks/use-chat-shortcuts";
 import ChatbotMessage from "./chatbot-message";
 import MessageAnimated from "./message-animated";
+import { useMutation } from "@tanstack/react-query";
 
 export default function ChatbotWidget() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
   const [messages, setMessages] = useState<
     {
@@ -65,33 +65,21 @@ export default function ChatbotWidget() {
 
   const handleResetChat = () => {
     setMessages([]);
-    setIsLoading(false);
   };
 
-  const handleSendMessage = async (message: string) => {
-    setIsLoading(true);
-
-    const userMessage = {
-      id: `user-${Date.now()}`,
-      sender: "user" as const,
-      text: message,
-      time: getCurrentTime(),
-    };
-
-    setMessages((prev) => [...prev, userMessage]);
-
-    try {
-      const { data } = await sendMessage({ message });
-
+  const { mutate, isPending } = useMutation({
+    mutationFn: sendMessage,
+    onSuccess(data, variables, onMutateResult, context) {
       const botMessage = {
         id: `bot-${Date.now()}`,
         sender: "bot" as const,
-        text: data,
+        text: data.data,
         time: getCurrentTime(),
       };
 
       setMessages((prev) => [...prev, botMessage]);
-    } catch {
+    },
+    onError(error, variables, onMutateResult, context) {
       setMessages((prev) => [
         ...prev,
         {
@@ -101,9 +89,21 @@ export default function ChatbotWidget() {
           time: getCurrentTime(),
         },
       ]);
-    } finally {
-      setIsLoading(false);
-    }
+    },
+  });
+
+  const handleSendMessage = (message: string) => {
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: `user-${Date.now()}`,
+        sender: "user",
+        text: message,
+        time: getCurrentTime(),
+      },
+    ]);
+
+    mutate({ message });
   };
 
   const { data: chatShortcuts } = useChatShortcuts();
@@ -184,7 +184,7 @@ export default function ChatbotWidget() {
 
               <ChatbotMessage
                 onSend={handleSendMessage}
-                isLoading={isLoading}
+                isLoading={isPending}
               />
             </CardFooter>
           </Card>
