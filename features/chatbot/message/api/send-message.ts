@@ -1,4 +1,4 @@
-import { chatApi } from "@/lib/api/chatbot-api";
+import { chatApi } from "@/lib/api/chat-api";
 import { Message } from "../../types/message";
 
 export const sendMessage = async (body: Message) => {
