@@ -69,7 +69,7 @@ export default function ChatbotWidget() {
 
   const { mutate, isPending } = useMutation({
     mutationFn: sendMessage,
-    onSuccess(data, variables, onMutateResult, context) {
+    onSuccess(data) {
       const botMessage = {
         id: `bot-${Date.now()}`,
         sender: "bot" as const,
@@ -79,7 +79,7 @@ export default function ChatbotWidget() {
 
       setMessages((prev) => [...prev, botMessage]);
     },
-    onError(error, variables, onMutateResult, context) {
+    onError() {
       setMessages((prev) => [
         ...prev,
         {

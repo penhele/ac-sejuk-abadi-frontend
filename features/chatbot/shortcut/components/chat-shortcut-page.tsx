@@ -1,10 +1,10 @@
 "use client";
 
 import { DataTable } from "@/components/tables/data-table";
-import { chatbotShortcutColumns } from "./components/chat-shortcut-columns";
-import { useChatShortcuts } from "./hooks/use-chat-shortcuts";
+import { chatbotShortcutColumns } from "./chat-shortcut-columns";
+import { useChatShortcuts } from "../hooks/use-chat-shortcuts";
 import SheetButton from "@/components/buttons/sheet-button";
-import CreateChatShortcutForm from "./components/create-chat-shortcut-form";
+import CreateChatShortcutForm from "./create-chat-shortcut-form";
 import { Plus } from "lucide-react";
 
 export default function ChatbotShortcutPage() {

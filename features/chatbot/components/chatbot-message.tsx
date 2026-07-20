@@ -8,15 +8,12 @@ import { useAppForm } from "@/hooks/use-app-form";
 import { ArrowUpIcon } from "lucide-react";
 import { Message } from "../message/types/message";
 
-interface ChatbotMessageProps {
+interface Props {
   onSend: (message: string) => void;
   isLoading: boolean;
 }
 
-export default function ChatbotMessage({
-  isLoading,
-  onSend,
-}: ChatbotMessageProps) {
+export default function ChatbotMessage({ isLoading, onSend }: Props) {
   const handleSubmit = ({ value }: { value: Message }) => {
     onSend(value.message);
     form.reset();
