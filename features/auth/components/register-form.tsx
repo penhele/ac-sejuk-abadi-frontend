@@ -7,14 +7,11 @@ import { AppError } from "@/types/error";
 import { useMutation } from "@tanstack/react-query";
 import { goeyToast } from "goey-toast";
 import { Lock, Mail } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { register } from "../api/register";
 import { registerSchema } from "../schemas/register.schema";
 import { RegisterPayload } from "../types/register-payload";
 
 export default function RegisterForm({ className }: { className?: string }) {
-  const router = useRouter();
-
   const { mutateAsync } = useMutation({
     mutationFn: (data: RegisterPayload) => register(data),
   });
@@ -25,10 +22,6 @@ export default function RegisterForm({ className }: { className?: string }) {
       last_name: "",
       email: "",
       password: "",
-      address: "",
-      rt: "",
-      rw: "",
-      zip_code: "",
     },
     validators: {
       onSubmit: registerSchema,
@@ -55,65 +48,28 @@ export default function RegisterForm({ className }: { className?: string }) {
             className,
           )}
         >
-          <form.AppField
-            name="first_name"
-            children={(field) => (
+          <form.AppField name="first_name">
+            {(field) => (
               <field.InputField
                 label="First Name"
                 placeholder="John"
                 className="col-span-2"
               />
             )}
-          />
-          <form.AppField
-            name="last_name"
-            children={(field) => (
+          </form.AppField>
+
+          <form.AppField name="last_name">
+            {(field) => (
               <field.InputField
                 label="Last Name"
                 placeholder="Doe"
                 className="col-span-2"
               />
             )}
-          />
-          <form.AppField
-            name="address"
-            children={(field) => (
-              <field.InputField
-                label="Address"
-                placeholder="Ruko Srengseng Permai Village Jl. Srengseng Sawah No.2"
-                className="col-span-4"
-              />
-            )}
-          />
+          </form.AppField>
 
-          <form.AppField
-            name="rt"
-            children={(field) => (
-              <field.InputField label="RT" placeholder="12" />
-            )}
-          />
-
-          <form.AppField
-            name="rw"
-            children={(field) => (
-              <field.InputField label="RW" placeholder="7" />
-            )}
-          />
-
-          <form.AppField
-            name="zip_code"
-            children={(field) => (
-              <field.InputField
-                label="Zip Code"
-                placeholder="12640"
-                className="col-span-2"
-              />
-            )}
-          />
-
-          <form.AppField
-            name="email"
-            children={(field) => (
+          <form.AppField name="email">
+            {(field) => (
               <field.InputField
                 label="Email"
                 placeholder="john@doe.com"
@@ -121,11 +77,10 @@ export default function RegisterForm({ className }: { className?: string }) {
                 IconAddon={Mail}
               />
             )}
-          />
+          </form.AppField>
 
-          <form.AppField
-            name="password"
-            children={(field) => (
+          <form.AppField name="password">
+            {(field) => (
               <field.InputField
                 type="password"
                 label="Password"
@@ -134,7 +89,7 @@ export default function RegisterForm({ className }: { className?: string }) {
                 IconAddon={Lock}
               />
             )}
-          />
+          </form.AppField>
 
           <form.SubmitButton label="Create an account" className="col-span-4" />
         </form>
