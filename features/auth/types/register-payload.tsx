@@ -3,8 +3,8 @@ export interface RegisterPayload {
   last_name: string;
   email: string;
   password: string;
-  address: string;
-  rt: string;
-  rw: string;
-  zip_code: string;
+  address?: string;
+  rt?: string;
+  rw?: string;
+  zip_code?: string;
 }
