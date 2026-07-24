@@ -131,6 +131,10 @@ export default function ProductPage() {
         isPagination
         searchValue={localSearch}
         onSearchChange={(value) => setLocalSearch(value)}
+        onRowClick={(product) =>
+          router.push(ROUTES.DASHBOARD_DETAIL_PRODUCT(product.id))
+        }
+        rowClickable
       />
     </div>
   );
