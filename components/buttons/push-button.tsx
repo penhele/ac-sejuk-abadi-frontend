@@ -7,9 +7,14 @@ import { useRouter } from "next/navigation";
 interface Props {
   route: string;
   className?: string;
+  label?: string;
 }
 
-export default function PushButton({ className, route }: Props) {
+export default function PushButton({
+  className,
+  route,
+  label = "Back",
+}: Props) {
   const router = useRouter();
 
   return (
@@ -19,7 +24,7 @@ export default function PushButton({ className, route }: Props) {
       size={"sm"}
       className={className}
     >
-      <ArrowLeft /> Back
+      <ArrowLeft /> {label}
     </Button>
   );
 }

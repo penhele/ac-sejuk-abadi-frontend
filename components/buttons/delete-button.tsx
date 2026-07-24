@@ -19,6 +19,7 @@ import { Button } from "../ui/button";
 import { DropdownMenuShortcut } from "../ui/dropdown-menu";
 import { Spinner } from "../ui/spinner";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+import { useRouter } from "next/navigation";
 
 interface Props<TId = string | number> {
   id: TId;
@@ -29,6 +30,12 @@ interface Props<TId = string | number> {
   item: string;
   className?: string;
   Icon?: LucideIcon;
+  label?: string;
+  size?:
+    "sm" | "default" | "xs" | "lg" | "icon" | "icon-xs" | "icon-sm" | "icon-lg";
+  variant?:
+    "default" | "link" | "outline" | "secondary" | "ghost" | "destructive";
+  routes?: string;
 }
 
 export default function DeleteButton<TId = string | number>({
@@ -39,13 +46,19 @@ export default function DeleteButton<TId = string | number>({
   item,
   className,
   Icon,
+  size = "icon-xs",
+  variant = "outline",
+  label,
+  routes,
 }: Props<TId>) {
   const queryClient = useQueryClient();
+  const router = useRouter();
 
   const { mutateAsync, isPending } = useMutation({
     mutationFn,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey });
+      if (routes) router.push(routes);
     },
   });
 
@@ -68,16 +81,17 @@ export default function DeleteButton<TId = string | number>({
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <DropdownMenuShortcut>
+        <DropdownMenuShortcut className="text-foreground tracking-normal">
           <Tooltip>
             <TooltipTrigger asChild>
               <Button
-                size={"icon-xs"}
-                variant={"outline"}
+                size={size}
+                variant={variant}
                 disabled={isPending}
                 className={className}
               >
                 {isPending ? <Spinner /> : Icon ? <Icon /> : <Trash2 />}
+                {label}
               </Button>
             </TooltipTrigger>
 

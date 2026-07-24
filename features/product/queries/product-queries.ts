@@ -29,6 +29,7 @@ export const getProductByIdQueryOptions = (id: string | number) =>
     queryKey: productKeys.detail(id),
     queryFn: () => getProductById(id),
     staleTime: 1000 * 60 * 5,
+    gcTime: 10 * 60 * 1000,
   });
 
 export const getProductsInfiniteQueryOptions = (params?: GetProductOptions) =>

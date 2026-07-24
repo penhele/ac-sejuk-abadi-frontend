@@ -191,6 +191,7 @@ export default function ProductForm({
                 <field.InputField
                   label="Nama Seri"
                   placeholder="Flash Thailand"
+                  isOpsional
                 />
               )}
             />
@@ -225,7 +226,6 @@ export default function ProductForm({
                   isPrice
                   placeholder={formatNumber("2000000")}
                   className="col-span-2"
-                  isOpsional
                 />
               )}
             />
