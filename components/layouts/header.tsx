@@ -18,7 +18,6 @@ import { Separator } from "../ui/separator";
 
 export default function Header() {
   const { data: me } = useMe();
-  const { data: company } = useCompany();
 
   const { theme, setTheme } = useTheme();
 

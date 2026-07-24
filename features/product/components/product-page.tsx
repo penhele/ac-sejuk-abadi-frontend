@@ -50,7 +50,7 @@ export default function ProductPage() {
 
   return (
     <div className="space-y-between-items">
-      <BreadcrumbComponent />
+      <BreadcrumbComponent isDashboard />
 
       <div className="flex flex-row">
         <div>

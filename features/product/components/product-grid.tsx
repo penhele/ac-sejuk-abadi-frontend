@@ -54,8 +54,8 @@ export default function ProductGrid({
 
   return (
     <div className={cn("grid grid-cols-5 gap-between-card", className)}>
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
+      {products.map((product, index) => (
+        <ProductCard key={index} product={product} />
       ))}
     </div>
   );

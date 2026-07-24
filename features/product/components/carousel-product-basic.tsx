@@ -26,7 +26,7 @@ export default function CarouselProductBasic({
                 alt={`${image.image_url}-${image.id}`}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
-                className="object-contain"
+                className="object-cover"
               />
             </div>
           </CarouselItem>
