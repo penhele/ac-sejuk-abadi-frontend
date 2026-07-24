@@ -79,6 +79,9 @@ interface DataTableProps<TData, TValue> {
   title?: string;
   description?: string;
   action?: React.ReactNode;
+
+  onRowClick?: (row: TData) => void;
+  rowClickable?: boolean;
 }
 
 export function DataTable<TData, TValue>({
@@ -101,6 +104,9 @@ export function DataTable<TData, TValue>({
   title,
   description,
   action,
+
+  onRowClick,
+  rowClickable,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -127,6 +133,13 @@ export function DataTable<TData, TValue>({
       columnVisibility,
     },
   });
+
+  // 👇 Perbaiki: handleOnRowClick menerima row sebagai parameter
+  const handleOnRowClick = (row: TData) => {
+    if (onRowClick) {
+      onRowClick(row);
+    }
+  };
 
   return (
     <div className={cn(className, "space-y-between-items-sm")}>
@@ -219,6 +232,9 @@ export function DataTable<TData, TValue>({
                   <TableRow
                     key={row.id}
                     data-state={row.getIsSelected() && "selected"}
+                    onClick={() =>
+                      rowClickable && handleOnRowClick(row.original)
+                    }
                   >
                     {row.getVisibleCells().map((cell) => (
                       <TableCell key={cell.id}>

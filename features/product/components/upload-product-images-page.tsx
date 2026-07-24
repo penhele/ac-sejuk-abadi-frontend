@@ -10,7 +10,7 @@ interface Props {
 export default function UploadProductImagesPage({ id }: Props) {
   return (
     <div className="space-y-between-items">
-      <PushButton route={ROUTES.PRODUCTS} />
+      <PushButton route={ROUTES.PRODUCTS} label="Back to Product Page" />
 
       <div className="grid grid-cols-2 gap-between-card">
         <UploadProductImagesForm id={id} />
