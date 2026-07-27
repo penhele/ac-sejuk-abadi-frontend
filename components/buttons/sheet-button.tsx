@@ -18,6 +18,9 @@ interface Props {
   children: ReactNode;
   size?:
     "default" | "xs" | "sm" | "lg" | "icon" | "icon-xs" | "icon-sm" | "icon-lg";
+  variant?:
+    "link" | "default" | "outline" | "secondary" | "ghost" | "destructive";
+  className?: string;
 }
 
 export default function SheetButton({
@@ -27,11 +30,13 @@ export default function SheetButton({
   description,
   children,
   size,
+  variant = "outline",
+  className,
 }: Readonly<Props>) {
   return (
     <Sheet>
-      <SheetTrigger asChild>
-        <Button variant="outline" size={size}>
+      <SheetTrigger asChild className={className}>
+        <Button variant={variant} size={size}>
           {Icon && <Icon />} {label}
         </Button>
       </SheetTrigger>

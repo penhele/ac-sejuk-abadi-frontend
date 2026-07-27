@@ -3,9 +3,9 @@ import { getChatShortcuts } from "../api/get-chat-shortcuts";
 import { chatShortcutKeys } from "./chat-shortcut-keys";
 import { getChatShortcut } from "../api/get-chat-shortcut";
 
-export const getChatShortcutQueryOptions = (all?: boolean) =>
+export const getChatShortcutQueryOptions = () =>
   queryOptions({
-    queryFn: () => getChatShortcuts({ all }),
+    queryFn: () => getChatShortcuts(),
     queryKey: chatShortcutKeys.all,
     staleTime: 1000 * 60 * 5,
   });
