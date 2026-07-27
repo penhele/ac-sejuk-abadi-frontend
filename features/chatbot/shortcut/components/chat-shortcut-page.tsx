@@ -51,14 +51,14 @@ export default function ChatbotShortcutPage() {
           <CardHeader>
             <CardDescription>Shortcut Aktif</CardDescription>
             <CardAction>
-              <div className="bg-sky-100 text-sky-600 p-2 rounded-full aspect-square">
+              <div className="bg-green-100 text-green-600 p-2 rounded-full aspect-square">
                 <MessageSquare size={16} />
               </div>
             </CardAction>
           </CardHeader>
 
           <CardContent>
-            <p className="text-2xl font-bold">{activeShortcuts?.length}</p>
+            <p className="text-2xl font-bold ">{activeShortcuts?.length}</p>
           </CardContent>
         </Card>
       </div>
@@ -75,7 +75,7 @@ export default function ChatbotShortcutPage() {
           title="Tambah Shortcut"
           Icon={Plus}
           label="Tambah Shortcut"
-          className="ml-auto"
+          className="ml-auto dark:text-white"
           variant="default"
         >
           <CreateChatShortcutForm />

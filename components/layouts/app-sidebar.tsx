@@ -11,34 +11,23 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarSeparator,
 } from "@/components/ui/sidebar";
 import { ROUTES } from "@/constants/routes";
+import { useAuthToken } from "@/features/auth/hooks";
 import {
   AirVent,
   BookOpen,
+  BotMessageSquare,
   Building2,
   LayoutDashboard,
   LogOut,
   MessageCircle,
-  Monitor,
-  Moon,
   Package,
   Settings2,
-  Sun,
   Users,
 } from "lucide-react";
-import { useTheme } from "next-themes";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
-import { useAuthToken } from "@/features/auth/hooks";
 
 export function AppSidebar() {
   const navItems = [
@@ -101,21 +90,18 @@ export function AppSidebar() {
       title: "Chatbot",
       items: [
         {
+          Icon: BotMessageSquare,
+          label: "Chatbot",
+          href: ROUTES.DASHBOARD_CHATBOT,
+        },
+        {
           Icon: MessageCircle,
           label: "Shortcut",
-          href: ROUTES.CHATBOT_SHORTCUT,
+          href: ROUTES.DASHBOARD_CHATBOT_SHORTCUT,
         },
       ],
     },
   ];
-
-  const { theme, setTheme, themes } = useTheme();
-
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const router = useRouter();
   const { removeToken } = useAuthToken();
