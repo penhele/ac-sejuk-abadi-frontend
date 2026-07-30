@@ -7,15 +7,27 @@ import {
   CardDescription,
   CardHeader,
 } from "@/components/ui/card";
+import { useArticles } from "@/features/article/hooks/use-articles";
+import { useProducts } from "@/features/product";
 import { Database, FileText, RefreshCw } from "lucide-react";
+import { useLastSynced } from "../hooks/use-last-synced";
+import { formatDate } from "@/lib/format/date";
 
 export default function SyncPage() {
+  const { data: products } = useProducts();
+  const { data: articles } = useArticles();
+  const { data: lastSynced } = useLastSynced();
+
+  console.log(lastSynced);
+  console.log(lastSynced?.products);
+  console.log(typeof lastSynced?.products);
+
   return (
     <div className="space-y-between-items">
       <div className="">
         <h1 className="font-bold text-xl">Sinkronisasi Data RAG</h1>
         <p className="text-sm text-muted-foreground">
-          Sinkronkan data produk dan artikel untuk pemrosesan RAG.
+          Sinkronkan data produk dan artikel untuk pemrosesan RAG
         </p>
       </div>
 
@@ -26,7 +38,7 @@ export default function SyncPage() {
           </CardHeader>
 
           <CardContent>
-            <p className="text-2xl font-bold">1.243</p>
+            <p className="text-2xl font-bold">{products?.meta.total ?? 0}</p>
           </CardContent>
         </Card>
         <Card>
@@ -35,7 +47,7 @@ export default function SyncPage() {
           </CardHeader>
 
           <CardContent>
-            <p className="text-2xl font-bold">1.243</p>
+            <p className="text-2xl font-bold">{articles?.length}</p>
           </CardContent>
         </Card>
       </div>
@@ -50,14 +62,17 @@ export default function SyncPage() {
             <div className="flex flex-col">
               <span className="font-semibold">Produk</span>
               <span className="text-muted-foreground">
-                Sinkronisasi Terakhir: 2024-01-15 14:30:22
+                Sinkronisasi Terakhir:{" "}
+                {lastSynced ? formatDate(lastSynced?.products) : "-"}
               </span>
             </div>
           </div>
 
           <div className="flex flex-row">
             <span className="text-muted-foreground">Data</span>
-            <span className="ml-auto font-semibold">1.200</span>
+            <span className="ml-auto font-semibold">
+              {products?.meta.total ?? 0}
+            </span>
           </div>
 
           <Button className="w-full bg-linear-to-r from-blue-500 to-indigo-600">
@@ -73,21 +88,24 @@ export default function SyncPage() {
             </div>
 
             <div className="flex flex-col">
-              <span className="font-semibold">Produk</span>
+              <span className="font-semibold">Artikel</span>
               <span className="text-muted-foreground">
-                Sinkronisasi Terakhir: 2024-01-15 14:30:22
+                Sinkronisasi Terakhir:{" "}
+                {lastSynced ? formatDate(lastSynced?.articles) : "-"}
               </span>
             </div>
           </div>
 
           <div className="flex flex-row">
             <span className="text-muted-foreground">Data</span>
-            <span className="ml-auto font-semibold">1.200</span>
+            <span className="ml-auto font-semibold">
+              {articles?.length ?? 0}
+            </span>
           </div>
 
           <Button className="w-full bg-linear-to-r from-purple-500 to-pink-500">
             <RefreshCw />
-            Sinkronisasi Produk
+            Sinkronisasi Artikel
           </Button>
         </div>
       </div>
