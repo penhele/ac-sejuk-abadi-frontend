@@ -5,12 +5,14 @@ interface Props {
   defaultValues: CreateChatShortcutPayload;
   onSubmit: (values: CreateChatShortcutPayload) => void;
   loading?: boolean;
+  label: string;
 }
 
 export default function ChatShortcutform({
   defaultValues,
   onSubmit,
   loading,
+  label,
 }: Props) {
   const form = useAppForm({
     defaultValues,
@@ -44,7 +46,7 @@ export default function ChatShortcutform({
         </form.AppField>
 
         <form.SubmitButton
-          label="Update"
+          label={label}
           className="mt-auto"
           loading={loading}
         />

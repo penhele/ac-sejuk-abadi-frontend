@@ -18,10 +18,6 @@ export default function SyncPage() {
   const { data: articles } = useArticles();
   const { data: lastSynced } = useLastSynced();
 
-  console.log(lastSynced);
-  console.log(lastSynced?.products);
-  console.log(typeof lastSynced?.products);
-
   return (
     <div className="space-y-between-items">
       <div className="">

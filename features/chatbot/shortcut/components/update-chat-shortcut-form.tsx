@@ -40,6 +40,7 @@ export default function UpdateChatShortcutForm({ id }: Props) {
       }}
       onSubmit={handleSubmit}
       loading={isPending}
+      label="Perbarui"
     />
   );
 }

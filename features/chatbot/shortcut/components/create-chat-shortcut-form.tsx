@@ -33,6 +33,7 @@ export default function CreateChatShortcutForm() {
       }}
       onSubmit={handleSubmit}
       loading={isPending}
+      label="Simpan"
     />
   );
 }
