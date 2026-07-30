@@ -52,6 +52,6 @@ export const ROUTES = {
   DASHBOARD_UPLOAD_ARTICLE_IMAGE: (id: string | number) =>
     `/dashboard/articles/${id}/images/create`,
 
-  DASHBOARD_CHATBOT: "/dashboard/chatbot",
+  DASHBOARD_CHATBOT_SYNC: "/dashboard/chatbot/sync",
   DASHBOARD_CHATBOT_SHORTCUT: "/dashboard/chatbot/shortcut",
 } as const;

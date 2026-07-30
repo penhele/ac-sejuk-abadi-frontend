@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/card";
 import { Database, FileText, RefreshCw } from "lucide-react";
 
-export default function ChatbotPage() {
+export default function SyncPage() {
   return (
     <div className="space-y-between-items">
       <div className="">

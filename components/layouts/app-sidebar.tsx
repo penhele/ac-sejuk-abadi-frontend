@@ -19,6 +19,7 @@ import {
   BookOpen,
   BotMessageSquare,
   Building2,
+  FolderSync,
   LayoutDashboard,
   LogOut,
   MessageCircle,
@@ -90,9 +91,9 @@ export function AppSidebar() {
       title: "Chatbot",
       items: [
         {
-          Icon: BotMessageSquare,
-          label: "Chatbot",
-          href: ROUTES.DASHBOARD_CHATBOT,
+          Icon: FolderSync,
+          label: "Sync",
+          href: ROUTES.DASHBOARD_CHATBOT_SYNC,
         },
         {
           Icon: MessageCircle,
