@@ -31,6 +31,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
+import { useMutation } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import {
   MessageCircle,
@@ -39,19 +40,20 @@ import {
   X,
 } from "lucide-react";
 import { useState } from "react";
-import { sendMessage } from "../message/api/send-message";
-import { useChatShortcuts } from "../shortcut/hooks/use-chat-shortcuts";
+import { useChatShortcuts } from "../../shortcut/hooks/use-chat-shortcuts";
+import { generateResponse } from "../api/generate-response";
 import ChatbotMessage from "./chatbot-message";
 import MessageAnimated from "./message-animated";
-import { useMutation } from "@tanstack/react-query";
 
 export default function ChatbotWidget() {
   const [isOpen, setIsOpen] = useState(false);
-
+  const [conversationId, setConversationId] = useState<string | undefined>(
+    undefined,
+  );
   const [messages, setMessages] = useState<
     {
       id: string;
-      sender: "user" | "bot";
+      sender: "user" | "assistant";
       text: string;
       time: string;
     }[]
@@ -65,18 +67,23 @@ export default function ChatbotWidget() {
 
   const handleResetChat = () => {
     setMessages([]);
+    setConversationId(undefined); // Reset conversation ID saat reset chat
   };
 
   const { mutate, isPending } = useMutation({
-    mutationFn: sendMessage,
+    mutationFn: generateResponse,
     onSuccess(data) {
+      // Simpan conversationId dari backend agar pesan berikutnya melanjutkan percakapan yang sama
+      if (data.conversationId) {
+        setConversationId(data.conversationId);
+      }
+
       const botMessage = {
         id: `bot-${Date.now()}`,
-        sender: "bot" as const,
-        text: data.data,
+        sender: "assistant" as const,
+        text: data.response, // Memperbaiki akses data (data.response bukan data.data)
         time: getCurrentTime(),
       };
-
       setMessages((prev) => [...prev, botMessage]);
     },
     onError() {
@@ -84,7 +91,7 @@ export default function ChatbotWidget() {
         ...prev,
         {
           id: `bot-${Date.now()}`,
-          sender: "bot",
+          sender: "assistant",
           text: "Maaf, terjadi kesalahan. Silakan coba lagi.",
           time: getCurrentTime(),
         },
@@ -92,18 +99,24 @@ export default function ChatbotWidget() {
     },
   });
 
-  const handleSendMessage = (message: string) => {
+  const handleSendMessage = (messageText: string) => {
+    if (!messageText.trim()) return;
+
     setMessages((prev) => [
       ...prev,
       {
         id: `user-${Date.now()}`,
         sender: "user",
-        text: message,
+        text: messageText,
         time: getCurrentTime(),
       },
     ]);
 
-    mutate({ message });
+    mutate({
+      message: messageText,
+      title: messages.length === 0 ? messageText.slice(0, 30) : undefined,
+      conversationId: conversationId,
+    });
   };
 
   const { data: chatShortcuts } = useChatShortcuts();
@@ -140,7 +153,7 @@ export default function ChatbotWidget() {
             <Separator />
 
             <CardContent className="h-100">
-              {messages.length === 0 ? (
+              {messages.length === 0 && !isPending ? (
                 <Empty className="h-full">
                   <EmptyHeader>
                     <EmptyMedia variant="icon">
@@ -161,6 +174,16 @@ export default function ChatbotWidget() {
                       {messages.map((message) => (
                         <MessageAnimated key={message.id} message={message} />
                       ))}
+                      {isPending && (
+                        <MessageAnimated
+                          message={{
+                            id: "bot-loading",
+                            sender: "assistant",
+                            text: "*Sedang mengetik...*",
+                            time: getCurrentTime(),
+                          }}
+                        />
+                      )}
                     </MessageScrollerContent>
                   </MessageScrollerViewport>
                 </MessageScroller>

@@ -43,7 +43,7 @@ export default function SyncPage() {
           </CardHeader>
 
           <CardContent>
-            <p className="text-2xl font-bold">{articles?.length}</p>
+            <p className="text-2xl font-bold">{articles?.length ?? 0}</p>
           </CardContent>
         </Card>
       </div>

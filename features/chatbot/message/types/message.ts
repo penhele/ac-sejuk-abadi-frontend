@@ -1,3 +1,7 @@
 export interface Message {
-  message: string;
+  id: string;
+  conversationId: string;
+  role: "user" | "assistant";
+  content: string;
+  createdAt: Date;
 }

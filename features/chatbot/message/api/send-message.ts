@@ -1,8 +1,8 @@
 import { chatApi } from "@/lib/api/chat-api";
+import { MessagePayload } from "../types/message-payload";
 import { Message } from "../types/message";
-import { MessageResponse } from "../types/message-response";
 
-export const sendMessage = async (body: Message): Promise<MessageResponse> => {
+export const sendMessage = async (body: MessagePayload): Promise<Message> => {
   const { data } = await chatApi.post("/chat", body);
 
   return data;

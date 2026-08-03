@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/input-group";
 import { useAppForm } from "@/hooks/use-app-form";
 import { ArrowUpIcon } from "lucide-react";
-import { Message } from "../message/types/message";
+import { Message } from "../../message/types/message";
 
 interface Props {
   onSend: (message: string) => void;
@@ -14,8 +14,9 @@ interface Props {
 }
 
 export default function ChatbotMessage({ isLoading, onSend }: Props) {
-  const handleSubmit = ({ value }: { value: Message }) => {
-    onSend(value.message);
+  const handleSubmit = ({ value }: { value: { message: string } }) => {
+    if (!value.message || !value.message.trim()) return;
+    onSend(value.message.trim());
     form.reset();
   };
 
@@ -42,6 +43,12 @@ export default function ChatbotMessage({ isLoading, onSend }: Props) {
                 <InputGroupTextarea
                   value={field.state.value}
                   onChange={(e) => field.handleChange(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && !e.shiftKey) {
+                      e.preventDefault();
+                      form.handleSubmit();
+                    }
+                  }}
                   disabled={isLoading}
                   placeholder="Produk apa yang tersedia di website ini?"
                   className="min-h-12 max-h-24"
@@ -52,6 +59,7 @@ export default function ChatbotMessage({ isLoading, onSend }: Props) {
                     <form.SubmitButton
                       Icon={ArrowUpIcon}
                       className="rounded-full ml-auto"
+                      isDisabled={isLoading}
                     />
                   </InputGroupButton>
                 </InputGroupAddon>
