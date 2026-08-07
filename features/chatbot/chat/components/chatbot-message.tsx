@@ -6,7 +6,6 @@ import {
 } from "@/components/ui/input-group";
 import { useAppForm } from "@/hooks/use-app-form";
 import { ArrowUpIcon } from "lucide-react";
-import { Message } from "../../message/types/message";
 
 interface Props {
   onSend: (message: string) => void;
@@ -50,7 +49,7 @@ export default function ChatbotMessage({ isLoading, onSend }: Props) {
                     }
                   }}
                   disabled={isLoading}
-                  placeholder="Produk apa yang tersedia di website ini?"
+                  placeholder="Apa saja tips merawat AC agar awet?"
                   className="min-h-12 max-h-24"
                 />
 

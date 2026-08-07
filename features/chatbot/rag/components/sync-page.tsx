@@ -12,12 +12,47 @@ import { useProducts } from "@/features/product";
 import { Database, FileText, RefreshCw } from "lucide-react";
 import { useLastSynced } from "../hooks/use-last-synced";
 import { formatDate } from "@/lib/format/date";
+import { syncArticles } from "../api/sync-articles";
+import { goeyToast } from "goey-toast";
+import { syncProducts } from "../api/sync-products";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export default function SyncPage() {
   const { data: products } = useProducts();
   const { data: articles } = useArticles();
   const { data: lastSynced } = useLastSynced();
 
+  const queryClient = useQueryClient();
+
+  const syncProductsMutation = useMutation({
+    mutationFn: syncProducts,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["last-synced"] });
+    },
+  });
+
+  const syncArticlesMutation = useMutation({
+    mutationFn: syncArticles,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["last-synced"] });
+    },
+  });
+
+  const handleSyncArticles = async () => {
+    await goeyToast.promise(syncArticlesMutation.mutateAsync(), {
+      loading: "Menyinkronkan artikel...",
+      success: "Sinkronisasi artikel berhasil.",
+      error: "Sinkronisasi artikel gagal.",
+    });
+  };
+
+  const handleSyncProducts = async () => {
+    await goeyToast.promise(syncProductsMutation.mutateAsync(), {
+      loading: "Menyinkronkan produk...",
+      success: "Sinkronisasi produk berhasil.",
+      error: "Sinkronisasi produk gagal.",
+    });
+  };
   return (
     <div className="space-y-between-items">
       <div className="">
@@ -71,8 +106,13 @@ export default function SyncPage() {
             </span>
           </div>
 
-          <Button className="w-full bg-linear-to-r from-blue-500 to-indigo-600">
-            <RefreshCw />
+          <Button
+            className="w-full bg-linear-to-r from-blue-500 to-indigo-600"
+            onClick={handleSyncProducts}
+          >
+            <RefreshCw
+              className={syncProductsMutation.isPending ? "animate-spin" : ""}
+            />
             Sinkronisasi Produk
           </Button>
         </div>
@@ -99,8 +139,13 @@ export default function SyncPage() {
             </span>
           </div>
 
-          <Button className="w-full bg-linear-to-r from-purple-500 to-pink-500">
-            <RefreshCw />
+          <Button
+            className="w-full bg-linear-to-r from-purple-500 to-pink-500"
+            onClick={handleSyncArticles}
+          >
+            <RefreshCw
+              className={syncArticlesMutation.isPending ? "animate-spin" : ""}
+            />
             Sinkronisasi Artikel
           </Button>
         </div>
