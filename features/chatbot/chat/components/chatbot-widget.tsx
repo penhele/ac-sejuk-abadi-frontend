@@ -67,13 +67,12 @@ export default function ChatbotWidget() {
 
   const handleResetChat = () => {
     setMessages([]);
-    setConversationId(undefined); // Reset conversation ID saat reset chat
+    setConversationId(undefined);
   };
 
   const { mutate, isPending } = useMutation({
     mutationFn: generateResponse,
     onSuccess(data) {
-      // Simpan conversationId dari backend agar pesan berikutnya melanjutkan percakapan yang sama
       if (data.conversationId) {
         setConversationId(data.conversationId);
       }
@@ -81,7 +80,7 @@ export default function ChatbotWidget() {
       const botMessage = {
         id: `bot-${Date.now()}`,
         sender: "assistant" as const,
-        text: data.response, // Memperbaiki akses data (data.response bukan data.data)
+        text: data.response,
         time: getCurrentTime(),
       };
       setMessages((prev) => [...prev, botMessage]);
@@ -192,17 +191,19 @@ export default function ChatbotWidget() {
 
             <CardFooter className="flex flex-col gap-2 items-start">
               <div className="flex flex-row gap-2 flex-wrap">
-                {chatShortcuts?.map((shortcut) => (
-                  <Badge
-                    key={shortcut.id}
-                    variant={"outline"}
-                    onClick={() => handleSendMessage(shortcut.content)}
-                    className="cursor-pointer"
-                  >
-                    <div className="aspect-square h-2  rounded-full bg-yellow-400" />
-                    {shortcut.title}
-                  </Badge>
-                ))}
+                {chatShortcuts
+                  ?.filter((shortcut) => shortcut.isActive)
+                  .map((shortcut) => (
+                    <Badge
+                      key={shortcut.id}
+                      variant={"outline"}
+                      onClick={() => handleSendMessage(shortcut.content)}
+                      className="cursor-pointer"
+                    >
+                      <div className="aspect-square h-2 rounded-full bg-yellow-400" />
+                      {shortcut.title}
+                    </Badge>
+                  ))}
               </div>
 
               <ChatbotMessage
